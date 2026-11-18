@@ -1,0 +1,44 @@
+{
+  "name": "@rekanica/css",
+  "version": "0.1.0",
+  "description": "Rekanica as plain CSS: framework-free components (rk-*) for HTML, WordPress, Laravel, Django, Rails, email-safe pages.",
+  "license": "MIT",
+  "author": "Aturanica Labs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/booyen/rekanica-des.git",
+    "directory": "packages/css"
+  },
+  "keywords": [
+    "css",
+    "design-system",
+    "rekanica",
+    "no-framework"
+  ],
+  "type": "module",
+  "style": "dist/rekanica.css",
+  "exports": {
+    ".": "./dist/rekanica.css",
+    "./min": "./dist/rekanica.min.css",
+    "./src/*": "./src/*"
+  },
+  "files": [
+    "dist",
+    "src",
+    "examples",
+    "README.md"
+  ],
+  "sideEffects": [
+    "*.css"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "prepublishOnly": "node scripts/build.mjs"
+  },
+  "dependencies": {
+    "@rekanica/tokens": "workspace:*"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

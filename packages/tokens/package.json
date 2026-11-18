@@ -1,0 +1,57 @@
+{
+  "name": "@rekanica/tokens",
+  "version": "0.1.0",
+  "description": "Rekanica design tokens (W3C Design Tokens format) with outputs for CSS, Tailwind v3/v4, JS/TS, Flutter, SwiftUI, Jetpack Compose and Figma (Tokens Studio).",
+  "license": "MIT",
+  "author": "Aturanica Labs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/booyen/rekanica-des.git",
+    "directory": "packages/tokens"
+  },
+  "keywords": [
+    "design-tokens",
+    "design-system",
+    "tailwindcss",
+    "flutter",
+    "swiftui",
+    "jetpack-compose",
+    "rekanica"
+  ],
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "exports": {
+    "./theme.css": "./theme.css",
+    "./variables.css": "./generated/css/variables.css",
+    "./tailwind-theme.css": "./generated/css/tailwind-theme.css",
+    "./tailwind-preset": "./generated/tailwind/preset.cjs",
+    ".": {
+      "types": "./generated/js/tokens.d.ts",
+      "import": "./generated/js/tokens.mjs",
+      "require": "./generated/js/tokens.cjs"
+    },
+    "./tokens.json": "./generated/json/tokens.json",
+    "./figma/tokens-studio.json": "./generated/figma/tokens-studio.json",
+    "./flutter/*": "./generated/flutter/*",
+    "./ios/*": "./generated/ios/*",
+    "./android/*": "./generated/android/*",
+    "./source/*": "./tokens/*"
+  },
+  "files": [
+    "theme.css",
+    "generated",
+    "tokens",
+    "scripts",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/build.mjs --check",
+    "prepublishOnly": "node scripts/build.mjs --check"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

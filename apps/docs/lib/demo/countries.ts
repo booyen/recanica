@@ -1,0 +1,1 @@
+export const COUNTRIES: [string, string][] = [["MY", "Malaysia"], ["SG", "Singapore"], ["ID", "Indonesia"], ["JP", "Japan"], ["KR", "South Korea"], ["IN", "India"], ["AU", "Australia"], ["US", "United States"], ["GB", "United Kingdom"], ["FR", "France"]];

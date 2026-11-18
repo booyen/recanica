@@ -1,0 +1,606 @@
+{
+  "components": [
+    {
+      "slug": "button",
+      "title": "Button",
+      "category": "Actions",
+      "description": "Pill-shaped action with variants for every level of emphasis."
+    },
+    {
+      "slug": "button-group",
+      "title": "Button Group",
+      "category": "Actions",
+      "description": "Joins related buttons into a single control."
+    },
+    {
+      "slug": "toggle",
+      "title": "Toggle",
+      "category": "Actions",
+      "description": "A two-state button that can be on or off."
+    },
+    {
+      "slug": "toggle-group",
+      "title": "Toggle Group",
+      "category": "Actions",
+      "description": "A set of toggles, single or multiple selection."
+    },
+    {
+      "slug": "input",
+      "title": "Input",
+      "category": "Forms",
+      "description": "Single-line text field."
+    },
+    {
+      "slug": "input-group",
+      "title": "Input Group",
+      "category": "Forms",
+      "description": "Input with leading/trailing addons, text or buttons."
+    },
+    {
+      "slug": "textarea",
+      "title": "Textarea",
+      "category": "Forms",
+      "description": "Multi-line text field."
+    },
+    {
+      "slug": "select",
+      "title": "Select",
+      "category": "Forms",
+      "description": "Pick one option from a popover list."
+    },
+    {
+      "slug": "native-select",
+      "title": "Native Select",
+      "category": "Forms",
+      "description": "Styled browser select, best on mobile."
+    },
+    {
+      "slug": "combobox",
+      "title": "Combobox",
+      "category": "Forms",
+      "description": "Searchable select with autocomplete."
+    },
+    {
+      "slug": "checkbox",
+      "title": "Checkbox",
+      "category": "Forms",
+      "description": "Toggle a single option on or off."
+    },
+    {
+      "slug": "radio-group",
+      "title": "Radio Group",
+      "category": "Forms",
+      "description": "Pick exactly one option from a set."
+    },
+    {
+      "slug": "switch",
+      "title": "Switch",
+      "category": "Forms",
+      "description": "Instant on/off setting."
+    },
+    {
+      "slug": "slider",
+      "title": "Slider",
+      "category": "Forms",
+      "description": "Select a value from a range."
+    },
+    {
+      "slug": "input-otp",
+      "title": "Input OTP",
+      "category": "Forms",
+      "description": "One-time passcode entry."
+    },
+    {
+      "slug": "label",
+      "title": "Label",
+      "category": "Forms",
+      "description": "Accessible label for a form control."
+    },
+    {
+      "slug": "field",
+      "title": "Field",
+      "category": "Forms",
+      "description": "Label, control, description and error as one unit."
+    },
+    {
+      "slug": "form",
+      "title": "Form",
+      "category": "Forms",
+      "description": "react-hook-form + zod bindings with field-level errors."
+    },
+    {
+      "slug": "calendar",
+      "title": "Calendar",
+      "category": "Forms",
+      "description": "Date picker grid."
+    },
+    {
+      "slug": "avatar",
+      "title": "Avatar",
+      "category": "Data display",
+      "description": "User or org image with initials fallback."
+    },
+    {
+      "slug": "badge",
+      "title": "Badge",
+      "category": "Data display",
+      "description": "Small status or label chip."
+    },
+    {
+      "slug": "card",
+      "title": "Card",
+      "category": "Data display",
+      "description": "Bordered container for grouped content."
+    },
+    {
+      "slug": "stat",
+      "title": "Stat",
+      "category": "Data display",
+      "description": "Rekanica metric panels: grouped stats, bar rows, list rows."
+    },
+    {
+      "slug": "table",
+      "title": "Table",
+      "category": "Data display",
+      "description": "Responsive data table primitives."
+    },
+    {
+      "slug": "chart",
+      "title": "Chart",
+      "category": "Data display",
+      "description": "Recharts wrapper themed with the monochrome chart ramp."
+    },
+    {
+      "slug": "item",
+      "title": "Item",
+      "category": "Data display",
+      "description": "Flexible row: media, content and actions."
+    },
+    {
+      "slug": "kbd",
+      "title": "Kbd",
+      "category": "Data display",
+      "description": "Keyboard key and shortcut display."
+    },
+    {
+      "slug": "accordion",
+      "title": "Accordion",
+      "category": "Data display",
+      "description": "Stacked sections that expand and collapse."
+    },
+    {
+      "slug": "collapsible",
+      "title": "Collapsible",
+      "category": "Data display",
+      "description": "Show and hide a single region."
+    },
+    {
+      "slug": "carousel",
+      "title": "Carousel",
+      "category": "Data display",
+      "description": "Swipeable horizontal slides."
+    },
+    {
+      "slug": "aspect-ratio",
+      "title": "Aspect Ratio",
+      "category": "Data display",
+      "description": "Keep media at a fixed ratio."
+    },
+    {
+      "slug": "separator",
+      "title": "Separator",
+      "category": "Data display",
+      "description": "Hairline divider, horizontal or vertical."
+    },
+    {
+      "slug": "scroll-area",
+      "title": "Scroll Area",
+      "category": "Data display",
+      "description": "Custom-styled scroll container."
+    },
+    {
+      "slug": "alert",
+      "title": "Alert",
+      "category": "Feedback",
+      "description": "Inline message for important information."
+    },
+    {
+      "slug": "progress",
+      "title": "Progress",
+      "category": "Feedback",
+      "description": "Determinate progress bar."
+    },
+    {
+      "slug": "skeleton",
+      "title": "Skeleton",
+      "category": "Feedback",
+      "description": "Loading placeholder."
+    },
+    {
+      "slug": "spinner",
+      "title": "Spinner",
+      "category": "Feedback",
+      "description": "Indeterminate loading indicator."
+    },
+    {
+      "slug": "sonner",
+      "title": "Toast",
+      "category": "Feedback",
+      "description": "Transient notifications via sonner."
+    },
+    {
+      "slug": "empty",
+      "title": "Empty",
+      "category": "Feedback",
+      "description": "Empty state with icon, copy and action."
+    },
+    {
+      "slug": "tabs",
+      "title": "Tabs",
+      "category": "Navigation",
+      "description": "Pill segmented control for switching views."
+    },
+    {
+      "slug": "breadcrumb",
+      "title": "Breadcrumb",
+      "category": "Navigation",
+      "description": "Show location within a hierarchy."
+    },
+    {
+      "slug": "pagination",
+      "title": "Pagination",
+      "category": "Navigation",
+      "description": "Move between pages of results."
+    },
+    {
+      "slug": "navigation-menu",
+      "title": "Navigation Menu",
+      "category": "Navigation",
+      "description": "Marketing site nav with dropdown panels."
+    },
+    {
+      "slug": "menubar",
+      "title": "Menubar",
+      "category": "Navigation",
+      "description": "Desktop-app style menu bar."
+    },
+    {
+      "slug": "sidebar",
+      "title": "Sidebar",
+      "category": "Navigation",
+      "description": "Collapsible app sidebar; becomes a sheet on mobile."
+    },
+    {
+      "slug": "dialog",
+      "title": "Dialog",
+      "category": "Overlays",
+      "description": "Modal window for focused tasks."
+    },
+    {
+      "slug": "alert-dialog",
+      "title": "Alert Dialog",
+      "category": "Overlays",
+      "description": "Interrupting confirmation for destructive actions."
+    },
+    {
+      "slug": "sheet",
+      "title": "Sheet",
+      "category": "Overlays",
+      "description": "Side panel that slides over content."
+    },
+    {
+      "slug": "drawer",
+      "title": "Drawer",
+      "category": "Overlays",
+      "description": "Bottom sheet, ideal on mobile."
+    },
+    {
+      "slug": "popover",
+      "title": "Popover",
+      "category": "Overlays",
+      "description": "Floating panel anchored to a trigger."
+    },
+    {
+      "slug": "dropdown-menu",
+      "title": "Dropdown Menu",
+      "category": "Overlays",
+      "description": "Menu of actions from a trigger."
+    },
+    {
+      "slug": "context-menu",
+      "title": "Context Menu",
+      "category": "Overlays",
+      "description": "Right-click menu."
+    },
+    {
+      "slug": "tooltip",
+      "title": "Tooltip",
+      "category": "Overlays",
+      "description": "Short label on hover or focus."
+    },
+    {
+      "slug": "hover-card",
+      "title": "Hover Card",
+      "category": "Overlays",
+      "description": "Rich preview on hover."
+    },
+    {
+      "slug": "command",
+      "title": "Command",
+      "category": "Overlays",
+      "description": "Searchable command palette."
+    },
+    {
+      "slug": "resizable",
+      "title": "Resizable",
+      "category": "Overlays",
+      "description": "Draggable split panes."
+    },
+    {
+      "slug": "message",
+      "title": "Message",
+      "category": "Chat",
+      "description": "Chat message layout with avatar, header and footer."
+    },
+    {
+      "slug": "bubble",
+      "title": "Bubble",
+      "category": "Chat",
+      "description": "Chat bubble content, start or end aligned."
+    },
+    {
+      "slug": "attachment",
+      "title": "Attachment",
+      "category": "Chat",
+      "description": "File attachment chip with actions."
+    },
+    {
+      "slug": "marker",
+      "title": "Marker",
+      "category": "Chat",
+      "description": "Inline status marker or separator in a thread."
+    }
+  ],
+  "patterns": [
+    {
+      "slug": "page-header",
+      "title": "Page Header",
+      "category": "Layout",
+      "height": 360,
+      "description": "Breadcrumb, title, description and actions; stacks on mobile."
+    },
+    {
+      "slug": "app-sidebar",
+      "title": "App Sidebar",
+      "category": "Layout",
+      "height": 640,
+      "description": "Polar-style nav with sub-items, promo card and account switcher; sheet on mobile."
+    },
+    {
+      "slug": "stat-overview",
+      "title": "Stat Overview",
+      "category": "Dashboard",
+      "height": 720,
+      "description": "Grouped metric panels with bar rows and activity lists."
+    },
+    {
+      "slug": "data-table",
+      "title": "Data Table",
+      "category": "Dashboard",
+      "height": 640,
+      "description": "Search, status filter, row selection, row actions and pagination."
+    },
+    {
+      "slug": "list-detail",
+      "title": "List / Detail",
+      "category": "Dashboard",
+      "height": 600,
+      "description": "Filterable list column with a detail pane; stacks on mobile."
+    },
+    {
+      "slug": "activity-feed",
+      "title": "Activity Feed",
+      "category": "Dashboard",
+      "height": 520,
+      "description": "Timeline of events grouped by day."
+    },
+    {
+      "slug": "settings-page",
+      "title": "Settings Page",
+      "category": "Forms",
+      "height": 760,
+      "description": "Two-column settings sections with a save bar."
+    },
+    {
+      "slug": "create-form",
+      "title": "Create Form",
+      "category": "Forms",
+      "height": 760,
+      "description": "Product creation form: field groups, pricing, toggles."
+    },
+    {
+      "slug": "file-upload",
+      "title": "File Upload",
+      "category": "Forms",
+      "height": 480,
+      "description": "Drop zone with upload progress list."
+    },
+    {
+      "slug": "danger-zone",
+      "title": "Danger Zone",
+      "category": "Forms",
+      "height": 420,
+      "description": "Destructive actions with type-to-confirm."
+    },
+    {
+      "slug": "sign-in",
+      "title": "Sign In",
+      "category": "Auth",
+      "height": 640,
+      "description": "Email + password, social providers and magic link."
+    },
+    {
+      "slug": "verify-code",
+      "title": "Verify Code",
+      "category": "Auth",
+      "height": 520,
+      "description": "One-time code verification with resend."
+    },
+    {
+      "slug": "onboarding-steps",
+      "title": "Onboarding Steps",
+      "category": "Auth",
+      "height": 560,
+      "description": "Setup checklist with progress."
+    },
+    {
+      "slug": "empty-states",
+      "title": "Empty States",
+      "category": "Feedback",
+      "height": 560,
+      "description": "First-run, no-results and error variants."
+    },
+    {
+      "slug": "notifications",
+      "title": "Notifications",
+      "category": "Feedback",
+      "height": 560,
+      "description": "Inbox popover with unread state and tabs."
+    },
+    {
+      "slug": "command-menu",
+      "title": "Command Menu",
+      "category": "Navigation",
+      "height": 520,
+      "description": "\u2318K palette with groups and shortcuts."
+    },
+    {
+      "slug": "account-switcher",
+      "title": "Account Switcher",
+      "category": "Navigation",
+      "height": 460,
+      "description": "Org/account dropdown with create and sign-out."
+    },
+    {
+      "slug": "pricing-table",
+      "title": "Plan Comparison",
+      "category": "Billing",
+      "height": 640,
+      "description": "In-app plan picker with billing toggle and current plan."
+    }
+  ],
+  "blocks": [
+    {
+      "slug": "navbar-01",
+      "title": "Navbar",
+      "category": "Marketing",
+      "height": 360,
+      "description": "Sticky site header with mobile menu."
+    },
+    {
+      "slug": "hero-01",
+      "title": "Hero \u00b7 Centered",
+      "category": "Marketing",
+      "height": 640,
+      "description": "Centered headline, badge and two CTAs."
+    },
+    {
+      "slug": "hero-02",
+      "title": "Hero \u00b7 Product",
+      "category": "Marketing",
+      "height": 760,
+      "description": "Headline with an app screenshot frame."
+    },
+    {
+      "slug": "logo-cloud-01",
+      "title": "Logo Cloud",
+      "category": "Marketing",
+      "height": 280,
+      "description": "Trusted-by wordmark row."
+    },
+    {
+      "slug": "features-01",
+      "title": "Features \u00b7 Grid",
+      "category": "Marketing",
+      "height": 720,
+      "description": "Icon feature grid, 1 \u2192 2 \u2192 3 columns."
+    },
+    {
+      "slug": "bento-01",
+      "title": "Features \u00b7 Bento",
+      "category": "Marketing",
+      "height": 820,
+      "description": "Asymmetric bento grid with visuals."
+    },
+    {
+      "slug": "bento-02",
+      "title": "Features \u00b7 Bento 2",
+      "category": "Marketing",
+      "height": 980,
+      "description": "Four-column bento with metrics, security, currencies, team and automation tiles."
+    },
+    {
+      "slug": "stats-01",
+      "title": "Stats",
+      "category": "Marketing",
+      "height": 360,
+      "description": "Big-number proof points."
+    },
+    {
+      "slug": "testimonials-01",
+      "title": "Testimonials",
+      "category": "Marketing",
+      "height": 640,
+      "description": "Quote cards with avatars."
+    },
+    {
+      "slug": "pricing-01",
+      "title": "Pricing",
+      "category": "Marketing",
+      "height": 820,
+      "description": "Three-tier pricing with featured plan."
+    },
+    {
+      "slug": "faq-01",
+      "title": "FAQ",
+      "category": "Marketing",
+      "height": 640,
+      "description": "Two-column FAQ accordion."
+    },
+    {
+      "slug": "cta-01",
+      "title": "Call to Action",
+      "category": "Marketing",
+      "height": 420,
+      "description": "Closing CTA panel."
+    },
+    {
+      "slug": "footer-01",
+      "title": "Footer",
+      "category": "Marketing",
+      "height": 420,
+      "description": "Link columns, legal row."
+    },
+    {
+      "slug": "invoice-01",
+      "title": "Invoice",
+      "category": "Billing",
+      "height": 1100,
+      "description": "Printable invoice document: parties, line items, totals, payment details."
+    },
+    {
+      "slug": "invoices-01",
+      "title": "Invoices",
+      "category": "Billing",
+      "height": 900,
+      "description": "Invoices page: summary stats, status tabs, search, table and detail sheet."
+    },
+    {
+      "slug": "dashboard-shell-01",
+      "title": "Dashboard Shell",
+      "category": "Application",
+      "height": 900,
+      "description": "Full app shell: sidebar, inset panel, grouped stats."
+    }
+  ]
+}

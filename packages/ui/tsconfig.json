@@ -1,0 +1,8 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "paths": { "@rekanica/ui/*": ["./src/*"] }
+  },
+  "include": ["src"]
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "new-york",
+  "rsc": true,
+  "tsx": true,
+  "tailwind": {
+    "config": "",
+    "css": "../tokens/theme.css",
+    "baseColor": "neutral",
+    "cssVariables": true
+  },
+  "iconLibrary": "lucide",
+  "aliases": {
+    "components": "@rekanica/ui/components",
+    "utils": "@rekanica/ui/lib/utils",
+    "hooks": "@rekanica/ui/hooks",
+    "lib": "@rekanica/ui/lib",
+    "ui": "@rekanica/ui/components"
+  }
+}

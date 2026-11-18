@@ -1,0 +1,20 @@
+name: rekanica_starter
+description: Flutter starter using Rekanica tokens (Aturanica Labs).
+publish_to: "none"
+version: 0.1.0
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+dependencies:
+  flutter:
+    sdk: flutter
+flutter:
+  uses-material-design: true
+  # Download Geist from Google Fonts into assets/fonts/ and uncomment:
+  # fonts:
+  #   - family: Geist
+  #     fonts:
+  #       - asset: assets/fonts/Geist-Light.ttf
+  #         weight: 300
+  #       - asset: assets/fonts/Geist-Regular.ttf
+  #       - asset: assets/fonts/Geist-Medium.ttf
+  #         weight: 500

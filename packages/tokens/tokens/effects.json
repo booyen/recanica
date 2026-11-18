@@ -1,0 +1,71 @@
+{
+  "duration": {
+    "fast": {
+      "$type": "duration",
+      "$value": "150ms"
+    },
+    "base": {
+      "$type": "duration",
+      "$value": "200ms"
+    },
+    "slow": {
+      "$type": "duration",
+      "$value": "300ms"
+    },
+    "slower": {
+      "$type": "duration",
+      "$value": "700ms"
+    }
+  },
+  "easing": {
+    "out-soft": {
+      "$type": "cubicBezier",
+      "$value": [
+        0.22,
+        1,
+        0.36,
+        1
+      ]
+    }
+  },
+  "shadow": {
+    "soft": {
+      "$type": "shadow",
+      "$value": [
+        {
+          "offsetX": "0px",
+          "offsetY": "1px",
+          "blur": "2px",
+          "spread": "0px",
+          "color": "#0000000a"
+        },
+        {
+          "offsetX": "0px",
+          "offsetY": "4px",
+          "blur": "16px",
+          "spread": "-4px",
+          "color": "#00000014"
+        }
+      ]
+    },
+    "float": {
+      "$type": "shadow",
+      "$value": [
+        {
+          "offsetX": "0px",
+          "offsetY": "2px",
+          "blur": "4px",
+          "spread": "0px",
+          "color": "#0000000a"
+        },
+        {
+          "offsetX": "0px",
+          "offsetY": "16px",
+          "blur": "40px",
+          "spread": "-8px",
+          "color": "#00000029"
+        }
+      ]
+    }
+  }
+}

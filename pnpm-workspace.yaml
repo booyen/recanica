@@ -1,0 +1,8 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+  - "templates/next-*"
+
+# Templates depend on published versions (^0.1.0) so they work when copied out;
+# inside the monorepo they link to the local packages.
+linkWorkspacePackages: true

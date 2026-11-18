@@ -1,0 +1,38 @@
+{
+  "name": "rekanica",
+  "version": "0.1.0",
+  "description": "Add Rekanica (UI framework by Aturanica Labs) to any project: npx rekanica init",
+  "license": "MIT",
+  "author": "Aturanica Labs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/booyen/rekanica-des.git",
+    "directory": "packages/cli"
+  },
+  "keywords": [
+    "rekanica",
+    "design-system",
+    "cli",
+    "tailwindcss",
+    "flutter",
+    "swiftui",
+    "jetpack-compose"
+  ],
+  "type": "module",
+  "bin": {
+    "rekanica": "./src/index.js"
+  },
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "node src/test.mjs"
+  },
+  "dependencies": {
+    "@rekanica/mcp": "workspace:*"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

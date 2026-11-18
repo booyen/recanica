@@ -1,0 +1,332 @@
+{
+  "$description": "Semantic colors. $value is light mode; $extensions.com.rekanica.dark is dark mode (falls back to light).",
+  "color": {
+    "background": {
+      "$type": "color",
+      "$value": "{rk.gray.0}",
+      "$extensions": {
+        "com.rekanica": {
+          "dark": "{rk.gray.1000}"
+        }
+      }
+    },
+    "foreground": {
+      "$type": "color",
+      "$value": "{rk.gray.950}",
+      "$extensions": {
+        "com.rekanica": {
+          "dark": "{rk.gray.50}"
+        }
+      }
+    },
+    "surface": {
+      "$type": "color",
+      "$value": "{rk.gray.50}",
+      "$extensions": {
+        "com.rekanica": {
+          "dark": "{rk.gray.950}"
+        }
+      }
+    },
+    "panel": {
+      "$type": "color",
+      "$value": "{rk.gray.0}",
+      "$extensions": {
+        "com.rekanica": {
+          "dark": "{rk.gray.950}"
+        }
+      }
+    },
+    "card": {
+      "$type": "color",
+      "$value": "{rk.gray.0}",
+      "$extensions": {
+        "com.rekanica": {
+          "dark": "{rk.gray.950}"
+        }
+      }
+    },
+    "card-foreground": {
+      "$type": "color",
+      "$value": "{rk.gray.950}",
+      "$extensions": {
+        "com.rekanica": {
+          "dark": "{rk.gray.50}"
+        }
+      }
+    },
+    "popover": {
+      "$type": "color",
+      "$value": "{rk.gray.0}",
+      "$extensions": {
+        "com.rekanica": {
+          "dark": "{rk.gray.900}"
+        }
+      }
+    },
+    "popover-foreground": {
+      "$type": "color",
+      "$value": "{rk.gray.950}",
+      "$extensions": {
+        "com.rekanica": {
+          "dark": "{rk.gray.50}"
+        }
+      }
+    },
+    "primary": {
+      "$type": "color",
+      "$value": "{rk.gray.950}",
+      "$extensions": {
+        "com.rekanica": {
+          "dark": "{rk.gray.50}"
+        }
+      }
+    },
+    "primary-foreground": {
+      "$type": "color",
+      "$value": "{rk.gray.50}",
+      "$extensions": {
+        "com.rekanica": {
+          "dark": "{rk.gray.950}"
+        }
+      }
+    },
+    "secondary": {
+      "$type": "color",
+      "$value": "{rk.gray.100}",
+      "$extensions": {
+        "com.rekanica": {
+          "dark": "{rk.gray.900}"
+        }
+      }
+    },
+    "secondary-foreground": {
+      "$type": "color",
+      "$value": "{rk.gray.900}",
+      "$extensions": {
+        "com.rekanica": {
+          "dark": "{rk.gray.100}"
+        }
+      }
+    },
+    "muted": {
+      "$type": "color",
+      "$value": "{rk.gray.100}",
+      "$extensions": {
+        "com.rekanica": {
+          "dark": "{rk.gray.900}"
+        }
+      }
+    },
+    "muted-foreground": {
+      "$type": "color",
+      "$value": "{rk.gray.500}",
+      "$extensions": {
+        "com.rekanica": {
+          "dark": "{rk.gray.450}"
+        }
+      }
+    },
+    "accent": {
+      "$type": "color",
+      "$value": "{rk.gray.100}",
+      "$extensions": {
+        "com.rekanica": {
+          "dark": "{rk.gray.900}"
+        }
+      }
+    },
+    "accent-foreground": {
+      "$type": "color",
+      "$value": "{rk.gray.900}",
+      "$extensions": {
+        "com.rekanica": {
+          "dark": "{rk.gray.50}"
+        }
+      }
+    },
+    "brand": {
+      "$type": "color",
+      "$value": "{rk.gray.900}",
+      "$extensions": {
+        "com.rekanica": {
+          "dark": "{rk.silver.200}"
+        }
+      }
+    },
+    "brand-foreground": {
+      "$type": "color",
+      "$value": "{rk.gray.0}",
+      "$extensions": {
+        "com.rekanica": {
+          "dark": "{rk.gray.950}"
+        }
+      }
+    },
+    "destructive": {
+      "$type": "color",
+      "$value": "{rk.red.500}",
+      "$extensions": {
+        "com.rekanica": {
+          "dark": "{rk.red.400}"
+        }
+      }
+    },
+    "destructive-foreground": {
+      "$type": "color",
+      "$value": "{rk.gray.0}"
+    },
+    "success": {
+      "$type": "color",
+      "$value": "{rk.green.500}"
+    },
+    "warning": {
+      "$type": "color",
+      "$value": "{rk.amber.500}"
+    },
+    "border": {
+      "$type": "color",
+      "$value": "{rk.gray.200}",
+      "$extensions": {
+        "com.rekanica": {
+          "dark": "{rk.gray.850}"
+        }
+      }
+    },
+    "input": {
+      "$type": "color",
+      "$value": "{rk.gray.200}",
+      "$extensions": {
+        "com.rekanica": {
+          "dark": "{rk.gray.800}"
+        }
+      }
+    },
+    "ring": {
+      "$type": "color",
+      "$value": "{rk.gray.500}",
+      "$extensions": {
+        "com.rekanica": {
+          "dark": "{rk.silver.300}"
+        }
+      }
+    },
+    "sidebar": {
+      "$type": "color",
+      "$value": "{rk.gray.100}",
+      "$extensions": {
+        "com.rekanica": {
+          "dark": "{rk.gray.1000}"
+        }
+      }
+    },
+    "sidebar-foreground": {
+      "$type": "color",
+      "$value": "{rk.gray.500}",
+      "$extensions": {
+        "com.rekanica": {
+          "dark": "{rk.gray.450}"
+        }
+      }
+    },
+    "sidebar-accent": {
+      "$type": "color",
+      "$value": "{rk.gray.200}",
+      "$extensions": {
+        "com.rekanica": {
+          "dark": "{rk.gray.900}"
+        }
+      }
+    },
+    "sidebar-border": {
+      "$type": "color",
+      "$value": "{rk.gray.200}",
+      "$extensions": {
+        "com.rekanica": {
+          "dark": "{rk.gray.850}"
+        }
+      }
+    },
+    "sidebar-primary": {
+      "$type": "color",
+      "$value": "{rk.gray.950}",
+      "$extensions": {
+        "com.rekanica": {
+          "dark": "{rk.gray.50}"
+        }
+      }
+    },
+    "sidebar-primary-foreground": {
+      "$type": "color",
+      "$value": "{rk.gray.0}",
+      "$extensions": {
+        "com.rekanica": {
+          "dark": "{rk.gray.950}"
+        }
+      }
+    },
+    "sidebar-accent-foreground": {
+      "$type": "color",
+      "$value": "{rk.gray.950}",
+      "$extensions": {
+        "com.rekanica": {
+          "dark": "{rk.gray.50}"
+        }
+      }
+    },
+    "sidebar-ring": {
+      "$type": "color",
+      "$value": "{rk.gray.500}",
+      "$extensions": {
+        "com.rekanica": {
+          "dark": "{rk.silver.300}"
+        }
+      }
+    },
+    "chart-1": {
+      "$type": "color",
+      "$value": "{rk.gray.950}",
+      "$extensions": {
+        "com.rekanica": {
+          "dark": "{rk.gray.50}"
+        }
+      }
+    },
+    "chart-2": {
+      "$type": "color",
+      "$value": "{rk.gray.700}",
+      "$extensions": {
+        "com.rekanica": {
+          "dark": "{rk.silver.200}"
+        }
+      }
+    },
+    "chart-3": {
+      "$type": "color",
+      "$value": "{rk.gray.500}",
+      "$extensions": {
+        "com.rekanica": {
+          "dark": "{rk.silver.400}"
+        }
+      }
+    },
+    "chart-4": {
+      "$type": "color",
+      "$value": "{rk.gray.400}",
+      "$extensions": {
+        "com.rekanica": {
+          "dark": "{rk.gray.600}"
+        }
+      }
+    },
+    "chart-5": {
+      "$type": "color",
+      "$value": "{rk.gray.300}",
+      "$extensions": {
+        "com.rekanica": {
+          "dark": "{rk.gray.700}"
+        }
+      }
+    }
+  }
+}

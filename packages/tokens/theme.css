@@ -1,0 +1,163 @@
+/*
+ * Rekanica · Tailwind v4 entry
+ * ------------------------------------------------------------------
+ * Values come from tokens/*.json (W3C Design Tokens) via scripts/build.mjs:
+ *   generated/css/variables.css       primitives + semantic light/dark (plain CSS vars)
+ *   generated/css/tailwind-theme.css  radius, fonts, spacing, containers, type, shadow, easing
+ * This file only wires them into Tailwind and adds base styles + brand-finish utilities.
+ *
+ * Tiers:
+ *   1. Primitives   --rk-*            raw scales (never used in components)
+ *   2. Semantic     --background ...  meaning-based, swapped per theme
+ *   3. Tailwind     @theme inline     exposes semantic tokens as utilities
+ */
+
+@import "./generated/css/variables.css";
+@import "./generated/css/tailwind-theme.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ---------- 3. Tailwind bridge ---------- */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-panel: var(--panel);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { color-scheme: light; }
+  html.dark { color-scheme: dark; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  :focus-visible { outline: 2px solid var(--color-ring); outline-offset: 2px; }
+}
+
+/* ---------- 5. Brand finish ----------
+ * One set of utilities, three finishes. Set data-finish on <html> (or any subtree):
+ *   flat   (default) solid brand: black in light, silver in dark
+ *   mesh   soft silver mesh gradient (graphite mesh in light)
+ *   chrome linear brushed chrome (black chrome in light)
+ *
+ * Utilities:
+ *   bg-metallic      brand surface (logo mark, brand buttons, badges)
+ *   text-metallic    brand text (display headlines, hero numbers)
+ *   border-metallic  1px brand edge; set --metallic-fill to the element's bg
+ *
+ * Every finish defines exactly 5 gradient layers (flat uses transparent layers)
+ * so border-metallic's background-clip list lines up.
+ */
+:root, [data-finish="flat"] {
+  --rk-none: linear-gradient(transparent, transparent);
+  --metallic-layers: var(--rk-none), var(--rk-none), var(--rk-none), var(--rk-none), var(--rk-none);
+  --metallic-base: var(--brand);
+  --metallic-foreground: var(--brand-foreground);
+  --metallic-shadow: none;
+}
+
+[data-finish="mesh"] {
+  --metallic-base: oklch(0.2 0.002 260);
+  --metallic-layers:
+    radial-gradient(at 16% 20%, oklch(0.46 0.004 260) 0px, transparent 52%),
+    radial-gradient(at 84% 14%, oklch(0.12 0.001 260) 0px, transparent 55%),
+    radial-gradient(at 70% 80%, oklch(0.38 0.004 245) 0px, transparent 50%),
+    radial-gradient(at 10% 90%, oklch(0.1 0 0) 0px, transparent 55%),
+    radial-gradient(at 46% 52%, oklch(0.28 0.003 260) 0px, transparent 60%);
+  --metallic-foreground: var(--rk-gray-0);
+  --metallic-shadow: inset 0 1px 0 oklch(1 0 0 / 0.18), inset 0 -1px 0 oklch(0 0 0 / 0.25);
+}
+.dark[data-finish="mesh"], .dark [data-finish="mesh"] {
+  --metallic-base: oklch(0.8 0.004 260);
+  --metallic-layers:
+    radial-gradient(at 16% 20%, oklch(0.99 0.001 260) 0px, transparent 52%),
+    radial-gradient(at 84% 14%, oklch(0.68 0.006 260) 0px, transparent 55%),
+    radial-gradient(at 70% 80%, oklch(0.96 0.003 245) 0px, transparent 50%),
+    radial-gradient(at 10% 90%, oklch(0.6 0.007 260) 0px, transparent 55%),
+    radial-gradient(at 46% 52%, oklch(0.9 0.002 260) 0px, transparent 60%);
+  --metallic-foreground: var(--rk-gray-950);
+  --metallic-shadow: inset 0 1px 0 oklch(1 0 0 / 0.4), inset 0 -1px 0 oklch(0 0 0 / 0.2);
+}
+
+[data-finish="chrome"] {
+  --metallic-base: oklch(0.2 0.002 260);
+  --metallic-layers:
+    linear-gradient(135deg, oklch(0.36 0.003 260) 0%, oklch(0.16 0.002 260) 30%, oklch(0.46 0.004 260) 52%, oklch(0.18 0.002 260) 72%, oklch(0.3 0.003 260) 100%),
+    var(--rk-none), var(--rk-none), var(--rk-none), var(--rk-none);
+  --metallic-foreground: var(--rk-gray-0);
+  --metallic-shadow: inset 0 1px 0 oklch(1 0 0 / 0.2), inset 0 -1px 0 oklch(0 0 0 / 0.3);
+}
+.dark[data-finish="chrome"], .dark [data-finish="chrome"] {
+  --metallic-base: oklch(0.8 0.004 260);
+  --metallic-layers:
+    linear-gradient(135deg, oklch(0.97 0.002 260) 0%, oklch(0.82 0.004 260) 22%, oklch(0.62 0.006 260) 44%, oklch(0.92 0.003 260) 62%, oklch(0.7 0.005 260) 80%, oklch(0.95 0.002 260) 100%),
+    var(--rk-none), var(--rk-none), var(--rk-none), var(--rk-none);
+  --metallic-foreground: var(--rk-gray-950);
+  --metallic-shadow: inset 0 1px 0 oklch(1 0 0 / 0.35), inset 0 -1px 0 oklch(0 0 0 / 0.25);
+}
+
+@utility bg-metallic {
+  background-color: var(--metallic-base);
+  background-image: var(--metallic-layers);
+  color: var(--metallic-foreground);
+  box-shadow: var(--metallic-shadow);
+}
+
+@utility text-metallic {
+  background-color: var(--metallic-base);
+  background-image: var(--metallic-layers);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility border-metallic {
+  border: 1px solid transparent;
+  background-color: var(--metallic-base);
+  background-image: linear-gradient(var(--metallic-fill, var(--card)), var(--metallic-fill, var(--card))), var(--metallic-layers);
+  background-origin: border-box;
+  background-clip: padding-box, border-box, border-box, border-box, border-box, border-box;
+}
+
+/* Docs/code highlighting (shiki dual theme) */
+.shiki, .shiki span { color: var(--shiki-light); background-color: transparent !important; }
+.dark .shiki, .dark .shiki span { color: var(--shiki-dark); }
+

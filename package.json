@@ -1,0 +1,29 @@
+{
+  "name": "rekanica-monorepo",
+  "private": true,
+  "packageManager": "pnpm@10.33.2",
+  "scripts": {
+    "dev": "pnpm --filter docs dev",
+    "build": "turbo build",
+    "typecheck": "turbo typecheck",
+    "tokens": "pnpm --filter @rekanica/tokens build",
+    "tokens:check": "pnpm --filter @rekanica/tokens check",
+    "test": "turbo test",
+    "test:layout": "pnpm --filter docs test:layout",
+    "test:visual": "pnpm --filter docs test:visual",
+    "registry:build": "pnpm --filter docs registry:build",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "turbo build --filter=./packages/* && changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^3.0.3",
+    "turbo": "^2.11.12",
+    "typescript": "^7.0.2"
+  },
+  "description": "Rekanica: a comprehensive UI framework by Aturanica Labs.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  }
+}

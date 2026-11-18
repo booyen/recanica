@@ -1,0 +1,687 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "rekanica",
+  "homepage": "https://rekanica.aturanica.com",
+  "items": [
+    {
+      "name": "page-header",
+      "type": "registry:block",
+      "title": "Page Header",
+      "description": "Breadcrumb, title, description and actions; stacks on mobile.",
+      "categories": [
+        "layout"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/patterns/page-header.tsx",
+          "type": "registry:block",
+          "target": "components/patterns/page-header.tsx"
+        }
+      ]
+    },
+    {
+      "name": "app-sidebar",
+      "type": "registry:block",
+      "title": "App Sidebar",
+      "description": "Polar-style nav with sub-items, promo card and account switcher; sheet on mobile.",
+      "categories": [
+        "layout"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/patterns/app-sidebar.tsx",
+          "type": "registry:block",
+          "target": "components/patterns/app-sidebar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "stat-overview",
+      "type": "registry:block",
+      "title": "Stat Overview",
+      "description": "Grouped metric panels with bar rows and activity lists.",
+      "categories": [
+        "dashboard"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/patterns/stat-overview.tsx",
+          "type": "registry:block",
+          "target": "components/patterns/stat-overview.tsx"
+        }
+      ]
+    },
+    {
+      "name": "data-table",
+      "type": "registry:block",
+      "title": "Data Table",
+      "description": "Search, status filter, row selection, row actions and pagination.",
+      "categories": [
+        "dashboard"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/patterns/data-table.tsx",
+          "type": "registry:block",
+          "target": "components/patterns/data-table.tsx"
+        }
+      ]
+    },
+    {
+      "name": "list-detail",
+      "type": "registry:block",
+      "title": "List / Detail",
+      "description": "Filterable list column with a detail pane; stacks on mobile.",
+      "categories": [
+        "dashboard"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/patterns/list-detail.tsx",
+          "type": "registry:block",
+          "target": "components/patterns/list-detail.tsx"
+        }
+      ]
+    },
+    {
+      "name": "activity-feed",
+      "type": "registry:block",
+      "title": "Activity Feed",
+      "description": "Timeline of events grouped by day.",
+      "categories": [
+        "dashboard"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/patterns/activity-feed.tsx",
+          "type": "registry:block",
+          "target": "components/patterns/activity-feed.tsx"
+        }
+      ]
+    },
+    {
+      "name": "settings-page",
+      "type": "registry:block",
+      "title": "Settings Page",
+      "description": "Two-column settings sections with a save bar.",
+      "categories": [
+        "forms"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/patterns/settings-page.tsx",
+          "type": "registry:block",
+          "target": "components/patterns/settings-page.tsx"
+        }
+      ]
+    },
+    {
+      "name": "create-form",
+      "type": "registry:block",
+      "title": "Create Form",
+      "description": "Product creation form: field groups, pricing, toggles.",
+      "categories": [
+        "forms"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/patterns/create-form.tsx",
+          "type": "registry:block",
+          "target": "components/patterns/create-form.tsx"
+        }
+      ]
+    },
+    {
+      "name": "file-upload",
+      "type": "registry:block",
+      "title": "File Upload",
+      "description": "Drop zone with upload progress list.",
+      "categories": [
+        "forms"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/patterns/file-upload.tsx",
+          "type": "registry:block",
+          "target": "components/patterns/file-upload.tsx"
+        }
+      ]
+    },
+    {
+      "name": "danger-zone",
+      "type": "registry:block",
+      "title": "Danger Zone",
+      "description": "Destructive actions with type-to-confirm.",
+      "categories": [
+        "forms"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/patterns/danger-zone.tsx",
+          "type": "registry:block",
+          "target": "components/patterns/danger-zone.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sign-in",
+      "type": "registry:block",
+      "title": "Sign In",
+      "description": "Email + password, social providers and magic link.",
+      "categories": [
+        "auth"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/patterns/sign-in.tsx",
+          "type": "registry:block",
+          "target": "components/patterns/sign-in.tsx"
+        }
+      ]
+    },
+    {
+      "name": "verify-code",
+      "type": "registry:block",
+      "title": "Verify Code",
+      "description": "One-time code verification with resend.",
+      "categories": [
+        "auth"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/patterns/verify-code.tsx",
+          "type": "registry:block",
+          "target": "components/patterns/verify-code.tsx"
+        }
+      ]
+    },
+    {
+      "name": "onboarding-steps",
+      "type": "registry:block",
+      "title": "Onboarding Steps",
+      "description": "Setup checklist with progress.",
+      "categories": [
+        "auth"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/patterns/onboarding-steps.tsx",
+          "type": "registry:block",
+          "target": "components/patterns/onboarding-steps.tsx"
+        }
+      ]
+    },
+    {
+      "name": "empty-states",
+      "type": "registry:block",
+      "title": "Empty States",
+      "description": "First-run, no-results and error variants.",
+      "categories": [
+        "feedback"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/patterns/empty-states.tsx",
+          "type": "registry:block",
+          "target": "components/patterns/empty-states.tsx"
+        }
+      ]
+    },
+    {
+      "name": "notifications",
+      "type": "registry:block",
+      "title": "Notifications",
+      "description": "Inbox popover with unread state and tabs.",
+      "categories": [
+        "feedback"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/patterns/notifications.tsx",
+          "type": "registry:block",
+          "target": "components/patterns/notifications.tsx"
+        }
+      ]
+    },
+    {
+      "name": "command-menu",
+      "type": "registry:block",
+      "title": "Command Menu",
+      "description": "⌘K palette with groups and shortcuts.",
+      "categories": [
+        "navigation"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/patterns/command-menu.tsx",
+          "type": "registry:block",
+          "target": "components/patterns/command-menu.tsx"
+        }
+      ]
+    },
+    {
+      "name": "account-switcher",
+      "type": "registry:block",
+      "title": "Account Switcher",
+      "description": "Org/account dropdown with create and sign-out.",
+      "categories": [
+        "navigation"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/patterns/account-switcher.tsx",
+          "type": "registry:block",
+          "target": "components/patterns/account-switcher.tsx"
+        }
+      ]
+    },
+    {
+      "name": "pricing-table",
+      "type": "registry:block",
+      "title": "Plan Comparison",
+      "description": "In-app plan picker with billing toggle and current plan.",
+      "categories": [
+        "billing"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/patterns/pricing-table.tsx",
+          "type": "registry:block",
+          "target": "components/patterns/pricing-table.tsx"
+        }
+      ]
+    },
+    {
+      "name": "navbar-01",
+      "type": "registry:block",
+      "title": "Navbar",
+      "description": "Sticky site header with mobile menu.",
+      "categories": [
+        "marketing"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/navbar-01.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/navbar-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "hero-01",
+      "type": "registry:block",
+      "title": "Hero · Centered",
+      "description": "Centered headline, badge and two CTAs.",
+      "categories": [
+        "marketing"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/hero-01.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/hero-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "hero-02",
+      "type": "registry:block",
+      "title": "Hero · Product",
+      "description": "Headline with an app screenshot frame.",
+      "categories": [
+        "marketing"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/hero-02.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/hero-02.tsx"
+        }
+      ]
+    },
+    {
+      "name": "logo-cloud-01",
+      "type": "registry:block",
+      "title": "Logo Cloud",
+      "description": "Trusted-by wordmark row.",
+      "categories": [
+        "marketing"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/logo-cloud-01.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/logo-cloud-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "features-01",
+      "type": "registry:block",
+      "title": "Features · Grid",
+      "description": "Icon feature grid, 1 → 2 → 3 columns.",
+      "categories": [
+        "marketing"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-01.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "bento-01",
+      "type": "registry:block",
+      "title": "Features · Bento",
+      "description": "Asymmetric bento grid with visuals.",
+      "categories": [
+        "marketing"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/bento-01.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/bento-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "bento-02",
+      "type": "registry:block",
+      "title": "Features · Bento 2",
+      "description": "Four-column bento with metrics, security, currencies, team and automation tiles.",
+      "categories": [
+        "marketing"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/bento-02.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/bento-02.tsx"
+        }
+      ]
+    },
+    {
+      "name": "stats-01",
+      "type": "registry:block",
+      "title": "Stats",
+      "description": "Big-number proof points.",
+      "categories": [
+        "marketing"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/stats-01.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/stats-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "testimonials-01",
+      "type": "registry:block",
+      "title": "Testimonials",
+      "description": "Quote cards with avatars.",
+      "categories": [
+        "marketing"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/testimonials-01.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/testimonials-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "pricing-01",
+      "type": "registry:block",
+      "title": "Pricing",
+      "description": "Three-tier pricing with featured plan.",
+      "categories": [
+        "marketing"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/pricing-01.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/pricing-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "faq-01",
+      "type": "registry:block",
+      "title": "FAQ",
+      "description": "Two-column FAQ accordion.",
+      "categories": [
+        "marketing"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/faq-01.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/faq-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "cta-01",
+      "type": "registry:block",
+      "title": "Call to Action",
+      "description": "Closing CTA panel.",
+      "categories": [
+        "marketing"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/cta-01.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/cta-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-01",
+      "type": "registry:block",
+      "title": "Footer",
+      "description": "Link columns, legal row.",
+      "categories": [
+        "marketing"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-01.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "invoice-01",
+      "type": "registry:block",
+      "title": "Invoice",
+      "description": "Printable invoice document: parties, line items, totals, payment details.",
+      "categories": [
+        "billing"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/invoice-01.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/invoice-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "invoices-01",
+      "type": "registry:block",
+      "title": "Invoices",
+      "description": "Invoices page: summary stats, status tabs, search, table and detail sheet.",
+      "categories": [
+        "billing"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/invoices-01.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/invoices-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dashboard-shell-01",
+      "type": "registry:block",
+      "title": "Dashboard Shell",
+      "description": "Full app shell: sidebar, inset panel, grouped stats.",
+      "categories": [
+        "application"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/dashboard-shell-01.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/dashboard-shell-01.tsx"
+        }
+      ]
+    }
+  ]
+}

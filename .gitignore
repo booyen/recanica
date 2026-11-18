@@ -1,0 +1,14 @@
+node_modules
+.next
+.turbo
+dist
+*.tsbuildinfo
+.DS_Store
+.env*.local
+apps/docs/public/r
+test-results
+playwright-report
+.claude/
+packages/ui/dist
+packages/css/dist
+packages/mcp/data
