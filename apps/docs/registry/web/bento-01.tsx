@@ -18,9 +18,9 @@ export function Bento01() {
   return (
     <section className="px-gutter py-section">
       <div className="mx-auto max-w-content">
-        <h2 className="max-w-2xl text-display-sm tracking-tight">Built for the way you sell</h2>
+        <h2 className="max-w-2xl text-display-sm tracking-tight">Four things you'll use every day</h2>
         <div className="mt-12 grid gap-4 md:grid-cols-6">
-          <Tile className="md:col-span-4" title="Revenue at a glance" body="Every number that matters, in one calm view.">
+          <Tile className="md:col-span-4" title="Revenue at a glance" body="Revenue, refunds and payouts on one page.">
             <div className="rounded-xl border bg-panel p-4">
               <p className="text-metric font-light text-metallic">$48,210</p>
               <div className="mt-2">
@@ -35,14 +35,14 @@ export function Bento01() {
               {["VAT", "GST", "Sales tax", "JCT", "SST"].map((t) => <Badge key={t} variant="outline">{t}</Badge>)}
             </div>
           </Tile>
-          <Tile className="md:col-span-2" title="Benefits on autopilot" body="Delivered the second a payment clears.">
+          <Tile className="md:col-span-2" title="Benefits delivered automatically" body="Sent as soon as the payment clears.">
             <ul className="space-y-2 text-sm">
               {["License key issued", "Discord role granted", "Repo invite sent"].map((b) => (
                 <li key={b} className="flex items-center gap-2"><CheckIcon className="size-4" /> {b}</li>
               ))}
             </ul>
           </Tile>
-          <Tile className="md:col-span-4" title="A checkout people finish" body="Fast, accessible and on-brand on every device.">
+          <Tile className="md:col-span-4" title="A short, fast checkout" body="Three fields, works on phones, matches your brand.">
             <div className="mx-auto max-w-xs space-y-3 rounded-xl border bg-panel p-4">
               <div className="flex justify-between text-sm"><span>Pro Yearly</span><span className="tabular-nums">$480</span></div>
               <div className="h-9 rounded-lg border" />

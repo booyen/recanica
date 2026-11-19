@@ -1,7 +1,8 @@
 import "server-only";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { blocks, components, patterns } from "./docs";
+import catalog from "./catalog.json";
+import { blocks, components, patterns, web } from "./docs";
 
 /** Public base URL for links inside prompts. Placeholder until a domain is chosen. */
 export const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://rekanica.aturanica.com";
@@ -44,7 +45,16 @@ export function patternIndex() {
   return [
     ...patterns.map((p) => `- Pattern · ${p.title} — ${p.description} (${SITE}/r/${p.slug}.json)`),
     ...blocks.map((b) => `- Block · ${b.title} — ${b.description} (${SITE}/r/${b.slug}.json)`),
+    ...web.map((w) => `- Web · ${w.category} · ${w.slug} — ${w.description}${w.use ? ` When: ${w.use}` : ""} (${SITE}/r/${w.slug}.json)`),
   ].join("\n");
+}
+
+export function recipesIndex() {
+  return catalog.webRecipes.map((r) => `- ${r.page}: ${r.sections.join(" → ")}${r.notes ? ` (${r.notes})` : ""}`).join("\n");
+}
+
+export function appLibraryIndex() {
+  return catalog.appLibrary.map((c) => `- ${c.category}: ${c.description} → ${c.items.map((i) => i.label).join(", ")}`).join("\n");
 }
 
 /* ---------- Copy-paste prompts ---------- */
@@ -119,8 +129,14 @@ Requirements:
 ## Available components
 ${componentIndex()}
 
-## Patterns and blocks you can start from
+## Patterns, blocks and web sections you can start from
 ${patternIndex()}
+
+## Website page recipes (section order)
+${recipesIndex()}
+
+## Dashboard / portal page types
+${appLibraryIndex()}
 
 ${guide}`,
     },

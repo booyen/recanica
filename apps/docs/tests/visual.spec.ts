@@ -8,7 +8,7 @@ const pages = [
   ["component-button", "/docs/components/button"],
   ["pattern-data-table", "/view/patterns/data-table"],
   ["pattern-settings", "/view/patterns/settings-page"],
-  ["block-pricing", "/view/blocks/pricing-01"],
+  ["block-pricing", "/view/web/pricing-01"],
   ["block-invoice", "/view/blocks/invoice-01"],
   ["demo-pay-invoice", "/demo/pay/inv_2"],
   ["stress", "/demo/stress"],

@@ -47,6 +47,19 @@ Shadows only on floating layers: popovers, menus, dialogs, toasts.
 - Icons: lucide, 16px default, 14px inline meta, 20px feature tiles, stroke 2, currentColor.
 - Motion: 150ms hovers, 200ms menus, 300ms sheets/dialogs, easing cubic-bezier(0.22, 1, 0.36, 1). Respect prefers-reduced-motion.
 
+## Voice & copy
+- Plain, specific, short. Say what happens, with numbers where you have them: "Most invoices are paid within 3 days", not "Get paid faster".
+- Write for the actual reader (a shop owner in Penang, a finance admin), not "teams of all sizes".
+- Banned: seamless, unlock, elevate, leverage, empower, effortless, cutting-edge, game-changer, supercharge, streamline, robust, delve, "in today's … world", "whether you're X or Y", "not just X, it's Y", "in minutes, not months", "built for the way you…", "on autopilot".
+- No placeholder copy in shipped sections. No invented statistics or testimonials in production; sample data must be marked as sample.
+- Buttons are verbs that say what happens: "Send invoice", "Pay RM 9,720", not "Submit" or "Continue".
+- Errors say what went wrong and what to do next. Empty states say what will appear and give one action.
+- Malaysian context: RM amounts, DD/MM/YYYY dates, SST, FPX/DuitNow; Malay names and places spelled correctly.
+
+## Page composition
+- Websites: start from a recipe (MCP `get_recipe`, or the Web Library recipes) and swap sections rather than inventing layouts.
+- Dashboards: check the page library (MCP `get_page_library`) for the page type before designing one.
+
 ## Do
 - Use value contrast (foreground vs muted-foreground) for hierarchy.
 - Keep one primary action per view; everything else outline/ghost.

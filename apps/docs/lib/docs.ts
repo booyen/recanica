@@ -1,6 +1,6 @@
 import catalog from "./catalog.json";
 
-export type CatalogItem = { slug: string; title: string; description: string; category: string; height?: number };
+export type CatalogItem = { slug: string; title: string; description: string; category: string; height?: number; use?: string };
 export type NavLink = { title: string; href: string };
 export type NavGroup = { title?: string; items: NavLink[] };
 export type NavSection = { title: string; href?: string; groups: NavGroup[] };
@@ -8,6 +8,7 @@ export type NavSection = { title: string; href?: string; groups: NavGroup[] };
 export const components = catalog.components as CatalogItem[];
 export const patterns = catalog.patterns as CatalogItem[];
 export const blocks = catalog.blocks as CatalogItem[];
+export const web = catalog.web as CatalogItem[];
 
 export const foundations: CatalogItem[] = [
   { slug: "colors", title: "Colors", category: "Foundations", description: "Monochrome palette, semantic tokens and status colors." },
@@ -41,6 +42,7 @@ export const nav: NavSection[] = [
   { title: "Foundations", groups: [{ items: foundations.map((f) => ({ title: f.title, href: `/docs/foundations/${f.slug}` })) }] },
   { title: "Components", href: "/docs/components", groups: grouped(components, "/docs/components") },
   { title: "Patterns", href: "/docs/patterns", groups: grouped(patterns, "/docs/patterns") },
+  { title: "Web Library", href: "/docs/web", groups: grouped(web, "/docs/web") },
   { title: "Blocks", href: "/docs/blocks", groups: grouped(blocks, "/docs/blocks") },
 ];
 

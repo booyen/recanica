@@ -364,266 +364,6 @@
       ]
     },
     {
-      "name": "navbar-01",
-      "type": "registry:block",
-      "title": "Navbar",
-      "description": "Sticky site header with mobile menu.",
-      "categories": [
-        "marketing"
-      ],
-      "dependencies": [
-        "@rekanica/ui",
-        "lucide-react"
-      ],
-      "files": [
-        {
-          "path": "registry/blocks/navbar-01.tsx",
-          "type": "registry:block",
-          "target": "components/blocks/navbar-01.tsx"
-        }
-      ]
-    },
-    {
-      "name": "hero-01",
-      "type": "registry:block",
-      "title": "Hero · Centered",
-      "description": "Centered headline, badge and two CTAs.",
-      "categories": [
-        "marketing"
-      ],
-      "dependencies": [
-        "@rekanica/ui",
-        "lucide-react"
-      ],
-      "files": [
-        {
-          "path": "registry/blocks/hero-01.tsx",
-          "type": "registry:block",
-          "target": "components/blocks/hero-01.tsx"
-        }
-      ]
-    },
-    {
-      "name": "hero-02",
-      "type": "registry:block",
-      "title": "Hero · Product",
-      "description": "Headline with an app screenshot frame.",
-      "categories": [
-        "marketing"
-      ],
-      "dependencies": [
-        "@rekanica/ui",
-        "lucide-react"
-      ],
-      "files": [
-        {
-          "path": "registry/blocks/hero-02.tsx",
-          "type": "registry:block",
-          "target": "components/blocks/hero-02.tsx"
-        }
-      ]
-    },
-    {
-      "name": "logo-cloud-01",
-      "type": "registry:block",
-      "title": "Logo Cloud",
-      "description": "Trusted-by wordmark row.",
-      "categories": [
-        "marketing"
-      ],
-      "dependencies": [
-        "@rekanica/ui",
-        "lucide-react"
-      ],
-      "files": [
-        {
-          "path": "registry/blocks/logo-cloud-01.tsx",
-          "type": "registry:block",
-          "target": "components/blocks/logo-cloud-01.tsx"
-        }
-      ]
-    },
-    {
-      "name": "features-01",
-      "type": "registry:block",
-      "title": "Features · Grid",
-      "description": "Icon feature grid, 1 → 2 → 3 columns.",
-      "categories": [
-        "marketing"
-      ],
-      "dependencies": [
-        "@rekanica/ui",
-        "lucide-react"
-      ],
-      "files": [
-        {
-          "path": "registry/blocks/features-01.tsx",
-          "type": "registry:block",
-          "target": "components/blocks/features-01.tsx"
-        }
-      ]
-    },
-    {
-      "name": "bento-01",
-      "type": "registry:block",
-      "title": "Features · Bento",
-      "description": "Asymmetric bento grid with visuals.",
-      "categories": [
-        "marketing"
-      ],
-      "dependencies": [
-        "@rekanica/ui",
-        "lucide-react"
-      ],
-      "files": [
-        {
-          "path": "registry/blocks/bento-01.tsx",
-          "type": "registry:block",
-          "target": "components/blocks/bento-01.tsx"
-        }
-      ]
-    },
-    {
-      "name": "bento-02",
-      "type": "registry:block",
-      "title": "Features · Bento 2",
-      "description": "Four-column bento with metrics, security, currencies, team and automation tiles.",
-      "categories": [
-        "marketing"
-      ],
-      "dependencies": [
-        "@rekanica/ui",
-        "lucide-react"
-      ],
-      "files": [
-        {
-          "path": "registry/blocks/bento-02.tsx",
-          "type": "registry:block",
-          "target": "components/blocks/bento-02.tsx"
-        }
-      ]
-    },
-    {
-      "name": "stats-01",
-      "type": "registry:block",
-      "title": "Stats",
-      "description": "Big-number proof points.",
-      "categories": [
-        "marketing"
-      ],
-      "dependencies": [
-        "@rekanica/ui",
-        "lucide-react"
-      ],
-      "files": [
-        {
-          "path": "registry/blocks/stats-01.tsx",
-          "type": "registry:block",
-          "target": "components/blocks/stats-01.tsx"
-        }
-      ]
-    },
-    {
-      "name": "testimonials-01",
-      "type": "registry:block",
-      "title": "Testimonials",
-      "description": "Quote cards with avatars.",
-      "categories": [
-        "marketing"
-      ],
-      "dependencies": [
-        "@rekanica/ui",
-        "lucide-react"
-      ],
-      "files": [
-        {
-          "path": "registry/blocks/testimonials-01.tsx",
-          "type": "registry:block",
-          "target": "components/blocks/testimonials-01.tsx"
-        }
-      ]
-    },
-    {
-      "name": "pricing-01",
-      "type": "registry:block",
-      "title": "Pricing",
-      "description": "Three-tier pricing with featured plan.",
-      "categories": [
-        "marketing"
-      ],
-      "dependencies": [
-        "@rekanica/ui",
-        "lucide-react"
-      ],
-      "files": [
-        {
-          "path": "registry/blocks/pricing-01.tsx",
-          "type": "registry:block",
-          "target": "components/blocks/pricing-01.tsx"
-        }
-      ]
-    },
-    {
-      "name": "faq-01",
-      "type": "registry:block",
-      "title": "FAQ",
-      "description": "Two-column FAQ accordion.",
-      "categories": [
-        "marketing"
-      ],
-      "dependencies": [
-        "@rekanica/ui",
-        "lucide-react"
-      ],
-      "files": [
-        {
-          "path": "registry/blocks/faq-01.tsx",
-          "type": "registry:block",
-          "target": "components/blocks/faq-01.tsx"
-        }
-      ]
-    },
-    {
-      "name": "cta-01",
-      "type": "registry:block",
-      "title": "Call to Action",
-      "description": "Closing CTA panel.",
-      "categories": [
-        "marketing"
-      ],
-      "dependencies": [
-        "@rekanica/ui",
-        "lucide-react"
-      ],
-      "files": [
-        {
-          "path": "registry/blocks/cta-01.tsx",
-          "type": "registry:block",
-          "target": "components/blocks/cta-01.tsx"
-        }
-      ]
-    },
-    {
-      "name": "footer-01",
-      "type": "registry:block",
-      "title": "Footer",
-      "description": "Link columns, legal row.",
-      "categories": [
-        "marketing"
-      ],
-      "dependencies": [
-        "@rekanica/ui",
-        "lucide-react"
-      ],
-      "files": [
-        {
-          "path": "registry/blocks/footer-01.tsx",
-          "type": "registry:block",
-          "target": "components/blocks/footer-01.tsx"
-        }
-      ]
-    },
-    {
       "name": "invoice-01",
       "type": "registry:block",
       "title": "Invoice",
@@ -680,6 +420,986 @@
           "path": "registry/blocks/dashboard-shell-01.tsx",
           "type": "registry:block",
           "target": "components/blocks/dashboard-shell-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "navbar-01",
+      "type": "registry:block",
+      "title": "Navbar",
+      "description": "Sticky site header with mobile menu.",
+      "categories": [
+        "headers"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/navbar-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/navbar-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "megamenu-01",
+      "type": "registry:block",
+      "title": "Mega Menu",
+      "description": "Header with mega menu panels for products and resources.",
+      "categories": [
+        "megamenu"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/megamenu-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/megamenu-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "offcanvas-01",
+      "type": "registry:block",
+      "title": "Offcanvas Menu",
+      "description": "Full navigation in a slide-over panel with grouped links and contact.",
+      "categories": [
+        "offcanvas"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/offcanvas-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/offcanvas-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "bottom-nav-01",
+      "type": "registry:block",
+      "title": "Bottom Navigation Bar",
+      "description": "Mobile tab bar with 4–5 destinations and an active state.",
+      "categories": [
+        "bottom navigation bar"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/bottom-nav-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/bottom-nav-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "banner-01",
+      "type": "registry:block",
+      "title": "Announcement & Promo Banner",
+      "description": "Site-wide announcement bar plus an inline promo banner with countdown.",
+      "categories": [
+        "banner"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/banner-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/banner-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "hero-01",
+      "type": "registry:block",
+      "title": "Hero · Centered",
+      "description": "Centered headline, badge and two CTAs.",
+      "categories": [
+        "hero"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/hero-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/hero-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "hero-02",
+      "type": "registry:block",
+      "title": "Hero · Product",
+      "description": "Headline with an app screenshot frame.",
+      "categories": [
+        "hero"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/hero-02.tsx",
+          "type": "registry:block",
+          "target": "components/web/hero-02.tsx"
+        }
+      ]
+    },
+    {
+      "name": "hero-03",
+      "type": "registry:block",
+      "title": "Hero · Split",
+      "description": "Split hero with headline, email capture and image.",
+      "categories": [
+        "hero"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/hero-03.tsx",
+          "type": "registry:block",
+          "target": "components/web/hero-03.tsx"
+        }
+      ]
+    },
+    {
+      "name": "intro-01",
+      "type": "registry:block",
+      "title": "Intro",
+      "description": "Short positioning statement with three supporting points.",
+      "categories": [
+        "intro"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/intro-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/intro-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "logo-cloud-01",
+      "type": "registry:block",
+      "title": "Logo Cloud",
+      "description": "Trusted-by wordmark row.",
+      "categories": [
+        "logo"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/logo-cloud-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/logo-cloud-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "bento-01",
+      "type": "registry:block",
+      "title": "Features · Bento",
+      "description": "Asymmetric bento grid with visuals.",
+      "categories": [
+        "feature"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/bento-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/bento-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "bento-02",
+      "type": "registry:block",
+      "title": "Features · Bento 2",
+      "description": "Four-column bento with metrics, security, currencies, team and automation tiles.",
+      "categories": [
+        "feature"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/bento-02.tsx",
+          "type": "registry:block",
+          "target": "components/web/bento-02.tsx"
+        }
+      ]
+    },
+    {
+      "name": "features-01",
+      "type": "registry:block",
+      "title": "Features · Grid",
+      "description": "Icon feature grid, 1 → 2 → 3 columns.",
+      "categories": [
+        "feature"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/features-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/features-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "content-01",
+      "type": "registry:block",
+      "title": "Image & Text",
+      "description": "Alternating image and text rows with a short list.",
+      "categories": [
+        "content"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/content-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/content-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "stats-01",
+      "type": "registry:block",
+      "title": "Stats",
+      "description": "Big-number proof points.",
+      "categories": [
+        "content"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/stats-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/stats-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "process-01",
+      "type": "registry:block",
+      "title": "Process Steps",
+      "description": "Numbered steps explaining how it works.",
+      "categories": [
+        "process"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/process-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/process-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "timeline-01",
+      "type": "registry:block",
+      "title": "Timeline",
+      "description": "Company history or roadmap as a vertical timeline.",
+      "categories": [
+        "timeline"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/timeline-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/timeline-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "testimonial-02",
+      "type": "registry:block",
+      "title": "Featured Quote",
+      "description": "One large customer quote with result metric.",
+      "categories": [
+        "testimonial"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/testimonial-02.tsx",
+          "type": "registry:block",
+          "target": "components/web/testimonial-02.tsx"
+        }
+      ]
+    },
+    {
+      "name": "testimonials-01",
+      "type": "registry:block",
+      "title": "Testimonials",
+      "description": "Quote cards with avatars.",
+      "categories": [
+        "testimonial"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/testimonials-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/testimonials-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "pricing-01",
+      "type": "registry:block",
+      "title": "Pricing",
+      "description": "Three-tier pricing with featured plan.",
+      "categories": [
+        "pricing"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/pricing-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/pricing-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "faq-01",
+      "type": "registry:block",
+      "title": "FAQ",
+      "description": "Two-column FAQ accordion.",
+      "categories": [
+        "faq"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/faq-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/faq-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "cta-01",
+      "type": "registry:block",
+      "title": "Call to Action",
+      "description": "Closing CTA panel.",
+      "categories": [
+        "cta"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/cta-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/cta-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "cta-02",
+      "type": "registry:block",
+      "title": "Newsletter CTA",
+      "description": "Inline email signup with consent note.",
+      "categories": [
+        "cta"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/cta-02.tsx",
+          "type": "registry:block",
+          "target": "components/web/cta-02.tsx"
+        }
+      ]
+    },
+    {
+      "name": "popup-01",
+      "type": "registry:block",
+      "title": "Newsletter Popup",
+      "description": "Modal offer with email capture; respects dismissal.",
+      "categories": [
+        "popup"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/popup-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/popup-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "contact-01",
+      "type": "registry:block",
+      "title": "Contact",
+      "description": "Contact form beside office details, hours and channels.",
+      "categories": [
+        "contact"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/contact-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/contact-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "blog-01",
+      "type": "registry:block",
+      "title": "Blog Grid",
+      "description": "Featured post plus a grid of posts with category filter.",
+      "categories": [
+        "blog"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/blog-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/blog-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "post-hero-01",
+      "type": "registry:block",
+      "title": "Post Hero",
+      "description": "Article header with category, title, author and reading time.",
+      "categories": [
+        "single post hero"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/post-hero-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/post-hero-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "single-post-01",
+      "type": "registry:block",
+      "title": "Article Body",
+      "description": "Readable article body with table of contents and share.",
+      "categories": [
+        "single post"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/single-post-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/single-post-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "team-01",
+      "type": "registry:block",
+      "title": "Team Grid",
+      "description": "Team members with role and social links.",
+      "categories": [
+        "team"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/team-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/team-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "single-team-01",
+      "type": "registry:block",
+      "title": "Team Member",
+      "description": "Profile with role, bio, expertise and contact.",
+      "categories": [
+        "single team"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/single-team-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/single-team-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "career-01",
+      "type": "registry:block",
+      "title": "Open Roles",
+      "description": "Careers header, perks and a filterable list of open roles.",
+      "categories": [
+        "career"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/career-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/career-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "portfolio-01",
+      "type": "registry:block",
+      "title": "Portfolio Grid",
+      "description": "Project grid with category filter.",
+      "categories": [
+        "portfolio"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/portfolio-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/portfolio-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "single-portfolio-01",
+      "type": "registry:block",
+      "title": "Case Study",
+      "description": "Project case study: summary, challenge, approach, results.",
+      "categories": [
+        "single portfolio"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/single-portfolio-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/single-portfolio-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "gallery-01",
+      "type": "registry:block",
+      "title": "Gallery",
+      "description": "Masonry-style image grid with lightbox.",
+      "categories": [
+        "gallery"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/gallery-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/gallery-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "event-01",
+      "type": "registry:block",
+      "title": "Events List",
+      "description": "Upcoming events with date blocks, type and location.",
+      "categories": [
+        "event"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/event-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/event-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "single-event-01",
+      "type": "registry:block",
+      "title": "Event Detail",
+      "description": "Event page with schedule, speakers, venue and registration.",
+      "categories": [
+        "single event"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/single-event-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/single-event-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "products-01",
+      "type": "registry:block",
+      "title": "Product Grid",
+      "description": "Product cards with price, rating and quick add.",
+      "categories": [
+        "products"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/products-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/products-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "category-filters-01",
+      "type": "registry:block",
+      "title": "Category Filters",
+      "description": "Filter sidebar (sheet on mobile), active chips, sort and result count.",
+      "categories": [
+        "category filters"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/category-filters-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/category-filters-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "single-product-01",
+      "type": "registry:block",
+      "title": "Product Detail",
+      "description": "Gallery, variants, quantity, add to cart and details accordion.",
+      "categories": [
+        "single product"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/single-product-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/single-product-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "cart-01",
+      "type": "registry:block",
+      "title": "Cart",
+      "description": "Line items with quantity steppers, summary with SST and voucher code.",
+      "categories": [
+        "cart page"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/cart-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/cart-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "checkout-01",
+      "type": "registry:block",
+      "title": "Checkout",
+      "description": "Contact, shipping address (Malaysian states) and payment method with order summary.",
+      "categories": [
+        "checkout page"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/checkout-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/checkout-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "thank-you-01",
+      "type": "registry:block",
+      "title": "Thank You",
+      "description": "Confirmation with next steps after a form or purchase.",
+      "categories": [
+        "thank you pages"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/thank-you-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/thank-you-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "property-01",
+      "type": "registry:block",
+      "title": "Property Listings",
+      "description": "Property cards with price, beds, baths and area.",
+      "categories": [
+        "property"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/property-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/property-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "single-property-01",
+      "type": "registry:block",
+      "title": "Property Detail",
+      "description": "Gallery, key facts, description, amenities and enquiry card.",
+      "categories": [
+        "single property"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/single-property-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/single-property-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "login-01",
+      "type": "registry:block",
+      "title": "Login · Split",
+      "description": "Two-column login with brand panel and form.",
+      "categories": [
+        "login pages"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/login-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/login-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "link-page-01",
+      "type": "registry:block",
+      "title": "Link in Bio",
+      "description": "Profile, short bio and stacked links for social profiles.",
+      "categories": [
+        "link pages"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/link-page-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/link-page-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "coming-soon-01",
+      "type": "registry:block",
+      "title": "Coming Soon",
+      "description": "Launch page with countdown and email waitlist.",
+      "categories": [
+        "coming soon page"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/coming-soon-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/coming-soon-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "error-01",
+      "type": "registry:block",
+      "title": "404 Page",
+      "description": "Not-found page with search and helpful links.",
+      "categories": [
+        "error pages"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/error-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/error-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-01",
+      "type": "registry:block",
+      "title": "Footer",
+      "description": "Link columns, legal row.",
+      "categories": [
+        "footers"
+      ],
+      "dependencies": [
+        "@rekanica/ui",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/web/footer-01.tsx",
+          "type": "registry:block",
+          "target": "components/web/footer-01.tsx"
         }
       ]
     }

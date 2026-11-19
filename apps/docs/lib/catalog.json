@@ -491,97 +491,6 @@
   ],
   "blocks": [
     {
-      "slug": "navbar-01",
-      "title": "Navbar",
-      "category": "Marketing",
-      "height": 360,
-      "description": "Sticky site header with mobile menu."
-    },
-    {
-      "slug": "hero-01",
-      "title": "Hero \u00b7 Centered",
-      "category": "Marketing",
-      "height": 640,
-      "description": "Centered headline, badge and two CTAs."
-    },
-    {
-      "slug": "hero-02",
-      "title": "Hero \u00b7 Product",
-      "category": "Marketing",
-      "height": 760,
-      "description": "Headline with an app screenshot frame."
-    },
-    {
-      "slug": "logo-cloud-01",
-      "title": "Logo Cloud",
-      "category": "Marketing",
-      "height": 280,
-      "description": "Trusted-by wordmark row."
-    },
-    {
-      "slug": "features-01",
-      "title": "Features \u00b7 Grid",
-      "category": "Marketing",
-      "height": 720,
-      "description": "Icon feature grid, 1 \u2192 2 \u2192 3 columns."
-    },
-    {
-      "slug": "bento-01",
-      "title": "Features \u00b7 Bento",
-      "category": "Marketing",
-      "height": 820,
-      "description": "Asymmetric bento grid with visuals."
-    },
-    {
-      "slug": "bento-02",
-      "title": "Features \u00b7 Bento 2",
-      "category": "Marketing",
-      "height": 980,
-      "description": "Four-column bento with metrics, security, currencies, team and automation tiles."
-    },
-    {
-      "slug": "stats-01",
-      "title": "Stats",
-      "category": "Marketing",
-      "height": 360,
-      "description": "Big-number proof points."
-    },
-    {
-      "slug": "testimonials-01",
-      "title": "Testimonials",
-      "category": "Marketing",
-      "height": 640,
-      "description": "Quote cards with avatars."
-    },
-    {
-      "slug": "pricing-01",
-      "title": "Pricing",
-      "category": "Marketing",
-      "height": 820,
-      "description": "Three-tier pricing with featured plan."
-    },
-    {
-      "slug": "faq-01",
-      "title": "FAQ",
-      "category": "Marketing",
-      "height": 640,
-      "description": "Two-column FAQ accordion."
-    },
-    {
-      "slug": "cta-01",
-      "title": "Call to Action",
-      "category": "Marketing",
-      "height": 420,
-      "description": "Closing CTA panel."
-    },
-    {
-      "slug": "footer-01",
-      "title": "Footer",
-      "category": "Marketing",
-      "height": 420,
-      "description": "Link columns, legal row."
-    },
-    {
       "slug": "invoice-01",
       "title": "Invoice",
       "category": "Billing",
@@ -601,6 +510,989 @@
       "category": "Application",
       "height": 900,
       "description": "Full app shell: sidebar, inset panel, grouped stats."
+    }
+  ],
+  "web": [
+    {
+      "slug": "navbar-01",
+      "title": "Navbar",
+      "category": "Headers",
+      "height": 360,
+      "description": "Sticky site header with mobile menu.",
+      "use": "Top of every marketing page. Keep 4\u20136 links; one primary action."
+    },
+    {
+      "slug": "megamenu-01",
+      "title": "Mega Menu",
+      "category": "Megamenu",
+      "description": "Header with mega menu panels for products and resources.",
+      "height": 520,
+      "use": "Sites with many product pages or resources."
+    },
+    {
+      "slug": "offcanvas-01",
+      "title": "Offcanvas Menu",
+      "category": "Offcanvas",
+      "description": "Full navigation in a slide-over panel with grouped links and contact.",
+      "height": 640,
+      "use": "Mobile navigation or a 'more' menu on desktop."
+    },
+    {
+      "slug": "bottom-nav-01",
+      "title": "Bottom Navigation Bar",
+      "category": "Bottom Navigation Bar",
+      "description": "Mobile tab bar with 4\u20135 destinations and an active state.",
+      "height": 640,
+      "use": "Mobile web apps and PWAs with 3\u20135 top-level destinations."
+    },
+    {
+      "slug": "banner-01",
+      "title": "Announcement & Promo Banner",
+      "category": "Banner",
+      "description": "Site-wide announcement bar plus an inline promo banner with countdown.",
+      "height": 420,
+      "use": "Time-bound offers, launches or notices. Dismissible; never more than one at a time."
+    },
+    {
+      "slug": "hero-01",
+      "title": "Hero \u00b7 Centered",
+      "category": "Hero",
+      "height": 640,
+      "description": "Centered headline, badge and two CTAs.",
+      "use": "Landing page opener when the message matters more than visuals."
+    },
+    {
+      "slug": "hero-02",
+      "title": "Hero \u00b7 Product",
+      "category": "Hero",
+      "height": 760,
+      "description": "Headline with an app screenshot frame.",
+      "use": "Product launch or SaaS home where a product screenshot proves the claim."
+    },
+    {
+      "slug": "hero-03",
+      "title": "Hero \u00b7 Split",
+      "category": "Hero",
+      "description": "Split hero with headline, email capture and image.",
+      "height": 680,
+      "use": "Lead-generation landing pages where the first action is signing up."
+    },
+    {
+      "slug": "intro-01",
+      "title": "Intro",
+      "category": "Intro",
+      "description": "Short positioning statement with three supporting points.",
+      "height": 520,
+      "use": "Right after the hero to say who it's for and why."
+    },
+    {
+      "slug": "logo-cloud-01",
+      "title": "Logo Cloud",
+      "category": "Logo",
+      "height": 280,
+      "description": "Trusted-by wordmark row.",
+      "use": "Directly under the hero to show who already uses the product."
+    },
+    {
+      "slug": "bento-01",
+      "title": "Features \u00b7 Bento",
+      "category": "Feature",
+      "height": 820,
+      "description": "Asymmetric bento grid with visuals.",
+      "use": "Show 4 capabilities where one deserves more space."
+    },
+    {
+      "slug": "bento-02",
+      "title": "Features \u00b7 Bento 2",
+      "category": "Feature",
+      "height": 980,
+      "description": "Four-column bento with metrics, security, currencies, team and automation tiles.",
+      "use": "Feature overview for a product with many small proofs (security, currencies, team)."
+    },
+    {
+      "slug": "features-01",
+      "title": "Features \u00b7 Grid",
+      "category": "Feature",
+      "height": 720,
+      "description": "Icon feature grid, 1 \u2192 2 \u2192 3 columns.",
+      "use": "Explain 3\u20136 capabilities at equal weight."
+    },
+    {
+      "slug": "content-01",
+      "title": "Image & Text",
+      "category": "Content",
+      "description": "Alternating image and text rows with a short list.",
+      "height": 900,
+      "use": "Explain a product or story in 2\u20133 steps with visuals."
+    },
+    {
+      "slug": "stats-01",
+      "title": "Stats",
+      "category": "Content",
+      "height": 360,
+      "description": "Big-number proof points.",
+      "use": "Proof points as numbers. Only use real, sourced figures."
+    },
+    {
+      "slug": "process-01",
+      "title": "Process Steps",
+      "category": "Process",
+      "description": "Numbered steps explaining how it works.",
+      "height": 520,
+      "use": "Explain onboarding, ordering or a service in 3\u20135 steps."
+    },
+    {
+      "slug": "timeline-01",
+      "title": "Timeline",
+      "category": "Timeline",
+      "description": "Company history or roadmap as a vertical timeline.",
+      "height": 820,
+      "use": "About page history, roadmaps, changelogs."
+    },
+    {
+      "slug": "testimonial-02",
+      "title": "Featured Quote",
+      "category": "Testimonial",
+      "description": "One large customer quote with result metric.",
+      "height": 420,
+      "use": "A single strong proof point near the CTA."
+    },
+    {
+      "slug": "testimonials-01",
+      "title": "Testimonials",
+      "category": "Testimonial",
+      "height": 640,
+      "description": "Quote cards with avatars.",
+      "use": "Several short customer quotes after features or pricing."
+    },
+    {
+      "slug": "pricing-01",
+      "title": "Pricing",
+      "category": "Pricing",
+      "height": 820,
+      "description": "Three-tier pricing with featured plan.",
+      "use": "Public pricing with 2\u20133 plans and one highlighted plan."
+    },
+    {
+      "slug": "faq-01",
+      "title": "FAQ",
+      "category": "FAQ",
+      "height": 640,
+      "description": "Two-column FAQ accordion.",
+      "use": "Answer objections near pricing or the final CTA."
+    },
+    {
+      "slug": "cta-01",
+      "title": "Call to Action",
+      "category": "CTA",
+      "height": 420,
+      "description": "Closing CTA panel.",
+      "use": "Last section before the footer; one clear action."
+    },
+    {
+      "slug": "cta-02",
+      "title": "Newsletter CTA",
+      "category": "CTA",
+      "description": "Inline email signup with consent note.",
+      "height": 320,
+      "use": "Mid-page or footer newsletter capture."
+    },
+    {
+      "slug": "popup-01",
+      "title": "Newsletter Popup",
+      "category": "Popup",
+      "description": "Modal offer with email capture; respects dismissal.",
+      "height": 600,
+      "use": "Exit-intent or delayed offers. Use sparingly."
+    },
+    {
+      "slug": "contact-01",
+      "title": "Contact",
+      "category": "Contact",
+      "description": "Contact form beside office details, hours and channels.",
+      "height": 820,
+      "use": "Contact page or bottom-of-page enquiry section."
+    },
+    {
+      "slug": "blog-01",
+      "title": "Blog Grid",
+      "category": "Blog",
+      "description": "Featured post plus a grid of posts with category filter.",
+      "height": 900,
+      "use": "Blog index or 'From the blog' section on the home page."
+    },
+    {
+      "slug": "post-hero-01",
+      "title": "Post Hero",
+      "category": "Single Post Hero",
+      "description": "Article header with category, title, author and reading time.",
+      "height": 560,
+      "use": "Top of a blog post or article."
+    },
+    {
+      "slug": "single-post-01",
+      "title": "Article Body",
+      "category": "Single Post",
+      "description": "Readable article body with table of contents and share.",
+      "height": 1200,
+      "use": "Long-form article content."
+    },
+    {
+      "slug": "team-01",
+      "title": "Team Grid",
+      "category": "Team",
+      "description": "Team members with role and social links.",
+      "height": 760,
+      "use": "About page team section."
+    },
+    {
+      "slug": "single-team-01",
+      "title": "Team Member",
+      "category": "Single Team",
+      "description": "Profile with role, bio, expertise and contact.",
+      "height": 760,
+      "use": "Detail page for one person."
+    },
+    {
+      "slug": "career-01",
+      "title": "Open Roles",
+      "category": "Career",
+      "description": "Careers header, perks and a filterable list of open roles.",
+      "height": 900,
+      "use": "Careers page or hiring section."
+    },
+    {
+      "slug": "portfolio-01",
+      "title": "Portfolio Grid",
+      "category": "Portfolio",
+      "description": "Project grid with category filter.",
+      "height": 880,
+      "use": "Agency or studio work index."
+    },
+    {
+      "slug": "single-portfolio-01",
+      "title": "Case Study",
+      "category": "Single Portfolio",
+      "description": "Project case study: summary, challenge, approach, results.",
+      "height": 1200,
+      "use": "Detail page for one project."
+    },
+    {
+      "slug": "gallery-01",
+      "title": "Gallery",
+      "category": "Gallery",
+      "description": "Masonry-style image grid with lightbox.",
+      "height": 820,
+      "use": "Photo galleries, office or project images."
+    },
+    {
+      "slug": "event-01",
+      "title": "Events List",
+      "category": "Event",
+      "description": "Upcoming events with date blocks, type and location.",
+      "height": 800,
+      "use": "Events, webinars or workshops index."
+    },
+    {
+      "slug": "single-event-01",
+      "title": "Event Detail",
+      "category": "Single Event",
+      "description": "Event page with schedule, speakers, venue and registration.",
+      "height": 1100,
+      "use": "Detail page for one event."
+    },
+    {
+      "slug": "products-01",
+      "title": "Product Grid",
+      "category": "Products",
+      "description": "Product cards with price, rating and quick add.",
+      "height": 880,
+      "use": "Shop index or featured products."
+    },
+    {
+      "slug": "category-filters-01",
+      "title": "Category Filters",
+      "category": "Category Filters",
+      "description": "Filter sidebar (sheet on mobile), active chips, sort and result count.",
+      "height": 760,
+      "use": "Above or beside any product, property or post grid."
+    },
+    {
+      "slug": "single-product-01",
+      "title": "Product Detail",
+      "category": "Single product",
+      "description": "Gallery, variants, quantity, add to cart and details accordion.",
+      "height": 900,
+      "use": "Detail page for one product."
+    },
+    {
+      "slug": "cart-01",
+      "title": "Cart",
+      "category": "Cart page",
+      "description": "Line items with quantity steppers, summary with SST and voucher code.",
+      "height": 760,
+      "use": "Shopping cart before checkout."
+    },
+    {
+      "slug": "checkout-01",
+      "title": "Checkout",
+      "category": "Checkout page",
+      "description": "Contact, shipping address (Malaysian states) and payment method with order summary.",
+      "height": 960,
+      "use": "One-page checkout for physical goods."
+    },
+    {
+      "slug": "thank-you-01",
+      "title": "Thank You",
+      "category": "Thank you Pages",
+      "description": "Confirmation with next steps after a form or purchase.",
+      "height": 620,
+      "use": "After sign-up, purchase or contact form submit."
+    },
+    {
+      "slug": "property-01",
+      "title": "Property Listings",
+      "category": "Property",
+      "description": "Property cards with price, beds, baths and area.",
+      "height": 900,
+      "use": "Real-estate listing index."
+    },
+    {
+      "slug": "single-property-01",
+      "title": "Property Detail",
+      "category": "Single Property",
+      "description": "Gallery, key facts, description, amenities and enquiry card.",
+      "height": 1100,
+      "use": "Detail page for one property."
+    },
+    {
+      "slug": "login-01",
+      "title": "Login \u00b7 Split",
+      "category": "Login pages",
+      "description": "Two-column login with brand panel and form.",
+      "height": 680,
+      "use": "Website sign-in for customer accounts."
+    },
+    {
+      "slug": "link-page-01",
+      "title": "Link in Bio",
+      "category": "Link Pages",
+      "description": "Profile, short bio and stacked links for social profiles.",
+      "height": 760,
+      "use": "Single link page for Instagram/TikTok bios."
+    },
+    {
+      "slug": "coming-soon-01",
+      "title": "Coming Soon",
+      "category": "Coming soon page",
+      "description": "Launch page with countdown and email waitlist.",
+      "height": 640,
+      "use": "Pre-launch or maintenance page."
+    },
+    {
+      "slug": "error-01",
+      "title": "404 Page",
+      "category": "Error pages",
+      "description": "Not-found page with search and helpful links.",
+      "height": 640,
+      "use": "404/500 pages. Always give a way forward."
+    },
+    {
+      "slug": "footer-01",
+      "title": "Footer",
+      "category": "Footers",
+      "height": 420,
+      "description": "Link columns, legal row.",
+      "use": "Bottom of every marketing page."
+    }
+  ],
+  "appLibrary": [
+    {
+      "category": "Authentication",
+      "description": "Sign in, sign up, verify code, forgot password.",
+      "items": [
+        {
+          "label": "Sign in",
+          "href": "/docs/patterns/sign-in",
+          "kind": "pattern"
+        },
+        {
+          "label": "Verify code",
+          "href": "/docs/patterns/verify-code",
+          "kind": "pattern"
+        },
+        {
+          "label": "Demo sign-in",
+          "href": "/demo/sign-in",
+          "kind": "demo"
+        },
+        {
+          "label": "Login \u00b7 split (web)",
+          "href": "/docs/web/login-01",
+          "kind": "web"
+        }
+      ]
+    },
+    {
+      "category": "Onboarding",
+      "description": "First-run checklist and setup steps.",
+      "items": [
+        {
+          "label": "Onboarding steps",
+          "href": "/docs/patterns/onboarding-steps",
+          "kind": "pattern"
+        }
+      ]
+    },
+    {
+      "category": "Overview / home",
+      "description": "KPIs, activity and what needs attention.",
+      "items": [
+        {
+          "label": "Overview",
+          "href": "/demo/app",
+          "kind": "demo"
+        },
+        {
+          "label": "Stat overview",
+          "href": "/docs/patterns/stat-overview",
+          "kind": "pattern"
+        }
+      ]
+    },
+    {
+      "category": "Analytics & reports",
+      "description": "Charts over time, breakdowns, export.",
+      "items": [
+        {
+          "label": "Reports",
+          "href": "/demo/app/reports",
+          "kind": "demo"
+        },
+        {
+          "label": "Chart",
+          "href": "/docs/components/chart",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "category": "Lists & tables",
+      "description": "Search, filter, sort, bulk actions, pagination.",
+      "items": [
+        {
+          "label": "Orders",
+          "href": "/demo/app/sales",
+          "kind": "demo"
+        },
+        {
+          "label": "Customers",
+          "href": "/demo/app/customers",
+          "kind": "demo"
+        },
+        {
+          "label": "Data table",
+          "href": "/docs/patterns/data-table",
+          "kind": "pattern"
+        }
+      ]
+    },
+    {
+      "category": "Record detail",
+      "description": "One customer, order, product or invoice with related data.",
+      "items": [
+        {
+          "label": "Customer",
+          "href": "/demo/app/customers/cus_3",
+          "kind": "demo"
+        },
+        {
+          "label": "Product",
+          "href": "/demo/app/products/prod_pro_m",
+          "kind": "demo"
+        },
+        {
+          "label": "Invoice",
+          "href": "/demo/app/invoices/inv_2",
+          "kind": "demo"
+        }
+      ]
+    },
+    {
+      "category": "Create & edit forms",
+      "description": "Multi-section forms with validation and save bar.",
+      "items": [
+        {
+          "label": "New product",
+          "href": "/demo/app/products/new",
+          "kind": "demo"
+        },
+        {
+          "label": "New invoice",
+          "href": "/demo/app/invoices/new",
+          "kind": "demo"
+        },
+        {
+          "label": "Create form",
+          "href": "/docs/patterns/create-form",
+          "kind": "pattern"
+        }
+      ]
+    },
+    {
+      "category": "List / detail",
+      "description": "Master list beside a detail pane.",
+      "items": [
+        {
+          "label": "Checkout links",
+          "href": "/demo/app/links",
+          "kind": "demo"
+        },
+        {
+          "label": "List / detail",
+          "href": "/docs/patterns/list-detail",
+          "kind": "pattern"
+        }
+      ]
+    },
+    {
+      "category": "Billing & payments",
+      "description": "Balance, payouts, plans, invoices.",
+      "items": [
+        {
+          "label": "Finance",
+          "href": "/demo/app/finance",
+          "kind": "demo"
+        },
+        {
+          "label": "Invoices",
+          "href": "/demo/app/invoices",
+          "kind": "demo"
+        },
+        {
+          "label": "Plan comparison",
+          "href": "/docs/patterns/pricing-table",
+          "kind": "pattern"
+        }
+      ]
+    },
+    {
+      "category": "Settings",
+      "description": "Organization profile, preferences, danger zone.",
+      "items": [
+        {
+          "label": "Settings",
+          "href": "/demo/app/settings",
+          "kind": "demo"
+        },
+        {
+          "label": "Settings page",
+          "href": "/docs/patterns/settings-page",
+          "kind": "pattern"
+        },
+        {
+          "label": "Danger zone",
+          "href": "/docs/patterns/danger-zone",
+          "kind": "pattern"
+        }
+      ]
+    },
+    {
+      "category": "Team & roles",
+      "description": "Members, invites, role permissions.",
+      "items": [
+        {
+          "label": "Team",
+          "href": "/demo/app/team",
+          "kind": "demo"
+        }
+      ]
+    },
+    {
+      "category": "Notifications",
+      "description": "Inbox with unread state and filters.",
+      "items": [
+        {
+          "label": "Notifications",
+          "href": "/demo/app/notifications",
+          "kind": "demo"
+        },
+        {
+          "label": "Notifications popover",
+          "href": "/docs/patterns/notifications",
+          "kind": "pattern"
+        }
+      ]
+    },
+    {
+      "category": "Audit log",
+      "description": "Who changed what, when, from where.",
+      "items": [
+        {
+          "label": "Audit log",
+          "href": "/demo/app/audit",
+          "kind": "demo"
+        },
+        {
+          "label": "Activity feed",
+          "href": "/docs/patterns/activity-feed",
+          "kind": "pattern"
+        }
+      ]
+    },
+    {
+      "category": "Developers",
+      "description": "API keys and webhooks.",
+      "items": [
+        {
+          "label": "Developers",
+          "href": "/demo/app/developers",
+          "kind": "demo"
+        }
+      ]
+    },
+    {
+      "category": "Integrations",
+      "description": "Connect third-party apps.",
+      "items": [
+        {
+          "label": "Integrations",
+          "href": "/demo/app/integrations",
+          "kind": "demo"
+        }
+      ]
+    },
+    {
+      "category": "Tasks / kanban",
+      "description": "Columns, drag and drop, assignees.",
+      "items": [
+        {
+          "label": "Tasks",
+          "href": "/demo/app/tasks",
+          "kind": "demo"
+        }
+      ]
+    },
+    {
+      "category": "Calendar",
+      "description": "Due dates, renewals, schedules.",
+      "items": [
+        {
+          "label": "Calendar",
+          "href": "/demo/app/calendar",
+          "kind": "demo"
+        },
+        {
+          "label": "Calendar component",
+          "href": "/docs/components/calendar",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "category": "Files",
+      "description": "Folders, uploads, file actions.",
+      "items": [
+        {
+          "label": "Files",
+          "href": "/demo/app/files",
+          "kind": "demo"
+        },
+        {
+          "label": "File upload",
+          "href": "/docs/patterns/file-upload",
+          "kind": "pattern"
+        }
+      ]
+    },
+    {
+      "category": "Support & help",
+      "description": "Tickets and conversation threads.",
+      "items": [
+        {
+          "label": "Support",
+          "href": "/demo/app/support",
+          "kind": "demo"
+        }
+      ]
+    },
+    {
+      "category": "Search",
+      "description": "Global search and quick actions.",
+      "items": [
+        {
+          "label": "Command menu (\u2318K in the demo)",
+          "href": "/docs/patterns/command-menu",
+          "kind": "pattern"
+        }
+      ]
+    },
+    {
+      "category": "Empty, error & loading states",
+      "description": "First run, no results, failure, not found.",
+      "items": [
+        {
+          "label": "Empty states",
+          "href": "/docs/patterns/empty-states",
+          "kind": "pattern"
+        },
+        {
+          "label": "404 page",
+          "href": "/docs/web/error-01",
+          "kind": "web"
+        },
+        {
+          "label": "Skeleton",
+          "href": "/docs/components/skeleton",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "category": "Customer portal",
+      "description": "What your customers see: invoices, subscriptions, downloads.",
+      "items": [
+        {
+          "label": "Customer portal",
+          "href": "/demo/portal",
+          "kind": "demo"
+        },
+        {
+          "label": "Pay invoice",
+          "href": "/demo/pay/inv_2",
+          "kind": "demo"
+        },
+        {
+          "label": "Checkout",
+          "href": "/demo/checkout/lnk_bf",
+          "kind": "demo"
+        }
+      ]
+    },
+    {
+      "category": "App shell",
+      "description": "Sidebar, inset panel, mobile sheet.",
+      "items": [
+        {
+          "label": "App sidebar",
+          "href": "/docs/patterns/app-sidebar",
+          "kind": "pattern"
+        },
+        {
+          "label": "Dashboard shell",
+          "href": "/docs/blocks/dashboard-shell-01",
+          "kind": "block"
+        }
+      ]
+    }
+  ],
+  "webRecipes": [
+    {
+      "page": "SaaS / product landing page",
+      "sections": [
+        "navbar-01",
+        "hero-02",
+        "logo-cloud-01",
+        "intro-01",
+        "features-01",
+        "content-01",
+        "bento-02",
+        "testimonial-02",
+        "pricing-01",
+        "faq-01",
+        "cta-01",
+        "footer-01"
+      ],
+      "notes": "One primary CTA repeated in hero, pricing and final CTA. Real customer logos and numbers only."
+    },
+    {
+      "page": "Lead-generation landing page",
+      "sections": [
+        "navbar-01",
+        "hero-03",
+        "logo-cloud-01",
+        "process-01",
+        "testimonials-01",
+        "faq-01",
+        "cta-02",
+        "footer-01"
+      ],
+      "notes": "Email capture above the fold; keep navigation minimal."
+    },
+    {
+      "page": "About page",
+      "sections": [
+        "navbar-01",
+        "intro-01",
+        "timeline-01",
+        "team-01",
+        "gallery-01",
+        "career-01",
+        "footer-01"
+      ],
+      "notes": "Specific history and real people. No mission-statement filler."
+    },
+    {
+      "page": "Blog index",
+      "sections": [
+        "navbar-01",
+        "blog-01",
+        "cta-02",
+        "footer-01"
+      ],
+      "notes": ""
+    },
+    {
+      "page": "Blog post",
+      "sections": [
+        "navbar-01",
+        "post-hero-01",
+        "single-post-01",
+        "cta-02",
+        "footer-01"
+      ],
+      "notes": "Max 70ch line length; table of contents for posts over ~800 words."
+    },
+    {
+      "page": "Shop / catalogue",
+      "sections": [
+        "banner-01",
+        "navbar-01",
+        "category-filters-01",
+        "products-01",
+        "footer-01"
+      ],
+      "notes": "Filters become a sheet below lg."
+    },
+    {
+      "page": "Product page",
+      "sections": [
+        "navbar-01",
+        "single-product-01",
+        "testimonials-01",
+        "products-01",
+        "footer-01"
+      ],
+      "notes": "Price, variants and add-to-cart visible without scrolling on desktop."
+    },
+    {
+      "page": "Cart \u2192 checkout \u2192 thank you",
+      "sections": [
+        "cart-01",
+        "checkout-01",
+        "thank-you-01"
+      ],
+      "notes": "Show totals incl. SST and delivery before payment; FPX, DuitNow, card."
+    },
+    {
+      "page": "Portfolio / agency",
+      "sections": [
+        "navbar-01",
+        "hero-01",
+        "portfolio-01",
+        "testimonials-01",
+        "contact-01",
+        "footer-01"
+      ],
+      "notes": ""
+    },
+    {
+      "page": "Case study",
+      "sections": [
+        "navbar-01",
+        "single-portfolio-01",
+        "testimonial-02",
+        "cta-01",
+        "footer-01"
+      ],
+      "notes": "Problem, approach, measurable results."
+    },
+    {
+      "page": "Property listings",
+      "sections": [
+        "navbar-01",
+        "category-filters-01",
+        "property-01",
+        "footer-01"
+      ],
+      "notes": "Price, beds, baths, built-up and location on every card."
+    },
+    {
+      "page": "Property detail",
+      "sections": [
+        "navbar-01",
+        "single-property-01",
+        "property-01",
+        "footer-01"
+      ],
+      "notes": "Agent card with REN number and WhatsApp."
+    },
+    {
+      "page": "Events",
+      "sections": [
+        "navbar-01",
+        "event-01",
+        "cta-02",
+        "footer-01"
+      ],
+      "notes": ""
+    },
+    {
+      "page": "Event detail",
+      "sections": [
+        "navbar-01",
+        "single-event-01",
+        "footer-01"
+      ],
+      "notes": "Date, venue, seats left and registration in a sticky card."
+    },
+    {
+      "page": "Careers",
+      "sections": [
+        "navbar-01",
+        "career-01",
+        "gallery-01",
+        "footer-01"
+      ],
+      "notes": "Salary range and location per role where possible."
+    },
+    {
+      "page": "Contact",
+      "sections": [
+        "navbar-01",
+        "contact-01",
+        "faq-01",
+        "footer-01"
+      ],
+      "notes": "State reply time; offer WhatsApp in Malaysia."
+    },
+    {
+      "page": "Login",
+      "sections": [
+        "login-01"
+      ],
+      "notes": ""
+    },
+    {
+      "page": "Link in bio",
+      "sections": [
+        "link-page-01"
+      ],
+      "notes": ""
+    },
+    {
+      "page": "Coming soon / maintenance",
+      "sections": [
+        "coming-soon-01"
+      ],
+      "notes": ""
+    },
+    {
+      "page": "404 / error",
+      "sections": [
+        "error-01"
+      ],
+      "notes": "Always offer search and 2\u20133 useful links."
     }
   ]
 }

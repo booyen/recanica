@@ -32,6 +32,10 @@ ${map(catalog.patterns, (s) => `registry/patterns/${s}`)}
 export const blocks: Record<string, ComponentType> = {
 ${map(catalog.blocks, (s) => `registry/blocks/${s}`)}
 };
+
+export const web: Record<string, ComponentType> = {
+${map(catalog.web, (s) => `registry/web/${s}`)}
+};
 `;
 writeFileSync(join(root, "__registry__/index.tsx"), index);
 
@@ -52,6 +56,7 @@ const registry = {
   items: [
     ...catalog.patterns.map(item("patterns", "registry:block")),
     ...catalog.blocks.map(item("blocks", "registry:block")),
+    ...catalog.web.map(item("web", "registry:block")),
   ],
 };
 writeFileSync(join(root, "registry.json"), JSON.stringify(registry, null, 2) + "\n");
@@ -60,5 +65,5 @@ if (missing.length) {
   console.warn(`gen-registry: ${missing.length} missing file(s):\n  ` + missing.join("\n  "));
   process.exitCode = 1;
 } else {
-  console.log(`gen-registry: ${catalog.components.length} components, ${catalog.patterns.length} patterns, ${catalog.blocks.length} blocks`);
+  console.log(`gen-registry: ${catalog.components.length} components, ${catalog.patterns.length} patterns, ${catalog.blocks.length} blocks, ${catalog.web.length} web sections`);
 }

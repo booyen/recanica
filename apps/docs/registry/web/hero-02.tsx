@@ -9,7 +9,7 @@ export function Hero02() {
         <div className="max-w-2xl space-y-6">
           <p className="text-sm text-muted-foreground">Billing infrastructure for software</p>
           <h1 className="text-display-sm tracking-tight text-balance sm:text-display-md">
-            Sell software <span className="text-metallic">in minutes</span>, not months
+            Sell software <span className="text-metallic">without building billing</span>
           </h1>
           <p className="max-w-xl text-base text-muted-foreground sm:text-lg">
             Checkout, subscriptions, tax and payouts, handled. You ship the product, we run the money.

@@ -4,9 +4,9 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
-  ArrowUpRightIcon, BellIcon, BoxIcon, CheckCheckIcon, ChevronsUpDownIcon, DollarSignIcon, FileTextIcon,
-  LayoutGridIcon, LinkIcon, LogOutIcon, MenuIcon, PlusIcon, RotateCcwIcon, SearchIcon, SettingsIcon,
-  ShoppingBagIcon, SlidersHorizontalIcon, UserPlusIcon, UsersIcon,
+  ArrowUpRightIcon, BellIcon, BoxIcon, BriefcaseIcon, CheckCheckIcon, ChevronsUpDownIcon, DollarSignIcon, FileTextIcon,
+  LayoutGridIcon, LayoutListIcon, LinkIcon, LogOutIcon, MenuIcon, PlusIcon, RotateCcwIcon, SearchIcon, SettingsIcon,
+  ShoppingBagIcon, SlidersHorizontalIcon, TrendingUpIcon, UserPlusIcon, UsersIcon,
 } from "lucide-react";
 import { toast } from "sonner";
 import { Avatar, AvatarFallback } from "@rekanica/ui/components/avatar";
@@ -39,7 +39,20 @@ const NAV: NavItem[] = [
     { label: "Invoices", href: "/demo/app/invoices" },
   ] },
   { label: "Finance", href: "/demo/app/finance", icon: DollarSignIcon },
-  { label: "Settings", href: "/demo/app/settings", icon: SlidersHorizontalIcon },
+  { label: "Reports", href: "/demo/app/reports", icon: TrendingUpIcon },
+  { label: "Workspace", href: "/demo/app/tasks", icon: BriefcaseIcon, children: [
+    { label: "Tasks", href: "/demo/app/tasks" },
+    { label: "Calendar", href: "/demo/app/calendar" },
+    { label: "Files", href: "/demo/app/files" },
+    { label: "Support", href: "/demo/app/support" },
+  ] },
+  { label: "Settings", href: "/demo/app/settings", icon: SlidersHorizontalIcon, children: [
+    { label: "General", href: "/demo/app/settings" },
+    { label: "Team", href: "/demo/app/team" },
+    { label: "Developers", href: "/demo/app/developers" },
+    { label: "Integrations", href: "/demo/app/integrations" },
+    { label: "Audit log", href: "/demo/app/audit" },
+  ] },
 ];
 
 function isActive(pathname: string, href: string) {
@@ -68,7 +81,10 @@ function Notifications() {
       <PopoverContent align="start" className="w-[min(22rem,calc(100vw-2rem))] p-0">
         <div className="flex items-center justify-between border-b px-4 py-2.5">
           <p className="text-sm">Activity</p>
-          <Button variant="ghost" size="sm" onClick={markRead} disabled={!unread}><CheckCheckIcon /> Mark read</Button>
+          <div className="flex gap-1">
+            <Button variant="ghost" size="sm" onClick={markRead} disabled={!unread}><CheckCheckIcon /> Mark read</Button>
+            <Button variant="ghost" size="sm" asChild><Link href="/demo/app/notifications">View all</Link></Button>
+          </div>
         </div>
         <ScrollArea className="h-80">
           <ul className="p-2">
@@ -155,6 +171,12 @@ function SidebarContents({ onNavigate, openSearch }: { onNavigate?: () => void; 
             <Link href="/demo/app/finance" onClick={onNavigate} className="mt-3 inline-block font-medium text-metallic">Set up</Link>
           </div>
         )}
+        <Link href="/demo/app/library" onClick={onNavigate} className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-sidebar-foreground hover:text-foreground">
+          <LayoutListIcon className="size-4" /> Page library
+        </Link>
+        <Link href="/demo/portal" className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-sidebar-foreground hover:text-foreground">
+          <UsersIcon className="size-4" /> Customer portal
+        </Link>
         <Link href="/docs" className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-sidebar-foreground hover:text-foreground">
           <ArrowUpRightIcon className="size-4" /> Design system
         </Link>

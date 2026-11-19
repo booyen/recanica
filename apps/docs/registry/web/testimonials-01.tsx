@@ -4,9 +4,9 @@ const quotes = [
   { body: "We moved our entire billing over in an afternoon. Taxes stopped being a weekly fire drill.", name: "Nadia Rahman", role: "Founder, Lumen", initials: "NR" },
   { body: "The dashboard is the first one my co-founder actually opens. It's calm and it's correct.", name: "Leo Tan", role: "CTO, Northwind", initials: "LT" },
   { body: "Benefits are the killer feature. License keys and repo access just happen.", name: "Mei Kato", role: "Indie developer", initials: "MK" },
-  { body: "Support answered in minutes, with code. That never happens.", name: "Arjun Mehta", role: "Engineer, Globex", initials: "AM" },
+  { body: "Support replied in 20 minutes with the exact API call I needed.", name: "Arjun Mehta", role: "Engineer, Globex", initials: "AM" },
   { body: "Checkout conversion went up 18% the week we switched.", name: "Chloe Martin", role: "Growth, Initech", initials: "CM" },
-  { body: "It feels like it was designed by people who sell software themselves.", name: "Hana Lee", role: "Designer, Acme", initials: "HL" },
+  { body: "Refunds, invoices and payouts are on the same screen. I stopped using three other tools.", name: "Hana Lee", role: "Designer, Acme", initials: "HL" },
 ];
 
 export function Testimonials01() {

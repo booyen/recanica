@@ -14,7 +14,8 @@
     "registry:build": "pnpm --filter docs registry:build",
     "changeset": "changeset",
     "version-packages": "changeset version",
-    "release": "turbo build --filter=./packages/* && changeset publish"
+    "release": "turbo build --filter=./packages/* && changeset publish",
+    "lint:copy": "node scripts/copy-lint.mjs"
   },
   "devDependencies": {
     "@changesets/cli": "^3.0.3",

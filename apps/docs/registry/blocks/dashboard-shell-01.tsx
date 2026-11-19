@@ -59,7 +59,7 @@ function SidebarContents() {
       <div className="mt-auto space-y-1">
         <div className="mb-3 rounded-xl border bg-panel p-4 text-sm">
           <p>Introducing Aturanica Pro</p>
-          <p className="mt-1 text-muted-foreground">Unlock advanced analytics and lower fees.</p>
+          <p className="mt-1 text-muted-foreground">Advanced reports and a lower 2.5% fee.</p>
           <a href="#" className="mt-3 inline-block font-medium text-metallic">Upgrade</a>
         </div>
         <NavItem label="Support" icon={LifeBuoyIcon} />

@@ -10,7 +10,8 @@
 | [`@rekanica/mcp`](packages/mcp) | MCP server: rules, tokens, components, patterns for AI tools |
 | [`rekanica`](packages/cli) | `npx rekanica init`: detects your stack and sets everything up |
 
-Also: [docs site + 18 patterns + 16 blocks + clickable demo](apps/docs), [starter templates](templates), [guides](docs/guides).
+Also: [docs site](apps/docs) with 60 components, 18 app patterns, a **web library of 49 sections in 42 categories**, 20 page recipes,
+a **sample website** (`/site`), a **clickable dashboard demo** with 23 page types (`/demo`) and a customer portal; [starter templates](templates); [guides](docs/guides); [copy audit](docs/COPY_AUDIT.md).
 
 ## Quick start
 
@@ -28,6 +29,7 @@ pnpm build && pnpm typecheck
 pnpm test           # CLI fixtures + MCP smoke
 pnpm test:layout    # layout audit on every page (mobile + desktop)
 pnpm test:visual    # screenshot regression
+pnpm lint:copy      # AI-jargon / placeholder copy check
 pnpm tokens         # rebuild generated tokens after editing packages/tokens/tokens/*.json
 ```
 

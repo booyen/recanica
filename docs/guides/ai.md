@@ -16,8 +16,12 @@ claude mcp add rekanica -- npx -y @rekanica/mcp
 { "rekanica": { "command": "npx", "args": ["-y", "@rekanica/mcp"] } }
 ```
 
-Tools: `get_rules`, `get_tokens(format)`, `list_components`, `get_component(name)`, `list_patterns`, `get_pattern(name)`,
-`search(query)`, `get_setup(stack)`. Prompt: `apply-rekanica`.
+Tools: `get_rules`, `get_tokens(format)`, `list_components`, `get_component(name)`, `list_patterns(kind, category)`, `get_pattern(name)`,
+`get_recipe(page)`, `get_page_library`, `search(query)`, `get_setup(stack)`. Prompt: `apply-rekanica`.
+
+Typical requests that work well once the server is connected:
+- "Build our pricing page with Rekanica." → the agent calls `get_recipe`, then `get_pattern` for each section.
+- "Add a team & roles page to the dashboard." → `get_page_library`, then the matching demo/pattern source.
 
 ## 2. Rules file in the project
 

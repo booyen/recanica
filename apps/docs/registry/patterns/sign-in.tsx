@@ -39,7 +39,7 @@ export default function SignIn() {
             <Input id="si-pass" type="password" autoComplete="current-password" />
           </Field>
           <Button type="submit" variant="brand" className="w-full">Sign in</Button>
-          <Button type="button" variant="ghost" className="w-full">Email me a magic link</Button>
+          <Button type="button" variant="ghost" className="w-full">Email me a sign-in link</Button>
         </form>
         <p className="text-center text-sm text-muted-foreground">
           No account? <a href="#" className="text-foreground underline-offset-4 hover:underline">Create one</a>

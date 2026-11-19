@@ -58,13 +58,28 @@ server.registerTool("get_component", {
 });
 
 server.registerTool("list_patterns", {
-  title: "List patterns and blocks",
-  description: "Composed app patterns (data table, list/detail, settings, auth, invoices…) and marketing/app blocks, with install commands.",
-  inputSchema: { kind: z.enum(["pattern", "block", "all"]).default("all") },
-}, async ({ kind }) => {
-  const list = data.patterns.filter((p) => kind === "all" || p.kind === kind);
-  return text(list.map((p) => `- ${p.slug} [${p.kind}/${p.category}]: ${p.description}`).join("\n"));
+  title: "List patterns, blocks and web sections",
+  description: "App patterns (data table, list/detail, settings, auth…), app blocks (shell, invoices) and the web library (49 website sections in 42 categories: headers, heroes, blog, shop, property, careers, events, utility pages). Includes when-to-use notes.",
+  inputSchema: { kind: z.enum(["pattern", "block", "web", "all"]).default("all"), category: z.string().optional().describe("e.g. Hero, Pricing, Single product") },
+}, async ({ kind, category }) => {
+  const list = data.patterns.filter((p) => (kind === "all" || p.kind === kind) && (!category || p.category.toLowerCase() === category.toLowerCase()));
+  return text(list.map((p) => `- ${p.slug} [${p.kind}/${p.category}]: ${p.description}${p.use ? ` When: ${p.use}` : ""}`).join("\n") || "No matches.");
 });
+
+server.registerTool("get_recipe", {
+  title: "Website page recipes",
+  description: "Ordered section lists for common website pages (SaaS landing, lead-gen, about, blog, shop, product, checkout, property, events, careers, contact, 404…). Use this to compose a page from web sections.",
+  inputSchema: { page: z.string().optional().describe("Page type, e.g. 'landing', 'product page'. Empty lists all.") },
+}, async ({ page }) => {
+  const list = data.webRecipes.filter((r) => !page || r.page.toLowerCase().includes(page.toLowerCase()));
+  return text(list.map((r) => `## ${r.page}\n${r.sections.map((s, i) => `${i + 1}. ${s}`).join("\n")}${r.notes ? `\nNotes: ${r.notes}` : ""}`).join("\n\n") || "No recipe matches. Call without arguments to list all.");
+});
+
+server.registerTool("get_page_library", {
+  title: "Dashboard / portal page library",
+  description: "Common dashboard and customer-portal page types (auth, overview, reports, tables, detail, forms, settings, team & roles, notifications, audit log, developers, integrations, tasks, calendar, files, support, empty states, customer portal) and which Rekanica patterns/components implement each.",
+  inputSchema: {},
+}, async () => text(data.appLibrary.map((c) => `## ${c.category}\n${c.description}\n${c.items.map((i) => `- ${i.kind}: ${i.label} (${data.site}${i.href})`).join("\n")}`).join("\n\n")));
 
 server.registerTool("get_pattern", {
   title: "Get pattern or block",
@@ -85,7 +100,8 @@ server.registerTool("search", {
   const score = (s) => q.reduce((n, w) => n + (s.toLowerCase().includes(w) ? 1 : 0), 0);
   const hits = [
     ...data.components.map((c) => ({ s: score(`${c.slug} ${c.title} ${c.description} ${c.category}`) * 2, line: `component ${c.slug}: ${c.description}` })),
-    ...data.patterns.map((p) => ({ s: score(`${p.slug} ${p.title} ${p.description} ${p.category}`) * 2, line: `${p.kind} ${p.slug}: ${p.description}` })),
+    ...data.patterns.map((p) => ({ s: score(`${p.slug} ${p.title} ${p.description} ${p.category} ${p.use ?? ""}`) * 2, line: `${p.kind} ${p.slug}: ${p.description}` })),
+    ...data.webRecipes.map((r) => ({ s: score(`${r.page} ${r.notes}`) * 2, line: `recipe "${r.page}": ${r.sections.join(" → ")}` })),
     ...Object.entries(data.guides).map(([k, v]) => ({ s: score(v), line: `guide ${k}` })),
   ].filter((h) => h.s > 0).sort((a, b) => b.s - a.s).slice(0, 15);
   return text(hits.length ? hits.map((h) => `- ${h.line}`).join("\n") : "No matches.");

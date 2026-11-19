@@ -28,7 +28,7 @@ export function Bento02() {
 
         {/* 1 col → 2 cols (sm) → 4-col asymmetric grid (lg) */}
         <div className="mt-12 grid auto-rows-[minmax(14rem,auto)] gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <Cell className="sm:col-span-2 lg:row-span-2" eyebrow="Analytics" title="Revenue that explains itself">
+          <Cell className="sm:col-span-2 lg:row-span-2" eyebrow="Analytics" title="Revenue by month and product">
             <p className="text-metric font-light text-metallic">$48,210</p>
             <p className="text-sm text-muted-foreground">+12.4% vs last month</p>
             <div className="mt-6 flex h-40 items-end gap-1.5">
@@ -66,7 +66,7 @@ export function Bento02() {
             </div>
           </Cell>
 
-          <Cell eyebrow="Team" title="Built for collaboration">
+          <Cell eyebrow="Team" title="Roles for your team">
             <div className="flex -space-x-2">
               {["NR", "LT", "MK", "AM"].map((i) => (
                 <Avatar key={i} className="ring-2 ring-card"><AvatarFallback>{i}</AvatarFallback></Avatar>
@@ -75,7 +75,7 @@ export function Bento02() {
             </div>
           </Cell>
 
-          <Cell className="sm:col-span-2 lg:col-span-1" eyebrow="Alerts" title="Know the moment it happens">
+          <Cell className="sm:col-span-2 lg:col-span-1" eyebrow="Alerts" title="Alerts for payments and payouts">
             <ul className="space-y-2 text-sm">
               {[["Order paid", "now"], ["Payout sent", "2h"]].map(([t, w]) => (
                 <li key={t} className="flex items-center gap-2 rounded-xl border bg-panel px-3 py-2">

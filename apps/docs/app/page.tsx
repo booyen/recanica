@@ -3,9 +3,9 @@ import { ArrowRightIcon } from "lucide-react";
 import { Badge } from "@rekanica/ui/components/badge";
 import { Button } from "@rekanica/ui/components/button";
 import { SiteHeader } from "@/components/docs/site-header";
-import { Bento01 } from "@/registry/blocks/bento-01";
-import { Cta01 } from "@/registry/blocks/cta-01";
-import { Footer01 } from "@/registry/blocks/footer-01";
+import { Bento01 } from "@/registry/web/bento-01";
+import { Cta01 } from "@/registry/web/cta-01";
+import { Footer01 } from "@/registry/web/footer-01";
 import { blocks, components, patterns } from "@/lib/docs";
 
 // The design system's own homepage, assembled from its blocks.

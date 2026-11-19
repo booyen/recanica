@@ -1,4 +1,4 @@
-import { blocks, components, foundations, patterns } from "@/lib/docs";
+import { blocks, components, foundations, patterns, web } from "@/lib/docs";
 import { SITE } from "@/lib/llm";
 
 export const dynamic = "force-static";
@@ -27,8 +27,16 @@ ${components.map((c) => `- [${c.title}](${SITE}/docs/components/${c.slug}): ${c.
 ## Patterns
 ${patterns.map((p) => `- [${p.title}](${SITE}/docs/patterns/${p.slug}): ${p.description}`).join("\n")}
 
+## Web library
+${web.map((w) => `- [${w.category} · ${w.title}](${SITE}/docs/web/${w.slug}): ${w.description}`).join("\n")}
+
 ## Blocks
 ${blocks.map((b) => `- [${b.title}](${SITE}/docs/blocks/${b.slug}): ${b.description}`).join("\n")}
+
+## Demos
+- [Sample website](${SITE}/site): every web section composed into real pages
+- [Dashboard demo](${SITE}/demo): working app with page library at /demo/app/library
+- [Customer portal](${SITE}/demo/portal)
 `;
   return new Response(body, { headers: { "content-type": "text/plain; charset=utf-8" } });
 }

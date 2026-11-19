@@ -42,7 +42,10 @@ const data = {
   patterns: [
     ...catalog.patterns.map((p) => ({ ...p, kind: "pattern", install: `npx shadcn@latest add https://rekanica.aturanica.com/r/${p.slug}.json`, source: read("apps/docs/registry/patterns", `${p.slug}.tsx`) })),
     ...catalog.blocks.map((b) => ({ ...b, kind: "block", install: `npx shadcn@latest add https://rekanica.aturanica.com/r/${b.slug}.json`, source: read("apps/docs/registry/blocks", `${b.slug}.tsx`) })),
+    ...catalog.web.map((w) => ({ ...w, kind: "web", install: `npx shadcn@latest add https://rekanica.aturanica.com/r/${w.slug}.json`, source: read("apps/docs/registry/web", `${w.slug}.tsx`) })),
   ],
+  appLibrary: catalog.appLibrary,
+  webRecipes: catalog.webRecipes,
   guides: Object.fromEntries(
     readdirSync(join(repo, "docs/guides")).filter((f) => f.endsWith(".md")).map((f) => [f.replace(/\.md$/, ""), read("docs/guides", f)])
   ),
@@ -51,4 +54,4 @@ const data = {
 mkdirSync(join(import.meta.dirname, "../data"), { recursive: true });
 const json = JSON.stringify(data);
 writeFileSync(join(import.meta.dirname, "../data/rekanica.json"), json);
-console.log(`data/rekanica.json ${(json.length / 1024).toFixed(0)} KB · ${data.components.length} components · ${data.patterns.length} patterns/blocks · ${Object.keys(data.guides).length} guides`);
+console.log(`data/rekanica.json ${(json.length / 1024).toFixed(0)} KB · ${data.components.length} components · ${data.patterns.length} patterns/blocks/web · ${data.webRecipes.length} recipes · ${Object.keys(data.guides).length} guides`);
