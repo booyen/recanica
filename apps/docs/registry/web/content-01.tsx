@@ -1,5 +1,5 @@
 import { CheckIcon } from "lucide-react";
-import { cn } from "@rekanica/ui/lib/utils";
+import { cn } from "@recanica/ui/lib/utils";
 
 const rows = [
   { eyebrow: "Invoicing", title: "Create an invoice in under a minute", body: "Pick a customer, add line items and choose SST. The invoice is numbered, validated with LHDN and sent.", points: ["Payment plans with deposits", "Reminders before and after the due date"] },

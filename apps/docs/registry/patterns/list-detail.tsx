@@ -2,12 +2,12 @@
 
 import * as React from "react";
 import { ArrowLeftIcon, CopyIcon, LinkIcon, PlusIcon } from "lucide-react";
-import { Badge } from "@rekanica/ui/components/badge";
-import { Button } from "@rekanica/ui/components/button";
-import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@rekanica/ui/components/empty";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@rekanica/ui/components/select";
-import { Separator } from "@rekanica/ui/components/separator";
-import { cn } from "@rekanica/ui/lib/utils";
+import { Badge } from "@recanica/ui/components/badge";
+import { Button } from "@recanica/ui/components/button";
+import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@recanica/ui/components/empty";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@recanica/ui/components/select";
+import { Separator } from "@recanica/ui/components/separator";
+import { cn } from "@recanica/ui/lib/utils";
 
 const links = [
   { id: "1", label: "Black Friday", product: "Pro Yearly", visits: 1240, conversions: 86, active: true },

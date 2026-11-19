@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import "@rekanica/tokens/theme.css";
+@import "@recanica/tokens/theme.css";
 
 /* Let Tailwind scan the shared UI package (lives outside this app) */
 @source "../../../packages/ui/src";

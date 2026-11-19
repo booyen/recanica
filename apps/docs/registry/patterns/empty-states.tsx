@@ -1,8 +1,8 @@
 "use client";
 
 import { AlertTriangleIcon, BoxIcon, SearchXIcon } from "lucide-react";
-import { Button } from "@rekanica/ui/components/button";
-import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@rekanica/ui/components/empty";
+import { Button } from "@recanica/ui/components/button";
+import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@recanica/ui/components/empty";
 
 const states = [
   {

@@ -5,4 +5,4 @@
    (or sync the plugin to this GitHub repo, path `packages/tokens/generated/figma/tokens-studio.json`).
 3. Themes **Light** and **Dark** are preconfigured. Export to Figma variables from the plugin.
 
-Changes go the other way through `packages/tokens/tokens/*.json` → `pnpm --filter @rekanica/tokens build`.
+Changes go the other way through `packages/tokens/tokens/*.json` → `pnpm --filter @recanica/tokens build`.

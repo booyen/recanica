@@ -7,11 +7,11 @@ import { toast } from "sonner";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter,
   AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
-} from "@rekanica/ui/components/alert-dialog";
-import { Avatar, AvatarFallback } from "@rekanica/ui/components/avatar";
-import { Badge } from "@rekanica/ui/components/badge";
-import { Button } from "@rekanica/ui/components/button";
-import { Stat, StatGroup, StatHeader, StatValue } from "@rekanica/ui/components/stat";
+} from "@recanica/ui/components/alert-dialog";
+import { Avatar, AvatarFallback } from "@recanica/ui/components/avatar";
+import { Badge } from "@recanica/ui/components/badge";
+import { Button } from "@recanica/ui/components/button";
+import { Stat, StatGroup, StatHeader, StatValue } from "@recanica/ui/components/stat";
 import { InvoiceBadge, NotFound, PageHeader, Section } from "@/components/demo/ui";
 import { date, initials, invoiceGrand, invoicePaid, isOverdue, money, price, shortDate, useDemo } from "@/lib/demo/store";
 
@@ -36,7 +36,7 @@ export default function CustomerPage({ params }: { params: Promise<{ id: string 
       />
 
       <StatGroup>
-        <Stat><StatHeader title="Lifetime value" /><StatValue value={<span className="text-metallic">{money(spent)}</span>} /></Stat>
+        <Stat><StatHeader title="Lifetime value" /><StatValue value={<span className="text-brand">{money(spent)}</span>} /></Stat>
         <Stat><StatHeader title="Orders" /><StatValue value={orders.length} /></Stat>
         <Stat><StatHeader title="Active subscriptions" /><StatValue value={subs.filter((s) => s.status === "active").length} /></Stat>
       </StatGroup>

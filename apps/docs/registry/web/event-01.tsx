@@ -1,6 +1,6 @@
 import { ArrowRightIcon } from "lucide-react";
-import { Badge } from "@rekanica/ui/components/badge";
-import { Button } from "@rekanica/ui/components/button";
+import { Badge } from "@recanica/ui/components/badge";
+import { Button } from "@recanica/ui/components/button";
 
 const events = [
   { day: "04", month: "Dec", title: "e-Invoice clinic for small businesses", type: "Workshop", place: "Kuala Lumpur · In person", time: "2:00–4:30pm", seats: "12 seats left" },
@@ -14,7 +14,7 @@ export function Event01() {
       <div className="mx-auto max-w-content">
         <div className="flex items-end justify-between gap-4">
           <h2 className="text-display-sm tracking-tight">Upcoming events</h2>
-          <a href="#" className="hidden text-sm text-muted-foreground hover:text-foreground sm:block">Past events</a>
+          <a href="/site/events" className="hidden text-sm text-muted-foreground hover:text-foreground sm:block">Past events</a>
         </div>
         <ul className="mt-10 divide-y rounded-2xl border">
           {events.map((e) => (

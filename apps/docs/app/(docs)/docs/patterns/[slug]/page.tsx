@@ -25,7 +25,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   if (!item) notFound();
   const raw = await readSource(`registry/patterns/${slug}.tsx`);
   const html = await highlight(raw);
-  const used = [...new Set([...raw.matchAll(/@rekanica\/ui\/components\/([a-z-]+)/g)].map((m) => m[1]))];
+  const used = [...new Set([...raw.matchAll(/@recanica\/ui\/components\/([a-z-]+)/g)].map((m) => m[1]))];
 
   return (
     <>
@@ -35,8 +35,8 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
       <H2 id="preview">Preview</H2>
       <BlockViewer src={`/view/patterns/${slug}`} height={item.height} html={html} raw={raw} title={item.title} />
       <H2 id="installation">Installation</H2>
-      <P>Install from the Rekanica registry. The file is copied into your app so you can edit it freely.</P>
-      <div className="mt-4"><CodeBlock lang="bash" code={`pnpm dlx shadcn@latest add https://rekanica.aturanica.com/r/${slug}.json`} /></div>
+      <P>Install from the Recanica registry. The file is copied into your app so you can edit it freely.</P>
+      <div className="mt-4"><CodeBlock lang="bash" code={`pnpm dlx shadcn@latest add https://recanica.aturanica.com/r/${slug}.json`} /></div>
       <H2 id="components">Components used</H2>
       <div className="flex flex-wrap gap-2">
         {used.map((u) => (

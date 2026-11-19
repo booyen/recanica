@@ -1,6 +1,6 @@
 "use client";
 
-import { Bubble, BubbleContent, BubbleGroup } from "@rekanica/ui/components/bubble";
+import { Bubble, BubbleContent, BubbleGroup } from "@recanica/ui/components/bubble";
 
 export default function BubbleDemo() {
   return (

@@ -2,11 +2,11 @@
 
 import * as React from "react";
 import { PlusIcon } from "lucide-react";
-import { Avatar, AvatarFallback } from "@rekanica/ui/components/avatar";
-import { Badge } from "@rekanica/ui/components/badge";
-import { Button } from "@rekanica/ui/components/button";
-import { Input } from "@rekanica/ui/components/input";
-import { cn } from "@rekanica/ui/lib/utils";
+import { Avatar, AvatarFallback } from "@recanica/ui/components/avatar";
+import { Badge } from "@recanica/ui/components/badge";
+import { Button } from "@recanica/ui/components/button";
+import { Input } from "@recanica/ui/components/input";
+import { cn } from "@recanica/ui/lib/utils";
 import { PageHeader } from "@/components/demo/ui";
 
 type Col = "To do" | "In progress" | "Done";

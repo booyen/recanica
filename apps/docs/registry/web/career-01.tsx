@@ -2,8 +2,8 @@
 
 import * as React from "react";
 import { ArrowUpRightIcon } from "lucide-react";
-import { Badge } from "@rekanica/ui/components/badge";
-import { Tabs, TabsList, TabsTrigger } from "@rekanica/ui/components/tabs";
+import { Badge } from "@recanica/ui/components/badge";
+import { Tabs, TabsList, TabsTrigger } from "@recanica/ui/components/tabs";
 
 const roles = [
   { title: "Senior Frontend Engineer", team: "Engineering", place: "Kuala Lumpur · Hybrid", type: "Full-time" },
@@ -36,7 +36,7 @@ export function Career01() {
           <ul className="divide-y rounded-2xl border">
             {list.map((r) => (
               <li key={r.title}>
-                <a href="#" className="group flex flex-col gap-2 p-5 transition-colors hover:bg-accent/40 sm:flex-row sm:items-center">
+                <a href="/site/contact" className="group flex flex-col gap-2 p-5 transition-colors hover:bg-accent/40 sm:flex-row sm:items-center">
                   <span className="flex-1">{r.title}<span className="block text-sm text-muted-foreground">{r.place}</span></span>
                   <Badge variant="outline">{r.team}</Badge>
                   <span className="text-sm text-muted-foreground sm:w-40 sm:text-right">{r.type}</span>

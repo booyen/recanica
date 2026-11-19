@@ -2,8 +2,8 @@
 
 import * as React from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
-import { Button } from "@rekanica/ui/components/button";
-import { Dialog, DialogContent, DialogTitle } from "@rekanica/ui/components/dialog";
+import { Button } from "@recanica/ui/components/button";
+import { Dialog, DialogContent, DialogTitle } from "@recanica/ui/components/dialog";
 
 const shots = [
   { label: "Office, level 12", ratio: "aspect-[4/5]" }, { label: "Team lunch", ratio: "aspect-square" }, { label: "Workshop room", ratio: "aspect-[4/3]" },

@@ -1,7 +1,7 @@
 import { ArrowUpRightIcon, BellIcon, CheckIcon, GlobeIcon, LockIcon, ZapIcon } from "lucide-react";
-import { Avatar, AvatarFallback } from "@rekanica/ui/components/avatar";
-import { Badge } from "@rekanica/ui/components/badge";
-import { cn } from "@rekanica/ui/lib/utils";
+import { Avatar, AvatarFallback } from "@recanica/ui/components/avatar";
+import { Badge } from "@recanica/ui/components/badge";
+import { cn } from "@recanica/ui/lib/utils";
 
 function Cell({ className, eyebrow, title, children }: { className?: string; eyebrow: string; title: string; children: React.ReactNode }) {
   return (
@@ -21,7 +21,7 @@ export function Bento02() {
       <div className="mx-auto max-w-content">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <h2 className="max-w-xl text-display-sm tracking-tight">One dashboard for the whole business</h2>
-          <a href="#" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
+          <a href="/site/about" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
             See all features <ArrowUpRightIcon className="size-3.5" />
           </a>
         </div>
@@ -29,13 +29,13 @@ export function Bento02() {
         {/* 1 col → 2 cols (sm) → 4-col asymmetric grid (lg) */}
         <div className="mt-12 grid auto-rows-[minmax(14rem,auto)] gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <Cell className="sm:col-span-2 lg:row-span-2" eyebrow="Analytics" title="Revenue by month and product">
-            <p className="text-metric font-light text-metallic">$48,210</p>
+            <p className="text-metric font-light text-brand">$48,210</p>
             <p className="text-sm text-muted-foreground">+12.4% vs last month</p>
             <div className="mt-6 flex h-40 items-end gap-1.5">
               {bars.map((h, i) => (
                 <div
                   key={i}
-                  className={cn("flex-1 rounded-t-md", i === bars.length - 1 ? "bg-metallic" : "bg-muted-foreground/25")}
+                  className={cn("flex-1 rounded-t-md", i === bars.length - 1 ? "bg-brand text-brand-foreground" : "bg-muted-foreground/25")}
                   style={{ height: `${h}%` }}
                 />
               ))}
@@ -90,7 +90,7 @@ export function Bento02() {
             <ol className="grid gap-2 text-sm sm:grid-cols-3">
               {["Payment clears", "License key issued", "Access granted"].map((s, i) => (
                 <li key={s} className="flex items-center gap-2 rounded-xl border bg-panel px-3 py-2">
-                  <span className={cn("flex size-5 items-center justify-center rounded-full text-[10px]", i < 2 ? "bg-metallic" : "border")}>
+                  <span className={cn("flex size-5 items-center justify-center rounded-full text-[10px]", i < 2 ? "bg-brand text-brand-foreground" : "border")}>
                     {i < 2 ? <CheckIcon className="size-3" /> : i + 1}
                   </span>
                   {s}

@@ -1,4 +1,4 @@
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@rekanica/ui/components/accordion";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@recanica/ui/components/accordion";
 
 const faqs = [
   ["How much does it cost?", "Free to start. We take 4% + 40¢ per transaction, including tax handling and payouts."],
@@ -14,7 +14,7 @@ export function Faq01() {
       <div className="mx-auto grid max-w-content gap-10 lg:grid-cols-[1fr_1.6fr] lg:gap-16">
         <div>
           <h2 className="text-display-sm tracking-tight">Questions</h2>
-          <p className="mt-4 text-muted-foreground">Can't find an answer? <a href="#" className="text-foreground underline underline-offset-4">Talk to us</a>.</p>
+          <p className="mt-4 text-muted-foreground">Can't find an answer? <a href="mailto:hello@acme.example" className="text-foreground underline underline-offset-4">Talk to us</a>.</p>
         </div>
         <Accordion type="single" collapsible className="w-full">
           {faqs.map(([q, a]) => (

@@ -1,7 +1,7 @@
 "use client";
 
 import { CheckIcon } from "lucide-react";
-import { Badge } from "@rekanica/ui/components/badge";
+import { Badge } from "@recanica/ui/components/badge";
 import { DemoQr } from "@/components/demo/my-ui";
 import { TAX, amountInWords } from "@/lib/demo/my";
 import { dmy, invoiceGrand, invoiceTax, invoiceTotal, money2, useDemo } from "@/lib/demo/store";
@@ -42,7 +42,7 @@ export function InvoiceDocument({ invoice, org, customer }: { invoice: Invoice; 
   return (
     <article className="@container rounded-2xl border bg-card p-6 text-card-foreground @2xl:p-10">
       <header className="flex flex-col gap-6 @xl:flex-row @xl:items-start @xl:justify-between">
-        <div className="flex items-center gap-2"><span className="size-7 rounded-lg bg-metallic" /><span className="text-lg">{o.name}</span></div>
+        <div className="flex items-center gap-2"><span className="size-7 rounded-lg bg-brand text-brand-foreground" /><span className="text-lg">{o.name}</span></div>
         <div className="@xl:text-right">
           <div className="flex items-center gap-2 @xl:justify-end">
             <p className="text-title">{tax > 0 ? "Tax Invoice" : "Invoice"}</p>

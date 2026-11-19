@@ -1,6 +1,6 @@
 "use client";
 
-import { AspectRatio } from "@rekanica/ui/components/aspect-ratio";
+import { AspectRatio } from "@recanica/ui/components/aspect-ratio";
 
 export default function AspectRatioDemo() {
   return (

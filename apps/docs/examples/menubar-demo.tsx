@@ -1,6 +1,6 @@
 "use client";
 
-import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSeparator, MenubarShortcut, MenubarTrigger } from "@rekanica/ui/components/menubar";
+import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSeparator, MenubarShortcut, MenubarTrigger } from "@recanica/ui/components/menubar";
 
 export default function MenubarDemo() {
   return (

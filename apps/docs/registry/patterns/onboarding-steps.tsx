@@ -2,9 +2,9 @@
 
 import * as React from "react";
 import { ArrowRightIcon, CheckIcon } from "lucide-react";
-import { Button } from "@rekanica/ui/components/button";
-import { Progress } from "@rekanica/ui/components/progress";
-import { cn } from "@rekanica/ui/lib/utils";
+import { Button } from "@recanica/ui/components/button";
+import { Progress } from "@recanica/ui/components/progress";
+import { cn } from "@recanica/ui/lib/utils";
 
 const steps = [
   { title: "Create your organization", body: "Name, logo and store URL.", cta: "Edit" },
@@ -36,7 +36,7 @@ export default function OnboardingSteps() {
               <span
                 className={cn(
                   "flex size-7 shrink-0 items-center justify-center rounded-full border text-xs tabular-nums",
-                  complete && "border-transparent bg-metallic"
+                  complete && "border-transparent bg-brand text-brand-foreground"
                 )}
               >
                 {complete ? <CheckIcon className="size-3.5" /> : i + 1}

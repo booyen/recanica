@@ -2,12 +2,12 @@ import {
   ArrowUpRightIcon, BarChart3Icon, BellIcon, BoxIcon, ChevronDownIcon, DollarSignIcon, LayoutGridIcon,
   LifeBuoyIcon, MenuIcon, SearchIcon, ShoppingBagIcon, SlidersHorizontalIcon, TrendingUpIcon, UsersIcon, WalletIcon,
 } from "lucide-react";
-import { Avatar, AvatarFallback } from "@rekanica/ui/components/avatar";
-import { Button } from "@rekanica/ui/components/button";
-import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@rekanica/ui/components/sheet";
-import { Tabs, TabsList, TabsTrigger } from "@rekanica/ui/components/tabs";
-import { BarRow, Stat, StatGroup, StatHeader, StatList, StatRow, StatValue } from "@rekanica/ui/components/stat";
-import { cn } from "@rekanica/ui/lib/utils";
+import { Avatar, AvatarFallback } from "@recanica/ui/components/avatar";
+import { Button } from "@recanica/ui/components/button";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@recanica/ui/components/sheet";
+import { Tabs, TabsList, TabsTrigger } from "@recanica/ui/components/tabs";
+import { BarRow, Stat, StatGroup, StatHeader, StatList, StatRow, StatValue } from "@recanica/ui/components/stat";
+import { cn } from "@recanica/ui/lib/utils";
 
 const nav = [
   { label: "Overview", icon: LayoutGridIcon, active: true },
@@ -37,7 +37,7 @@ function SidebarContents() {
   return (
     <div className="flex h-full flex-col gap-1 p-3">
       <div className="mb-4 flex items-center justify-between px-2 py-1">
-        <span className="size-6 rounded-md bg-metallic" aria-label="Aturanica" />
+        <span className="size-6 rounded-md bg-brand text-brand-foreground" aria-label="Aturanica" />
         <div className="flex">
           <Button size="icon" variant="ghost" aria-label="Notifications"><BellIcon /></Button>
           <Button size="icon" variant="ghost" aria-label="Search"><SearchIcon /></Button>
@@ -60,7 +60,7 @@ function SidebarContents() {
         <div className="mb-3 rounded-xl border bg-panel p-4 text-sm">
           <p>Introducing Aturanica Pro</p>
           <p className="mt-1 text-muted-foreground">Advanced reports and a lower 2.5% fee.</p>
-          <a href="#" className="mt-3 inline-block font-medium text-metallic">Upgrade</a>
+          <a href="#" className="mt-3 inline-block font-medium text-brand">Upgrade</a>
         </div>
         <NavItem label="Support" icon={LifeBuoyIcon} />
         <NavItem label="Documentation" icon={ArrowUpRightIcon} />
@@ -90,7 +90,7 @@ export function DashboardShell01() {
               <SidebarContents />
             </SheetContent>
           </Sheet>
-          <span className="size-5 rounded-md bg-metallic" />
+          <span className="size-5 rounded-md bg-brand text-brand-foreground" />
           <span className="text-sm">Acme Studio</span>
         </div>
         {/* Fixed frame: content scrolls inside so the rounded border stays in place */}
@@ -131,7 +131,7 @@ export function DashboardShell01() {
               </Stat>
               <Stat>
                 <StatHeader title="Available balance" href="#" />
-                <StatValue value={<span className="text-metallic">$1,206</span>} />
+                <StatValue value={<span className="text-brand">$1,206</span>} />
                 <div className="mt-auto text-sm">
                   <p>Next payout on 1 Dec</p>
                   <p className="text-muted-foreground">Payouts run monthly above $10.</p>

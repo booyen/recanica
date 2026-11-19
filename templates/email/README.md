@@ -1,7 +1,7 @@
-# Rekanica · email templates
+# Recanica · email templates
 
 Email clients don't support CSS variables, flexbox reliably, or web fonts everywhere, so emails use tables and inline
-styles with Rekanica's **light-mode hex values** (from `packages/tokens/generated/json/tokens.json`).
+styles with Recanica's **light-mode hex values** (from `packages/tokens/generated/json/tokens.json`).
 
 - `invoice-reminder.html`: instalment reminder with pay button and payment schedule (Malaysian invoicing).
 

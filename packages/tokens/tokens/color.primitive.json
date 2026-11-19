@@ -1,12 +1,12 @@
 {
-  "$description": "Rekanica primitive palette. Never reference these from components; use semantic tokens.",
-  "rk": {
+  "$description": "Recanica primitive palette. Never reference these from components; use semantic tokens.",
+  "rc": {
     "gray": {
       "0": {
         "$type": "color",
         "$value": "#ffffff",
         "$extensions": {
-          "com.rekanica": {
+          "com.recanica": {
             "oklch": "oklch(1 0 0)"
           }
         }
@@ -15,7 +15,7 @@
         "$type": "color",
         "$value": "#fafafa",
         "$extensions": {
-          "com.rekanica": {
+          "com.recanica": {
             "oklch": "oklch(0.985 0 0)"
           }
         }
@@ -24,7 +24,7 @@
         "$type": "color",
         "$value": "#f4f4f4",
         "$extensions": {
-          "com.rekanica": {
+          "com.recanica": {
             "oklch": "oklch(0.967 0 0)"
           }
         }
@@ -33,7 +33,7 @@
         "$type": "color",
         "$value": "#e5e5e5",
         "$extensions": {
-          "com.rekanica": {
+          "com.recanica": {
             "oklch": "oklch(0.922 0 0)"
           }
         }
@@ -42,7 +42,7 @@
         "$type": "color",
         "$value": "#d4d4d4",
         "$extensions": {
-          "com.rekanica": {
+          "com.recanica": {
             "oklch": "oklch(0.87 0 0)"
           }
         }
@@ -51,7 +51,7 @@
         "$type": "color",
         "$value": "#a1a1a1",
         "$extensions": {
-          "com.rekanica": {
+          "com.recanica": {
             "oklch": "oklch(0.708 0 0)"
           }
         }
@@ -60,7 +60,7 @@
         "$type": "color",
         "$value": "#8c8c8c",
         "$extensions": {
-          "com.rekanica": {
+          "com.recanica": {
             "oklch": "oklch(0.64 0 0)"
           }
         }
@@ -69,7 +69,7 @@
         "$type": "color",
         "$value": "#737373",
         "$extensions": {
-          "com.rekanica": {
+          "com.recanica": {
             "oklch": "oklch(0.556 0 0)"
           }
         }
@@ -78,7 +78,7 @@
         "$type": "color",
         "$value": "#525252",
         "$extensions": {
-          "com.rekanica": {
+          "com.recanica": {
             "oklch": "oklch(0.439 0 0)"
           }
         }
@@ -87,7 +87,7 @@
         "$type": "color",
         "$value": "#404040",
         "$extensions": {
-          "com.rekanica": {
+          "com.recanica": {
             "oklch": "oklch(0.371 0 0)"
           }
         }
@@ -96,7 +96,7 @@
         "$type": "color",
         "$value": "#262626",
         "$extensions": {
-          "com.rekanica": {
+          "com.recanica": {
             "oklch": "oklch(0.269 0 0)"
           }
         }
@@ -105,7 +105,7 @@
         "$type": "color",
         "$value": "#1e1e1e",
         "$extensions": {
-          "com.rekanica": {
+          "com.recanica": {
             "oklch": "oklch(0.235 0 0)"
           }
         }
@@ -114,7 +114,7 @@
         "$type": "color",
         "$value": "#161616",
         "$extensions": {
-          "com.rekanica": {
+          "com.recanica": {
             "oklch": "oklch(0.2 0 0)"
           }
         }
@@ -123,7 +123,7 @@
         "$type": "color",
         "$value": "#0d0d0d",
         "$extensions": {
-          "com.rekanica": {
+          "com.recanica": {
             "oklch": "oklch(0.16 0 0)"
           }
         }
@@ -132,7 +132,7 @@
         "$type": "color",
         "$value": "#020202",
         "$extensions": {
-          "com.rekanica": {
+          "com.recanica": {
             "oklch": "oklch(0.09 0 0)"
           }
         }
@@ -143,7 +143,7 @@
         "$type": "color",
         "$value": "#f6f7f8",
         "$extensions": {
-          "com.rekanica": {
+          "com.recanica": {
             "oklch": "oklch(0.975 0.002 260)"
           }
         }
@@ -152,7 +152,7 @@
         "$type": "color",
         "$value": "#e7e8ea",
         "$extensions": {
-          "com.rekanica": {
+          "com.recanica": {
             "oklch": "oklch(0.93 0.003 260)"
           }
         }
@@ -161,7 +161,7 @@
         "$type": "color",
         "$value": "#cfd1d4",
         "$extensions": {
-          "com.rekanica": {
+          "com.recanica": {
             "oklch": "oklch(0.86 0.004 260)"
           }
         }
@@ -170,7 +170,7 @@
         "$type": "color",
         "$value": "#afb1b4",
         "$extensions": {
-          "com.rekanica": {
+          "com.recanica": {
             "oklch": "oklch(0.76 0.005 260)"
           }
         }
@@ -179,7 +179,7 @@
         "$type": "color",
         "$value": "#8a8c90",
         "$extensions": {
-          "com.rekanica": {
+          "com.recanica": {
             "oklch": "oklch(0.64 0.006 260)"
           }
         }
@@ -188,7 +188,7 @@
         "$type": "color",
         "$value": "#67696c",
         "$extensions": {
-          "com.rekanica": {
+          "com.recanica": {
             "oklch": "oklch(0.52 0.006 260)"
           }
         }
@@ -199,7 +199,7 @@
         "$type": "color",
         "$value": "#db4241",
         "$extensions": {
-          "com.rekanica": {
+          "com.recanica": {
             "oklch": "oklch(0.6 0.19 25)"
           }
         }
@@ -208,7 +208,7 @@
         "$type": "color",
         "$value": "#ea6a6a",
         "$extensions": {
-          "com.rekanica": {
+          "com.recanica": {
             "oklch": "oklch(0.68 0.16 22)"
           }
         }
@@ -219,7 +219,7 @@
         "$type": "color",
         "$value": "#46a16b",
         "$extensions": {
-          "com.rekanica": {
+          "com.recanica": {
             "oklch": "oklch(0.64 0.12 155)"
           }
         }
@@ -230,7 +230,7 @@
         "$type": "color",
         "$value": "#dda552",
         "$extensions": {
-          "com.rekanica": {
+          "com.recanica": {
             "oklch": "oklch(0.76 0.12 75)"
           }
         }

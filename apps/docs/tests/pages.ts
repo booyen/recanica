@@ -1,9 +1,10 @@
 import catalog from "../lib/catalog.json";
+import { slugify } from "../lib/kit";
 
 /** Every route worth checking, generated from the catalog so new items are covered automatically. */
 export const publicPages = [
-  "/", "/docs", "/docs/installation", "/docs/theming", "/docs/ai",
-  ...["colors", "typography", "spacing", "surfaces", "finish", "iconography", "motion"].map((s) => `/docs/foundations/${s}`),
+  "/", "/docs", "/docs/installation", "/docs/theming", "/docs/ai", "/docs/page-library", "/site/sections/bottom-nav-01", "/site/sections/offcanvas-01",
+  ...["colors", "typography", "spacing", "surfaces", "iconography", "navigation", "motion"].map((s) => `/docs/foundations/${s}`),
   "/docs/components", "/docs/patterns", "/docs/blocks",
   ...catalog.components.map((c) => `/docs/components/${c.slug}`),
   ...catalog.patterns.map((p) => `/view/patterns/${p.slug}`),
@@ -24,4 +25,6 @@ export const appPages = [
   "/demo/app/invoices", "/demo/app/invoices/new", "/demo/app/invoices/inv_2", "/demo/app/finance", "/demo/app/settings",
   "/demo/app/reports", "/demo/app/team", "/demo/app/notifications", "/demo/app/audit", "/demo/app/developers", "/demo/app/integrations",
   "/demo/app/tasks", "/demo/app/calendar", "/demo/app/files", "/demo/app/support", "/demo/app/library",
+  "/demo/app/ui", "/demo/app/forms", "/demo/app/ui/patterns",
+  ...[...new Set(catalog.components.map((c) => c.category))].map((c) => `/demo/app/ui/${slugify(c)}`),
 ];

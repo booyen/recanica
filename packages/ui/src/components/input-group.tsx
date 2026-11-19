@@ -2,11 +2,11 @@
 
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
-import { cn } from "@rekanica/ui/lib/utils"
+import { cn } from "@recanica/ui/lib/utils"
 
-import { Button } from "@rekanica/ui/components/button"
-import { Input } from "@rekanica/ui/components/input"
-import { Textarea } from "@rekanica/ui/components/textarea"
+import { Button } from "@recanica/ui/components/button"
+import { Input } from "@recanica/ui/components/input"
+import { Textarea } from "@recanica/ui/components/textarea"
 
 function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (
@@ -27,7 +27,7 @@ function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
         "has-[[data-slot=input-group-control]:focus-visible]:border-ring has-[[data-slot=input-group-control]:focus-visible]:ring-[3px] has-[[data-slot=input-group-control]:focus-visible]:ring-ring/50",
 
         // Error state.
-        "has-[[data-slot][aria-invalid=true]]:border-destructive has-[[data-slot][aria-invalid=true]]:ring-destructive/20 dark:has-[[data-slot][aria-invalid=true]]:ring-destructive/40",
+        "group-data-[invalid=true]/field:border-destructive group-data-[invalid=true]/field:ring-[3px] group-data-[invalid=true]/field:ring-destructive/15 group-data-[invalid=true]/field:bg-destructive/[0.04] has-[[data-slot][aria-invalid=true]]:border-destructive has-[[data-slot][aria-invalid=true]]:ring-destructive/20 dark:has-[[data-slot][aria-invalid=true]]:ring-destructive/40",
 
         className
       )}

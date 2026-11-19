@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback } from "@rekanica/ui/components/avatar";
+import { Avatar, AvatarFallback } from "@recanica/ui/components/avatar";
 
 const quotes = [
   { body: "We moved our entire billing over in an afternoon. Taxes stopped being a weekly fire drill.", name: "Nadia Rahman", role: "Founder, Lumen", initials: "NR" },

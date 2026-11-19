@@ -1,7 +1,7 @@
 "use client";
 
-import { Checkbox } from "@rekanica/ui/components/checkbox";
-import { Label } from "@rekanica/ui/components/label";
+import { Checkbox } from "@recanica/ui/components/checkbox";
+import { Label } from "@recanica/ui/components/label";
 
 export default function CheckboxDemo() {
   return (

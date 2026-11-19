@@ -1,7 +1,7 @@
 "use client";
 
-import { Spinner } from "@rekanica/ui/components/spinner";
-import { Button } from "@rekanica/ui/components/button";
+import { Spinner } from "@recanica/ui/components/spinner";
+import { Button } from "@recanica/ui/components/button";
 
 export default function SpinnerDemo() {
   return (

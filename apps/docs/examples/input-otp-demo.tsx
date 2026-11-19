@@ -1,10 +1,10 @@
 "use client";
 
-import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from "@rekanica/ui/components/input-otp";
+import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from "@recanica/ui/components/input-otp";
 
 export default function InputOTPDemo() {
   return (
-    <InputOTP maxLength={6}>
+    <InputOTP maxLength={6} aria-label="Verification code">
       <InputOTPGroup>
         <InputOTPSlot index={0} /><InputOTPSlot index={1} /><InputOTPSlot index={2} />
       </InputOTPGroup>

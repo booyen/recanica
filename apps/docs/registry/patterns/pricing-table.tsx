@@ -2,10 +2,10 @@
 
 import * as React from "react";
 import { CheckIcon, MinusIcon } from "lucide-react";
-import { Badge } from "@rekanica/ui/components/badge";
-import { Button } from "@rekanica/ui/components/button";
-import { Tabs, TabsList, TabsTrigger } from "@rekanica/ui/components/tabs";
-import { cn } from "@rekanica/ui/lib/utils";
+import { Badge } from "@recanica/ui/components/badge";
+import { Button } from "@recanica/ui/components/button";
+import { Tabs, TabsList, TabsTrigger } from "@recanica/ui/components/tabs";
+import { cn } from "@recanica/ui/lib/utils";
 
 const plans = [
   { id: "starter", name: "Starter", monthly: 0, fee: "5% + 40¢", current: true },
@@ -46,7 +46,7 @@ export default function PricingTable() {
               {p.current ? <Badge variant="outline">Current</Badge> : p.featured ? <Badge variant="brand">Recommended</Badge> : null}
             </div>
             <div className="flex items-baseline gap-1">
-              <span className={cn("text-metric font-light tabular-nums", p.featured && "text-metallic")}>${price(p.monthly)}</span>
+              <span className={cn("text-metric font-light tabular-nums", p.featured && "text-brand")}>${price(p.monthly)}</span>
               <span className="text-sm text-muted-foreground">/ mo</span>
             </div>
             <p className="text-sm text-muted-foreground">Transaction fee <span className="text-foreground">{p.fee}</span></p>

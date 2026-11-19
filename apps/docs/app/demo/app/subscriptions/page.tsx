@@ -2,9 +2,9 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { Badge } from "@rekanica/ui/components/badge";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@rekanica/ui/components/table";
-import { Tabs, TabsList, TabsTrigger } from "@rekanica/ui/components/tabs";
+import { Badge } from "@recanica/ui/components/badge";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@recanica/ui/components/table";
+import { Tabs, TabsList, TabsTrigger } from "@recanica/ui/components/tabs";
 import { PageHeader } from "@/components/demo/ui";
 import { metrics, money, price, shortDate, useDemo } from "@/lib/demo/store";
 

@@ -1,7 +1,7 @@
 # Flutter
 
-Copy [`packages/tokens/generated/flutter/rekanica_tokens.dart`](../../packages/tokens/generated/flutter/rekanica_tokens.dart) into `lib/theme/`
-(or run `npx rekanica init --stack flutter` in the project root).
+Copy [`packages/tokens/generated/flutter/recanica_tokens.dart`](../../packages/tokens/generated/flutter/recanica_tokens.dart) into `lib/theme/`
+(or run `npx recanica init --stack flutter` in the project root).
 
 Add Geist to `pubspec.yaml` (download from Google Fonts):
 
@@ -18,16 +18,16 @@ flutter:
 ```
 
 ```dart
-import 'theme/rekanica_tokens.dart';
+import 'theme/recanica_tokens.dart';
 
 MaterialApp(
-  theme: rekanicaTheme(Brightness.light),
-  darkTheme: rekanicaTheme(Brightness.dark),
+  theme: recanicaTheme(Brightness.light),
+  darkTheme: recanicaTheme(Brightness.dark),
   themeMode: ThemeMode.dark,
 );
 
 // Direct access
-final c = Theme.of(context).brightness == Brightness.dark ? RekanicaColors.dark : RekanicaColors.light;
-Text('RM 4,820', style: RekanicaText.metric.copyWith(color: c.foreground));
-Padding(padding: const EdgeInsets.all(RekanicaSpacing.panel), child: …);
+final c = Theme.of(context).brightness == Brightness.dark ? RecanicaColors.dark : RecanicaColors.light;
+Text('RM 4,820', style: RecanicaText.metric.copyWith(color: c.foreground));
+Padding(padding: const EdgeInsets.all(RecanicaSpacing.panel), child: …);
 ```

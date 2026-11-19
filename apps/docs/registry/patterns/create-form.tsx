@@ -1,16 +1,16 @@
 "use client";
 
 import * as React from "react";
-import { Button } from "@rekanica/ui/components/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@rekanica/ui/components/card";
-import { Checkbox } from "@rekanica/ui/components/checkbox";
-import { Field, FieldDescription, FieldLabel } from "@rekanica/ui/components/field";
-import { Input } from "@rekanica/ui/components/input";
-import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupText } from "@rekanica/ui/components/input-group";
-import { Label } from "@rekanica/ui/components/label";
-import { Switch } from "@rekanica/ui/components/switch";
-import { Textarea } from "@rekanica/ui/components/textarea";
-import { ToggleGroup, ToggleGroupItem } from "@rekanica/ui/components/toggle-group";
+import { Button } from "@recanica/ui/components/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@recanica/ui/components/card";
+import { Checkbox } from "@recanica/ui/components/checkbox";
+import { Field, FieldDescription, FieldLabel } from "@recanica/ui/components/field";
+import { Input } from "@recanica/ui/components/input";
+import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupText } from "@recanica/ui/components/input-group";
+import { Label } from "@recanica/ui/components/label";
+import { Switch } from "@recanica/ui/components/switch";
+import { Textarea } from "@recanica/ui/components/textarea";
+import { ToggleGroup, ToggleGroupItem } from "@recanica/ui/components/toggle-group";
 
 const benefits = ["License key", "Discord role", "GitHub repository access", "File downloads"];
 

@@ -61,7 +61,7 @@ export default function Page() {
       <div className="mt-8">
         <DoDont
           do={["Pair a light metric with a small muted caption: “$48 November”.", "Use sentence case everywhere.", "Keep line length under ~70ch (max-w-copy)."]}
-          dont={["Use font-semibold or font-bold.", "Use ALL CAPS labels.", "Mix more than three sizes in one card."]}
+          dont={[/* recanica-ignore: rule example */ "Use font-semibold or font-bold.", "Use ALL CAPS labels.", "Mix more than three sizes in one card."]}
         />
       </div>
       <Pager href="/docs/foundations/typography" />

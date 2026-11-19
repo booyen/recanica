@@ -1,7 +1,7 @@
 "use client";
 
 import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon } from "lucide-react";
-import { ToggleGroup, ToggleGroupItem } from "@rekanica/ui/components/toggle-group";
+import { ToggleGroup, ToggleGroupItem } from "@recanica/ui/components/toggle-group";
 
 export default function ToggleGroupDemo() {
   return (

@@ -1,7 +1,7 @@
 "use client";
 
-import { Badge } from "@rekanica/ui/components/badge";
-import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@rekanica/ui/components/table";
+import { Badge } from "@recanica/ui/components/badge";
+import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@recanica/ui/components/table";
 
 const rows = [
   { id: "INV-001", customer: "Nadia Rahman", status: "Paid", amount: 250 },

@@ -1,4 +1,4 @@
-import { cn } from "@rekanica/ui/lib/utils";
+import { cn } from "@recanica/ui/lib/utils";
 
 /** Bordered preview surface used across foundation pages. */
 export function Frame({ children, className }: { children: React.ReactNode; className?: string }) {
@@ -10,7 +10,7 @@ export function TokenTable({ rows, head }: { rows: React.ReactNode[][]; head: st
     <div className="overflow-x-auto rounded-2xl border">
       <table className="w-full min-w-[32rem] text-sm">
         <thead className="border-b bg-surface text-left text-muted-foreground">
-          <tr>{head.map((h) => <th key={h} className="px-4 py-2.5 font-normal">{h}</th>)}</tr>
+          <tr>{head.map((h) => <th key={h} className="px-4 py-2.5 font-normal whitespace-nowrap">{h}</th>)}</tr>
         </thead>
         <tbody className="divide-y">
           {rows.map((r, i) => (

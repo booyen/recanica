@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "rekanica": {
+    "recanica": {
       "command": "node",
       "args": ["packages/mcp/src/index.js"]
     }

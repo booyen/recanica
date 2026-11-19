@@ -1,7 +1,7 @@
 "use client";
 
 import { BoxIcon, LayoutGridIcon, SlidersHorizontalIcon, UsersIcon } from "lucide-react";
-import { SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarProvider } from "@rekanica/ui/components/sidebar";
+import { SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarProvider } from "@recanica/ui/components/sidebar";
 
 const items = [
   { title: "Overview", icon: LayoutGridIcon, active: true },

@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { cn } from "@rekanica/ui/lib/utils"
+import { cn } from "@recanica/ui/lib/utils"
 import { Label as LabelPrimitive } from "radix-ui"
 
 function Label({

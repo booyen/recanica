@@ -9,7 +9,7 @@
     "components": "@/components",
     "hooks": "@/hooks",
     "lib": "@/lib",
-    "utils": "@rekanica/ui/lib/utils",
-    "ui": "@rekanica/ui/components"
+    "utils": "@recanica/ui/lib/utils",
+    "ui": "@recanica/ui/components"
   }
 }

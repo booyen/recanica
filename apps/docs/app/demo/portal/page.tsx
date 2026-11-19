@@ -4,9 +4,9 @@ import * as React from "react";
 import Link from "next/link";
 import { DownloadIcon, LogOutIcon } from "lucide-react";
 import { toast } from "sonner";
-import { Badge } from "@rekanica/ui/components/badge";
-import { Button } from "@rekanica/ui/components/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@rekanica/ui/components/tabs";
+import { Badge } from "@recanica/ui/components/badge";
+import { Button } from "@recanica/ui/components/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@recanica/ui/components/tabs";
 import { InvoiceBadge } from "@/components/demo/ui";
 import { date, dmy, invoiceBalance, invoiceGrand, isOverdue, money2, price, useDemo } from "@/lib/demo/store";
 
@@ -25,7 +25,7 @@ export default function PortalPage() {
     <div className="min-h-svh bg-background">
       <header className="border-b px-gutter">
         <div className="mx-auto flex h-16 max-w-narrow items-center gap-3">
-          <span className="size-6 rounded-md bg-metallic" /><span>{state.org.name}</span><span className="text-sm text-muted-foreground">· Customer portal</span>
+          <span className="size-6 rounded-md bg-brand text-brand-foreground" /><span>{state.org.name}</span><span className="text-sm text-muted-foreground">· Customer portal</span>
           <Button variant="ghost" size="icon" className="ml-auto" aria-label="Sign out" asChild><Link href="/demo"><LogOutIcon /></Link></Button>
         </div>
       </header>

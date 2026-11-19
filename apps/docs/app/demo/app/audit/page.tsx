@@ -2,9 +2,9 @@
 
 import * as React from "react";
 import { SearchIcon } from "lucide-react";
-import { Badge } from "@rekanica/ui/components/badge";
-import { InputGroup, InputGroupAddon, InputGroupInput } from "@rekanica/ui/components/input-group";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@rekanica/ui/components/table";
+import { Badge } from "@recanica/ui/components/badge";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@recanica/ui/components/input-group";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@recanica/ui/components/table";
 import { PageHeader } from "@/components/demo/ui";
 
 const log = [
@@ -23,7 +23,7 @@ export default function AuditPage() {
   return (
     <>
       <PageHeader title="Audit log" description="Every change made in this organization, kept for 2 years." />
-      <InputGroup className="mb-4 sm:max-w-sm"><InputGroupAddon><SearchIcon /></InputGroupAddon><InputGroupInput placeholder="Filter by person, action or object" value={q} onChange={(e) => setQ(e.target.value)} /></InputGroup>
+      <InputGroup className="mb-4 sm:max-w-sm"><InputGroupAddon><SearchIcon /></InputGroupAddon><InputGroupInput placeholder="Filter by person, action or object" aria-label="Filter by person, action or object" value={q} onChange={(e) => setQ(e.target.value)} /></InputGroup>
       <div className="overflow-hidden rounded-2xl border bg-card">
         <Table>
           <TableHeader><TableRow><TableHead className="pl-4">When</TableHead><TableHead>Actor</TableHead><TableHead>Action</TableHead><TableHead className="hidden md:table-cell">Details</TableHead><TableHead className="hidden lg:table-cell">IP</TableHead></TableRow></TableHeader>

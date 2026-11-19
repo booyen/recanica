@@ -2,11 +2,11 @@
 
 import * as React from "react";
 import { CheckIcon } from "lucide-react";
-import { Avatar, AvatarFallback } from "@rekanica/ui/components/avatar";
-import { Badge } from "@rekanica/ui/components/badge";
-import { Button } from "@rekanica/ui/components/button";
-import { Input } from "@rekanica/ui/components/input";
-import { Textarea } from "@rekanica/ui/components/textarea";
+import { Avatar, AvatarFallback } from "@recanica/ui/components/avatar";
+import { Badge } from "@recanica/ui/components/badge";
+import { Button } from "@recanica/ui/components/button";
+import { Input } from "@recanica/ui/components/input";
+import { Textarea } from "@recanica/ui/components/textarea";
 
 const facts = [["Price", "RM 1,280,000"], ["Bedrooms", "3"], ["Bathrooms", "2"], ["Built-up", "1,420 sqft"], ["Tenure", "Freehold"], ["Furnishing", "Partly furnished"]];
 const amenities = ["24-hour security", "Swimming pool", "Gym", "2 car parks", "Near international schools", "5 min to Publika"];

@@ -2,10 +2,10 @@
   "$schema": "https://unpkg.com/@changesets/config@3.1.1/schema.json",
   "changelog": "@changesets/cli/changelog",
   "commit": false,
-  "fixed": [["@rekanica/tokens", "@rekanica/ui", "@rekanica/css", "@rekanica/mcp", "rekanica"]],
+  "fixed": [["@recanica/tokens", "@recanica/ui", "@recanica/css", "@recanica/mcp", "recanica"]],
   "linked": [],
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["docs", "rekanica-next-dashboard", "rekanica-next-marketing"]
+  "ignore": ["docs", "recanica-next-dashboard", "recanica-next-marketing"]
 }

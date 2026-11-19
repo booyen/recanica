@@ -1,7 +1,7 @@
 "use client";
 
 import { BoxIcon, CreditCardIcon, SettingsIcon, UserIcon } from "lucide-react";
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, CommandShortcut } from "@rekanica/ui/components/command";
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, CommandShortcut } from "@recanica/ui/components/command";
 
 export default function CommandDemo() {
   return (

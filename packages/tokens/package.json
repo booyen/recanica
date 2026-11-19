@@ -1,7 +1,7 @@
 {
-  "name": "@rekanica/tokens",
+  "name": "@recanica/tokens",
   "version": "0.1.0",
-  "description": "Rekanica design tokens (W3C Design Tokens format) with outputs for CSS, Tailwind v3/v4, JS/TS, Flutter, SwiftUI, Jetpack Compose and Figma (Tokens Studio).",
+  "description": "Recanica design tokens (W3C Design Tokens format) with outputs for CSS, Tailwind v3/v4, JS/TS, Flutter, SwiftUI, Jetpack Compose and Figma (Tokens Studio).",
   "license": "MIT",
   "author": "Aturanica Labs",
   "repository": {
@@ -16,7 +16,7 @@
     "flutter",
     "swiftui",
     "jetpack-compose",
-    "rekanica"
+    "recanica"
   ],
   "type": "module",
   "sideEffects": [

@@ -5,23 +5,23 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
   ArrowUpRightIcon, BellIcon, BoxIcon, BriefcaseIcon, CheckCheckIcon, ChevronsUpDownIcon, DollarSignIcon, FileTextIcon,
-  LayoutGridIcon, LayoutListIcon, LinkIcon, LogOutIcon, MenuIcon, PlusIcon, RotateCcwIcon, SearchIcon, SettingsIcon,
-  ShoppingBagIcon, SlidersHorizontalIcon, TrendingUpIcon, UserPlusIcon, UsersIcon,
+  LayoutGridIcon, LinkIcon, LogOutIcon, MenuIcon, PanelLeftCloseIcon, PanelLeftOpenIcon, PlusIcon, RotateCcwIcon, SearchIcon, SettingsIcon,
+  ShapesIcon, ShoppingBagIcon, SlidersHorizontalIcon, TrendingUpIcon, UserPlusIcon, UsersIcon,
 } from "lucide-react";
 import { toast } from "sonner";
-import { Avatar, AvatarFallback } from "@rekanica/ui/components/avatar";
-import { Button } from "@rekanica/ui/components/button";
+import { Avatar, AvatarFallback } from "@recanica/ui/components/avatar";
+import { Button } from "@recanica/ui/components/button";
 import {
   CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator,
-} from "@rekanica/ui/components/command";
+} from "@recanica/ui/components/command";
 import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger,
-} from "@rekanica/ui/components/dropdown-menu";
-import { Kbd } from "@rekanica/ui/components/kbd";
-import { Popover, PopoverContent, PopoverTrigger } from "@rekanica/ui/components/popover";
-import { ScrollArea } from "@rekanica/ui/components/scroll-area";
-import { Sheet, SheetContent, SheetTitle } from "@rekanica/ui/components/sheet";
-import { cn } from "@rekanica/ui/lib/utils";
+} from "@recanica/ui/components/dropdown-menu";
+import { Kbd } from "@recanica/ui/components/kbd";
+import { Popover, PopoverContent, PopoverTrigger } from "@recanica/ui/components/popover";
+import { ScrollArea } from "@recanica/ui/components/scroll-area";
+import { Sheet, SheetContent, SheetTitle } from "@recanica/ui/components/sheet";
+import { cn } from "@recanica/ui/lib/utils";
 import { ago, initials, useDemo } from "@/lib/demo/store";
 
 type NavItem = { label: string; href: string; icon: typeof BoxIcon; children?: { label: string; href: string }[] };
@@ -53,6 +53,13 @@ const NAV: NavItem[] = [
     { label: "Integrations", href: "/demo/app/integrations" },
     { label: "Audit log", href: "/demo/app/audit" },
   ] },
+  { label: "UI kit", href: "/demo/app/ui", icon: ShapesIcon, children: [
+    { label: "Components", href: "/demo/app/ui" },
+    { label: "Forms", href: "/demo/app/forms" },
+    { label: "Patterns & blocks", href: "/demo/app/ui/patterns" },
+    { label: "Web sections", href: "/site/sections" },
+    { label: "Page types", href: "/demo/app/library" },
+  ] },
 ];
 
 function isActive(pathname: string, href: string) {
@@ -62,13 +69,13 @@ function isActive(pathname: string, href: string) {
 function Notifications() {
   const { state } = useDemo();
   const [seenAt, setSeenAt] = React.useState<string>(() => {
-    try { return localStorage.getItem("rekanica-demo-seen") ?? ""; } catch { return ""; }
+    try { return localStorage.getItem("recanica-demo-seen") ?? ""; } catch { return ""; }
   });
   const unread = state.events.filter((e) => !seenAt || e.at > seenAt).length;
   const markRead = () => {
     const t = new Date().toISOString();
     setSeenAt(t);
-    try { localStorage.setItem("rekanica-demo-seen", t); } catch {}
+    try { localStorage.setItem("recanica-demo-seen", t); } catch {}
   };
   return (
     <Popover>
@@ -116,17 +123,18 @@ function Notifications() {
   );
 }
 
-function SidebarContents({ onNavigate, openSearch }: { onNavigate?: () => void; openSearch: () => void }) {
+function SidebarContents({ onNavigate, openSearch, onHide }: { onNavigate?: () => void; openSearch: () => void; onHide?: () => void }) {
   const pathname = usePathname();
   const router = useRouter();
   const { state, dispatch } = useDemo();
   return (
     <div className="flex h-full flex-col gap-1 p-3">
       <div className="mb-4 flex items-center justify-between px-2 py-1">
-        <Link href="/demo" onClick={onNavigate} aria-label="Demo home"><span className="block size-6 rounded-md bg-metallic" /></Link>
+        <Link href="/demo" onClick={onNavigate} aria-label="Demo home"><span className="block size-6 rounded-md bg-brand text-brand-foreground" /></Link>
         <div className="flex">
           <Notifications />
           <Button size="icon-sm" variant="ghost" aria-label="Search" onClick={openSearch}><SearchIcon /></Button>
+          {onHide && <Button size="icon-sm" variant="ghost" aria-label="Hide sidebar (⌘B)" title="Hide sidebar (⌘B)" onClick={onHide}><PanelLeftCloseIcon /></Button>}
         </div>
       </div>
       <nav className="flex flex-col gap-0.5">
@@ -151,7 +159,7 @@ function SidebarContents({ onNavigate, openSearch }: { onNavigate?: () => void; 
                       key={c.href}
                       href={c.href}
                       onClick={onNavigate}
-                      className={cn("py-1.5 text-sm text-sidebar-foreground transition-colors hover:text-foreground", isActive(pathname, c.href) && "text-foreground")}
+                      className={cn("py-1.5 text-sm text-sidebar-foreground transition-colors hover:text-foreground", isActive(pathname, c.href) && !n.children!.some((o) => o.href.length > c.href.length && isActive(pathname, o.href)) && "text-foreground")}
                     >
                       {c.label}
                     </Link>
@@ -168,12 +176,9 @@ function SidebarContents({ onNavigate, openSearch }: { onNavigate?: () => void; 
           <div className="mb-3 rounded-xl border bg-panel p-4 text-sm">
             <p>Connect payouts</p>
             <p className="mt-1 text-muted-foreground">Link a bank account to withdraw your balance.</p>
-            <Link href="/demo/app/finance" onClick={onNavigate} className="mt-3 inline-block font-medium text-metallic">Set up</Link>
+            <Link href="/demo/app/finance" onClick={onNavigate} className="mt-3 inline-block font-medium text-brand">Set up</Link>
           </div>
         )}
-        <Link href="/demo/app/library" onClick={onNavigate} className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-sidebar-foreground hover:text-foreground">
-          <LayoutListIcon className="size-4" /> Page library
-        </Link>
         <Link href="/demo/portal" className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-sidebar-foreground hover:text-foreground">
           <UsersIcon className="size-4" /> Customer portal
         </Link>
@@ -240,6 +245,17 @@ export function DemoShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [menu, setMenu] = React.useState(false);
   const [search, setSearch] = React.useState(false);
+  // Desktop sidebar can be hidden (button or ⌘B); the choice is remembered per browser.
+  const [hidden, setHidden] = React.useState(false);
+  React.useEffect(() => {
+    try { setHidden(localStorage.getItem("recanica-demo-sidebar") === "hidden"); } catch {}
+  }, []);
+  const toggleSidebar = React.useCallback(() => {
+    setHidden((h) => {
+      try { localStorage.setItem("recanica-demo-sidebar", h ? "shown" : "hidden"); } catch {}
+      return !h;
+    });
+  }, []);
   const scroller = React.useRef<HTMLElement>(null);
 
   // The panel is the scroll container, so reset it on navigation.
@@ -252,23 +268,37 @@ export function DemoShell({ children }: { children: React.ReactNode }) {
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if (e.key === "k" && (e.metaKey || e.ctrlKey)) { e.preventDefault(); setSearch((s) => !s); }
+      if (e.key === "b" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        if (window.matchMedia("(min-width: 48rem)").matches) toggleSidebar(); else setMenu((m) => !m);
+      }
     };
     document.addEventListener("keydown", down);
     return () => document.removeEventListener("keydown", down);
-  }, []);
+  }, [toggleSidebar]);
 
   if (!state.signedIn) return null;
   const current = NAV.flatMap((n) => [n, ...(n.children ?? []).map((c) => ({ ...c, icon: n.icon }))]).filter((n) => isActive(pathname, n.href)).pop();
 
   return (
     <div className="flex h-svh overflow-hidden bg-sidebar text-foreground">
-      <aside className="hidden h-full w-sidebar shrink-0 overflow-y-auto md:block">
-        <SidebarContents openSearch={() => setSearch(true)} />
+      <aside
+        inert={hidden || undefined}
+        aria-hidden={hidden || undefined}
+        className={cn(
+          "hidden h-full shrink-0 overflow-hidden transition-[width] duration-200 ease-out motion-reduce:transition-none md:block",
+          hidden ? "w-0" : "w-sidebar"
+        )}
+      >
+        <div className="h-full w-sidebar overflow-y-auto">
+          <SidebarContents openSearch={() => setSearch(true)} onHide={toggleSidebar} />
+        </div>
       </aside>
-      <div className="flex min-h-0 min-w-0 flex-1 flex-col p-2 md:pl-0">
-        <div className="flex shrink-0 items-center gap-2 px-1 pb-2 md:hidden">
-          <Button variant="ghost" size="icon" aria-label="Open menu" onClick={() => setMenu(true)}><MenuIcon /></Button>
-          <span className="size-5 rounded-md bg-metallic" />
+      <div className={cn("flex min-h-0 min-w-0 flex-1 flex-col p-2", !hidden && "md:pl-0")}>
+        <div className={cn("flex shrink-0 items-center gap-2 px-1 pb-2", !hidden && "md:hidden")}>
+          <Button variant="ghost" size="icon" aria-label="Open menu" className="md:hidden" onClick={() => setMenu(true)}><MenuIcon /></Button>
+          <Button variant="ghost" size="icon" aria-label="Show sidebar (⌘B)" title="Show sidebar (⌘B)" className="hidden md:inline-flex" onClick={toggleSidebar}><PanelLeftOpenIcon /></Button>
+          <span className="size-5 rounded-md bg-brand text-brand-foreground" />
           <span className="text-sm">{current?.label ?? state.org.name}</span>
           <Button variant="ghost" size="icon" className="ml-auto" aria-label="Search" onClick={() => setSearch(true)}><SearchIcon /></Button>
         </div>
@@ -277,7 +307,7 @@ export function DemoShell({ children }: { children: React.ReactNode }) {
           <div className="mx-auto max-w-content px-gutter py-6 pb-16 sm:py-8">{children}</div>
         </main>
         <p className="hidden shrink-0 px-2 pt-2 text-xs text-muted-foreground md:block">
-          Demo data lives in your browser. Press <Kbd>⌘</Kbd> <Kbd>K</Kbd> to search.
+          Demo data lives in your browser. <Kbd>⌘</Kbd> <Kbd>K</Kbd> search · <Kbd>⌘</Kbd> <Kbd>B</Kbd> sidebar.
         </p>
       </div>
       <Sheet open={menu} onOpenChange={setMenu}>

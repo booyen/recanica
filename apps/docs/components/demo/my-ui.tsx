@@ -2,8 +2,8 @@
 
 import * as React from "react";
 import { BuildingIcon, CreditCardIcon, QrCodeIcon } from "lucide-react";
-import { NativeSelect, NativeSelectOption } from "@rekanica/ui/components/native-select";
-import { cn } from "@rekanica/ui/lib/utils";
+import { NativeSelect, NativeSelectOption } from "@recanica/ui/components/native-select";
+import { cn } from "@recanica/ui/lib/utils";
 import { FPX_BANKS, hash } from "@/lib/demo/my";
 
 /**

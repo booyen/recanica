@@ -5,8 +5,8 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { CheckIcon, CopyIcon } from "lucide-react";
 import { toast } from "sonner";
-import { Button } from "@rekanica/ui/components/button";
-import { Separator } from "@rekanica/ui/components/separator";
+import { Button } from "@recanica/ui/components/button";
+import { Separator } from "@recanica/ui/components/separator";
 import { date, money2, useDemo } from "@/lib/demo/store";
 
 function licenseKey(orderId: string) {
@@ -27,7 +27,7 @@ function SuccessInner() {
   return (
     <div className="w-full max-w-md space-y-8">
       <div className="space-y-3 text-center">
-        <span className="mx-auto flex size-12 items-center justify-center rounded-full bg-metallic"><CheckIcon className="size-5" /></span>
+        <span className="mx-auto flex size-12 items-center justify-center rounded-full bg-brand text-brand-foreground"><CheckIcon className="size-5" /></span>
         <h1 className="text-title">Thanks, {customer.name.split(" ")[0]}!</h1>
         <p className="text-muted-foreground">Your payment to {state.org.name} was successful. A receipt is on its way to {customer.email}.</p>
       </div>

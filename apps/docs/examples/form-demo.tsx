@@ -4,9 +4,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { toast } from "sonner";
-import { Button } from "@rekanica/ui/components/button";
-import { Input } from "@rekanica/ui/components/input";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@rekanica/ui/components/form";
+import { Button } from "@recanica/ui/components/button";
+import { Input } from "@recanica/ui/components/input";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@recanica/ui/components/form";
 
 const schema = z.object({ email: z.string().email("Enter a valid email.") });
 

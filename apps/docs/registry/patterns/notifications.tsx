@@ -2,12 +2,12 @@
 
 import * as React from "react";
 import { BellIcon, CheckCheckIcon } from "lucide-react";
-import { Avatar, AvatarFallback } from "@rekanica/ui/components/avatar";
-import { Button } from "@rekanica/ui/components/button";
-import { Popover, PopoverContent, PopoverTrigger } from "@rekanica/ui/components/popover";
-import { ScrollArea } from "@rekanica/ui/components/scroll-area";
-import { Tabs, TabsList, TabsTrigger } from "@rekanica/ui/components/tabs";
-import { cn } from "@rekanica/ui/lib/utils";
+import { Avatar, AvatarFallback } from "@recanica/ui/components/avatar";
+import { Button } from "@recanica/ui/components/button";
+import { Popover, PopoverContent, PopoverTrigger } from "@recanica/ui/components/popover";
+import { ScrollArea } from "@recanica/ui/components/scroll-area";
+import { Tabs, TabsList, TabsTrigger } from "@recanica/ui/components/tabs";
+import { cn } from "@recanica/ui/lib/utils";
 
 const seed = [
   { id: 1, who: "Nadia Rahman", initials: "NR", text: "purchased Pro Yearly", time: "2m", unread: true },

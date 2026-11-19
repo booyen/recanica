@@ -1,8 +1,8 @@
 "use client";
 
 import { ArrowRightIcon, PlusIcon } from "lucide-react";
-import { Button } from "@rekanica/ui/components/button";
-import { Spinner } from "@rekanica/ui/components/spinner";
+import { Button } from "@recanica/ui/components/button";
+import { Spinner } from "@recanica/ui/components/spinner";
 
 export default function ButtonDemo() {
   return (

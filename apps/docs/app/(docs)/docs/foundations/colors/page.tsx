@@ -8,7 +8,7 @@ const semantic: [string, string][] = [
   ["background", "Page and sidebar"], ["panel", "Inset content panel"], ["card", "Cards, stat groups"],
   ["popover", "Menus, popovers"], ["muted", "Quiet fills, tracks"], ["accent", "Hover, active nav"],
   ["border", "Hairlines"], ["input", "Field borders"], ["foreground", "Primary text"],
-  ["muted-foreground", "Secondary text"], ["primary", "Primary action"], ["brand", "Brand (flat finish)"],
+  ["muted-foreground", "Secondary text"], ["primary", "Primary action"], ["brand", "Brand: black / silver"],
 ];
 const status: [string, string][] = [["success", "Paid, active, positive delta"], ["warning", "Pending, attention"], ["destructive", "Failed, danger, delete"]];
 const grays = ["0", "50", "100", "200", "300", "400", "500", "600", "700", "800", "850", "900", "950", "1000"];
@@ -39,11 +39,11 @@ export default function Page() {
       <P>Raw values. Never reference them from components; remap the semantic tier instead.</P>
       <div className="mt-6 space-y-4">
         <div className="flex overflow-hidden rounded-xl border">
-          {grays.map((g) => <div key={g} className="h-14 flex-1" style={{ background: `var(--rk-gray-${g})` }} title={`--rk-gray-${g}`} />)}
+          {grays.map((g) => <div key={g} className="h-14 flex-1" style={{ background: `var(--rc-gray-${g})` }} title={`--rc-gray-${g}`} />)}
         </div>
         <div className="flex justify-between font-mono text-[10px] text-muted-foreground">{grays.map((g) => <span key={g}>{g}</span>)}</div>
         <div className="flex overflow-hidden rounded-xl border">
-          {silvers.map((g) => <div key={g} className="h-14 flex-1" style={{ background: `var(--rk-silver-${g})` }} title={`--rk-silver-${g}`} />)}
+          {silvers.map((g) => <div key={g} className="h-14 flex-1" style={{ background: `var(--rc-silver-${g})` }} title={`--rc-silver-${g}`} />)}
         </div>
         <p className="text-xs text-muted-foreground">Silver: a whisper of cool tint so metal reads as metal.</p>
       </div>
@@ -65,8 +65,8 @@ export default function Page() {
       />
       <div className="mt-6">
         <DoDont
-          do={["Create hierarchy with value: foreground vs muted-foreground.", "Use status colors as tints inside badges.", "Let the brand finish carry emphasis."]}
-          dont={["Introduce new hues for decoration.", "Use status colors for large surfaces.", "Reference --rk-* primitives in components."]}
+          do={["Create hierarchy with value: foreground vs muted-foreground.", "Use status colors as tints inside badges.", "Let one brand surface carry emphasis."]}
+          dont={["Introduce new hues for decoration.", "Use status colors for large surfaces.", "Reference --rc-* primitives in components."]}
         />
       </div>
       <Pager href="/docs/foundations/colors" />

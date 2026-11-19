@@ -15,7 +15,7 @@ export function Team01() {
         <ul className="mt-12 grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-4">
           {team.map(([name, role]) => (
             <li key={name}>
-              <a href="#" className="group block">
+              <a href="/site/team/mei-kato" className="group block">
                 <div className="flex aspect-square items-center justify-center rounded-2xl border bg-muted text-title font-light text-muted-foreground" role="img" aria-label={`Photo of ${name}`}>{initials(name)}</div>
                 <p className="mt-3 group-hover:underline">{name}</p>
                 <p className="text-sm text-muted-foreground">{role}</p>

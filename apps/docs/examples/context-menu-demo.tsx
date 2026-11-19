@@ -1,6 +1,6 @@
 "use client";
 
-import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuShortcut, ContextMenuTrigger } from "@rekanica/ui/components/context-menu";
+import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuShortcut, ContextMenuTrigger } from "@recanica/ui/components/context-menu";
 
 export default function ContextMenuDemo() {
   return (

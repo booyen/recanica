@@ -23,7 +23,7 @@ export default function Page() {
       <Frame className="group mt-6 p-5">
         <p className="mb-4 text-sm text-muted-foreground">Hover this panel.</p>
         <div className="h-2 rounded-full bg-muted">
-          <div className="h-2 w-1/6 rounded-full bg-metallic transition-[width] duration-700 ease-out-soft group-hover:w-full" />
+          <div className="h-2 w-1/6 rounded-full bg-brand text-brand-foreground transition-[width] duration-700 ease-out-soft group-hover:w-full" />
         </div>
       </Frame>
       <H2 id="press">Press feedback</H2>

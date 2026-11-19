@@ -1,8 +1,8 @@
 import { CheckIcon } from "lucide-react";
-import { Badge } from "@rekanica/ui/components/badge";
-import { Button } from "@rekanica/ui/components/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@rekanica/ui/components/card";
-import { cn } from "@rekanica/ui/lib/utils";
+import { Badge } from "@recanica/ui/components/badge";
+import { Button } from "@recanica/ui/components/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@recanica/ui/components/card";
+import { cn } from "@recanica/ui/lib/utils";
 
 const tiers = [
   { name: "Starter", price: "$0", blurb: "For individuals trying things out.", features: ["1 workspace", "Community support", "Basic analytics"] },
@@ -19,7 +19,7 @@ export function Pricing01() {
       </div>
       <div className="grid gap-4 md:grid-cols-3">
         {tiers.map((t) => (
-          <Card key={t.name} className={cn(t.featured && "border-metallic shadow-float")}>
+          <Card key={t.name} className={cn(t.featured && "border-foreground/25 shadow-float")}>
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle>{t.name}</CardTitle>
@@ -28,7 +28,7 @@ export function Pricing01() {
               <CardDescription>{t.blurb}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
-              <p className="text-4xl font-light tracking-tight text-metallic">
+              <p className="text-4xl font-light tracking-tight text-brand">
                 {t.price}
                 {t.price.startsWith("$") && <span className="text-base font-normal text-muted-foreground">/mo</span>}
               </p>

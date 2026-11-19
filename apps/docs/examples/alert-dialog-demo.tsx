@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@rekanica/ui/components/button";
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@rekanica/ui/components/alert-dialog";
+import { Button } from "@recanica/ui/components/button";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@recanica/ui/components/alert-dialog";
 
 export default function AlertDialogDemo() {
   return (

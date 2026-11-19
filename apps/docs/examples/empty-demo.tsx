@@ -1,8 +1,8 @@
 "use client";
 
 import { LinkIcon } from "lucide-react";
-import { Button } from "@rekanica/ui/components/button";
-import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@rekanica/ui/components/empty";
+import { Button } from "@recanica/ui/components/button";
+import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@recanica/ui/components/empty";
 
 export default function EmptyDemo() {
   return (

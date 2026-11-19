@@ -2,8 +2,8 @@
 
 import { PlusIcon, StarIcon } from "lucide-react";
 import { toast } from "sonner";
-import { Badge } from "@rekanica/ui/components/badge";
-import { Button } from "@rekanica/ui/components/button";
+import { Badge } from "@recanica/ui/components/badge";
+import { Button } from "@recanica/ui/components/button";
 
 export const products = [
   { id: "p1", name: "Kopi Ais Blend, 500g", price: 38, rating: 4.8, reviews: 214, tag: "Bestseller" },
@@ -23,7 +23,7 @@ export function Products01() {
       <div className="mx-auto max-w-content">
         <div className="flex items-end justify-between gap-4">
           <h2 className="text-display-sm tracking-tight">Shop</h2>
-          <a href="#" className="text-sm text-muted-foreground hover:text-foreground">View all</a>
+          <a href="/site/shop" className="-my-1 py-1 text-sm text-muted-foreground hover:text-foreground">View all</a>
         </div>
         <ul className="mt-10 grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 lg:grid-cols-4">
           {products.map((p) => (
@@ -34,7 +34,7 @@ export function Products01() {
                   <PlusIcon />
                 </Button>
               </div>
-              <a href="#" className="mt-3 block text-sm hover:underline">{p.name}</a>
+              <a href="/site/shop/kopi-ais-blend" className="mt-2 block py-1 text-sm hover:underline">{p.name}</a>
               <p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground"><StarIcon className="size-3 fill-current" /> {p.rating} ({p.reviews})</p>
               <p className="mt-1 text-sm tabular-nums">{rm(p.price)} {p.was && <span className="text-muted-foreground line-through">{rm(p.was)}</span>}</p>
             </li>

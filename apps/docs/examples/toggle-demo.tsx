@@ -1,7 +1,7 @@
 "use client";
 
 import { BookmarkIcon } from "lucide-react";
-import { Toggle } from "@rekanica/ui/components/toggle";
+import { Toggle } from "@recanica/ui/components/toggle";
 
 export default function ToggleDemo() {
   return (

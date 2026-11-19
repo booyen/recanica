@@ -7,13 +7,13 @@ import { toast } from "sonner";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter,
   AlertDialogHeader, AlertDialogTitle,
-} from "@rekanica/ui/components/alert-dialog";
-import { Badge } from "@rekanica/ui/components/badge";
-import { Button } from "@rekanica/ui/components/button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@rekanica/ui/components/dropdown-menu";
-import { InputGroup, InputGroupAddon, InputGroupInput } from "@rekanica/ui/components/input-group";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@rekanica/ui/components/table";
-import { Tabs, TabsList, TabsTrigger } from "@rekanica/ui/components/tabs";
+} from "@recanica/ui/components/alert-dialog";
+import { Badge } from "@recanica/ui/components/badge";
+import { Button } from "@recanica/ui/components/button";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@recanica/ui/components/dropdown-menu";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@recanica/ui/components/input-group";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@recanica/ui/components/table";
+import { Tabs, TabsList, TabsTrigger } from "@recanica/ui/components/tabs";
 import { PageHeader } from "@/components/demo/ui";
 import { money2, shortDate, useDemo } from "@/lib/demo/store";
 
@@ -42,7 +42,7 @@ export default function SalesPage() {
         </Tabs>
         <InputGroup className="sm:ml-auto sm:max-w-xs">
           <InputGroupAddon><SearchIcon /></InputGroupAddon>
-          <InputGroupInput placeholder="Search orders" value={q} onChange={(e) => setQ(e.target.value)} />
+          <InputGroupInput placeholder="Search orders" aria-label="Search orders" value={q} onChange={(e) => setQ(e.target.value)} />
         </InputGroup>
       </div>
       <div className="overflow-hidden rounded-2xl border bg-card">

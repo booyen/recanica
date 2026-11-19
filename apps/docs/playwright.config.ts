@@ -23,6 +23,7 @@ export default defineConfig({
   use: { baseURL, colorScheme: "dark" },
   projects: [
     { name: "mobile", use: { ...devices["Pixel 7"], viewport: { width: 375, height: 812 } } },
+    { name: "tablet", use: { ...devices["Desktop Chrome"], viewport: { width: 900, height: 1100 } } },
     { name: "desktop", use: { ...devices["Desktop Chrome"], viewport: { width: 1280, height: 900 } } },
   ],
   webServer: process.env.BASE_URL

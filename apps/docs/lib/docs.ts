@@ -15,8 +15,8 @@ export const foundations: CatalogItem[] = [
   { slug: "typography", title: "Typography", category: "Foundations", description: "Type scale for product UI and landing pages." },
   { slug: "spacing", title: "Spacing & Layout", category: "Foundations", description: "4px grid, layout tokens, containers and breakpoints." },
   { slug: "surfaces", title: "Surfaces & Radius", category: "Foundations", description: "Layering, borders, radius and elevation." },
-  { slug: "finish", title: "Brand Finish", category: "Foundations", description: "Flat, mesh or chrome: one switch for every brand surface." },
   { slug: "iconography", title: "Iconography", category: "Foundations", description: "Lucide icons, sizes and stroke." },
+  { slug: "navigation", title: "Navigation", category: "Foundations", description: "Side nav, top nav, site header and how each behaves as space shrinks." },
   { slug: "motion", title: "Motion", category: "Foundations", description: "Durations, easing and reduced motion." },
 ];
 
@@ -42,11 +42,18 @@ export const nav: NavSection[] = [
   { title: "Foundations", groups: [{ items: foundations.map((f) => ({ title: f.title, href: `/docs/foundations/${f.slug}` })) }] },
   { title: "Components", href: "/docs/components", groups: grouped(components, "/docs/components") },
   { title: "Patterns", href: "/docs/patterns", groups: grouped(patterns, "/docs/patterns") },
+  { title: "Page Library", href: "/docs/page-library", groups: [] },
+  { title: "Demos", groups: [{ items: [
+    { title: "Sample website", href: "/site" },
+    { title: "Dashboard demo", href: "/demo" },
+    { title: "Customer portal", href: "/demo/portal" },
+    { title: "All web sections", href: "/site/sections" },
+  ] }] },
   { title: "Web Library", href: "/docs/web", groups: grouped(web, "/docs/web") },
   { title: "Blocks", href: "/docs/blocks", groups: grouped(blocks, "/docs/blocks") },
 ];
 
-export const flatNav: NavLink[] = nav.flatMap((s) => [
+export const flatNav: NavLink[] = nav.filter((s) => s.title !== "Demos").flatMap((s) => [
   ...(s.href ? [{ title: s.title, href: s.href }] : []),
   ...s.groups.flatMap((g) => g.items),
 ]);

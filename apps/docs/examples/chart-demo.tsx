@@ -1,7 +1,7 @@
 "use client";
 
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
-import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@rekanica/ui/components/chart";
+import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@recanica/ui/components/chart";
 
 const data = [
   { month: "Jun", revenue: 1860, refunds: 80 },

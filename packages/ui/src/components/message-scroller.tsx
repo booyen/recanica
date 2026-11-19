@@ -7,10 +7,10 @@ import {
   useMessageScrollerScrollable,
   useMessageScrollerVisibility,
 } from "@shadcn/react/message-scroller"
-import { cn } from "@rekanica/ui/lib/utils"
+import { cn } from "@recanica/ui/lib/utils"
 import { ArrowDownIcon } from "lucide-react"
 
-import { Button } from "@rekanica/ui/components/button"
+import { Button } from "@recanica/ui/components/button"
 
 function MessageScrollerProvider(
   props: React.ComponentProps<typeof MessageScrollerPrimitive.Provider>

@@ -3,9 +3,9 @@
 import * as React from "react";
 import { CopyIcon, EyeIcon, EyeOffIcon, PlusIcon } from "lucide-react";
 import { toast } from "sonner";
-import { Badge } from "@rekanica/ui/components/badge";
-import { Button } from "@rekanica/ui/components/button";
-import { Switch } from "@rekanica/ui/components/switch";
+import { Badge } from "@recanica/ui/components/badge";
+import { Button } from "@recanica/ui/components/button";
+import { Switch } from "@recanica/ui/components/switch";
 import { PageHeader, Section } from "@/components/demo/ui";
 
 // Demo-only fake keys; never put real secrets in source.

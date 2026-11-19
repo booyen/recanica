@@ -2,28 +2,28 @@
 
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
-import { cn } from "@rekanica/ui/lib/utils"
+import { cn } from "@recanica/ui/lib/utils"
 import { PanelLeftIcon } from "lucide-react"
 import { Slot } from "radix-ui"
 
-import { useIsMobile } from "@rekanica/ui/hooks/use-mobile"
-import { Button } from "@rekanica/ui/components/button"
-import { Input } from "@rekanica/ui/components/input"
-import { Separator } from "@rekanica/ui/components/separator"
+import { useIsMobile } from "@recanica/ui/hooks/use-mobile"
+import { Button } from "@recanica/ui/components/button"
+import { Input } from "@recanica/ui/components/input"
+import { Separator } from "@recanica/ui/components/separator"
 import {
   Sheet,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
-} from "@rekanica/ui/components/sheet"
-import { Skeleton } from "@rekanica/ui/components/skeleton"
+} from "@recanica/ui/components/sheet"
+import { Skeleton } from "@recanica/ui/components/skeleton"
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@rekanica/ui/components/tooltip"
+} from "@recanica/ui/components/tooltip"
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7

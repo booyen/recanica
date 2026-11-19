@@ -3,10 +3,10 @@
 import * as React from "react";
 import Link from "next/link";
 import { CheckCheckIcon } from "lucide-react";
-import { Button } from "@rekanica/ui/components/button";
-import { Empty, EmptyDescription, EmptyHeader, EmptyTitle } from "@rekanica/ui/components/empty";
-import { Tabs, TabsList, TabsTrigger } from "@rekanica/ui/components/tabs";
-import { cn } from "@rekanica/ui/lib/utils";
+import { Button } from "@recanica/ui/components/button";
+import { Empty, EmptyDescription, EmptyHeader, EmptyTitle } from "@recanica/ui/components/empty";
+import { Tabs, TabsList, TabsTrigger } from "@recanica/ui/components/tabs";
+import { cn } from "@recanica/ui/lib/utils";
 import { PageHeader } from "@/components/demo/ui";
 import { ago, useDemo } from "@/lib/demo/store";
 

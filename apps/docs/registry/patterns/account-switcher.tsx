@@ -2,11 +2,11 @@
 
 import * as React from "react";
 import { CheckIcon, ChevronsUpDownIcon, LogOutIcon, PlusIcon, SettingsIcon } from "lucide-react";
-import { Avatar, AvatarFallback } from "@rekanica/ui/components/avatar";
+import { Avatar, AvatarFallback } from "@recanica/ui/components/avatar";
 import {
   DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator,
   DropdownMenuShortcut, DropdownMenuTrigger,
-} from "@rekanica/ui/components/dropdown-menu";
+} from "@recanica/ui/components/dropdown-menu";
 
 const orgs = [
   { name: "Acme Studio", initials: "AS", plan: "Pro" },

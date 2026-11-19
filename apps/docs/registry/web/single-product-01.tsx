@@ -3,10 +3,10 @@
 import * as React from "react";
 import { MinusIcon, PlusIcon, StarIcon, TruckIcon } from "lucide-react";
 import { toast } from "sonner";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@rekanica/ui/components/accordion";
-import { Button } from "@rekanica/ui/components/button";
-import { ToggleGroup, ToggleGroupItem } from "@rekanica/ui/components/toggle-group";
-import { cn } from "@rekanica/ui/lib/utils";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@recanica/ui/components/accordion";
+import { Button } from "@recanica/ui/components/button";
+import { ToggleGroup, ToggleGroupItem } from "@recanica/ui/components/toggle-group";
+import { cn } from "@recanica/ui/lib/utils";
 
 export function SingleProduct01() {
   const [img, setImg] = React.useState(0);
@@ -31,12 +31,12 @@ export function SingleProduct01() {
             <p className="text-muted-foreground">Robusta and liberica roasted with butter and sugar, the way kopitiams have done it for decades. Made for iced coffee.</p>
           </div>
           <div className="space-y-2"><p className="text-sm">Grind</p>
-            <ToggleGroup type="single" value={grind} onValueChange={(v) => v && setGrind(v)} variant="outline">
+            <ToggleGroup type="single" value={grind} onValueChange={(v) => v && setGrind(v)} variant="outline" spacing={2} className="flex-wrap">
               <ToggleGroupItem value="beans">Whole beans</ToggleGroupItem><ToggleGroupItem value="filter">Filter</ToggleGroupItem><ToggleGroupItem value="sock">Kopi sock</ToggleGroupItem>
             </ToggleGroup>
           </div>
           <div className="space-y-2"><p className="text-sm">Size</p>
-            <ToggleGroup type="single" value={size} onValueChange={(v) => v && setSize(v)} variant="outline">
+            <ToggleGroup type="single" value={size} onValueChange={(v) => v && setSize(v)} variant="outline" spacing={2} className="flex-wrap">
               <ToggleGroupItem value="500g">500g</ToggleGroupItem><ToggleGroupItem value="1kg">1kg</ToggleGroupItem>
             </ToggleGroup>
           </div>

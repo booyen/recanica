@@ -1,14 +1,14 @@
 "use client";
 
 import * as React from "react";
-import { Avatar, AvatarFallback } from "@rekanica/ui/components/avatar";
-import { Button } from "@rekanica/ui/components/button";
-import { Field, FieldDescription, FieldLabel } from "@rekanica/ui/components/field";
-import { Input } from "@rekanica/ui/components/input";
-import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupText } from "@rekanica/ui/components/input-group";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@rekanica/ui/components/select";
-import { Switch } from "@rekanica/ui/components/switch";
-import { Textarea } from "@rekanica/ui/components/textarea";
+import { Avatar, AvatarFallback } from "@recanica/ui/components/avatar";
+import { Button } from "@recanica/ui/components/button";
+import { Field, FieldDescription, FieldLabel } from "@recanica/ui/components/field";
+import { Input } from "@recanica/ui/components/input";
+import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupText } from "@recanica/ui/components/input-group";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@recanica/ui/components/select";
+import { Switch } from "@recanica/ui/components/switch";
+import { Textarea } from "@recanica/ui/components/textarea";
 
 function Section({ title, description, children }: { title: string; description: string; children: React.ReactNode }) {
   return (

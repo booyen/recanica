@@ -49,6 +49,24 @@ export async function auditLayout(page: Page): Promise<Issue[]> {
         else if (!clipped) issues.push({ rule: "text-overflow", detail: `${describe(el)} (${el.scrollWidth}px in ${el.clientWidth}px)` });
       }
 
+      // Short control labels (buttons, badges, tabs, table headers) must never break onto two lines.
+      // Counts the rendered lines of each text run, so tall buttons and multi-line cards don't trip it.
+      if (el.matches("button, [data-slot=badge], [role=tab], th, [data-slot=button]")) {
+        const label = (el.textContent ?? "").trim().replace(/\s+/g, " ");
+        if (label && label.length <= 32) {
+          const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+          let wrapped = false;
+          for (let n = walker.nextNode(); n && !wrapped; n = walker.nextNode()) {
+            if (!(n.textContent ?? "").trim()) continue;
+            const r = document.createRange();
+            r.selectNodeContents(n);
+            const tops = new Set(Array.from(r.getClientRects()).filter((b) => b.width > 0).map((b) => Math.round(b.top)));
+            if (tops.size > 1) wrapped = true;
+          }
+          if (wrapped) issues.push({ rule: "wrapped-label", detail: describe(el) });
+        }
+      }
+
       if (cs.display === "grid") {
         const kids = Array.from(el.children).filter(visible).map((k) => k.getBoundingClientRect());
         const singleColumn = kids.length >= 3 && kids.every((k) => Math.abs(k.left - kids[0].left) < 2);

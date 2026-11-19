@@ -3,11 +3,11 @@
 import * as React from "react";
 import { useRouter } from "next/navigation";
 import { SearchIcon } from "lucide-react";
-import { Button } from "@rekanica/ui/components/button";
+import { Button } from "@recanica/ui/components/button";
 import {
   CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList,
-} from "@rekanica/ui/components/command";
-import { Kbd, KbdGroup } from "@rekanica/ui/components/kbd";
+} from "@recanica/ui/components/command";
+import { Kbd, KbdGroup } from "@recanica/ui/components/kbd";
 import { nav } from "@/lib/docs";
 
 export function SearchCommand() {
@@ -30,6 +30,7 @@ export function SearchCommand() {
       <Button
         variant="secondary"
         onClick={() => setOpen(true)}
+        aria-label="Search docs (⌘K)"
         className="h-9 w-9 justify-center px-0 text-muted-foreground sm:w-56 sm:justify-start sm:px-3 md:w-64"
       >
         <SearchIcon />

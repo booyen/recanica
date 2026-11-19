@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Tabs, TabsList, TabsTrigger } from "@rekanica/ui/components/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@recanica/ui/components/tabs";
 
 const work = [
   { title: "Kopi Pak Mat ordering", client: "Kedai Kopi Pak Mat", tag: "Product", year: "2026" },
@@ -24,7 +24,7 @@ export function Portfolio01() {
         </div>
         <div className="grid gap-x-6 gap-y-10 md:grid-cols-2">
           {list.map((w) => (
-            <a key={w.title} href="#" className="group space-y-3">
+            <a key={w.title} href="/site/work/kopitiam-ordering" className="group space-y-3">
               <div className="aspect-[4/3] rounded-3xl border bg-muted transition-transform duration-300 ease-out-soft group-hover:scale-[0.99]" role="img" aria-label={`${w.title} cover`} />
               <div className="flex items-baseline justify-between gap-4">
                 <h2 className="group-hover:underline">{w.title}</h2>

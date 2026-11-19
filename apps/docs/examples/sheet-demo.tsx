@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "@rekanica/ui/components/button";
-import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@rekanica/ui/components/sheet";
-import { Field, FieldLabel } from "@rekanica/ui/components/field";
-import { Input } from "@rekanica/ui/components/input";
+import { Button } from "@recanica/ui/components/button";
+import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@recanica/ui/components/sheet";
+import { Field, FieldLabel } from "@recanica/ui/components/field";
+import { Input } from "@recanica/ui/components/input";
 
 export default function SheetDemo() {
   return (

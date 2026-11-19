@@ -2,10 +2,10 @@
 
 import * as React from "react";
 import { PlusIcon, SendIcon } from "lucide-react";
-import { Badge } from "@rekanica/ui/components/badge";
-import { Button } from "@rekanica/ui/components/button";
-import { Textarea } from "@rekanica/ui/components/textarea";
-import { cn } from "@rekanica/ui/lib/utils";
+import { Badge } from "@recanica/ui/components/badge";
+import { Button } from "@recanica/ui/components/button";
+import { Textarea } from "@recanica/ui/components/textarea";
+import { cn } from "@recanica/ui/lib/utils";
 import { PageHeader } from "@/components/demo/ui";
 
 type Ticket = { id: string; subject: string; status: "Open" | "Waiting on you" | "Solved"; updated: string; thread: { from: "you" | "support"; text: string; at: string }[] };

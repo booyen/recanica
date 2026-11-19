@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { ArrowRightIcon, PlusIcon } from "lucide-react";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
-import { Button } from "@rekanica/ui/components/button";
-import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@rekanica/ui/components/chart";
-import { BarRow, Stat, StatGroup, StatHeader, StatList, StatRow, StatValue } from "@rekanica/ui/components/stat";
+import { Button } from "@recanica/ui/components/button";
+import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@recanica/ui/components/chart";
+import { BarRow, Stat, StatGroup, StatHeader, StatList, StatRow, StatValue } from "@recanica/ui/components/stat";
 import { PageHeader } from "@/components/demo/ui";
 import { ago, invoiceBalance, metrics, money, useDemo } from "@/lib/demo/store";
 
@@ -34,7 +34,7 @@ export default function Overview() {
       {!state.org.payoutConnected && (
         <div className="mb-stack flex flex-col gap-3 rounded-2xl border bg-card p-5 sm:flex-row sm:items-center">
           <div className="flex-1">
-            <p>You have <span className="text-metallic">{money(m.balance)}</span> ready to withdraw</p>
+            <p>You have <span className="text-brand">{money(m.balance)}</span> ready to withdraw</p>
             <p className="text-sm text-muted-foreground">Connect a bank account to receive payouts.</p>
           </div>
           <Button asChild variant="brand"><Link href="/demo/app/finance">Connect payouts <ArrowRightIcon /></Link></Button>
@@ -61,7 +61,7 @@ export default function Overview() {
           </Stat>
           <Stat>
             <StatHeader title="Available balance" href="/demo/app/finance" />
-            <StatValue value={<span className="text-metallic">{money(m.balance)}</span>} />
+            <StatValue value={<span className="text-brand">{money(m.balance)}</span>} />
             <div className="mt-auto text-sm">
               <p>{state.org.payoutConnected ? "Payouts connected" : "No payout account yet"}</p>
               <p className="text-muted-foreground">You may withdraw funds above RM10.</p>

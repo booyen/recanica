@@ -1,6 +1,6 @@
 "use client";
 
-import { Kbd, KbdGroup } from "@rekanica/ui/components/kbd";
+import { Kbd, KbdGroup } from "@recanica/ui/components/kbd";
 
 export default function KbdDemo() {
   return (

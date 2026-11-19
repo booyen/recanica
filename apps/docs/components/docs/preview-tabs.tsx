@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@rekanica/ui/components/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@recanica/ui/components/tabs";
 import { CodeFrame } from "./code-frame";
 
 export function PreviewTabs({ preview, html, raw }: { preview: React.ReactNode; html: string; raw: string }) {

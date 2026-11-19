@@ -1,7 +1,7 @@
 "use client";
 
-import { Switch } from "@rekanica/ui/components/switch";
-import { Label } from "@rekanica/ui/components/label";
+import { Switch } from "@recanica/ui/components/switch";
+import { Label } from "@recanica/ui/components/label";
 
 export default function SwitchDemo() {
   return (

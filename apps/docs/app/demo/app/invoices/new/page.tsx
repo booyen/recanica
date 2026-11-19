@@ -5,16 +5,16 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { CalendarClockIcon, PlusIcon, SendIcon, ShieldCheckIcon, Trash2Icon } from "lucide-react";
 import { toast } from "sonner";
-import { Button } from "@rekanica/ui/components/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@rekanica/ui/components/card";
-import { Field, FieldDescription, FieldError, FieldLabel } from "@rekanica/ui/components/field";
-import { Input } from "@rekanica/ui/components/input";
-import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupText } from "@rekanica/ui/components/input-group";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@rekanica/ui/components/select";
-import { Separator } from "@rekanica/ui/components/separator";
-import { Switch } from "@rekanica/ui/components/switch";
-import { Textarea } from "@rekanica/ui/components/textarea";
-import { PageHeader } from "@/components/demo/ui";
+import { Button } from "@recanica/ui/components/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@recanica/ui/components/card";
+import { Field, FieldDescription, FieldError, FieldLabel, FieldMessage } from "@recanica/ui/components/field";
+import { Input } from "@recanica/ui/components/input";
+import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupText } from "@recanica/ui/components/input-group";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@recanica/ui/components/select";
+import { Separator } from "@recanica/ui/components/separator";
+import { Switch } from "@recanica/ui/components/switch";
+import { Textarea } from "@recanica/ui/components/textarea";
+import { PageHeader, focusFirstInvalid } from "@/components/demo/ui";
 import { PLAN_TEMPLATES, TAX, amountInWords, buildPlan, customParts } from "@/lib/demo/my";
 import { dmy, money2, uid, useDemo } from "@/lib/demo/store";
 import type { TaxCode } from "@/lib/demo/types";
@@ -60,7 +60,7 @@ function NewInvoiceInner() {
 
   const save = (send: boolean) => {
     setTouched(true);
-    if (errors.customer || errors.items) return;
+    if (errors.customer || errors.items) { focusFirstInvalid(); return; }
     const id = uid("inv");
     const dueAt = plan ? plan[plan.length - 1].dueAt : new Date(Date.now() + Number(terms) * 864e5).toISOString();
     dispatch({
@@ -100,7 +100,7 @@ function NewInvoiceInner() {
                     {customer.address && <> · {customer.address.city}, {customer.address.state}</>}
                   </FieldDescription>
                 ) : (
-                  <Link href="/demo/app/customers?new=1" className="text-xs text-muted-foreground hover:text-foreground">+ Add a new customer</Link>
+                  <Link href="/demo/app/customers?new=1" className="-my-1 inline-block py-1 text-xs text-muted-foreground hover:text-foreground">+ Add a new customer</Link>
                 )}
               </Field>
               <Field>
@@ -139,7 +139,7 @@ function NewInvoiceInner() {
                 </div>
               ))}
               <Button variant="outline" size="sm" onClick={() => setRows((x) => [...x, blank()])}><PlusIcon /> Add line</Button>
-              {touched && errors.items && <p className="text-sm text-destructive">{errors.items}</p>}
+              {touched && errors.items && <FieldMessage tone="error">{errors.items}</FieldMessage>}
             </CardContent>
           </Card>
 
@@ -198,7 +198,7 @@ function NewInvoiceInner() {
 
           <Card>
             <CardHeader><CardTitle>Notes</CardTitle></CardHeader>
-            <CardContent><Textarea value={notes} onChange={(e) => setNotes(e.target.value)} /></CardContent>
+            <CardContent><Textarea aria-label="Notes on the invoice" value={notes} onChange={(e) => setNotes(e.target.value)} /></CardContent>
           </Card>
         </div>
 

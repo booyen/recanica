@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import "@rekanica/tokens/theme.css";
+@import "@recanica/tokens/theme.css";
 
 /* Scan the component library for classes (works for node_modules and the monorepo link) */
-@source "../node_modules/@rekanica/ui";
+@source "../node_modules/@recanica/ui";

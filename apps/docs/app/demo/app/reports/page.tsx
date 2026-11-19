@@ -3,10 +3,10 @@
 import * as React from "react";
 import { DownloadIcon } from "lucide-react";
 import { Bar, BarChart, CartesianGrid, Line, LineChart, XAxis } from "recharts";
-import { Button } from "@rekanica/ui/components/button";
-import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@rekanica/ui/components/chart";
-import { BarRow, Stat, StatGroup, StatHeader, StatList, StatValue } from "@rekanica/ui/components/stat";
-import { Tabs, TabsList, TabsTrigger } from "@rekanica/ui/components/tabs";
+import { Button } from "@recanica/ui/components/button";
+import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@recanica/ui/components/chart";
+import { BarRow, Stat, StatGroup, StatHeader, StatList, StatValue } from "@recanica/ui/components/stat";
+import { Tabs, TabsList, TabsTrigger } from "@recanica/ui/components/tabs";
 import { PageHeader } from "@/components/demo/ui";
 import { metrics, money, useDemo } from "@/lib/demo/store";
 

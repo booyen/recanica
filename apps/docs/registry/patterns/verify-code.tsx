@@ -2,8 +2,8 @@
 
 import * as React from "react";
 import { MailIcon } from "lucide-react";
-import { Button } from "@rekanica/ui/components/button";
-import { InputOTP, InputOTPGroup, InputOTPSlot } from "@rekanica/ui/components/input-otp";
+import { Button } from "@recanica/ui/components/button";
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "@recanica/ui/components/input-otp";
 
 export default function VerifyCode() {
   const [code, setCode] = React.useState("");

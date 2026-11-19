@@ -1,68 +1,68 @@
 <!doctype html>
-<html lang="en" class="dark" data-finish="flat">
+<html lang="en" class="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Rekanica CSS · example</title>
+  <title>Recanica CSS · example</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&family=Geist+Mono&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://unpkg.com/@rekanica/css/dist/rekanica.css" />
+  <link rel="stylesheet" href="https://unpkg.com/@recanica/css/dist/recanica.css" />
   <style>:root { --font-geist-sans: "Geist"; --font-geist-mono: "Geist Mono"; }</style>
 </head>
 <body>
-  <div class="rk-shell">
-    <aside class="rk-sidebar">
-      <span class="rk-logo" style="margin: 0.25rem 0.5rem 1rem"></span>
-      <a class="rk-nav-item" href="#" aria-current="page">Overview</a>
-      <a class="rk-nav-item" href="#">Products</a>
-      <a class="rk-nav-item" href="#">Customers</a>
-      <a class="rk-nav-item" href="#">Invoices</a>
-      <a class="rk-nav-item" href="#">Settings</a>
+  <div class="rc-shell">
+    <aside class="rc-sidebar">
+      <span class="rc-logo" style="margin: 0.25rem 0.5rem 1rem"></span>
+      <a class="rc-nav-item" href="#" aria-current="page">Overview</a>
+      <a class="rc-nav-item" href="#">Products</a>
+      <a class="rc-nav-item" href="#">Customers</a>
+      <a class="rc-nav-item" href="#">Invoices</a>
+      <a class="rc-nav-item" href="#">Settings</a>
     </aside>
-    <div class="rk-shell__main">
-      <main class="rk-panel">
-        <div class="rk-panel__inner rk-stack">
-          <div class="rk-row" style="justify-content: space-between">
-            <h1 class="rk-title">Overview</h1>
-            <div class="rk-row">
-              <div class="rk-tabs" role="tablist">
-                <button class="rk-tab" role="tab">12m</button>
-                <button class="rk-tab" role="tab" aria-selected="true">30d</button>
-                <button class="rk-tab" role="tab">Today</button>
+    <div class="rc-shell__main">
+      <main class="rc-panel">
+        <div class="rc-panel__inner rc-stack">
+          <div class="rc-row" style="justify-content: space-between">
+            <h1 class="rc-title">Overview</h1>
+            <div class="rc-row">
+              <div class="rc-tabs" role="tablist">
+                <button class="rc-tab" role="tab">12m</button>
+                <button class="rc-tab" role="tab" aria-selected="true">30d</button>
+                <button class="rc-tab" role="tab">Today</button>
               </div>
-              <button class="rk-btn rk-btn--brand" onclick="document.getElementById('dlg').showModal()">New invoice</button>
+              <button class="rc-btn rc-btn--brand" onclick="document.getElementById('dlg').showModal()">New invoice</button>
             </div>
           </div>
 
-          <section class="rk-stats">
-            <div class="rk-stat">
-              <div class="rk-stat__head"><span>Revenue</span><a href="#">View all →</a></div>
-              <div class="rk-stat__value"><span class="rk-metric">RM 4,820</span><span class="rk-caption">November</span></div>
-              <div class="rk-list">
-                <div><span style="width:2rem">Nov</span><div class="rk-bar rk-bar--active"><span style="width:100%"></span></div><span class="rk-nums">RM 4,820</span></div>
-                <div class="rk-muted"><span style="width:2rem">Oct</span><div class="rk-bar"><span style="width:82%"></span></div><span class="rk-nums">RM 3,960</span></div>
+          <section class="rc-stats">
+            <div class="rc-stat">
+              <div class="rc-stat__head"><span>Revenue</span><a href="#">View all →</a></div>
+              <div class="rc-stat__value"><span class="rc-metric">RM 4,820</span><span class="rc-caption">November</span></div>
+              <div class="rc-list">
+                <div><span style="width:2rem">Nov</span><div class="rc-bar rc-bar--active"><span style="width:100%"></span></div><span class="rc-nums">RM 4,820</span></div>
+                <div class="rc-muted"><span style="width:2rem">Oct</span><div class="rc-bar"><span style="width:82%"></span></div><span class="rc-nums">RM 3,960</span></div>
               </div>
             </div>
-            <div class="rk-stat">
-              <div class="rk-stat__head"><span>Activity</span><a href="#">View all →</a></div>
-              <div class="rk-stat__value"><span class="rk-metric">14</span><span class="rk-caption">events today</span></div>
-              <div class="rk-list">
-                <div>Order paid <span class="rk-muted">Tan Wei Ming</span><span class="rk-trailing">now</span></div>
-                <div>Invoice sent <span class="rk-muted">Lumen Labs</span><span class="rk-trailing">1h ago</span></div>
+            <div class="rc-stat">
+              <div class="rc-stat__head"><span>Activity</span><a href="#">View all →</a></div>
+              <div class="rc-stat__value"><span class="rc-metric">14</span><span class="rc-caption">events today</span></div>
+              <div class="rc-list">
+                <div>Order paid <span class="rc-muted">Tan Wei Ming</span><span class="rc-trailing">now</span></div>
+                <div>Invoice sent <span class="rc-muted">Lumen Labs</span><span class="rc-trailing">1h ago</span></div>
               </div>
             </div>
-            <div class="rk-stat">
-              <div class="rk-stat__head"><span>Balance</span></div>
-              <div class="rk-stat__value"><span class="rk-metric rk-metallic-text">RM 1,206</span></div>
+            <div class="rc-stat">
+              <div class="rc-stat__head"><span>Balance</span></div>
+              <div class="rc-stat__value"><span class="rc-metric rc-brand-text">RM 1,206</span></div>
             </div>
           </section>
 
-          <div class="rk-table-wrap">
-            <table class="rk-table">
+          <div class="rc-table-wrap">
+            <table class="rc-table">
               <thead><tr><th>Invoice</th><th>Customer</th><th>Status</th><th style="text-align:right">Amount</th></tr></thead>
               <tbody>
-                <tr><td class="rk-mono">INV-2026-0008</td><td>Syarikat Maju Jaya</td><td><span class="rk-badge rk-badge--warning">Partially paid</span></td><td class="rk-nums" style="text-align:right">RM 14,904.00</td></tr>
-                <tr><td class="rk-mono">INV-2026-0007</td><td>Lumen Labs Sdn. Bhd.</td><td><span class="rk-badge rk-badge--success">Paid</span></td><td class="rk-nums" style="text-align:right">RM 5,184.00</td></tr>
+                <tr><td class="rc-mono">INV-2026-0008</td><td>Syarikat Maju Jaya</td><td><span class="rc-badge rc-badge--warning">Partially paid</span></td><td class="rc-nums" style="text-align:right">RM 14,904.00</td></tr>
+                <tr><td class="rc-mono">INV-2026-0007</td><td>Lumen Labs Sdn. Bhd.</td><td><span class="rc-badge rc-badge--success">Paid</span></td><td class="rc-nums" style="text-align:right">RM 5,184.00</td></tr>
               </tbody>
             </table>
           </div>
@@ -71,13 +71,13 @@
     </div>
   </div>
 
-  <dialog id="dlg" class="rk-dialog">
+  <dialog id="dlg" class="rc-dialog">
     <form method="dialog" style="display:grid; gap:1rem">
-      <h2 class="rk-heading">New invoice</h2>
-      <label class="rk-field"><span class="rk-label">Customer</span><input class="rk-input" placeholder="Company name" /></label>
-      <label class="rk-field"><span class="rk-label">Amount (RM)</span><input class="rk-input" inputmode="decimal" placeholder="0.00" /><span class="rk-hint">SST 8% is added automatically.</span></label>
-      <label class="rk-row"><input type="checkbox" class="rk-switch" checked /> Submit to MyInvois</label>
-      <div class="rk-row" style="justify-content:flex-end"><button class="rk-btn rk-btn--ghost">Cancel</button><button class="rk-btn">Create</button></div>
+      <h2 class="rc-heading">New invoice</h2>
+      <label class="rc-field"><span class="rc-label">Customer</span><input class="rc-input" placeholder="Company name" /></label>
+      <label class="rc-field"><span class="rc-label">Amount (RM)</span><input class="rc-input" inputmode="decimal" placeholder="0.00" /><span class="rc-hint">SST 8% is added automatically.</span></label>
+      <label class="rc-row"><input type="checkbox" class="rc-switch" checked /> Submit to MyInvois</label>
+      <div class="rc-row" style="justify-content:flex-end"><button class="rc-btn rc-btn--ghost">Cancel</button><button class="rc-btn">Create</button></div>
     </form>
   </dialog>
 </body>

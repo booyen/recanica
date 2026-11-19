@@ -1,13 +1,13 @@
-# @rekanica/mcp
+# @recanica/mcp
 
-MCP server that gives AI coding tools live access to Rekanica (UI framework by Aturanica Labs).
+MCP server that gives AI coding tools live access to Recanica (UI framework by Aturanica Labs).
 
 ```bash
-claude mcp add rekanica -- npx -y @rekanica/mcp
+claude mcp add recanica -- npx -y @recanica/mcp
 ```
 
 ```json
-{ "mcpServers": { "rekanica": { "command": "npx", "args": ["-y", "@rekanica/mcp"] } } }
+{ "mcpServers": { "recanica": { "command": "npx", "args": ["-y", "@recanica/mcp"] } } }
 ```
 
 | Tool | Returns |
@@ -21,6 +21,6 @@ claude mcp add rekanica -- npx -y @rekanica/mcp
 | `search(query)` | Keyword search across everything |
 | `get_setup(stack)` | nextjs · vite-react · tailwind-v3 · html · flutter · swiftui · compose · figma · ai |
 
-Prompt: `apply-rekanica` restyles the current project.
+Prompt: `apply-recanica` restyles the current project.
 
-Data is a snapshot built from the monorepo (`pnpm --filter @rekanica/mcp build`); no network access needed.
+Data is a snapshot built from the monorepo (`pnpm --filter @recanica/mcp build`); no network access needed.

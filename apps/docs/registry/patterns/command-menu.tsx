@@ -4,11 +4,11 @@ import * as React from "react";
 import {
   BoxIcon, CreditCardIcon, LayoutGridIcon, LinkIcon, MoonIcon, SearchIcon, SettingsIcon, UsersIcon,
 } from "lucide-react";
-import { Button } from "@rekanica/ui/components/button";
+import { Button } from "@recanica/ui/components/button";
 import {
   CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, CommandShortcut,
-} from "@rekanica/ui/components/command";
-import { Kbd, KbdGroup } from "@rekanica/ui/components/kbd";
+} from "@recanica/ui/components/command";
+import { Kbd, KbdGroup } from "@recanica/ui/components/kbd";
 
 export default function CommandMenu() {
   const [open, setOpen] = React.useState(true);

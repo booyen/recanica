@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Badge } from "@rekanica/ui/components/badge";
+import { Badge } from "@recanica/ui/components/badge";
 import { PageHeader } from "@/components/demo/ui";
 import catalog from "@/lib/catalog.json";
 
@@ -20,7 +20,7 @@ export default function LibraryPage() {
             <ul className="mt-4 space-y-1.5">
               {c.items.map((i) => (
                 <li key={i.href}>
-                  <Link href={i.href} target={i.href.startsWith("/docs") ? "_blank" : undefined} className="flex items-center gap-2 text-sm hover:underline">
+                  <Link href={i.href} target={i.href.startsWith("/docs") ? "_blank" : undefined} className="flex items-center gap-2 py-1 text-sm hover:underline">
                     <Badge variant={tone[i.kind as keyof typeof tone]} className="w-20 justify-center">{i.kind}</Badge>{i.label}
                   </Link>
                 </li>

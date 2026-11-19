@@ -7,18 +7,18 @@ import { toast } from "sonner";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter,
   AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
-} from "@rekanica/ui/components/alert-dialog";
-import { Badge } from "@rekanica/ui/components/badge";
-import { Button } from "@rekanica/ui/components/button";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@rekanica/ui/components/dialog";
-import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@rekanica/ui/components/empty";
-import { Field, FieldLabel } from "@rekanica/ui/components/field";
-import { Input } from "@rekanica/ui/components/input";
-import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "@rekanica/ui/components/input-group";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@rekanica/ui/components/select";
-import { StatList, StatRow } from "@rekanica/ui/components/stat";
-import { Switch } from "@rekanica/ui/components/switch";
-import { cn } from "@rekanica/ui/lib/utils";
+} from "@recanica/ui/components/alert-dialog";
+import { Badge } from "@recanica/ui/components/badge";
+import { Button } from "@recanica/ui/components/button";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@recanica/ui/components/dialog";
+import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@recanica/ui/components/empty";
+import { Field, FieldLabel } from "@recanica/ui/components/field";
+import { Input } from "@recanica/ui/components/input";
+import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "@recanica/ui/components/input-group";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@recanica/ui/components/select";
+import { StatList, StatRow } from "@recanica/ui/components/stat";
+import { Switch } from "@recanica/ui/components/switch";
+import { cn } from "@recanica/ui/lib/utils";
 import { ago, money, price, uid, useDemo } from "@/lib/demo/store";
 
 function CreateLinkDialog({ open, onOpenChange, onCreated }: { open: boolean; onOpenChange: (o: boolean) => void; onCreated: (id: string) => void }) {

@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "@rekanica/ui/components/button";
-import { Input } from "@rekanica/ui/components/input";
-import { Label } from "@rekanica/ui/components/label";
-import { Popover, PopoverContent, PopoverTrigger } from "@rekanica/ui/components/popover";
+import { Button } from "@recanica/ui/components/button";
+import { Input } from "@recanica/ui/components/input";
+import { Label } from "@recanica/ui/components/label";
+import { Popover, PopoverContent, PopoverTrigger } from "@recanica/ui/components/popover";
 
 export default function PopoverDemo() {
   return (

@@ -1,7 +1,7 @@
 "use client";
 
 import { CheckIcon } from "lucide-react";
-import { Marker, MarkerContent, MarkerIcon } from "@rekanica/ui/components/marker";
+import { Marker, MarkerContent, MarkerIcon } from "@recanica/ui/components/marker";
 
 export default function MarkerDemo() {
   return (

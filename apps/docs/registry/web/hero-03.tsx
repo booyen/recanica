@@ -2,8 +2,8 @@
 
 import * as React from "react";
 import { CheckIcon } from "lucide-react";
-import { Button } from "@rekanica/ui/components/button";
-import { Input } from "@rekanica/ui/components/input";
+import { Button } from "@recanica/ui/components/button";
+import { Input } from "@recanica/ui/components/input";
 
 export function Hero03() {
   const [sent, setSent] = React.useState(false);

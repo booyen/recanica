@@ -1,0 +1,4 @@
+{
+  "$comment": "Exceptions for `npx recanica check`. Email HTML needs inline hex (clients ignore CSS variables); the theming guide shows raw token overrides on purpose.",
+  "ignore": ["templates/email/**", "apps/docs/app/(docs)/docs/theming/**"]
+}

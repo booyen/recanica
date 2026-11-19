@@ -1,7 +1,7 @@
 "use client";
 
 import { FileTextIcon, XIcon } from "lucide-react";
-import { Attachment, AttachmentAction, AttachmentActions, AttachmentContent, AttachmentDescription, AttachmentGroup, AttachmentMedia, AttachmentTitle } from "@rekanica/ui/components/attachment";
+import { Attachment, AttachmentAction, AttachmentActions, AttachmentContent, AttachmentDescription, AttachmentGroup, AttachmentMedia, AttachmentTitle } from "@recanica/ui/components/attachment";
 
 export default function AttachmentDemo() {
   return (

@@ -8,7 +8,7 @@ export const metadata = { title: "Patterns" };
 export default function Page() {
   return (
     <>
-      <DocsPageHeader eyebrow="Library" title="Patterns" description="Composed app UI built only from @rekanica/ui. Preview at any viewport, then copy the code or install it from the registry." />
+      <DocsPageHeader eyebrow="Library" title="Patterns" description="Composed app UI built only from @recanica/ui. Preview at any viewport, then copy the code or install it from the registry." />
       <CatalogGrid items={patterns} base="/docs/patterns" />
       <Pager href="/docs/patterns" />
     </>

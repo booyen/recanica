@@ -1,6 +1,6 @@
 "use client";
 
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@rekanica/ui/components/resizable";
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@recanica/ui/components/resizable";
 
 export default function ResizableDemo() {
   return (

@@ -4,10 +4,10 @@ import * as React from "react";
 import {
   AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader,
   AlertDialogTitle, AlertDialogTrigger,
-} from "@rekanica/ui/components/alert-dialog";
-import { Button } from "@rekanica/ui/components/button";
-import { Field, FieldLabel } from "@rekanica/ui/components/field";
-import { Input } from "@rekanica/ui/components/input";
+} from "@recanica/ui/components/alert-dialog";
+import { Button } from "@recanica/ui/components/button";
+import { Field, FieldLabel } from "@recanica/ui/components/field";
+import { Input } from "@recanica/ui/components/input";
 
 const NAME = "acme-studio";
 

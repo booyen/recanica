@@ -3,15 +3,16 @@
 import * as React from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { Button } from "@rekanica/ui/components/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@rekanica/ui/components/card";
-import { Checkbox } from "@rekanica/ui/components/checkbox";
-import { Field, FieldDescription, FieldError, FieldLabel } from "@rekanica/ui/components/field";
-import { Input } from "@rekanica/ui/components/input";
-import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupText } from "@rekanica/ui/components/input-group";
-import { Label } from "@rekanica/ui/components/label";
-import { Textarea } from "@rekanica/ui/components/textarea";
-import { ToggleGroup, ToggleGroupItem } from "@rekanica/ui/components/toggle-group";
+import { Button } from "@recanica/ui/components/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@recanica/ui/components/card";
+import { Checkbox } from "@recanica/ui/components/checkbox";
+import { Field, FieldError, FieldLabel, FieldMessage } from "@recanica/ui/components/field";
+import { focusFirstInvalid } from "@/components/demo/ui";
+import { Input } from "@recanica/ui/components/input";
+import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupText } from "@recanica/ui/components/input-group";
+import { Label } from "@recanica/ui/components/label";
+import { Textarea } from "@recanica/ui/components/textarea";
+import { ToggleGroup, ToggleGroupItem } from "@recanica/ui/components/toggle-group";
 import { uid, useDemo } from "@/lib/demo/store";
 import type { Interval, Product, ProductType } from "@/lib/demo/types";
 
@@ -38,7 +39,7 @@ export function ProductForm({ product }: { product?: Product }) {
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     setTouched(true);
-    if (!valid) return;
+    if (!valid) { focusFirstInvalid(e.currentTarget as HTMLElement); return; }
     const next: Product = {
       id: product?.id ?? uid("prod"),
       name: name.trim(),
@@ -114,7 +115,7 @@ export function ProductForm({ product }: { product?: Product }) {
                 <Label htmlFor={`b-${i}`}>{b}</Label>
               </div>
             ))}
-            <FieldDescription>Fulfilment is simulated in this demo.</FieldDescription>
+            <FieldMessage tone="info">Fulfilment is simulated in this demo.</FieldMessage>
           </CardContent>
         </Card>
         <div className="flex gap-2 lg:flex-col">

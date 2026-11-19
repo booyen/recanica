@@ -1,7 +1,7 @@
 "use client";
 
-import { Card, CardContent } from "@rekanica/ui/components/card";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@rekanica/ui/components/carousel";
+import { Card, CardContent } from "@recanica/ui/components/card";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@recanica/ui/components/carousel";
 
 export default function CarouselDemo() {
   return (

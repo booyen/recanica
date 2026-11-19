@@ -1,7 +1,7 @@
 {
-  "name": "rekanica",
+  "name": "recanica",
   "version": "0.1.0",
-  "description": "Add Rekanica (UI framework by Aturanica Labs) to any project: npx rekanica init",
+  "description": "Add Recanica (UI framework by Aturanica Labs) to any project: npx recanica init",
   "license": "MIT",
   "author": "Aturanica Labs",
   "repository": {
@@ -10,7 +10,7 @@
     "directory": "packages/cli"
   },
   "keywords": [
-    "rekanica",
+    "recanica",
     "design-system",
     "cli",
     "tailwindcss",
@@ -20,7 +20,7 @@
   ],
   "type": "module",
   "bin": {
-    "rekanica": "./src/index.js"
+    "recanica": "./src/index.js"
   },
   "files": [
     "src",
@@ -30,7 +30,7 @@
     "test": "node src/test.mjs"
   },
   "dependencies": {
-    "@rekanica/mcp": "workspace:*"
+    "@recanica/mcp": "workspace:*"
   },
   "publishConfig": {
     "access": "public"

@@ -2,11 +2,11 @@
 
 import * as React from "react";
 import { CheckIcon, ClockIcon, MailIcon, MapPinIcon, PhoneIcon } from "lucide-react";
-import { Button } from "@rekanica/ui/components/button";
-import { Field, FieldLabel } from "@rekanica/ui/components/field";
-import { Input } from "@rekanica/ui/components/input";
-import { NativeSelect, NativeSelectOption } from "@rekanica/ui/components/native-select";
-import { Textarea } from "@rekanica/ui/components/textarea";
+import { Button } from "@recanica/ui/components/button";
+import { Field, FieldLabel } from "@recanica/ui/components/field";
+import { Input } from "@recanica/ui/components/input";
+import { NativeSelect, NativeSelectOption } from "@recanica/ui/components/native-select";
+import { Textarea } from "@recanica/ui/components/textarea";
 
 const details = [
   { icon: MailIcon, label: "Email", value: "hello@acme.example" },
@@ -37,7 +37,7 @@ export function Contact01() {
         <div className="rounded-3xl border bg-card p-6 sm:p-8">
           {sent ? (
             <div className="flex h-full flex-col items-center justify-center gap-3 py-12 text-center">
-              <span className="flex size-10 items-center justify-center rounded-full bg-metallic"><CheckIcon className="size-4" /></span>
+              <span className="flex size-10 items-center justify-center rounded-full bg-brand text-brand-foreground"><CheckIcon className="size-4" /></span>
               <p className="text-heading">Message sent</p>
               <p className="text-sm text-muted-foreground">We&apos;ll reply to your email by tomorrow.</p>
             </div>

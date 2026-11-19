@@ -68,6 +68,7 @@ export const examples: Record<string, ComponentType> = {
 export const patterns: Record<string, ComponentType> = {
   "page-header": dynamic(() => import("@/registry/patterns/page-header")),
   "app-sidebar": dynamic(() => import("@/registry/patterns/app-sidebar")),
+  "app-topnav": dynamic(() => import("@/registry/patterns/app-topnav")),
   "stat-overview": dynamic(() => import("@/registry/patterns/stat-overview")),
   "data-table": dynamic(() => import("@/registry/patterns/data-table")),
   "list-detail": dynamic(() => import("@/registry/patterns/list-detail")),

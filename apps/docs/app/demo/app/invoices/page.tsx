@@ -4,12 +4,12 @@ import * as React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FileTextIcon, PlusIcon, SearchIcon } from "lucide-react";
-import { Button } from "@rekanica/ui/components/button";
-import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@rekanica/ui/components/empty";
-import { InputGroup, InputGroupAddon, InputGroupInput } from "@rekanica/ui/components/input-group";
-import { Stat, StatGroup, StatHeader, StatValue } from "@rekanica/ui/components/stat";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@rekanica/ui/components/table";
-import { Tabs, TabsList, TabsTrigger } from "@rekanica/ui/components/tabs";
+import { Button } from "@recanica/ui/components/button";
+import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@recanica/ui/components/empty";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@recanica/ui/components/input-group";
+import { Stat, StatGroup, StatHeader, StatValue } from "@recanica/ui/components/stat";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@recanica/ui/components/table";
+import { Tabs, TabsList, TabsTrigger } from "@recanica/ui/components/tabs";
 import { InvoiceBadge, PageHeader } from "@/components/demo/ui";
 import { currentDue, invoiceBalance, invoiceGrand, invoicePaid, isOverdue, money, money2, shortDate, useDemo } from "@/lib/demo/store";
 
@@ -42,7 +42,7 @@ export default function InvoicesPage() {
       <StatGroup className="mb-stack">
         <Stat><StatHeader title="Outstanding" /><StatValue value={money(total(isOpen))} caption={`${state.invoices.filter(isOpen).length} open · incl. SST`} /></Stat>
         <Stat><StatHeader title="Overdue" /><StatValue value={<span className={total(isOverdue) ? "text-destructive" : ""}>{money(total(isOverdue))}</span>} caption="needs follow-up" /></Stat>
-        <Stat><StatHeader title="Collected" /><StatValue value={<span className="text-metallic">{money(collected)}</span>} caption="incl. instalments" /></Stat>
+        <Stat><StatHeader title="Collected" /><StatValue value={<span className="text-brand">{money(collected)}</span>} caption="incl. instalments" /></Stat>
       </StatGroup>
 
       <div className="mb-4 flex flex-col gap-2 md:flex-row md:items-center">
@@ -55,7 +55,7 @@ export default function InvoicesPage() {
         </div>
         <InputGroup className="md:ml-auto md:max-w-xs">
           <InputGroupAddon><SearchIcon /></InputGroupAddon>
-          <InputGroupInput placeholder="Search invoices" value={q} onChange={(e) => setQ(e.target.value)} />
+          <InputGroupInput placeholder="Search invoices" aria-label="Search invoices" value={q} onChange={(e) => setQ(e.target.value)} />
         </InputGroup>
       </div>
 

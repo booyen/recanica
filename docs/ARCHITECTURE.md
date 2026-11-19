@@ -1,25 +1,17 @@
-# Rekanica: Architecture & Approach
+# Recanica: Architecture & Approach
 
-Rekanica is the UI framework by Aturanica Labs.
+Recanica is the UI framework by Aturanica Labs.
 
 Visual reference: **Polar** (dashboard). Architecture: **shadcn/ui** (own-your-source
 components, registry distribution) and **Payload** (one `@scope/ui` package shared
 across admin and marketing).
 
-## Visual language (decided)
+## Visual language
 
-- **Monochrome.** Black, white and gray only. Status colors (success / warning /
-  destructive) are muted and used only for status.
-- **Brand finish (option).** `<html data-finish="flat|mesh|chrome">`. Flat (default)
-  is solid black in light / silver in dark; mesh is a soft silver mesh gradient;
-  chrome is a linear brushed chrome. Brand surfaces use `bg-metallic`,
-  `text-metallic`, `border-metallic`, so one attribute switches all of them.
-- **Depth from layers, not shadow.** Page `background` → inset `panel` (rounded-2xl)
-  → `card` → `accent` for hover/active, separated by hairline `border`s.
-- **Type is light.** Regular for titles, light for big metrics, medium max. Never bold.
-- **Pills.** Buttons, icon buttons and segmented controls are fully rounded.
-- **Dashboard pattern.** Grouped stat panels (`StatGroup`) with dividers, thin
-  `BarRow` tracks, `StatRow` lists with muted secondary text.
+The rules live in one place: [`docs/ai/rules.template.md`](ai/rules.template.md). The docs AI page, `/llms.txt`, the MCP
+server and the CLI's `AGENTS.md` are all generated from it, and `recanica check` enforces the mechanical parts
+(see [GOVERNANCE.md](GOVERNANCE.md)). In short: monochrome, flat brand colour, depth from layers not shadows,
+light type, pill controls, labels that never wrap.
 
 ## Layers
 
@@ -28,20 +20,20 @@ across admin and marketing).
  │ 5. Templates   full pages/apps (marketing site, dashboard)   │  starter repos
  │ 4. Blocks      hero, pricing, dashboard-shell, auth, …       │  shadcn registry (copy-in)
  │ 3. Patterns    data-table, list-detail, settings, auth, …    │  shadcn registry (copy-in)
- │ 2. Components  button, card, dialog, tabs, input, …          │  @rekanica/ui
- │ 1. Tokens      color, type, radius, shadow, motion           │  @rekanica/tokens
+ │ 2. Components  button, card, dialog, tabs, input, …          │  @recanica/ui
+ │ 1. Tokens      color, type, radius, shadow, motion           │  @recanica/tokens
  └──────────────────────────────────────────────────────────────┘
 ```
 
 **Rule:** each layer may only use the layers below it. Blocks never hard-code
-colors; components never reference primitive tokens (`--rk-gray-500`), only
+colors; components never reference primitive tokens (`--rc-gray-500`), only
 semantic ones (`--muted-foreground`).
 
 ## Why hybrid distribution
 
 | Layer | Distributed as | Why |
 |---|---|---|
-| Tokens, Components | Workspace/npm package `@rekanica/*` | Must stay identical everywhere; a fix ships to all apps at once. |
+| Tokens, Components | Workspace/npm package `@recanica/*` | Must stay identical everywhere; a fix ships to all apps at once. |
 | Patterns, Blocks | shadcn registry (`/r/*.json`) | Composed UI gets customized per app; copying source avoids prop explosion. |
 | Templates | Starter repos / `create-*` | Whole-app scaffolds. |
 
@@ -78,7 +70,7 @@ Landing scale: `text-display-sm/md/lg` (36/48/64).
 
 ## Tokens: three tiers
 
-1. **Primitives** `--rk-gray-*`, `--rk-silver-*`: raw scales.
+1. **Primitives** `--rc-gray-*`, `--rc-silver-*`: raw scales.
 2. **Semantic** `--background`, `--surface`, `--brand`, `--sidebar`, …: swapped under `.dark`.
 3. **Tailwind bridge** `@theme inline`: so you can write `bg-surface text-muted-foreground`.
 
@@ -92,7 +84,7 @@ dashboards get **sidebar tokens**. Same system, two densities.
 - `apps/docs/lib/llm.ts` builds every AI artifact from the live `theme.css` and `catalog.json`
   (including OKLCH → hex conversion), so prompts never drift from the real tokens.
 - `/docs/ai`: five copy-paste prompts (apply, brand-only, build a screen, audit, rules file).
-- `/llms.txt`, `/llms-full.txt`, `/rekanica.css`: static, machine-readable.
+- `/llms.txt`, `/llms-full.txt`, `/recanica.css`: static, machine-readable.
 - "Copy for LLM" on each component/pattern/block page: reference code + core rules.
 
 ## Clickable demo
@@ -102,6 +94,10 @@ dashboards get **sidebar tokens**. Same system, two densities.
 (synced across tabs). Flows: sign in → product → checkout link → customer checkout →
 order/customer/revenue update; invoices draft → send → customer pays; refunds;
 cancel subscription; connect payouts → withdraw; settings with save bar; reset.
+
+It is laid out like a template you'd buy: a **UI kit** (`/demo/app/ui`) renders every component by category, `/demo/app/forms`
+shows every form state, input, layout and a wizard, and `/demo/app/ui/patterns` previews every pattern and block.
+`tests/coverage.spec.ts` fails if a catalog item is missing from the demos. The sidebar hides with ⌘B.
 
 ## Malaysia localization (demo invoicing)
 
@@ -114,7 +110,7 @@ and payment plans (deposit + instalments, each payable separately, partial statu
 ## Conventions
 
 - Components are shadcn-shaped: function components, `data-slot`, `className` passthrough, `cva` variants.
-- You can still run `pnpm dlx shadcn add <component>` inside `packages/ui`, then restyle it to Rekanica tokens.
+- You can still run `pnpm dlx shadcn add <component>` inside `packages/ui`, then restyle it to Recanica tokens.
 - Every component, pattern and block is listed in `lib/catalog.json` and has a docs page.
   Adding one = add the file + a catalog entry; `pnpm gen` warns about missing files.
 - Mobile-first: write the phone layout first; sidebars become Sheets below `md`.
@@ -122,18 +118,14 @@ and payment plans (deposit + instalments, each payable separately, partial statu
 
 ## Open decisions (to discuss)
 
-1. **Logo & typeface**: currently Geist and a placeholder mark.
-2. **Publishing**: keep packages private in-monorepo, or publish to npm/GitHub Packages so separate repos can consume them?
-3. **Docs hosting**: domain for the docs + registry (`registry.json` homepage is a placeholder).
-4. **Figma**: mirror tokens as Figma variables (can be synced from `theme.css`).
-5. **Motion**: adopt a motion library (Motion/Framer) for marketing, or CSS-only?
+1. **Publishing**: publish `@recanica/*` to npm (release workflow is ready; needs `NPM_TOKEN`) or keep in-monorepo.
+2. **Docs hosting**: domain for the docs + registry (`registry.json` homepage is a placeholder).
+3. **Repo name**: GitHub repo is still `rekanica-des`; rename to match Recanica?
+4. **Motion**: adopt a motion library for marketing, or stay CSS-only?
 
 ## Roadmap
 
-- **v0.1 Foundation** (done): monochrome tokens, spacing/type scale, full component set.
-- **v0.2 Docs library** (done): docs shell (nav, ⌘K search, TOC, pager), 60 component pages,
-  18 app patterns, 13 blocks with a responsive viewer, 7 foundation pages, brand finish option.
-- **v0.3 Depth**: TanStack data table, more chart patterns, per-component API/props tables,
-  multiple examples per component.
-- **v0.4 Templates**: `marketing-site` and `dashboard-app` starters built from the blocks.
-- **Quality**: visual regression (Playwright screenshots of docs pages), a11y checks, changesets for versioning.
+- **Done**: tokens for 7 platforms, 60 components, 19 patterns, 3 blocks, 49 web sections, 20 page recipes,
+  sample website, dashboard demo with UI kit and forms, MCP server, CLI (`init`, `add`, `check`),
+  layout audit / coverage / link / visual / copy / design checks in CI.
+- **Next**: TanStack data table, per-component props tables, multiple examples per component, a11y audit (axe) in CI.

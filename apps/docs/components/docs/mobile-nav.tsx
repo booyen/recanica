@@ -2,8 +2,8 @@
 
 import * as React from "react";
 import { MenuIcon } from "lucide-react";
-import { Button } from "@rekanica/ui/components/button";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@rekanica/ui/components/sheet";
+import { Button } from "@recanica/ui/components/button";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@recanica/ui/components/sheet";
 import { DocsNav } from "./docs-nav";
 
 export function MobileNav() {
@@ -14,7 +14,7 @@ export function MobileNav() {
         <Button variant="ghost" size="icon" className="lg:hidden" aria-label="Open menu"><MenuIcon /></Button>
       </SheetTrigger>
       <SheetContent side="left" className="w-[85vw] max-w-xs gap-0 p-0">
-        <SheetHeader className="border-b"><SheetTitle>Rekanica</SheetTitle></SheetHeader>
+        <SheetHeader className="border-b"><SheetTitle>Recanica</SheetTitle></SheetHeader>
         <div className="overflow-y-auto px-2 pt-4">
           <DocsNav onNavigate={() => setOpen(false)} />
         </div>

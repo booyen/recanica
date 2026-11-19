@@ -1,7 +1,7 @@
 "use client";
 
-import { RadioGroup, RadioGroupItem } from "@rekanica/ui/components/radio-group";
-import { Label } from "@rekanica/ui/components/label";
+import { RadioGroup, RadioGroupItem } from "@recanica/ui/components/radio-group";
+import { Label } from "@recanica/ui/components/label";
 
 export default function RadioGroupDemo() {
   return (

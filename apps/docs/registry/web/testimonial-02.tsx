@@ -1,10 +1,10 @@
-import { Avatar, AvatarFallback } from "@rekanica/ui/components/avatar";
+import { Avatar, AvatarFallback } from "@recanica/ui/components/avatar";
 
 export function Testimonial02() {
   return (
     <section className="px-gutter py-section-sm">
       <figure className="mx-auto max-w-narrow text-center">
-        <p className="text-metric font-light text-metallic">11 days → 3 days</p>
+        <p className="text-metric font-light text-brand">11 days → 3 days</p>
         <p className="mt-1 text-sm text-muted-foreground">average time to get paid</p>
         <blockquote className="mt-8 text-heading text-balance sm:text-title">
           “We used to chase every invoice on WhatsApp. Now customers pay from the link and I only look at the overdue list on Fridays.”

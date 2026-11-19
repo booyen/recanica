@@ -1,7 +1,7 @@
 "use client";
 
 import { AlertCircleIcon, CheckCircle2Icon } from "lucide-react";
-import { Alert, AlertDescription, AlertTitle } from "@rekanica/ui/components/alert";
+import { Alert, AlertDescription, AlertTitle } from "@recanica/ui/components/alert";
 
 export default function AlertDemo() {
   return (

@@ -1,13 +1,14 @@
 import Link from "next/link";
 import { ArrowRightIcon } from "lucide-react";
 import { groupBy, type CatalogItem } from "@/lib/docs";
+import { slugify } from "@/lib/kit";
 
 export function CatalogGrid({ items, base }: { items: CatalogItem[]; base: string }) {
   return (
     <div className="space-y-10">
       {groupBy(items).map(([category, list]) => (
         <section key={category} className="space-y-3">
-          <h2 id={category.toLowerCase().replace(/\s+/g, "-")} className="scroll-mt-20 text-sm text-muted-foreground">{category}</h2>
+          <h2 id={slugify(category)} className="scroll-mt-20 text-sm text-muted-foreground">{category}</h2>
           <div className="grid gap-px overflow-hidden rounded-2xl border bg-border sm:grid-cols-2 xl:grid-cols-3">
             {list.map((i) => (
               <Link key={i.slug} href={`${base}/${i.slug}`} className="group flex flex-col gap-1 bg-panel p-5 transition-colors hover:bg-accent">

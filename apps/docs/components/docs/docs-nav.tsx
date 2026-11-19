@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { cn } from "@rekanica/ui/lib/utils";
+import { cn } from "@recanica/ui/lib/utils";
 import { nav } from "@/lib/docs";
 
 export function DocsNav({ onNavigate }: { onNavigate?: () => void }) {
@@ -25,9 +25,10 @@ export function DocsNav({ onNavigate }: { onNavigate?: () => void }) {
                 <Link
                   key={l.href}
                   href={l.href}
+                  title={l.title}
                   onClick={onNavigate}
                   className={cn(
-                    "block rounded-lg px-3 py-1.5 text-muted-foreground transition-colors hover:text-foreground",
+                    "block truncate rounded-lg px-3 py-1.5 text-muted-foreground transition-colors hover:text-foreground",
                     pathname === l.href && "bg-accent text-foreground"
                   )}
                 >

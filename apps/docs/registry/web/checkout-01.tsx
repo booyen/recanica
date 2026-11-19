@@ -2,12 +2,12 @@
 
 import * as React from "react";
 import { BuildingIcon, CreditCardIcon, QrCodeIcon } from "lucide-react";
-import { Button } from "@rekanica/ui/components/button";
-import { Field, FieldLabel } from "@rekanica/ui/components/field";
-import { Input } from "@rekanica/ui/components/input";
-import { NativeSelect, NativeSelectOption } from "@rekanica/ui/components/native-select";
-import { Separator } from "@rekanica/ui/components/separator";
-import { cn } from "@rekanica/ui/lib/utils";
+import { Button } from "@recanica/ui/components/button";
+import { Field, FieldLabel } from "@recanica/ui/components/field";
+import { Input } from "@recanica/ui/components/input";
+import { NativeSelect, NativeSelectOption } from "@recanica/ui/components/native-select";
+import { Separator } from "@recanica/ui/components/separator";
+import { cn } from "@recanica/ui/lib/utils";
 
 const STATES = ["Johor", "Kedah", "Kelantan", "Melaka", "Negeri Sembilan", "Pahang", "Perak", "Perlis", "Pulau Pinang", "Sabah", "Sarawak", "Selangor", "Terengganu", "W.P. Kuala Lumpur", "W.P. Labuan", "W.P. Putrajaya"];
 const methods = [{ id: "fpx", label: "FPX online banking", icon: BuildingIcon }, { id: "duitnow", label: "DuitNow QR", icon: QrCodeIcon }, { id: "card", label: "Card", icon: CreditCardIcon }];

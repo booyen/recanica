@@ -2,8 +2,8 @@
 
 import * as React from "react";
 import { CheckIcon, CopyIcon } from "lucide-react";
-import { Button } from "@rekanica/ui/components/button";
-import { cn } from "@rekanica/ui/lib/utils";
+import { Button } from "@recanica/ui/components/button";
+import { cn } from "@recanica/ui/lib/utils";
 
 export function CopyButton({ value, className }: { value: string; className?: string }) {
   const [done, setDone] = React.useState(false);

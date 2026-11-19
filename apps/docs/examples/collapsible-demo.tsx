@@ -1,8 +1,8 @@
 "use client";
 
 import { ChevronsUpDownIcon } from "lucide-react";
-import { Button } from "@rekanica/ui/components/button";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@rekanica/ui/components/collapsible";
+import { Button } from "@recanica/ui/components/button";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@recanica/ui/components/collapsible";
 
 export default function CollapsibleDemo() {
   return (

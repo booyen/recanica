@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "@rekanica/ui/components/button";
-import { Field, FieldLabel } from "@rekanica/ui/components/field";
-import { Input } from "@rekanica/ui/components/input";
-import { Separator } from "@rekanica/ui/components/separator";
+import { Button } from "@recanica/ui/components/button";
+import { Field, FieldLabel } from "@recanica/ui/components/field";
+import { Input } from "@recanica/ui/components/input";
+import { Separator } from "@recanica/ui/components/separator";
 
 function GitHubMark() {
   return (
@@ -18,7 +18,7 @@ export default function SignIn() {
     <div className="flex min-h-svh items-center justify-center bg-background px-gutter py-12">
       <div className="w-full max-w-sm space-y-6">
         <div className="flex flex-col items-center gap-3 text-center">
-          <span className="size-9 rounded-xl bg-metallic" />
+          <span className="size-9 rounded-xl bg-brand text-brand-foreground" />
           <h1 className="text-title">Welcome back</h1>
           <p className="text-sm text-muted-foreground">Sign in to your Aturanica account.</p>
         </div>

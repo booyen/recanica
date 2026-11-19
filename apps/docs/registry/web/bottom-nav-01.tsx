@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { HomeIcon, ReceiptIcon, SearchIcon, ShoppingBagIcon, UserIcon } from "lucide-react";
-import { cn } from "@rekanica/ui/lib/utils";
+import { cn } from "@recanica/ui/lib/utils";
 
 const tabs = [
   { id: "home", label: "Home", icon: HomeIcon },

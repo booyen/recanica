@@ -10,7 +10,7 @@ const principles = [
   ["Monochrome", "Black, white and gray. Hierarchy through value, not hue."],
   ["Layered", "Depth from stacked surfaces and hairlines, not shadows."],
   ["Light type", "Regular and light weights. Big numbers, small labels."],
-  ["One brand moment", "A single finish (flat, mesh or chrome) carries emphasis."],
+  ["One brand moment", "One solid brand surface per screen carries emphasis."],
 ];
 
 const layers = [
@@ -18,7 +18,7 @@ const layers = [
   ["Blocks", `${blocks.length} landing and app-shell sections`, "/docs/blocks"],
   ["Patterns", `${patterns.length} composed app UI patterns`, "/docs/patterns"],
   ["Components", `${components.length} accessible primitives`, "/docs/components"],
-  ["Foundations", "Color, type, spacing, surfaces, finish", "/docs/foundations/colors"],
+  ["Foundations", "Color, type, spacing, surfaces, navigation", "/docs/foundations/colors"],
 ];
 
 export default function Page() {
@@ -26,7 +26,7 @@ export default function Page() {
     <>
       <DocsPageHeader
         eyebrow="Getting started"
-        title="Rekanica"
+        title="Recanica"
         description="A comprehensive UI framework by Aturanica Labs for dashboards, landing pages and everything between. Built on Radix and Tailwind, inspired by Polar's calm product UI, and written to be read by LLMs."
       />
       <H2 id="principles">Principles</H2>

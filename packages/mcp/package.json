@@ -1,7 +1,7 @@
 {
-  "name": "@rekanica/mcp",
+  "name": "@recanica/mcp",
   "version": "0.1.0",
-  "description": "MCP server for Rekanica: gives AI tools the design rules, tokens, component source, patterns and setup guides.",
+  "description": "MCP server for Recanica: gives AI tools the design rules, tokens, component source, patterns and setup guides.",
   "license": "MIT",
   "author": "Aturanica Labs",
   "repository": {
@@ -13,13 +13,13 @@
     "mcp",
     "model-context-protocol",
     "design-system",
-    "rekanica",
+    "recanica",
     "claude",
     "cursor"
   ],
   "type": "module",
   "bin": {
-    "rekanica-mcp": "./src/index.js"
+    "recanica-mcp": "./src/index.js"
   },
   "files": [
     "src",
@@ -38,14 +38,14 @@
   },
   "exports": {
     ".": "./src/index.js",
-    "./data": "./data/rekanica.json",
+    "./data": "./data/recanica.json",
     "./package.json": "./package.json"
   },
   "publishConfig": {
     "access": "public"
   },
   "devDependencies": {
-    "@rekanica/tokens": "workspace:*",
-    "@rekanica/css": "workspace:*"
+    "@recanica/tokens": "workspace:*",
+    "@recanica/css": "workspace:*"
   }
 }

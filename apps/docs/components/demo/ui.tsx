@@ -3,25 +3,25 @@
 import * as React from "react";
 import Link from "next/link";
 import { ArrowLeftIcon } from "lucide-react";
-import { Badge } from "@rekanica/ui/components/badge";
-import { Button } from "@rekanica/ui/components/button";
-import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@rekanica/ui/components/empty";
+import { Badge } from "@recanica/ui/components/badge";
+import { Button } from "@recanica/ui/components/button";
+import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@recanica/ui/components/empty";
 import type { InvoiceStatus } from "@/lib/demo/types";
 
 export function PageHeader({ title, description, actions, back }: { title: React.ReactNode; description?: React.ReactNode; actions?: React.ReactNode; back?: { href: string; label: string } }) {
   return (
-    <div className="mb-8 space-y-3">
+    <div className="@container mb-8 space-y-3">
       {back && (
         <Button asChild variant="ghost" size="sm" className="-ml-3 text-muted-foreground">
           <Link href={back.href}><ArrowLeftIcon /> {back.label}</Link>
         </Button>
       )}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+      <div className="flex flex-col gap-4 @2xl:flex-row @2xl:items-end @2xl:justify-between">
         <div className="min-w-0 space-y-1">
           <h1 className="text-title">{title}</h1>
           {description && <div className="text-sm text-muted-foreground">{description}</div>}
         </div>
-        {actions && <div className="flex shrink-0 flex-wrap gap-2">{actions}</div>}
+        {actions && <div className="flex flex-wrap gap-2 @2xl:shrink-0 @2xl:justify-end">{actions}</div>}
       </div>
     </div>
   );
@@ -57,4 +57,13 @@ export function Section({ title, action, children }: { title: string; action?: R
       {children}
     </section>
   );
+}
+
+/** After a failed submit: move focus to the first invalid control so keyboard and screen-reader users land on it. */
+export function focusFirstInvalid(root?: HTMLElement | null) {
+  requestAnimationFrame(() => {
+    const el = (root ?? document).querySelector<HTMLElement>('[aria-invalid="true"]');
+    el?.focus();
+    el?.scrollIntoView({ block: "center", behavior: "smooth" });
+  });
 }

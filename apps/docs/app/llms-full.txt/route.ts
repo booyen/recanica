@@ -4,7 +4,7 @@ export const dynamic = "force-static";
 
 export function GET() {
   const body = `${brandGuide()}
-## Components (@rekanica/ui)
+## Components (@recanica/ui)
 ${componentIndex()}
 
 ## Patterns, blocks and web sections (install with: pnpm dlx shadcn@latest add <url>)

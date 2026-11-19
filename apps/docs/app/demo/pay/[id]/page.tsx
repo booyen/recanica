@@ -4,10 +4,10 @@ import * as React from "react";
 import Link from "next/link";
 import { CheckIcon, LockIcon } from "lucide-react";
 import { toast } from "sonner";
-import { Button } from "@rekanica/ui/components/button";
-import { Progress } from "@rekanica/ui/components/progress";
-import { Spinner } from "@rekanica/ui/components/spinner";
-import { Tabs, TabsList, TabsTrigger } from "@rekanica/ui/components/tabs";
+import { Button } from "@recanica/ui/components/button";
+import { Progress } from "@recanica/ui/components/progress";
+import { Spinner } from "@recanica/ui/components/spinner";
+import { Tabs, TabsList, TabsTrigger } from "@recanica/ui/components/tabs";
 import { InvoiceDocument } from "@/components/demo/invoice-document";
 import { PaymentMethodPicker, methodLabel, type PayMethod } from "@/components/demo/my-ui";
 import { FPX_BANKS } from "@/lib/demo/my";
@@ -49,10 +49,10 @@ export default function PayInvoicePage({ params }: { params: Promise<{ id: strin
 
         <aside className="order-1 space-y-4 lg:sticky lg:top-6 lg:order-2 lg:self-start">
           <div className="space-y-5 rounded-2xl border bg-panel p-5">
-            <div className="flex items-center gap-2 text-sm"><span className="size-5 rounded-md bg-metallic" /> {state.org.name}</div>
+            <div className="flex items-center gap-2 text-sm"><span className="size-5 rounded-md bg-brand text-brand-foreground" /> {state.org.name}</div>
             {inv.status === "paid" ? (
               <div className="space-y-3 text-center">
-                <span className="mx-auto flex size-12 items-center justify-center rounded-full bg-metallic"><CheckIcon className="size-5" /></span>
+                <span className="mx-auto flex size-12 items-center justify-center rounded-full bg-brand text-brand-foreground"><CheckIcon className="size-5" /></span>
                 <p className="text-title">Paid in full</p>
                 <p className="text-sm text-muted-foreground">Terima kasih! {money2(total)} received{inv.paidAt ? ` on ${dmy(inv.paidAt)}` : ""}.</p>
               </div>

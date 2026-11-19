@@ -5,9 +5,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArchiveIcon, ArchiveRestoreIcon, CheckIcon, LinkIcon, PencilIcon } from "lucide-react";
 import { toast } from "sonner";
-import { Badge } from "@rekanica/ui/components/badge";
-import { Button } from "@rekanica/ui/components/button";
-import { Stat, StatGroup, StatHeader, StatList, StatRow, StatValue } from "@rekanica/ui/components/stat";
+import { Badge } from "@recanica/ui/components/badge";
+import { Button } from "@recanica/ui/components/button";
+import { Stat, StatGroup, StatHeader, StatList, StatRow, StatValue } from "@recanica/ui/components/stat";
 import { NotFound, PageHeader, Section } from "@/components/demo/ui";
 import { ago, money, price, uid, useDemo } from "@/lib/demo/store";
 
@@ -55,7 +55,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
 
       <StatGroup>
         <Stat><StatHeader title="Price" /><StatValue value={price(product)} caption={product.type === "recurring" ? "subscription" : "one-time"} /></Stat>
-        <Stat><StatHeader title="Revenue" /><StatValue value={<span className="text-metallic">{money(paid.reduce((a, o) => a + o.amount, 0))}</span>} caption={`${paid.length} orders`} /></Stat>
+        <Stat><StatHeader title="Revenue" /><StatValue value={<span className="text-brand">{money(paid.reduce((a, o) => a + o.amount, 0))}</span>} caption={`${paid.length} orders`} /></Stat>
         <Stat><StatHeader title="Active subscriptions" /><StatValue value={subs.length} /></Stat>
       </StatGroup>
 

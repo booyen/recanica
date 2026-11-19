@@ -1,11 +1,13 @@
 "use client"
 
+import * as React from "react"
 import { useMemo } from "react"
+import { AlertCircleIcon, AlertTriangleIcon, CheckCircle2Icon, InfoIcon } from "lucide-react"
 import { cva, type VariantProps } from "class-variance-authority"
-import { cn } from "@rekanica/ui/lib/utils"
+import { cn } from "@recanica/ui/lib/utils"
 
-import { Label } from "@rekanica/ui/components/label"
-import { Separator } from "@rekanica/ui/components/separator"
+import { Label } from "@recanica/ui/components/label"
+import { Separator } from "@recanica/ui/components/separator"
 
 function FieldSet({ className, ...props }: React.ComponentProps<"fieldset">) {
   return (
@@ -55,7 +57,7 @@ function FieldGroup({ className, ...props }: React.ComponentProps<"div">) {
 }
 
 const fieldVariants = cva(
-  "group/field flex w-full gap-3 data-[invalid=true]:text-destructive",
+  "group/field flex w-full gap-3",
   {
     variants: {
       orientation: {
@@ -78,19 +80,32 @@ const fieldVariants = cva(
   }
 )
 
+/** Shared with controls inside a Field so they set aria-invalid and highlight themselves. */
+const FieldStateContext = React.createContext<{ invalid: boolean }>({ invalid: false })
+
+/** For custom controls: true when the surrounding <Field data-invalid> is invalid. */
+function useFieldInvalid() {
+  return React.useContext(FieldStateContext).invalid
+}
+
 function Field({
   className,
   orientation = "vertical",
   ...props
 }: React.ComponentProps<"div"> & VariantProps<typeof fieldVariants>) {
+  const raw = (props as Record<string, unknown>)["data-invalid"]
+  const invalid = raw === true || raw === "true"
+  const value = useMemo(() => ({ invalid }), [invalid])
   return (
-    <div
-      role="group"
-      data-slot="field"
-      data-orientation={orientation}
-      className={cn(fieldVariants({ orientation }), className)}
-      {...props}
-    />
+    <FieldStateContext.Provider value={value}>
+      <div
+        role="group"
+        data-slot="field"
+        data-orientation={orientation}
+        className={cn(fieldVariants({ orientation }), className)}
+        {...props}
+      />
+    </FieldStateContext.Provider>
   )
 }
 
@@ -223,18 +238,48 @@ function FieldError({
   }
 
   return (
+    <FieldMessage tone="error" data-slot="field-error" className={className} {...props}>
+      {content}
+    </FieldMessage>
+  )
+}
+
+const messageTone = {
+  info: { icon: InfoIcon, className: "bg-muted text-muted-foreground" },
+  success: { icon: CheckCircle2Icon, className: "bg-success/10 text-success" },
+  warning: { icon: AlertTriangleIcon, className: "bg-warning/12 text-warning" },
+  error: { icon: AlertCircleIcon, className: "bg-destructive/10 text-destructive" },
+} as const
+
+/**
+ * Small inline notice under a field: help, success, warning or error.
+ * Tinted background + icon so status reads at a glance; errors are announced (role="alert").
+ */
+function FieldMessage({
+  tone = "info",
+  className,
+  children,
+  ...props
+}: React.ComponentProps<"div"> & { tone?: keyof typeof messageTone }) {
+  const t = messageTone[tone]
+  const Icon = t.icon
+  return (
     <div
-      role="alert"
-      data-slot="field-error"
-      className={cn("text-sm font-normal text-destructive", className)}
+      role={tone === "error" ? "alert" : "status"}
+      data-slot="field-message"
+      data-tone={tone}
+      className={cn("flex w-fit max-w-full items-start gap-2 rounded-lg px-2.5 py-1.5 text-[13px] leading-snug", t.className, className)}
       {...props}
     >
-      {content}
+      <Icon className="mt-px size-3.5 shrink-0" aria-hidden />
+      <div className="min-w-0 [overflow-wrap:anywhere]">{children}</div>
     </div>
   )
 }
 
 export {
+  useFieldInvalid,
+  FieldMessage,
   Field,
   FieldLabel,
   FieldDescription,

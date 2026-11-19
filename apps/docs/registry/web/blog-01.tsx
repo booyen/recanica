@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { Badge } from "@rekanica/ui/components/badge";
-import { Tabs, TabsList, TabsTrigger } from "@rekanica/ui/components/tabs";
+import { Badge } from "@recanica/ui/components/badge";
+import { Tabs, TabsList, TabsTrigger } from "@recanica/ui/components/tabs";
 
 const posts = [
   { title: "What changes for small businesses with e-Invoice in 2026", cat: "Tax", date: "12 Nov 2026", read: "6 min", excerpt: "Who needs to comply, by when, and what the validation QR on your invoice actually does." },
@@ -32,7 +32,7 @@ export function Blog01() {
           </div>
         </div>
         {cat === "All" && (
-          <a href="#" className="group grid gap-6 lg:grid-cols-2 lg:items-center">
+          <a href="/site/blog/e-invoice-2026" className="group grid gap-6 lg:grid-cols-2 lg:items-center">
             <Cover className="aspect-[16/10]" />
             <div className="space-y-3">
               <Badge variant="outline">{featured.cat}</Badge>
@@ -44,7 +44,7 @@ export function Blog01() {
         )}
         <div className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
           {list.map((p) => (
-            <a key={p.title} href="#" className="group space-y-3">
+            <a key={p.title} href="/site/blog/e-invoice-2026" className="group space-y-3">
               <Cover className="aspect-[16/10]" />
               <p className="text-xs text-muted-foreground">{p.cat} · {p.date}</p>
               <h3 className="text-balance group-hover:underline">{p.title}</h3>

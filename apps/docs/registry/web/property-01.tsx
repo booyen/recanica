@@ -1,6 +1,6 @@
 import { BathIcon, BedDoubleIcon, HeartIcon, RulerIcon } from "lucide-react";
-import { Badge } from "@rekanica/ui/components/badge";
-import { Button } from "@rekanica/ui/components/button";
+import { Badge } from "@recanica/ui/components/badge";
+import { Button } from "@recanica/ui/components/button";
 
 const listings = [
   { title: "Corner unit at Mont Kiara", place: "Mont Kiara, Kuala Lumpur", price: "RM 1,280,000", beds: 3, baths: 2, sqft: 1420, tag: "New" },
@@ -25,7 +25,7 @@ export function Property01() {
               </div>
               <div className="space-y-3 p-5">
                 <p className="text-heading tabular-nums">{l.price}</p>
-                <div><a href="#" className="hover:underline">{l.title}</a><p className="text-sm text-muted-foreground">{l.place}</p></div>
+                <div><a href="/site/property/mont-kiara" className="hover:underline">{l.title}</a><p className="text-sm text-muted-foreground">{l.place}</p></div>
                 <dl className="flex gap-4 border-t pt-3 text-sm text-muted-foreground">
                   <div className="flex items-center gap-1.5"><BedDoubleIcon className="size-4" /><dd>{l.beds} <span className="sr-only">bedrooms</span></dd></div>
                   <div className="flex items-center gap-1.5"><BathIcon className="size-4" /><dd>{l.baths} <span className="sr-only">bathrooms</span></dd></div>

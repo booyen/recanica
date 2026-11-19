@@ -1,6 +1,6 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
-import { cn } from "@rekanica/ui/lib/utils"
+import { cn } from "@recanica/ui/lib/utils"
 import { Slot } from "radix-ui"
 
 const badgeVariants = cva(
@@ -16,7 +16,7 @@ const badgeVariants = cva(
         outline:
           "border-border text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
         ghost: "[a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
-        brand: "bg-metallic",
+        brand: "bg-brand text-brand-foreground",
         success: "bg-success/12 text-success",
         warning: "bg-warning/15 text-warning",
         muted: "bg-muted text-muted-foreground",

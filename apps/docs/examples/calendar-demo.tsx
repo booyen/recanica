@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Calendar } from "@rekanica/ui/components/calendar";
+import { Calendar } from "@recanica/ui/components/calendar";
 
 export default function CalendarDemo() {
   // Fixed initial date keeps server and client renders identical.

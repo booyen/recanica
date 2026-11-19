@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /**
- * Rekanica MCP server (stdio).
- *   claude mcp add rekanica -- npx -y @rekanica/mcp
- *   { "mcpServers": { "rekanica": { "command": "npx", "args": ["-y", "@rekanica/mcp"] } } }
+ * Recanica MCP server (stdio).
+ *   claude mcp add recanica -- npx -y @recanica/mcp
+ *   { "mcpServers": { "recanica": { "command": "npx", "args": ["-y", "@recanica/mcp"] } } }
  */
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
@@ -10,7 +10,7 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
 
-const data = JSON.parse(readFileSync(join(import.meta.dirname, "../data/rekanica.json"), "utf8"));
+const data = JSON.parse(readFileSync(join(import.meta.dirname, "../data/recanica.json"), "utf8"));
 const text = (t) => ({ content: [{ type: "text", text: t }] });
 const fence = (lang, code) => "```" + lang + "\n" + code + "\n```";
 
@@ -20,17 +20,17 @@ const STACKS = {
 };
 const TOKEN_FORMATS = ["json", "css", "tailwind-v4", "tailwind-v3", "flutter", "swiftui", "compose", "figma", "plain-css"];
 
-const server = new McpServer({ name: "rekanica", version: data.version });
+const server = new McpServer({ name: "recanica", version: data.version });
 
 server.registerTool("get_rules", {
-  title: "Rekanica design rules",
-  description: "The complete Rekanica brand and UI rules (identity, color tokens with hex values, surfaces, type, spacing, shape, components, do/don't). Read this before writing any UI.",
+  title: "Recanica design rules",
+  description: "The complete Recanica brand and UI rules (identity, color tokens with hex values, surfaces, type, spacing, shape, components, do/don't). Read this before writing any UI.",
   inputSchema: {},
 }, async () => text(data.rules));
 
 server.registerTool("get_tokens", {
   title: "Design tokens",
-  description: "Rekanica tokens in a platform format: json (resolved hex), css (variables), tailwind-v4, tailwind-v3 (preset), flutter, swiftui, compose, figma (Tokens Studio), plain-css (full rk-* component stylesheet).",
+  description: "Recanica tokens in a platform format: json (resolved hex), css (variables), tailwind-v4, tailwind-v3 (preset), flutter, swiftui, compose, figma (Tokens Studio), plain-css (full rc-* component stylesheet).",
   inputSchema: { format: z.enum(TOKEN_FORMATS).describe("Output format") },
 }, async ({ format }) => {
   const v = data.tokens[format];
@@ -40,7 +40,7 @@ server.registerTool("get_tokens", {
 
 server.registerTool("list_components", {
   title: "List components",
-  description: "All @rekanica/ui React components with category, description and import path.",
+  description: "All @recanica/ui React components with category, description and import path.",
   inputSchema: { category: z.string().optional().describe("Filter by category, e.g. Forms, Overlays") },
 }, async ({ category }) => {
   const list = data.components.filter((c) => !category || c.category.toLowerCase() === category.toLowerCase());
@@ -49,7 +49,7 @@ server.registerTool("list_components", {
 
 server.registerTool("get_component", {
   title: "Get component",
-  description: "Source code and a usage example for one @rekanica/ui component.",
+  description: "Source code and a usage example for one @recanica/ui component.",
   inputSchema: { name: z.string().describe("Component slug, e.g. button, dialog, stat, data-table is a pattern") },
 }, async ({ name }) => {
   const c = data.components.find((x) => x.slug === name.toLowerCase() || x.title.toLowerCase() === name.toLowerCase());
@@ -77,7 +77,7 @@ server.registerTool("get_recipe", {
 
 server.registerTool("get_page_library", {
   title: "Dashboard / portal page library",
-  description: "Common dashboard and customer-portal page types (auth, overview, reports, tables, detail, forms, settings, team & roles, notifications, audit log, developers, integrations, tasks, calendar, files, support, empty states, customer portal) and which Rekanica patterns/components implement each.",
+  description: "Common dashboard and customer-portal page types (auth, overview, reports, tables, detail, forms, settings, team & roles, notifications, audit log, developers, integrations, tasks, calendar, files, support, empty states, customer portal) and which Recanica patterns/components implement each.",
   inputSchema: {},
 }, async () => text(data.appLibrary.map((c) => `## ${c.category}\n${c.description}\n${c.items.map((i) => `- ${i.kind}: ${i.label} (${data.site}${i.href})`).join("\n")}`).join("\n\n")));
 
@@ -92,7 +92,7 @@ server.registerTool("get_pattern", {
 });
 
 server.registerTool("search", {
-  title: "Search Rekanica",
+  title: "Search Recanica",
   description: "Keyword search across components, patterns, blocks and guides.",
   inputSchema: { query: z.string() },
 }, async ({ query }) => {
@@ -109,16 +109,16 @@ server.registerTool("search", {
 
 server.registerTool("get_setup", {
   title: "Setup guide",
-  description: `How to install Rekanica in a project. Stacks: ${Object.keys(STACKS).join(", ")}, ai.`,
+  description: `How to install Recanica in a project. Stacks: ${Object.keys(STACKS).join(", ")}, ai.`,
   inputSchema: { stack: z.enum([...Object.keys(STACKS), "ai", "overview"]) },
 }, async ({ stack }) => {
   const key = stack === "overview" ? "README" : stack === "ai" ? "ai" : STACKS[stack];
   return text(data.guides[key] ?? `No guide for ${stack}.`);
 });
 
-server.registerPrompt("apply-rekanica", {
-  title: "Apply Rekanica to this project",
-  description: "Restyle the current project to Rekanica (detects the stack, installs tokens, updates shared components).",
+server.registerPrompt("apply-recanica", {
+  title: "Apply Recanica to this project",
+  description: "Restyle the current project to Recanica (detects the stack, installs tokens, updates shared components).",
   argsSchema: { stack: z.string().optional().describe("Known stack, e.g. nextjs, flutter. Leave empty to detect.") },
 }, ({ stack }) => ({
   messages: [{
@@ -126,11 +126,14 @@ server.registerPrompt("apply-rekanica", {
     content: {
       type: "text",
       text: [
-        "Restyle this project to the Rekanica design system (UI framework by Aturanica Labs).",
+        "Restyle this project to the Recanica design system (UI framework by Aturanica Labs).",
         stack ? `The stack is ${stack}.` : "First inspect the project and tell me its stack, styling approach and where global styles live.",
-        "Then: install the tokens for this stack (call get_setup), load Geist, default to dark mode with data-finish=\"flat\",",
+        "Before changing code, show me a short mockup plan: the screens you will restyle, the Recanica patterns each maps to,",
+        "and anything you would change or drop. Wait for my answer, then:",
+        "install the tokens for this stack (call get_setup), load Geist, default to dark mode,",
         "restyle shared components first (button, input, card, table, nav, dialog), keep behavior/routes/copy unchanged,",
-        "check 375px width has no horizontal scroll, and list every changed file. Follow these rules exactly:",
+        "check 375px, ~900px and 1280px widths (no horizontal scroll, no wrapped button or nav labels),",
+        "run `npx recanica check` and fix every error, and list every changed file. Follow these rules exactly:",
         "",
         data.rules,
       ].join("\n"),

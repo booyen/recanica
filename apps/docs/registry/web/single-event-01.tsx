@@ -2,10 +2,10 @@
 
 import * as React from "react";
 import { CalendarIcon, CheckIcon, MapPinIcon, UsersIcon } from "lucide-react";
-import { Avatar, AvatarFallback } from "@rekanica/ui/components/avatar";
-import { Badge } from "@rekanica/ui/components/badge";
-import { Button } from "@rekanica/ui/components/button";
-import { Input } from "@rekanica/ui/components/input";
+import { Avatar, AvatarFallback } from "@recanica/ui/components/avatar";
+import { Badge } from "@recanica/ui/components/badge";
+import { Button } from "@recanica/ui/components/button";
+import { Input } from "@recanica/ui/components/input";
 
 const agenda = [
   ["2:00pm", "Arrival and coffee"], ["2:20pm", "What e-Invoice means for your business"], ["3:00pm", "Hands-on: set up your first validated invoice"], ["4:00pm", "Q&A with the LHDN-certified consultant"],

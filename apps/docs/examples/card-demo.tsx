@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "@rekanica/ui/components/button";
-import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@rekanica/ui/components/card";
-import { Input } from "@rekanica/ui/components/input";
-import { Label } from "@rekanica/ui/components/label";
+import { Button } from "@recanica/ui/components/button";
+import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@recanica/ui/components/card";
+import { Input } from "@recanica/ui/components/input";
+import { Label } from "@recanica/ui/components/label";
 
 export default function CardDemo() {
   return (

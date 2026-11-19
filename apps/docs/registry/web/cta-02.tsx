@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { Button } from "@rekanica/ui/components/button";
-import { Input } from "@rekanica/ui/components/input";
+import { Button } from "@recanica/ui/components/button";
+import { Input } from "@recanica/ui/components/input";
 
 export function Cta02() {
   const [done, setDone] = React.useState(false);

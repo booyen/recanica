@@ -1,6 +1,6 @@
 import { ArrowRightIcon } from "lucide-react";
-import { Badge } from "@rekanica/ui/components/badge";
-import { Button } from "@rekanica/ui/components/button";
+import { Badge } from "@recanica/ui/components/badge";
+import { Button } from "@recanica/ui/components/button";
 
 export function Hero01() {
   return (
@@ -8,7 +8,7 @@ export function Hero01() {
       <div aria-hidden className="pointer-events-none absolute inset-x-0 -top-40 mx-auto h-96 max-w-3xl rounded-full bg-foreground/10 blur-3xl" />
       <div className="relative mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
         <Badge variant="outline" className="bg-background/60 backdrop-blur">New · Payment plans are live</Badge>
-        <h1 className="text-display-sm tracking-tight text-balance text-metallic sm:text-display-md lg:text-display-lg">
+        <h1 className="text-display-sm tracking-tight text-balance text-brand sm:text-display-md lg:text-display-lg">
           Invoices and payments for small businesses
         </h1>
         <p className="max-w-xl text-base text-balance text-muted-foreground sm:text-lg">

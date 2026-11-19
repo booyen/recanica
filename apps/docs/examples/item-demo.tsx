@@ -1,8 +1,8 @@
 "use client";
 
 import { BadgeCheckIcon, ChevronRightIcon } from "lucide-react";
-import { Button } from "@rekanica/ui/components/button";
-import { Item, ItemActions, ItemContent, ItemDescription, ItemMedia, ItemTitle } from "@rekanica/ui/components/item";
+import { Button } from "@recanica/ui/components/button";
+import { Item, ItemActions, ItemContent, ItemDescription, ItemMedia, ItemTitle } from "@recanica/ui/components/item";
 
 export default function ItemDemo() {
   return (
@@ -15,7 +15,7 @@ export default function ItemDemo() {
         <ItemActions><Button size="sm" variant="outline">Connect</Button></ItemActions>
       </Item>
       <Item variant="outline" size="sm" asChild>
-        <a href="#">
+        <a href="/demo/app/settings">
           <ItemMedia><BadgeCheckIcon className="size-5" /></ItemMedia>
           <ItemContent><ItemTitle>Your profile is verified.</ItemTitle></ItemContent>
           <ItemActions><ChevronRightIcon className="size-4" /></ItemActions>

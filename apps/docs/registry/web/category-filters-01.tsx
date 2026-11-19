@@ -2,13 +2,13 @@
 
 import * as React from "react";
 import { SlidersHorizontalIcon, XIcon } from "lucide-react";
-import { Badge } from "@rekanica/ui/components/badge";
-import { Button } from "@rekanica/ui/components/button";
-import { Checkbox } from "@rekanica/ui/components/checkbox";
-import { Label } from "@rekanica/ui/components/label";
-import { NativeSelect, NativeSelectOption } from "@rekanica/ui/components/native-select";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@rekanica/ui/components/sheet";
-import { Slider } from "@rekanica/ui/components/slider";
+import { Badge } from "@recanica/ui/components/badge";
+import { Button } from "@recanica/ui/components/button";
+import { Checkbox } from "@recanica/ui/components/checkbox";
+import { Label } from "@recanica/ui/components/label";
+import { NativeSelect, NativeSelectOption } from "@recanica/ui/components/native-select";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@recanica/ui/components/sheet";
+import { Slider } from "@recanica/ui/components/slider";
 
 const groups = { Category: ["Coffee", "Tea", "Equipment", "Gifts"], Roast: ["Light", "Medium", "Dark"], Origin: ["Sabah", "Johor", "Imported"] };
 type Key = keyof typeof groups;

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { ArrowRightIcon, LayoutDashboardIcon, RotateCcwIcon, ShoppingCartIcon } from "lucide-react";
 import { toast } from "sonner";
-import { Button } from "@rekanica/ui/components/button";
+import { Button } from "@recanica/ui/components/button";
 import { useDemo } from "@/lib/demo/store";
 
 export default function DemoHome() {
@@ -13,10 +13,10 @@ export default function DemoHome() {
     <main className="flex min-h-svh items-center justify-center bg-sidebar px-gutter py-12">
       <div className="w-full max-w-lg space-y-8">
         <div className="space-y-3 text-center">
-          <span className="mx-auto block size-10 rounded-xl bg-metallic" />
-          <h1 className="text-title">Rekanica clickable demo</h1>
+          <span className="mx-auto block size-10 rounded-xl bg-brand text-brand-foreground" />
+          <h1 className="text-title">Recanica clickable demo</h1>
           <p className="text-muted-foreground">
-            A working product built with Rekanica. Everything is fake data kept in your browser. Nothing is sent anywhere.
+            A working product built with Recanica. Everything is fake data kept in your browser. Nothing is sent anywhere.
           </p>
         </div>
         <div className="grid gap-px overflow-hidden rounded-2xl border bg-border">
@@ -37,7 +37,7 @@ export default function DemoHome() {
           <Button variant="ghost" size="sm" onClick={() => { dispatch({ type: "reset" }); toast("Demo data reset"); }}>
             <RotateCcwIcon /> Reset demo data
           </Button>
-          <Link href="/docs" className="hover:text-foreground">← Back to the design system</Link>
+          <Link href="/docs" className="-my-1 inline-block py-1 hover:text-foreground">← Back to the design system</Link>
         </div>
       </div>
     </main>

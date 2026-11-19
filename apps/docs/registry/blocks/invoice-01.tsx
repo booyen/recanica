@@ -1,9 +1,9 @@
 "use client";
 
 import { DownloadIcon, PrinterIcon, SendIcon } from "lucide-react";
-import { Badge } from "@rekanica/ui/components/badge";
-import { Button } from "@rekanica/ui/components/button";
-import { Separator } from "@rekanica/ui/components/separator";
+import { Badge } from "@recanica/ui/components/badge";
+import { Button } from "@recanica/ui/components/button";
+import { Separator } from "@recanica/ui/components/separator";
 
 const invoice = {
   number: "INV-2026-0042",
@@ -46,7 +46,7 @@ export function Invoice01() {
       <article className="mx-auto max-w-narrow rounded-2xl border bg-panel p-6 sm:p-10 print:max-w-none print:rounded-none print:border-0 print:text-black">
         <header className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
           <div className="flex items-center gap-2">
-            <span className="size-7 rounded-lg bg-metallic print:bg-black" />
+            <span className="size-7 rounded-lg bg-brand text-brand-foreground print:bg-black" />
             <span className="text-lg">Acme Studio</span>
           </div>
           <div className="sm:text-right">

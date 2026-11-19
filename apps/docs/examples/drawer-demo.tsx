@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@rekanica/ui/components/button";
-import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "@rekanica/ui/components/drawer";
+import { Button } from "@recanica/ui/components/button";
+import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "@recanica/ui/components/drawer";
 
 export default function DrawerDemo() {
   return (

@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { usePathname } from "next/navigation";
-import { cn } from "@rekanica/ui/lib/utils";
+import { cn } from "@recanica/ui/lib/utils";
 
 type Heading = { id: string; text: string; level: number };
 

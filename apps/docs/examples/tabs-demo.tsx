@@ -1,6 +1,6 @@
 "use client";
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@rekanica/ui/components/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@recanica/ui/components/tabs";
 
 const ranges = ["All time", "12m", "3m", "30d", "Today"];
 

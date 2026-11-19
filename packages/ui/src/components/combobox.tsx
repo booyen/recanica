@@ -2,16 +2,16 @@
 
 import * as React from "react"
 import { Combobox as ComboboxPrimitive } from "@base-ui/react"
-import { cn } from "@rekanica/ui/lib/utils"
+import { cn } from "@recanica/ui/lib/utils"
 import { CheckIcon, ChevronDownIcon, XIcon } from "lucide-react"
 
-import { Button } from "@rekanica/ui/components/button"
+import { Button } from "@recanica/ui/components/button"
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
-} from "@rekanica/ui/components/input-group"
+} from "@recanica/ui/components/input-group"
 
 const Combobox = ComboboxPrimitive.Root
 

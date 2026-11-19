@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Calendar } from "@rekanica/ui/components/calendar";
+import { Calendar } from "@recanica/ui/components/calendar";
 import { PageHeader } from "@/components/demo/ui";
 import { dmy, invoiceGrand, money2, useDemo } from "@/lib/demo/store";
 

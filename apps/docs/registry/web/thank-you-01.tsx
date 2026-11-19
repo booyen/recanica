@@ -1,5 +1,5 @@
 import { CheckIcon, MailIcon, PackageIcon, TruckIcon } from "lucide-react";
-import { Button } from "@rekanica/ui/components/button";
+import { Button } from "@recanica/ui/components/button";
 
 const next = [
   { icon: MailIcon, title: "Receipt sent", body: "To nadia@example.com. Keep it for returns." },
@@ -12,7 +12,7 @@ export function ThankYou01() {
     <section className="flex min-h-[600px] items-center px-gutter py-section-sm">
       <div className="mx-auto w-full max-w-narrow space-y-10 text-center">
         <div className="space-y-4">
-          <span className="mx-auto flex size-12 items-center justify-center rounded-full bg-metallic"><CheckIcon className="size-5" /></span>
+          <span className="mx-auto flex size-12 items-center justify-center rounded-full bg-brand text-brand-foreground"><CheckIcon className="size-5" /></span>
           <h1 className="text-display-sm tracking-tight">Thank you, Nadia</h1>
           <p className="text-muted-foreground">Order <span className="font-mono text-foreground">#AC-20431</span> is confirmed. Total paid RM254.00.</p>
         </div>

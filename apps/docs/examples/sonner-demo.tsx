@@ -1,7 +1,7 @@
 "use client";
 
 import { toast } from "sonner";
-import { Button } from "@rekanica/ui/components/button";
+import { Button } from "@recanica/ui/components/button";
 
 export default function ToastDemo() {
   return (

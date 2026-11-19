@@ -11,7 +11,7 @@
           "sans-serif"
         ],
         "$extensions": {
-          "com.rekanica": {
+          "com.recanica": {
             "css": "var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif"
           }
         }
@@ -24,7 +24,7 @@
           "monospace"
         ],
         "$extensions": {
-          "com.rekanica": {
+          "com.recanica": {
             "css": "var(--font-geist-mono), ui-monospace, monospace"
           }
         }

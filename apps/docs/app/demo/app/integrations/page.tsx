@@ -3,8 +3,8 @@
 import * as React from "react";
 import { SearchIcon } from "lucide-react";
 import { toast } from "sonner";
-import { Button } from "@rekanica/ui/components/button";
-import { InputGroup, InputGroupAddon, InputGroupInput } from "@rekanica/ui/components/input-group";
+import { Button } from "@recanica/ui/components/button";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@recanica/ui/components/input-group";
 import { PageHeader } from "@/components/demo/ui";
 
 const apps = [
@@ -25,7 +25,7 @@ export default function IntegrationsPage() {
   return (
     <>
       <PageHeader title="Integrations" description={`${on.size} connected`} />
-      <InputGroup className="mb-6 sm:max-w-sm"><InputGroupAddon><SearchIcon /></InputGroupAddon><InputGroupInput placeholder="Search integrations" value={q} onChange={(e) => setQ(e.target.value)} /></InputGroup>
+      <InputGroup className="mb-6 sm:max-w-sm"><InputGroupAddon><SearchIcon /></InputGroupAddon><InputGroupInput placeholder="Search integrations" aria-label="Search integrations" value={q} onChange={(e) => setQ(e.target.value)} /></InputGroup>
       <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {list.map((a) => {
           const connected = on.has(a.name);

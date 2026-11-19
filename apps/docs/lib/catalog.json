@@ -136,7 +136,7 @@
       "slug": "stat",
       "title": "Stat",
       "category": "Data display",
-      "description": "Rekanica metric panels: grouped stats, bar rows, list rows."
+      "description": "Recanica metric panels: grouped stats, bar rows, list rows."
     },
     {
       "slug": "table",
@@ -374,7 +374,14 @@
       "title": "App Sidebar",
       "category": "Layout",
       "height": 640,
-      "description": "Polar-style nav with sub-items, promo card and account switcher; sheet on mobile."
+      "description": "Polar-style nav with sub-items, promo card and account switcher. Hide it with the button or ⌘B; sheet on mobile."
+    },
+    {
+      "slug": "app-topnav",
+      "title": "App Top Nav",
+      "category": "Layout",
+      "height": 520,
+      "description": "Horizontal app nav that never wraps: items that do not fit move into a More menu; sheet on mobile."
     },
     {
       "slug": "stat-overview",
@@ -472,7 +479,7 @@
       "title": "Command Menu",
       "category": "Navigation",
       "height": 520,
-      "description": "\u2318K palette with groups and shortcuts."
+      "description": "⌘K palette with groups and shortcuts."
     },
     {
       "slug": "account-switcher",
@@ -519,7 +526,7 @@
       "category": "Headers",
       "height": 360,
       "description": "Sticky site header with mobile menu.",
-      "use": "Top of every marketing page. Keep 4\u20136 links; one primary action."
+      "use": "Top of every marketing page. Keep 4–6 links; one primary action."
     },
     {
       "slug": "megamenu-01",
@@ -541,9 +548,9 @@
       "slug": "bottom-nav-01",
       "title": "Bottom Navigation Bar",
       "category": "Bottom Navigation Bar",
-      "description": "Mobile tab bar with 4\u20135 destinations and an active state.",
+      "description": "Mobile tab bar with 4–5 destinations and an active state.",
       "height": 640,
-      "use": "Mobile web apps and PWAs with 3\u20135 top-level destinations."
+      "use": "Mobile web apps and PWAs with 3–5 top-level destinations."
     },
     {
       "slug": "banner-01",
@@ -555,7 +562,7 @@
     },
     {
       "slug": "hero-01",
-      "title": "Hero \u00b7 Centered",
+      "title": "Hero · Centered",
       "category": "Hero",
       "height": 640,
       "description": "Centered headline, badge and two CTAs.",
@@ -563,7 +570,7 @@
     },
     {
       "slug": "hero-02",
-      "title": "Hero \u00b7 Product",
+      "title": "Hero · Product",
       "category": "Hero",
       "height": 760,
       "description": "Headline with an app screenshot frame.",
@@ -571,7 +578,7 @@
     },
     {
       "slug": "hero-03",
-      "title": "Hero \u00b7 Split",
+      "title": "Hero · Split",
       "category": "Hero",
       "description": "Split hero with headline, email capture and image.",
       "height": 680,
@@ -595,7 +602,7 @@
     },
     {
       "slug": "bento-01",
-      "title": "Features \u00b7 Bento",
+      "title": "Features · Bento",
       "category": "Feature",
       "height": 820,
       "description": "Asymmetric bento grid with visuals.",
@@ -603,7 +610,7 @@
     },
     {
       "slug": "bento-02",
-      "title": "Features \u00b7 Bento 2",
+      "title": "Features · Bento 2",
       "category": "Feature",
       "height": 980,
       "description": "Four-column bento with metrics, security, currencies, team and automation tiles.",
@@ -611,11 +618,11 @@
     },
     {
       "slug": "features-01",
-      "title": "Features \u00b7 Grid",
+      "title": "Features · Grid",
       "category": "Feature",
       "height": 720,
-      "description": "Icon feature grid, 1 \u2192 2 \u2192 3 columns.",
-      "use": "Explain 3\u20136 capabilities at equal weight."
+      "description": "Icon feature grid, 1 → 2 → 3 columns.",
+      "use": "Explain 3–6 capabilities at equal weight."
     },
     {
       "slug": "content-01",
@@ -623,7 +630,7 @@
       "category": "Content",
       "description": "Alternating image and text rows with a short list.",
       "height": 900,
-      "use": "Explain a product or story in 2\u20133 steps with visuals."
+      "use": "Explain a product or story in 2–3 steps with visuals."
     },
     {
       "slug": "stats-01",
@@ -639,7 +646,7 @@
       "category": "Process",
       "description": "Numbered steps explaining how it works.",
       "height": 520,
-      "use": "Explain onboarding, ordering or a service in 3\u20135 steps."
+      "use": "Explain onboarding, ordering or a service in 3–5 steps."
     },
     {
       "slug": "timeline-01",
@@ -671,7 +678,7 @@
       "category": "Pricing",
       "height": 820,
       "description": "Three-tier pricing with featured plan.",
-      "use": "Public pricing with 2\u20133 plans and one highlighted plan."
+      "use": "Public pricing with 2–3 plans and one highlighted plan."
     },
     {
       "slug": "faq-01",
@@ -867,7 +874,7 @@
     },
     {
       "slug": "login-01",
-      "title": "Login \u00b7 Split",
+      "title": "Login · Split",
       "category": "Login pages",
       "description": "Two-column login with brand panel and form.",
       "height": 680,
@@ -927,7 +934,7 @@
           "kind": "demo"
         },
         {
-          "label": "Login \u00b7 split (web)",
+          "label": "Login · split (web)",
           "href": "/docs/web/login-01",
           "kind": "web"
         }
@@ -1221,7 +1228,7 @@
       "description": "Global search and quick actions.",
       "items": [
         {
-          "label": "Command menu (\u2318K in the demo)",
+          "label": "Command menu (⌘K in the demo)",
           "href": "/docs/patterns/command-menu",
           "kind": "pattern"
         }
@@ -1376,7 +1383,7 @@
       "notes": "Price, variants and add-to-cart visible without scrolling on desktop."
     },
     {
-      "page": "Cart \u2192 checkout \u2192 thank you",
+      "page": "Cart → checkout → thank you",
       "sections": [
         "cart-01",
         "checkout-01",
@@ -1492,7 +1499,7 @@
       "sections": [
         "error-01"
       ],
-      "notes": "Always offer search and 2\u20133 useful links."
+      "notes": "Always offer search and 2–3 useful links."
     }
   ]
 }

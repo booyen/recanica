@@ -34,13 +34,13 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
       <H2 id="preview">Preview</H2>
       <ComponentPreview slug={slug} />
       <H2 id="installation">Installation</H2>
-      <P>Ships with the <InlineCode>@rekanica/ui</InlineCode> package. In an app inside the monorepo:</P>
-      <div className="mt-4"><CodeBlock lang="bash" code={`pnpm add @rekanica/ui@workspace:*`} /></div>
+      <P>Ships with the <InlineCode>@recanica/ui</InlineCode> package. In an app inside the monorepo:</P>
+      <div className="mt-4"><CodeBlock lang="bash" code={`pnpm add @recanica/ui@workspace:*`} /></div>
       <H2 id="usage">Usage</H2>
-      <CodeBlock code={uiImports(src) || `import * from "@rekanica/ui/components/${file}";`} />
+      <CodeBlock code={uiImports(src) || `import * from "@recanica/ui/components/${file}";`} />
       <P>
         Source: <InlineCode>packages/ui/src/components/{file}.tsx</InlineCode>. Styles come from semantic tokens only, so it
-        follows light/dark and the brand finish automatically.
+        follows light and dark mode automatically.
       </P>
       <Pager href={`/docs/components/${slug}`} />
     </>

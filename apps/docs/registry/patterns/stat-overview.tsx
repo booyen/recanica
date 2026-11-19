@@ -1,9 +1,9 @@
 "use client";
 
 import { SlidersHorizontalIcon } from "lucide-react";
-import { Button } from "@rekanica/ui/components/button";
-import { BarRow, Stat, StatGroup, StatHeader, StatList, StatRow, StatValue } from "@rekanica/ui/components/stat";
-import { Tabs, TabsList, TabsTrigger } from "@rekanica/ui/components/tabs";
+import { Button } from "@recanica/ui/components/button";
+import { BarRow, Stat, StatGroup, StatHeader, StatList, StatRow, StatValue } from "@recanica/ui/components/stat";
+import { Tabs, TabsList, TabsTrigger } from "@recanica/ui/components/tabs";
 
 const ranges = ["All time", "12m", "3m", "30d", "Today"];
 
@@ -47,7 +47,7 @@ export default function StatOverview() {
         </Stat>
         <Stat>
           <StatHeader title="Available balance" href="#" />
-          <StatValue value={<span className="text-metallic">$1,206</span>} />
+          <StatValue value={<span className="text-brand">$1,206</span>} />
           <div className="mt-auto text-sm">
             <p>Next payout on 1 Dec</p>
             <p className="text-muted-foreground">Payouts run monthly above $10.</p>

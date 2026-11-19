@@ -16,8 +16,8 @@ export async function readSource(rel: string) {
   return (await readFile(join(process.cwd(), rel), "utf8")).trimEnd();
 }
 
-/** Pull `@rekanica/ui` import statements out of a source file for the Usage section. */
+/** Pull `@recanica/ui` import statements out of a source file for the Usage section. */
 export function uiImports(src: string) {
-  const m = src.match(/import[\s\S]*?from\s+"@rekanica\/ui\/[^"]+";?/g) ?? [];
+  const m = src.match(/import[\s\S]*?from\s+"@recanica\/ui\/[^"]+";?/g) ?? [];
   return m.map((s) => s.replace(/\s+/g, " ").replace("{ ", "{ ").trim()).join("\n");
 }

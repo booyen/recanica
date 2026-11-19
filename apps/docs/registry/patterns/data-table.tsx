@@ -2,15 +2,15 @@
 
 import * as React from "react";
 import { ListFilterIcon, MoreHorizontalIcon, SearchIcon } from "lucide-react";
-import { Badge } from "@rekanica/ui/components/badge";
-import { Button } from "@rekanica/ui/components/button";
-import { Checkbox } from "@rekanica/ui/components/checkbox";
+import { Badge } from "@recanica/ui/components/badge";
+import { Button } from "@recanica/ui/components/button";
+import { Checkbox } from "@recanica/ui/components/checkbox";
 import {
   DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
   DropdownMenuSeparator, DropdownMenuTrigger,
-} from "@rekanica/ui/components/dropdown-menu";
-import { InputGroup, InputGroupAddon, InputGroupInput } from "@rekanica/ui/components/input-group";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@rekanica/ui/components/table";
+} from "@recanica/ui/components/dropdown-menu";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@recanica/ui/components/input-group";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@recanica/ui/components/table";
 
 type Status = "Paid" | "Pending" | "Refunded" | "Failed";
 type Order = { id: string; customer: string; email: string; product: string; status: Status; amount: number; date: string };

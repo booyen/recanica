@@ -2,9 +2,9 @@
 
 import * as React from "react";
 import { FileIcon, UploadCloudIcon, XIcon } from "lucide-react";
-import { Button } from "@rekanica/ui/components/button";
-import { Progress } from "@rekanica/ui/components/progress";
-import { cn } from "@rekanica/ui/lib/utils";
+import { Button } from "@recanica/ui/components/button";
+import { Progress } from "@recanica/ui/components/progress";
+import { cn } from "@recanica/ui/lib/utils";
 
 type Upload = { name: string; size: number; progress: number };
 

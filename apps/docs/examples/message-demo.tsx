@@ -1,8 +1,8 @@
 "use client";
 
-import { Avatar, AvatarFallback } from "@rekanica/ui/components/avatar";
-import { Message, MessageAvatar, MessageContent, MessageFooter, MessageGroup, MessageHeader } from "@rekanica/ui/components/message";
-import { Bubble, BubbleContent } from "@rekanica/ui/components/bubble";
+import { Avatar, AvatarFallback } from "@recanica/ui/components/avatar";
+import { Message, MessageAvatar, MessageContent, MessageFooter, MessageGroup, MessageHeader } from "@recanica/ui/components/message";
+import { Bubble, BubbleContent } from "@recanica/ui/components/bubble";
 
 export default function MessageDemo() {
   return (

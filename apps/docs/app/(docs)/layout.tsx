@@ -1,4 +1,5 @@
 import { DocsNav } from "@/components/docs/docs-nav";
+import { SiteFooter } from "@/components/docs/site-footer";
 import { SiteHeader } from "@/components/docs/site-header";
 import { Toc } from "@/components/docs/toc";
 
@@ -17,6 +18,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
           <Toc />
         </aside>
       </div>
+      <SiteFooter />
     </>
   );
 }

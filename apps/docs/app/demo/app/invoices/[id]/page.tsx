@@ -8,13 +8,13 @@ import { toast } from "sonner";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter,
   AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
-} from "@rekanica/ui/components/alert-dialog";
-import { Badge } from "@rekanica/ui/components/badge";
-import { Button } from "@rekanica/ui/components/button";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@rekanica/ui/components/dialog";
-import { Field, FieldLabel } from "@rekanica/ui/components/field";
-import { NativeSelect, NativeSelectOption } from "@rekanica/ui/components/native-select";
-import { Progress } from "@rekanica/ui/components/progress";
+} from "@recanica/ui/components/alert-dialog";
+import { Badge } from "@recanica/ui/components/badge";
+import { Button } from "@recanica/ui/components/button";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@recanica/ui/components/dialog";
+import { Field, FieldLabel } from "@recanica/ui/components/field";
+import { NativeSelect, NativeSelectOption } from "@recanica/ui/components/native-select";
+import { Progress } from "@recanica/ui/components/progress";
 import { InvoiceDocument } from "@/components/demo/invoice-document";
 import { InvoiceBadge, NotFound, PageHeader } from "@/components/demo/ui";
 import { date, dmy, invoiceBalance, invoiceGrand, invoicePaid, isOverdue, money2, nextInstallment, useDemo } from "@/lib/demo/store";

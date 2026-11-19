@@ -2,9 +2,9 @@
 
 import * as React from "react";
 import { MinusIcon, PlusIcon, Trash2Icon } from "lucide-react";
-import { Button } from "@rekanica/ui/components/button";
-import { Input } from "@rekanica/ui/components/input";
-import { Separator } from "@rekanica/ui/components/separator";
+import { Button } from "@recanica/ui/components/button";
+import { Input } from "@recanica/ui/components/input";
+import { Separator } from "@recanica/ui/components/separator";
 
 const initial = [
   { id: "p1", name: "Kopi Ais Blend", variant: "500g · Whole beans", price: 38, qty: 2 },
@@ -27,7 +27,7 @@ export function Cart01() {
         <div>
           <h1 className="text-title">Your cart</h1>
           {items.length === 0 ? (
-            <p className="mt-8 text-muted-foreground">Your cart is empty. <a href="#" className="text-foreground underline underline-offset-4">Continue shopping</a></p>
+            <p className="mt-8 text-muted-foreground">Your cart is empty. <a href="/site/shop" className="text-foreground underline underline-offset-4">Continue shopping</a></p>
           ) : (
             <ul className="mt-6 divide-y border-y">
               {items.map((i) => (

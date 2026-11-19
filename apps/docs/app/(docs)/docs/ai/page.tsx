@@ -5,11 +5,11 @@ import { Pager } from "@/components/docs/pager";
 import { CopyPromptButton, PromptLibrary } from "@/components/docs/prompt-library";
 import { SITE, brandGuide, colorTable, prompts } from "@/lib/llm";
 
-export const metadata = { title: "Use with AI", description: "Copy-paste prompts that teach any LLM the Rekanica brand, style and tokens." };
+export const metadata = { title: "Use with AI", description: "Copy-paste prompts that teach any LLM the Recanica brand, style and tokens." };
 
 const steps = [
   ["Open your project", "In Claude Code, Cursor, Codex, ChatGPT or any coding assistant, at the project root."],
-  ["Copy a prompt", "“Apply Rekanica to this project” for a full restyle, or a smaller one below."],
+  ["Copy a prompt", "“Apply Recanica to this project” for a full restyle, or a smaller one below."],
   ["Paste and run", "The prompt contains the full rules and tokens, so the LLM needs nothing else."],
 ];
 
@@ -18,7 +18,7 @@ export default function Page() {
   const files = [
     ["/llms.txt", "Index of every page, in llmstxt.org format."],
     ["/llms-full.txt", "Rules, tokens with hex values, and the full component/pattern index in one file."],
-    ["/rekanica.css", "The raw token stylesheet (Tailwind v4)."],
+    ["/recanica.css", "The raw token stylesheet (Tailwind v4)."],
   ];
 
   return (
@@ -26,10 +26,10 @@ export default function Page() {
       <DocsPageHeader
         eyebrow="Getting started"
         title="Use with AI"
-        description="Rekanica is written to be read by LLMs. Copy a prompt, paste it into your AI tool inside any project, and it will apply the Rekanica brand, style and colors."
+        description="Recanica is written to be read by LLMs. Copy a prompt, paste it into your AI tool inside any project, and it will apply the Recanica brand, style and colors."
       >
         <div className="flex flex-wrap gap-2 pt-2">
-          <CopyPromptButton text={list[0].body} label="Copy “Apply Rekanica” prompt" size="lg" />
+          <CopyPromptButton text={list[0].body} label="Copy “Apply Recanica” prompt" size="lg" />
           <CopyPromptButton text={brandGuide()} label="Copy rules only" size="lg" variant="outline" />
         </div>
       </DocsPageHeader>
@@ -46,7 +46,7 @@ export default function Page() {
       </ol>
 
       <H2 id="prompts">Prompts</H2>
-      <P>Each prompt embeds the complete Rekanica rules and token values, generated from the live token file, so it never goes out of date.</P>
+      <P>Each prompt embeds the complete Recanica rules and token values, generated from the live token file, so it never goes out of date.</P>
       <div className="mt-6"><PromptLibrary prompts={list} /></div>
 
       <H2 id="per-page">Per-component context</H2>
@@ -60,7 +60,7 @@ export default function Page() {
       <div className="mt-6 divide-y overflow-hidden rounded-2xl border">
         {files.map(([path, desc]) => (
           <div key={path} className="flex items-center gap-3 bg-panel px-5 py-3">
-            <a href={path} target="_blank" rel="noreferrer" className="font-mono text-sm hover:underline">{path}</a>
+            <a href={path} target="_blank" rel="noreferrer" className="-my-1 inline-block py-1 font-mono text-sm hover:underline">{path}</a>
             <span className="hidden flex-1 text-sm text-muted-foreground sm:block">{desc}</span>
             <CopyButton value={`${SITE}${path}`} className="ml-auto" />
           </div>

@@ -45,14 +45,14 @@ const item = (kind, type) => (i) => ({
   title: i.title,
   description: i.description,
   categories: [i.category.toLowerCase()],
-  dependencies: ["@rekanica/ui", "lucide-react"],
+  dependencies: ["@recanica/ui", "lucide-react"],
   files: [{ path: `registry/${kind}/${i.slug}.tsx`, type, target: `components/${kind}/${i.slug}.tsx` }],
 });
 
 const registry = {
   $schema: "https://ui.shadcn.com/schema/registry.json",
-  name: "rekanica",
-  homepage: "https://rekanica.aturanica.com",
+  name: "recanica",
+  homepage: "https://recanica.aturanica.com",
   items: [
     ...catalog.patterns.map(item("patterns", "registry:block")),
     ...catalog.blocks.map(item("blocks", "registry:block")),

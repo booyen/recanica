@@ -7,7 +7,7 @@ import type {
   CheckoutLink, Customer, DemoEvent, DemoState, Invoice, InvoiceItem, Org, Product,
 } from "./types";
 
-const KEY = "rekanica-demo-v2";
+const KEY = "recanica-demo-v2";
 export const FEE_RATE = 0.03;
 export const FEE_FIXED = 1;
 
@@ -217,7 +217,7 @@ export function DemoProvider({ children }: { children: React.ReactNode }) {
   if (!ready) {
     return (
       <div className="flex min-h-svh items-center justify-center bg-sidebar">
-        <span className="size-8 animate-pulse rounded-xl bg-metallic" />
+        <span className="size-8 animate-pulse rounded-xl bg-brand text-brand-foreground" />
       </div>
     );
   }

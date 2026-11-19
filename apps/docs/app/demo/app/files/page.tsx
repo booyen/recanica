@@ -3,10 +3,10 @@
 import * as React from "react";
 import { FileIcon, FileSpreadsheetIcon, FileTextIcon, FolderIcon, ImageIcon, MoreHorizontalIcon, UploadIcon } from "lucide-react";
 import { toast } from "sonner";
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@rekanica/ui/components/breadcrumb";
-import { Button } from "@rekanica/ui/components/button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@rekanica/ui/components/dropdown-menu";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@rekanica/ui/components/table";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@recanica/ui/components/breadcrumb";
+import { Button } from "@recanica/ui/components/button";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@recanica/ui/components/dropdown-menu";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@recanica/ui/components/table";
 import { PageHeader } from "@/components/demo/ui";
 
 const tree: Record<string, { name: string; kind: "folder" | "pdf" | "sheet" | "image" | "doc"; size?: string; date: string }[]> = {

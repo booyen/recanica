@@ -1,28 +1,30 @@
 {
-  "name": "rekanica-monorepo",
+  "name": "recanica-monorepo",
   "private": true,
   "packageManager": "pnpm@10.33.2",
   "scripts": {
     "dev": "pnpm --filter docs dev",
     "build": "turbo build",
     "typecheck": "turbo typecheck",
-    "tokens": "pnpm --filter @rekanica/tokens build",
-    "tokens:check": "pnpm --filter @rekanica/tokens check",
+    "tokens": "pnpm --filter @recanica/tokens build",
+    "tokens:check": "pnpm --filter @recanica/tokens check",
     "test": "turbo test",
     "test:layout": "pnpm --filter docs test:layout",
+    "test:audit": "pnpm --filter docs test:audit",
     "test:visual": "pnpm --filter docs test:visual",
     "registry:build": "pnpm --filter docs registry:build",
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "turbo build --filter=./packages/* && changeset publish",
-    "lint:copy": "node scripts/copy-lint.mjs"
+    "lint:copy": "node scripts/copy-lint.mjs",
+    "lint:design": "node packages/cli/src/index.js check apps/docs/registry apps/docs/examples apps/docs/components apps/docs/app templates packages/ui/src"
   },
   "devDependencies": {
     "@changesets/cli": "^3.0.3",
     "turbo": "^2.11.12",
     "typescript": "^7.0.2"
   },
-  "description": "Rekanica: a comprehensive UI framework by Aturanica Labs.",
+  "description": "Recanica: a comprehensive UI framework by Aturanica Labs.",
   "license": "MIT",
   "engines": {
     "node": ">=20"

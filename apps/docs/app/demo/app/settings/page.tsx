@@ -5,13 +5,13 @@ import { toast } from "sonner";
 import {
   AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader,
   AlertDialogTitle, AlertDialogTrigger,
-} from "@rekanica/ui/components/alert-dialog";
-import { Button } from "@rekanica/ui/components/button";
-import { Field, FieldDescription, FieldLabel } from "@rekanica/ui/components/field";
-import { Input } from "@rekanica/ui/components/input";
-import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupText } from "@rekanica/ui/components/input-group";
-import { NativeSelect, NativeSelectOption } from "@rekanica/ui/components/native-select";
-import { Switch } from "@rekanica/ui/components/switch";
+} from "@recanica/ui/components/alert-dialog";
+import { Button } from "@recanica/ui/components/button";
+import { Field, FieldDescription, FieldLabel, FieldMessage } from "@recanica/ui/components/field";
+import { Input } from "@recanica/ui/components/input";
+import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupText } from "@recanica/ui/components/input-group";
+import { NativeSelect, NativeSelectOption } from "@recanica/ui/components/native-select";
+import { Switch } from "@recanica/ui/components/switch";
 import { PageHeader } from "@/components/demo/ui";
 import { useDemo } from "@/lib/demo/store";
 import { STATES, TAX } from "@/lib/demo/my";
@@ -45,6 +45,7 @@ export default function SettingsPage() {
             <InputGroupAddon><InputGroupText>aturanica.com/</InputGroupText></InputGroupAddon>
             <InputGroupInput id="o-slug" value={draft.slug} onChange={(e) => set({ slug: e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, "-") })} />
           </InputGroup>
+          {draft.slug.length < 3 ? <FieldMessage tone="warning">Use at least 3 characters.</FieldMessage> : <FieldMessage tone="success">aturanica.com/{draft.slug} is available.</FieldMessage>}
         </Field>
         <Field>
           <FieldLabel htmlFor="o-email">Billing email</FieldLabel>

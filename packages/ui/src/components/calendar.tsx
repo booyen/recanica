@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { cn } from "@rekanica/ui/lib/utils"
+import { cn } from "@recanica/ui/lib/utils"
 import {
   ChevronDownIcon,
   ChevronLeftIcon,
@@ -13,7 +13,7 @@ import {
   type DayButton,
 } from "react-day-picker"
 
-import { Button, buttonVariants } from "@rekanica/ui/components/button"
+import { Button, buttonVariants } from "@recanica/ui/components/button"
 
 function Calendar({
   className,

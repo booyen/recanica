@@ -1,8 +1,8 @@
 "use client";
 
 import { ChevronDownIcon } from "lucide-react";
-import { Button } from "@rekanica/ui/components/button";
-import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuTrigger } from "@rekanica/ui/components/dropdown-menu";
+import { Button } from "@recanica/ui/components/button";
+import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuTrigger } from "@recanica/ui/components/dropdown-menu";
 
 export default function DropdownMenuDemo() {
   return (

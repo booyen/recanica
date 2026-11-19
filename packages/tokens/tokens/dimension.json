@@ -1,11 +1,11 @@
 {
-  "$description": "Size tokens. CSS uses rem/clamp via $extensions.com.rekanica.css; native platforms use the px $value.",
+  "$description": "Size tokens. CSS uses rem/clamp via $extensions.com.recanica.css; native platforms use the px $value.",
   "radius": {
     "base": {
       "$type": "dimension",
       "$value": "12px",
       "$extensions": {
-        "com.rekanica": {
+        "com.recanica": {
           "css": "0.75rem",
           "cssVar": "--radius"
         }
@@ -15,7 +15,7 @@
       "$type": "dimension",
       "$value": "8px",
       "$extensions": {
-        "com.rekanica": {
+        "com.recanica": {
           "css": "calc(var(--radius) - 4px)"
         }
       }
@@ -24,7 +24,7 @@
       "$type": "dimension",
       "$value": "10px",
       "$extensions": {
-        "com.rekanica": {
+        "com.recanica": {
           "css": "calc(var(--radius) - 2px)"
         }
       }
@@ -33,7 +33,7 @@
       "$type": "dimension",
       "$value": "12px",
       "$extensions": {
-        "com.rekanica": {
+        "com.recanica": {
           "css": "var(--radius)"
         }
       }
@@ -42,7 +42,7 @@
       "$type": "dimension",
       "$value": "16px",
       "$extensions": {
-        "com.rekanica": {
+        "com.recanica": {
           "css": "calc(var(--radius) + 4px)"
         }
       }
@@ -51,7 +51,7 @@
       "$type": "dimension",
       "$value": "20px",
       "$extensions": {
-        "com.rekanica": {
+        "com.recanica": {
           "css": "calc(var(--radius) + 8px)"
         }
       }
@@ -71,7 +71,7 @@
       "$type": "dimension",
       "$value": "16px",
       "$extensions": {
-        "com.rekanica": {
+        "com.recanica": {
           "css": "clamp(1rem, 3vw, 2.5rem)"
         }
       },
@@ -81,7 +81,7 @@
       "$type": "dimension",
       "$value": "64px",
       "$extensions": {
-        "com.rekanica": {
+        "com.recanica": {
           "css": "clamp(4rem, 10vw, 8rem)"
         }
       },
@@ -91,7 +91,7 @@
       "$type": "dimension",
       "$value": "48px",
       "$extensions": {
-        "com.rekanica": {
+        "com.recanica": {
           "css": "clamp(3rem, 6vw, 5rem)"
         }
       }
@@ -100,7 +100,7 @@
       "$type": "dimension",
       "$value": "28px",
       "$extensions": {
-        "com.rekanica": {
+        "com.recanica": {
           "css": "1.75rem"
         }
       },
@@ -110,7 +110,7 @@
       "$type": "dimension",
       "$value": "40px",
       "$extensions": {
-        "com.rekanica": {
+        "com.recanica": {
           "css": "2.5rem"
         }
       },
@@ -120,7 +120,7 @@
       "$type": "dimension",
       "$value": "240px",
       "$extensions": {
-        "com.rekanica": {
+        "com.recanica": {
           "css": "15rem"
         }
       }
@@ -131,7 +131,7 @@
       "$type": "dimension",
       "$value": "1152px",
       "$extensions": {
-        "com.rekanica": {
+        "com.recanica": {
           "css": "72rem"
         }
       }
@@ -140,7 +140,7 @@
       "$type": "dimension",
       "$value": "768px",
       "$extensions": {
-        "com.rekanica": {
+        "com.recanica": {
           "css": "48rem"
         }
       }
@@ -149,7 +149,7 @@
       "$type": "dimension",
       "$value": "640px",
       "$extensions": {
-        "com.rekanica": {
+        "com.recanica": {
           "css": "40rem"
         }
       }

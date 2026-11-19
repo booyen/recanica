@@ -5,17 +5,17 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { SearchIcon, UserPlusIcon } from "lucide-react";
 import { toast } from "sonner";
-import { Avatar, AvatarFallback } from "@rekanica/ui/components/avatar";
-import { Button } from "@rekanica/ui/components/button";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@rekanica/ui/components/dialog";
-import { Field, FieldError, FieldLabel } from "@rekanica/ui/components/field";
-import { Input } from "@rekanica/ui/components/input";
-import { InputGroup, InputGroupAddon, InputGroupInput } from "@rekanica/ui/components/input-group";
-import { NativeSelect, NativeSelectOption } from "@rekanica/ui/components/native-select";
-import { ToggleGroup, ToggleGroupItem } from "@rekanica/ui/components/toggle-group";
+import { Avatar, AvatarFallback } from "@recanica/ui/components/avatar";
+import { Button } from "@recanica/ui/components/button";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@recanica/ui/components/dialog";
+import { Field, FieldError, FieldLabel, FieldMessage } from "@recanica/ui/components/field";
+import { Input } from "@recanica/ui/components/input";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@recanica/ui/components/input-group";
+import { NativeSelect, NativeSelectOption } from "@recanica/ui/components/native-select";
+import { ToggleGroup, ToggleGroupItem } from "@recanica/ui/components/toggle-group";
 import { GENERAL_TIN, STATES } from "@/lib/demo/my";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@rekanica/ui/components/table";
-import { PageHeader } from "@/components/demo/ui";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@recanica/ui/components/table";
+import { PageHeader, focusFirstInvalid } from "@/components/demo/ui";
 import { COUNTRIES } from "@/lib/demo/countries";
 import { initials, money, shortDate, uid, useDemo } from "@/lib/demo/store";
 
@@ -36,7 +36,7 @@ function NewCustomer({ open, onOpenChange }: { open: boolean; onOpenChange: (o: 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     setTouched(true);
-    if (!name.trim() || emailErr) return;
+    if (!name.trim() || emailErr) { focusFirstInvalid(e.currentTarget as HTMLElement); return; }
     const fallbackTin = country === "MY" ? GENERAL_TIN.individual : GENERAL_TIN.foreign;
     const customer = {
       id: uid("cus"), name: name.trim(), email: email.trim(), country, createdAt: new Date().toISOString(),
@@ -92,7 +92,7 @@ function NewCustomer({ open, onOpenChange }: { open: boolean; onOpenChange: (o: 
               </NativeSelect>
             </Field>
           )}
-          <p className="text-xs text-muted-foreground">No TIN? LHDN's general TIN is used automatically for e-Invoice.</p>
+          <FieldMessage tone="info">No TIN? LHDN's general TIN is used automatically for e-Invoice.</FieldMessage>
           <DialogFooter>
             <Button type="button" variant="ghost" onClick={() => onOpenChange(false)}>Cancel</Button>
             <Button type="submit">Add customer</Button>
@@ -116,7 +116,7 @@ function CustomersInner() {
       <PageHeader title="Customers" description={`${state.customers.length} customers`} actions={<Button onClick={() => setOpen(true)}><UserPlusIcon /> New customer</Button>} />
       <InputGroup className="mb-4 sm:max-w-xs">
         <InputGroupAddon><SearchIcon /></InputGroupAddon>
-        <InputGroupInput placeholder="Search customers" value={q} onChange={(e) => setQ(e.target.value)} />
+        <InputGroupInput placeholder="Search customers" aria-label="Search customers" value={q} onChange={(e) => setQ(e.target.value)} />
       </InputGroup>
       <div className="overflow-hidden rounded-2xl border bg-card">
         <Table>

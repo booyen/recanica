@@ -1,9 +1,9 @@
 "use client";
 
 import * as React from "react";
-import { Button } from "@rekanica/ui/components/button";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@rekanica/ui/components/dialog";
-import { Input } from "@rekanica/ui/components/input";
+import { Button } from "@recanica/ui/components/button";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@recanica/ui/components/dialog";
+import { Input } from "@recanica/ui/components/input";
 
 export function Popup01() {
   const [open, setOpen] = React.useState(true);
@@ -13,7 +13,7 @@ export function Popup01() {
       <Button variant="outline" onClick={() => { setDone(false); setOpen(true); }}>Show popup</Button>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="overflow-hidden p-0 sm:max-w-md">
-          <div className="h-28 bg-metallic" aria-hidden />
+          <div className="h-28 bg-brand text-brand-foreground" aria-hidden />
           <div className="space-y-4 p-6">
             <DialogHeader>
               <DialogTitle>{done ? "Check your inbox" : "RM20 off your first order"}</DialogTitle>

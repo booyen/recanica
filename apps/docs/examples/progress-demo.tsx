@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Progress } from "@rekanica/ui/components/progress";
+import { Progress } from "@recanica/ui/components/progress";
 
 export default function ProgressDemo() {
   const [value, setValue] = React.useState(20);

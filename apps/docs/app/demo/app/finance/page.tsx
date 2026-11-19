@@ -3,15 +3,15 @@
 import * as React from "react";
 import { LandmarkIcon } from "lucide-react";
 import { toast } from "sonner";
-import { Badge } from "@rekanica/ui/components/badge";
-import { Button } from "@rekanica/ui/components/button";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@rekanica/ui/components/dialog";
-import { Field, FieldDescription, FieldError, FieldLabel } from "@rekanica/ui/components/field";
-import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupText } from "@rekanica/ui/components/input-group";
-import { Input } from "@rekanica/ui/components/input";
-import { Spinner } from "@rekanica/ui/components/spinner";
-import { Stat, StatGroup, StatHeader, StatValue } from "@rekanica/ui/components/stat";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@rekanica/ui/components/table";
+import { Badge } from "@recanica/ui/components/badge";
+import { Button } from "@recanica/ui/components/button";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@recanica/ui/components/dialog";
+import { Field, FieldError, FieldLabel, FieldMessage } from "@recanica/ui/components/field";
+import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupText } from "@recanica/ui/components/input-group";
+import { Input } from "@recanica/ui/components/input";
+import { Spinner } from "@recanica/ui/components/spinner";
+import { Stat, StatGroup, StatHeader, StatValue } from "@recanica/ui/components/stat";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@recanica/ui/components/table";
 import { PageHeader, Section } from "@/components/demo/ui";
 import { FEE_FIXED, FEE_RATE, date, metrics, money2, useDemo } from "@/lib/demo/store";
 
@@ -75,7 +75,7 @@ function WithdrawDialog({ open, onOpenChange, max }: { open: boolean; onOpenChan
               <InputGroupAddon><InputGroupText>RM</InputGroupText></InputGroupAddon>
               <InputGroupInput id="amt" inputMode="decimal" value={amount} onChange={(e) => setAmount(e.target.value.replace(/[^0-9.]/g, ""))} />
             </InputGroup>
-            {err ? <FieldError>{err}</FieldError> : <FieldDescription>To your connected demo account.</FieldDescription>}
+            {err ? <FieldError>{err}</FieldError> : <FieldMessage tone="info">To your connected demo account. Arrives in 2–3 business days.</FieldMessage>}
           </Field>
           <DialogFooter>
             <Button type="button" variant="ghost" onClick={() => onOpenChange(false)}>Cancel</Button>
@@ -105,7 +105,7 @@ export default function FinancePage() {
         }
       />
       <StatGroup>
-        <Stat><StatHeader title="Available balance" /><StatValue value={<span className="text-metallic">{money2(m.balance)}</span>} /></Stat>
+        <Stat><StatHeader title="Available balance" /><StatValue value={<span className="text-brand">{money2(m.balance)}</span>} /></Stat>
         <Stat><StatHeader title="Gross volume" /><StatValue value={money2(m.gross)} caption="all time" /></Stat>
         <Stat><StatHeader title="Fees" /><StatValue value={money2(m.fees)} caption={`${FEE_RATE * 100}% + ${money2(FEE_FIXED)}`} /></Stat>
       </StatGroup>

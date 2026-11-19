@@ -1,5 +1,5 @@
-name: rekanica_starter
-description: Flutter starter using Rekanica tokens (Aturanica Labs).
+name: recanica_starter
+description: Flutter starter using Recanica tokens (Aturanica Labs).
 publish_to: "none"
 version: 0.1.0
 environment:

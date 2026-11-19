@@ -2,8 +2,8 @@
 
 import * as React from "react";
 import { CheckIcon, CopyIcon, DownloadIcon } from "lucide-react";
-import { Button } from "@rekanica/ui/components/button";
-import { cn } from "@rekanica/ui/lib/utils";
+import { Button } from "@recanica/ui/components/button";
+import { cn } from "@recanica/ui/lib/utils";
 import type { LlmPrompt } from "@/lib/llm";
 
 export function CopyPromptButton({ text, label = "Copy prompt", className, size = "default", variant = "brand" }: {
@@ -28,7 +28,7 @@ export function PromptLibrary({ prompts }: { prompts: LlmPrompt[] }) {
   const [active, setActive] = React.useState(prompts[0].id);
   const p = prompts.find((x) => x.id === active)!;
   const download = () => {
-    const name = p.id === "rules" ? "CLAUDE.md" : `rekanica-${p.id}-prompt.md`;
+    const name = p.id === "rules" ? "CLAUDE.md" : `recanica-${p.id}-prompt.md`;
     const url = URL.createObjectURL(new Blob([p.body], { type: "text/markdown" }));
     const a = Object.assign(document.createElement("a"), { href: url, download: name });
     a.click();

@@ -2,17 +2,17 @@
 
 import * as React from "react";
 import { BellIcon, CopyIcon, DownloadIcon, MoreHorizontalIcon, PlusIcon, SearchIcon, SendIcon } from "lucide-react";
-import { Badge } from "@rekanica/ui/components/badge";
-import { Button } from "@rekanica/ui/components/button";
+import { Badge } from "@recanica/ui/components/badge";
+import { Button } from "@recanica/ui/components/button";
 import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger,
-} from "@rekanica/ui/components/dropdown-menu";
-import { InputGroup, InputGroupAddon, InputGroupInput } from "@rekanica/ui/components/input-group";
-import { Separator } from "@rekanica/ui/components/separator";
-import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle } from "@rekanica/ui/components/sheet";
-import { Stat, StatGroup, StatHeader, StatValue } from "@rekanica/ui/components/stat";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@rekanica/ui/components/table";
-import { Tabs, TabsList, TabsTrigger } from "@rekanica/ui/components/tabs";
+} from "@recanica/ui/components/dropdown-menu";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@recanica/ui/components/input-group";
+import { Separator } from "@recanica/ui/components/separator";
+import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle } from "@recanica/ui/components/sheet";
+import { Stat, StatGroup, StatHeader, StatValue } from "@recanica/ui/components/stat";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@recanica/ui/components/table";
+import { Tabs, TabsList, TabsTrigger } from "@recanica/ui/components/tabs";
 
 type Status = "Draft" | "Open" | "Paid" | "Overdue" | "Void";
 type Invoice = { id: string; customer: string; email: string; status: Status; issued: string; due: string; amount: number };
@@ -67,7 +67,7 @@ export function Invoices01() {
         </Stat>
         <Stat>
           <StatHeader title="Paid" />
-          <StatValue value={<span className="text-metallic">{money(sum("Paid"))}</span>} caption="last 30 days" />
+          <StatValue value={<span className="text-brand">{money(sum("Paid"))}</span>} caption="last 30 days" />
         </Stat>
       </StatGroup>
 

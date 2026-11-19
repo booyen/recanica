@@ -1,6 +1,6 @@
 "use client";
 
-import { Badge } from "@rekanica/ui/components/badge";
+import { Badge } from "@recanica/ui/components/badge";
 
 export default function BadgeDemo() {
   return (

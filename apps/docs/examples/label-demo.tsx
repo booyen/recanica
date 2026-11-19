@@ -1,7 +1,7 @@
 "use client";
 
-import { Label } from "@rekanica/ui/components/label";
-import { Input } from "@rekanica/ui/components/input";
+import { Label } from "@recanica/ui/components/label";
+import { Input } from "@recanica/ui/components/input";
 
 export default function LabelDemo() {
   return (

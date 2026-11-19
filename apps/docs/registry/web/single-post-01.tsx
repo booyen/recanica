@@ -2,7 +2,7 @@
 
 import { CopyIcon, LinkIcon } from "lucide-react";
 import { toast } from "sonner";
-import { Button } from "@rekanica/ui/components/button";
+import { Button } from "@recanica/ui/components/button";
 
 const toc = [["who", "Who needs to comply"], ["when", "Key dates"], ["how", "How validation works"], ["checklist", "A short checklist"]];
 

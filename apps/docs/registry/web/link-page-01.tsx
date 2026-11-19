@@ -1,11 +1,11 @@
 import { ArrowUpRightIcon, CameraIcon, MailIcon, MessageCircleIcon } from "lucide-react";
 
 const links = [
-  { label: "Order online (delivery & pickup)", href: "#" },
-  { label: "This week's menu", href: "#" },
-  { label: "Book the back room for events", href: "#" },
-  { label: "Our beans, roasted in Johor", href: "#" },
-  { label: "Find us on Google Maps", href: "#" },
+  { label: "Order online (delivery & pickup)", href: "/site/shop" },
+  { label: "This week's menu", href: "/site/shop/kopi-ais-blend" },
+  { label: "Book the back room for events", href: "/site/events" },
+  { label: "Our beans, roasted in Johor", href: "/site/about" },
+  { label: "Find us on Google Maps", href: "/site/contact" },
 ];
 
 export function LinkPage01() {
@@ -27,9 +27,9 @@ export function LinkPage01() {
           ))}
         </ul>
         <div className="flex justify-center gap-2">
-          {[[CameraIcon, "Instagram"], [MessageCircleIcon, "WhatsApp"], [MailIcon, "Email"]].map(([Icon, label]) => {
+          {[[CameraIcon, "Instagram", "/site/coming-soon"], [MessageCircleIcon, "WhatsApp", "/site/contact"], [MailIcon, "Email", "/site/contact"]].map(([Icon, label, href]) => {
             const I = Icon as typeof MailIcon;
-            return <a key={label as string} href="#" aria-label={label as string} className="flex size-10 items-center justify-center rounded-full border bg-background hover:bg-accent"><I className="size-4" /></a>;
+            return <a key={label as string} href={href as string} aria-label={label as string} className="flex size-10 items-center justify-center rounded-full border bg-background hover:bg-accent"><I className="size-4" /></a>;
           })}
         </div>
       </div>

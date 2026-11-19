@@ -1,17 +1,17 @@
-# @rekanica/css
+# @recanica/css
 
-Rekanica without React or Tailwind. One stylesheet, `rk-*` classes, same tokens.
+Recanica without React or Tailwind. One stylesheet, `rc-*` classes, same tokens.
 
 ```html
-<html class="dark" data-finish="flat">
-<link rel="stylesheet" href="https://unpkg.com/@rekanica/css/dist/rekanica.css" />
-<button class="rk-btn rk-btn--brand">Get started</button>
+<html class="dark">
+<link rel="stylesheet" href="https://unpkg.com/@recanica/css/dist/recanica.css" />
+<button class="rc-btn rc-btn--brand">Get started</button>
 ```
 
-Classes: `rk-btn` (+ `--secondary --outline --ghost --destructive --brand --sm --lg --icon --block`), `rk-badge`, `rk-card`,
-`rk-field rk-label rk-input rk-select rk-textarea rk-hint rk-error rk-check rk-switch`, `rk-tabs rk-tab[aria-selected]`,
-`rk-table-wrap rk-table`, `rk-stats rk-stat rk-list rk-bar`, `rk-alert`, `rk-empty`, `rk-avatar`, `rk-kbd`, `rk-dialog` (native `<dialog>`),
-layout `rk-shell rk-sidebar rk-nav-item rk-panel rk-container rk-stack rk-row`, type `rk-title rk-heading rk-metric rk-display rk-caption rk-muted`,
-brand `rk-metallic rk-metallic-text rk-logo`.
+Classes: `rc-btn` (+ `--secondary --outline --ghost --destructive --brand --sm --lg --icon --block`), `rc-badge`, `rc-card`,
+`rc-field rc-label rc-input rc-select rc-textarea rc-hint rc-error rc-check rc-switch`, `rc-tabs rc-tab[aria-selected]`,
+`rc-table-wrap rc-table`, `rc-stats rc-stat rc-list rc-bar`, `rc-alert`, `rc-empty`, `rc-avatar`, `rc-kbd`, `rc-dialog` (native `<dialog>`),
+layout `rc-shell rc-sidebar rc-nav-item rc-panel rc-container rc-stack rc-row`, type `rc-title rc-heading rc-metric rc-display rc-caption rc-muted`,
+brand `rc-brand rc-brand-text rc-logo`.
 
 See `examples/index.html`.

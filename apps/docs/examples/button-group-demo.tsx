@@ -1,8 +1,8 @@
 "use client";
 
 import { ChevronDownIcon } from "lucide-react";
-import { Button } from "@rekanica/ui/components/button";
-import { ButtonGroup } from "@rekanica/ui/components/button-group";
+import { Button } from "@recanica/ui/components/button";
+import { ButtonGroup } from "@recanica/ui/components/button-group";
 
 export default function ButtonGroupDemo() {
   return (

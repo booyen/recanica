@@ -11,7 +11,7 @@ export default function Page() {
       <DocsPageHeader
         eyebrow="Library"
         title="Components"
-        description={`${components.length} accessible primitives on Radix, styled only with Rekanica tokens. Import from @rekanica/ui/components/<name>.`}
+        description={`${components.length} accessible primitives on Radix, styled only with Recanica tokens. Import from @recanica/ui/components/<name>.`}
       />
       <CatalogGrid items={components} base="/docs/components" />
       <Pager href="/docs/components" />

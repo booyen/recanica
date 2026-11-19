@@ -2,9 +2,9 @@
 
 import * as React from "react";
 import { ExternalLinkIcon, MonitorIcon, SmartphoneIcon, TabletIcon } from "lucide-react";
-import { Button } from "@rekanica/ui/components/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@rekanica/ui/components/tabs";
-import { ToggleGroup, ToggleGroupItem } from "@rekanica/ui/components/toggle-group";
+import { Button } from "@recanica/ui/components/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@recanica/ui/components/tabs";
+import { ToggleGroup, ToggleGroupItem } from "@recanica/ui/components/toggle-group";
 import { CodeFrame } from "./code-frame";
 
 const sizes = { desktop: "100%", tablet: "768px", mobile: "375px" } as const;

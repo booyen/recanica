@@ -5,9 +5,9 @@ export const dynamic = "force-static";
 
 // llmstxt.org format: a short, link-rich index for LLMs.
 export function GET() {
-  const body = `# Rekanica
+  const body = `# Recanica
 
-> Rekanica is the UI framework by Aturanica Labs: monochrome, Polar-inspired design tokens, ${components.length} React components (Radix + Tailwind v4), ${patterns.length} app patterns and ${blocks.length} blocks. Dark-first, light type, pill controls, depth from layered surfaces and hairline borders.
+> Recanica is the UI framework by Aturanica Labs: monochrome, Polar-inspired design tokens, ${components.length} React components (Radix + Tailwind v4), ${patterns.length} app patterns and ${blocks.length} blocks. Dark-first, light type, pill controls, depth from layered surfaces and hairline borders.
 
 Use ${SITE}/llms-full.txt for the complete rules, tokens (with hex values) and component index in one file.
 
@@ -15,8 +15,8 @@ Use ${SITE}/llms-full.txt for the complete rules, tokens (with hex values) and c
 - [Introduction](${SITE}/docs)
 - [Installation](${SITE}/docs/installation)
 - [Theming](${SITE}/docs/theming)
-- [Use with AI](${SITE}/docs/ai): copy-paste prompts to apply Rekanica to any project
-- [Token CSS](${SITE}/rekanica.css): raw theme file
+- [Use with AI](${SITE}/docs/ai): copy-paste prompts to apply Recanica to any project
+- [Token CSS](${SITE}/recanica.css): raw theme file
 
 ## Foundations
 ${foundations.map((f) => `- [${f.title}](${SITE}/docs/foundations/${f.slug}): ${f.description}`).join("\n")}

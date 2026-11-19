@@ -1,7 +1,7 @@
 "use client";
 
-import { ScrollArea } from "@rekanica/ui/components/scroll-area";
-import { Separator } from "@rekanica/ui/components/separator";
+import { ScrollArea } from "@recanica/ui/components/scroll-area";
+import { Separator } from "@recanica/ui/components/separator";
 
 const tags = Array.from({ length: 30 }).map((_, i) => `v1.${30 - i}.0`);
 

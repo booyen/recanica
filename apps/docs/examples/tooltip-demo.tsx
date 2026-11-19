@@ -1,8 +1,8 @@
 "use client";
 
 import { CopyIcon } from "lucide-react";
-import { Button } from "@rekanica/ui/components/button";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@rekanica/ui/components/tooltip";
+import { Button } from "@recanica/ui/components/button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@recanica/ui/components/tooltip";
 
 export default function TooltipDemo() {
   return (

@@ -3,10 +3,10 @@
 import * as React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Button } from "@rekanica/ui/components/button";
-import { Field, FieldLabel } from "@rekanica/ui/components/field";
-import { Input } from "@rekanica/ui/components/input";
-import { Spinner } from "@rekanica/ui/components/spinner";
+import { Button } from "@recanica/ui/components/button";
+import { Field, FieldLabel } from "@recanica/ui/components/field";
+import { Input } from "@recanica/ui/components/input";
+import { Spinner } from "@recanica/ui/components/spinner";
 import { useDemo } from "@/lib/demo/store";
 
 export default function SignInPage() {
@@ -28,7 +28,7 @@ export default function SignInPage() {
     <main className="flex min-h-svh items-center justify-center bg-background px-gutter py-12">
       <div className="w-full max-w-sm space-y-6">
         <div className="flex flex-col items-center gap-3 text-center">
-          <span className="size-9 rounded-xl bg-metallic" />
+          <span className="size-9 rounded-xl bg-brand text-brand-foreground" />
           <h1 className="text-title">Sign in to Acme Studio</h1>
           <p className="text-sm text-muted-foreground">Demo account. Any password works.</p>
         </div>

@@ -23,10 +23,10 @@ importers:
       '@hookform/resolvers':
         specifier: ^7.0.7
         version: 7.0.7(@standard-schema/spec@1.1.0)(ajv-formats@3.0.1(ajv@8.20.0))(ajv@8.20.0)(react-hook-form@7.92.0(@types/react@19.3.0)(react@19.3.1))(zod@4.6.7)
-      '@rekanica/tokens':
+      '@recanica/tokens':
         specifier: workspace:*
         version: link:../../packages/tokens
-      '@rekanica/ui':
+      '@recanica/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       lucide-react:
@@ -90,13 +90,13 @@ importers:
 
   packages/cli:
     dependencies:
-      '@rekanica/mcp':
+      '@recanica/mcp':
         specifier: workspace:*
         version: link:../mcp
 
   packages/css:
     dependencies:
-      '@rekanica/tokens':
+      '@recanica/tokens':
         specifier: workspace:*
         version: link:../tokens
 
@@ -109,10 +109,10 @@ importers:
         specifier: ^4.6.7
         version: 4.6.7
     devDependencies:
-      '@rekanica/css':
+      '@recanica/css':
         specifier: workspace:*
         version: link:../css
-      '@rekanica/tokens':
+      '@recanica/tokens':
         specifier: workspace:*
         version: link:../tokens
 
@@ -126,7 +126,7 @@ importers:
       '@hookform/resolvers':
         specifier: ^7.0.7
         version: 7.0.7(@standard-schema/spec@1.1.0)(ajv-formats@3.0.1(ajv@8.20.0))(ajv@8.20.0)(react-hook-form@7.92.0(@types/react@19.3.0)(react@19.3.1))(zod@4.6.7)
-      '@rekanica/tokens':
+      '@recanica/tokens':
         specifier: ^0.1.0
         version: link:../tokens
       '@shadcn/react':
@@ -205,10 +205,10 @@ importers:
 
   templates/next-dashboard:
     dependencies:
-      '@rekanica/tokens':
+      '@recanica/tokens':
         specifier: ^0.1.0
         version: link:../../packages/tokens
-      '@rekanica/ui':
+      '@recanica/ui':
         specifier: ^0.1.0
         version: link:../../packages/ui
       lucide-react:
@@ -248,10 +248,10 @@ importers:
 
   templates/next-marketing:
     dependencies:
-      '@rekanica/tokens':
+      '@recanica/tokens':
         specifier: ^0.1.0
         version: link:../../packages/tokens
-      '@rekanica/ui':
+      '@recanica/ui':
         specifier: ^0.1.0
         version: link:../../packages/ui
       lucide-react:

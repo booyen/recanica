@@ -2,14 +2,14 @@
 
 import * as React from "react";
 import { MailIcon, MenuIcon, PhoneIcon } from "lucide-react";
-import { Button } from "@rekanica/ui/components/button";
-import { Separator } from "@rekanica/ui/components/separator";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@rekanica/ui/components/sheet";
+import { Button } from "@recanica/ui/components/button";
+import { Separator } from "@recanica/ui/components/separator";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@recanica/ui/components/sheet";
 
 const groups = [
-  { title: "Product", links: ["Checkout", "Subscriptions", "Invoicing", "Reports"] },
-  { title: "Company", links: ["About", "Careers", "Press", "Contact"] },
-  { title: "Help", links: ["Guides", "API reference", "Status"] },
+  { title: "Shop", links: [["All products", "/site/shop"], ["Kopi Ais Blend", "/site/shop/kopi-ais-blend"], ["Cart", "/site/shop/cart"]] },
+  { title: "Company", links: [["About", "/site/about"], ["Careers", "/site/careers"], ["Work", "/site/work"], ["Contact", "/site/contact"]] },
+  { title: "Read", links: [["Blog", "/site/blog"], ["Events", "/site/events"]] },
 ];
 
 export function Offcanvas01() {
@@ -17,7 +17,7 @@ export function Offcanvas01() {
   return (
     <div className="min-h-[560px] bg-background">
       <header className="flex h-16 items-center gap-3 border-b px-gutter">
-        <span className="size-6 rounded-md bg-metallic" />
+        <span className="size-6 rounded-md bg-brand text-brand-foreground" />
         <span className="font-medium">Acme</span>
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild><Button variant="outline" size="icon" className="ml-auto" aria-label="Open menu"><MenuIcon /></Button></SheetTrigger>
@@ -27,7 +27,7 @@ export function Offcanvas01() {
               {groups.map((g) => (
                 <div key={g.title}>
                   <p className="mb-2 text-xs text-muted-foreground">{g.title}</p>
-                  <ul>{g.links.map((l) => <li key={l}><a href="#" className="block rounded-lg py-2 text-lg hover:text-muted-foreground">{l}</a></li>)}</ul>
+                  <ul>{g.links.map(([l, href]) => <li key={href}><a href={href} className="block rounded-lg py-2 text-lg hover:text-muted-foreground">{l}</a></li>)}</ul>
                 </div>
               ))}
               <Separator />

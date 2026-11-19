@@ -5,12 +5,12 @@
  * Used by tests/layout.spec.ts. If something only breaks "when combined", it should break here first.
  */
 import { MoreHorizontalIcon, PlusIcon } from "lucide-react";
-import { Badge } from "@rekanica/ui/components/badge";
-import { Button } from "@rekanica/ui/components/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@rekanica/ui/components/card";
-import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyTitle } from "@rekanica/ui/components/empty";
-import { BarRow, Stat, StatGroup, StatHeader, StatList, StatRow, StatValue } from "@rekanica/ui/components/stat";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@rekanica/ui/components/table";
+import { Badge } from "@recanica/ui/components/badge";
+import { Button } from "@recanica/ui/components/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@recanica/ui/components/card";
+import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyTitle } from "@recanica/ui/components/empty";
+import { BarRow, Stat, StatGroup, StatHeader, StatList, StatRow, StatValue } from "@recanica/ui/components/stat";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@recanica/ui/components/table";
 import { InvoiceDocument } from "@/components/demo/invoice-document";
 import { PageHeader } from "@/components/demo/ui";
 import { seed } from "@/lib/demo/seed";
@@ -74,7 +74,7 @@ export default function StressPage() {
         <StatGroup>
           {["Revenue (gross, before refunds and fees)", "Outstanding", "Collected", "Average order value"].map((t, i) => (
             <Stat key={t}>
-              <StatHeader title={t} href="#" />
+              <StatHeader title={t} href="/demo/app/reports" />
               <StatValue value={`RM ${(123456789.12 * (i + 1)).toLocaleString("en-MY")}`} caption="last twelve months, all channels" />
               <StatList>
                 <BarRow label="Nov" value="RM 12,345,678" percent={100} active />

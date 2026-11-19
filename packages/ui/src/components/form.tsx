@@ -1,7 +1,8 @@
 "use client"
 
 import * as React from "react"
-import { cn } from "@rekanica/ui/lib/utils"
+import { cn } from "@recanica/ui/lib/utils"
+import { FieldMessage } from "@recanica/ui/components/field"
 import type { Label as LabelPrimitive } from "radix-ui"
 import { Slot } from "radix-ui"
 import {
@@ -14,7 +15,7 @@ import {
   type FieldValues,
 } from "react-hook-form"
 
-import { Label } from "@rekanica/ui/components/label"
+import { Label } from "@recanica/ui/components/label"
 
 const Form = FormProvider
 
@@ -97,7 +98,7 @@ function FormLabel({
     <Label
       data-slot="form-label"
       data-error={!!error}
-      className={cn("data-[error=true]:text-destructive", className)}
+      className={className}
       htmlFor={formItemId}
       {...props}
     />
@@ -143,11 +144,20 @@ function FormMessage({ className, ...props }: React.ComponentProps<"p">) {
     return null
   }
 
+  // Errors use the same tinted notice as FieldError; plain children stay muted helper text.
+  if (error) {
+    return (
+      <FieldMessage tone="error" data-slot="form-message" id={formMessageId} className={className}>
+        {body}
+      </FieldMessage>
+    )
+  }
+
   return (
     <p
       data-slot="form-message"
       id={formMessageId}
-      className={cn("text-sm text-destructive", className)}
+      className={cn("text-sm text-muted-foreground", className)}
       {...props}
     >
       {body}

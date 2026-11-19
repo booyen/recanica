@@ -3,13 +3,13 @@
 import { DownloadIcon, MoreHorizontalIcon, PlusIcon } from "lucide-react";
 import {
   Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator,
-} from "@rekanica/ui/components/breadcrumb";
-import { Badge } from "@rekanica/ui/components/badge";
-import { Button } from "@rekanica/ui/components/button";
+} from "@recanica/ui/components/breadcrumb";
+import { Badge } from "@recanica/ui/components/badge";
+import { Button } from "@recanica/ui/components/button";
 import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,
-} from "@rekanica/ui/components/dropdown-menu";
-import { Tabs, TabsList, TabsTrigger } from "@rekanica/ui/components/tabs";
+} from "@recanica/ui/components/dropdown-menu";
+import { Tabs, TabsList, TabsTrigger } from "@recanica/ui/components/tabs";
 
 export default function PageHeader() {
   return (

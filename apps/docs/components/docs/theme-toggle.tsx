@@ -2,7 +2,7 @@
 
 import { useTheme } from "next-themes";
 import { MoonIcon, SunIcon } from "lucide-react";
-import { Button } from "@rekanica/ui/components/button";
+import { Button } from "@recanica/ui/components/button";
 
 export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();

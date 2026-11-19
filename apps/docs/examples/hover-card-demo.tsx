@@ -1,8 +1,8 @@
 "use client";
 
-import { Avatar, AvatarFallback } from "@rekanica/ui/components/avatar";
-import { Button } from "@rekanica/ui/components/button";
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@rekanica/ui/components/hover-card";
+import { Avatar, AvatarFallback } from "@recanica/ui/components/avatar";
+import { Button } from "@recanica/ui/components/button";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@recanica/ui/components/hover-card";
 
 export default function HoverCardDemo() {
   return (

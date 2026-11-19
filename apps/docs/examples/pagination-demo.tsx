@@ -1,17 +1,17 @@
 "use client";
 
-import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@rekanica/ui/components/pagination";
+import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@recanica/ui/components/pagination";
 
 export default function PaginationDemo() {
   return (
     <Pagination>
       <PaginationContent>
-        <PaginationItem><PaginationPrevious href="#" /></PaginationItem>
-        <PaginationItem><PaginationLink href="#">1</PaginationLink></PaginationItem>
-        <PaginationItem><PaginationLink href="#" isActive>2</PaginationLink></PaginationItem>
-        <PaginationItem className="hidden sm:block"><PaginationLink href="#">3</PaginationLink></PaginationItem>
+        <PaginationItem><PaginationPrevious href="?page=1" /></PaginationItem>
+        <PaginationItem><PaginationLink href="?page=1">1</PaginationLink></PaginationItem>
+        <PaginationItem><PaginationLink href="?page=2" isActive>2</PaginationLink></PaginationItem>
+        <PaginationItem className="hidden sm:block"><PaginationLink href="?page=3">3</PaginationLink></PaginationItem>
         <PaginationItem><PaginationEllipsis /></PaginationItem>
-        <PaginationItem><PaginationNext href="#" /></PaginationItem>
+        <PaginationItem><PaginationNext href="?page=3" /></PaginationItem>
       </PaginationContent>
     </Pagination>
   );

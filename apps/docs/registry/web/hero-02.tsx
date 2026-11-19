@@ -1,6 +1,6 @@
 import { ArrowRightIcon } from "lucide-react";
-import { Button } from "@rekanica/ui/components/button";
-import { BarRow, Stat, StatGroup, StatHeader, StatList, StatValue } from "@rekanica/ui/components/stat";
+import { Button } from "@recanica/ui/components/button";
+import { BarRow, Stat, StatGroup, StatHeader, StatList, StatValue } from "@recanica/ui/components/stat";
 
 export function Hero02() {
   return (
@@ -9,7 +9,7 @@ export function Hero02() {
         <div className="max-w-2xl space-y-6">
           <p className="text-sm text-muted-foreground">Billing infrastructure for software</p>
           <h1 className="text-display-sm tracking-tight text-balance sm:text-display-md">
-            Sell software <span className="text-metallic">without building billing</span>
+            Sell software <span className="text-brand">without building billing</span>
           </h1>
           <p className="max-w-xl text-base text-muted-foreground sm:text-lg">
             Checkout, subscriptions, tax and payouts, handled. You ship the product, we run the money.
@@ -46,7 +46,7 @@ export function Hero02() {
               </Stat>
               <Stat className="hidden lg:flex">
                 <StatHeader title="MRR" />
-                <StatValue value={<span className="text-metallic">$12.4k</span>} caption="+8%" />
+                <StatValue value={<span className="text-brand">$12.4k</span>} caption="+8%" />
               </Stat>
             </StatGroup>
           </div>

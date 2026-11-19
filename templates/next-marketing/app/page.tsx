@@ -9,7 +9,7 @@ import { Navbar01 } from "@/components/blocks/navbar-01";
 import { Pricing01 } from "@/components/blocks/pricing-01";
 import { Testimonials01 } from "@/components/blocks/testimonials-01";
 
-// A full landing page composed only from Rekanica blocks. Edit the copy inside components/blocks/*.
+// A full landing page composed only from Recanica blocks. Edit the copy inside components/blocks/*.
 export default function Home() {
   return (
     <>
@@ -17,11 +17,11 @@ export default function Home() {
       <main>
         <Hero02 />
         <LogoCloud01 />
-        <Features01 />
+        <div id="features" className="scroll-mt-16"><Features01 /></div>
         <Bento02 />
         <Testimonials01 />
-        <Pricing01 />
-        <Faq01 />
+        <div id="pricing" className="scroll-mt-16"><Pricing01 /></div>
+        <div id="faq" className="scroll-mt-16"><Faq01 /></div>
         <Cta01 />
       </main>
       <Footer01 />

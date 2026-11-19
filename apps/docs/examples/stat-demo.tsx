@@ -1,12 +1,12 @@
 "use client";
 
-import { BarRow, Stat, StatGroup, StatHeader, StatList, StatRow, StatValue } from "@rekanica/ui/components/stat";
+import { BarRow, Stat, StatGroup, StatHeader, StatList, StatRow, StatValue } from "@recanica/ui/components/stat";
 
 export default function StatDemo() {
   return (
     <StatGroup className="w-full text-left">
       <Stat>
-        <StatHeader title="Revenue" href="#" />
+        <StatHeader title="Revenue" href="/demo/app/reports" />
         <StatValue value="$4,820" caption="November" />
         <StatList>
           <BarRow label="Nov" value="$4,820" percent={100} active />
@@ -15,7 +15,7 @@ export default function StatDemo() {
         </StatList>
       </Stat>
       <Stat>
-        <StatHeader title="Activity" href="#" />
+        <StatHeader title="Activity" href="/demo/app/notifications" />
         <StatValue value="14" caption="events today" />
         <StatList>
           <StatRow primary="Order paid" secondary="Nadia Rahman" trailing="now" />

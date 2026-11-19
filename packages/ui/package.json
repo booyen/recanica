@@ -1,5 +1,5 @@
 {
-  "name": "@rekanica/ui",
+  "name": "@recanica/ui",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -15,7 +15,7 @@
     "prepublishOnly": "pnpm build"
   },
   "peerDependencies": {
-    "@rekanica/tokens": "^0.1.0",
+    "@recanica/tokens": "^0.1.0",
     "react": "^19",
     "react-dom": "^19"
   },
@@ -49,7 +49,7 @@
     "tsup": "^9.0.0",
     "typescript": "^7.0.2"
   },
-  "description": "Rekanica React components: 60 accessible primitives on Radix + Tailwind CSS v4, styled with Rekanica tokens.",
+  "description": "Recanica React components: 60 accessible primitives on Radix + Tailwind CSS v4, styled with Recanica tokens.",
   "license": "MIT",
   "author": "Aturanica Labs",
   "repository": {
@@ -63,7 +63,7 @@
     "radix-ui",
     "tailwindcss",
     "design-system",
-    "rekanica"
+    "recanica"
   ],
   "files": [
     "dist",

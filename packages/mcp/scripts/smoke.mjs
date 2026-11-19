@@ -26,6 +26,6 @@ await call("get_page_library");
 await call("get_setup", { stack: "html" });
 const { prompts } = await client.listPrompts();
 console.log("prompts:", prompts.map((p) => p.name).join(", "));
-const p = await client.getPrompt({ name: "apply-rekanica", arguments: { stack: "nextjs" } });
-console.log(`✓ apply-rekanica → ${p.messages[0].content.text.length} chars`);
+const p = await client.getPrompt({ name: "apply-recanica", arguments: { stack: "nextjs" } });
+console.log(`✓ apply-recanica → ${p.messages[0].content.text.length} chars`);
 await client.close();

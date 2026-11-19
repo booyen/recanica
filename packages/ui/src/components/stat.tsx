@@ -19,8 +19,9 @@ function StatGroup({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="stat-group"
       className={cn(
-        "grid overflow-hidden rounded-2xl border bg-card",
-        "grid-cols-1 divide-y md:auto-cols-fr md:grid-flow-col md:divide-x md:divide-y-0",
+        // Container-aware: each stat wants ≥17rem; they wrap to new rows when the *container* is narrow
+        // (not the viewport), and the last stat in a row grows to fill it. gap-px over bg-border = hairlines.
+        "flex flex-wrap gap-px overflow-hidden rounded-2xl border bg-border",
         className
       )}
       {...props}
@@ -29,7 +30,7 @@ function StatGroup({ className, ...props }: React.ComponentProps<"div">) {
 }
 
 function Stat({ className, ...props }: React.ComponentProps<"div">) {
-  return <div data-slot="stat" className={cn("flex min-w-0 flex-col gap-6 p-panel", className)} {...props} />;
+  return <div data-slot="stat" className={cn("@container flex min-w-0 flex-[1_1_17rem] flex-col gap-6 bg-card p-panel", className)} {...props} />;
 }
 
 function StatHeader({
@@ -39,10 +40,10 @@ function StatHeader({
   className,
 }: { title: React.ReactNode; href?: string; actionLabel?: string; className?: string }) {
   return (
-    <div className={cn("flex items-center justify-between gap-4 text-sm", className)}>
-      <span>{title}</span>
+    <div className={cn("flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 text-sm", className)}>
+      <span className="min-w-0">{title}</span>
       {href && (
-        <a href={href} className="inline-flex items-center gap-1 text-muted-foreground transition-colors hover:text-foreground">
+        <a href={href} className="-my-1 inline-flex shrink-0 items-center gap-1 py-1 whitespace-nowrap text-muted-foreground transition-colors hover:text-foreground">
           {actionLabel} <ArrowRightIcon className="size-3.5" />
         </a>
       )}
@@ -56,9 +57,9 @@ function StatValue({
   className,
 }: { value: React.ReactNode; caption?: React.ReactNode; className?: string }) {
   return (
-    <div className={cn("flex items-baseline gap-3", className)}>
-      <span className="text-metric font-light tabular-nums">{value}</span>
-      {caption && <span className="text-sm text-muted-foreground">{caption}</span>}
+    <div className={cn("flex flex-wrap items-baseline gap-x-3 gap-y-1", className)}>
+      <span className="text-metric font-light whitespace-nowrap tabular-nums">{value}</span>
+      {caption && <span className="text-sm whitespace-nowrap text-muted-foreground">{caption}</span>}
     </div>
   );
 }
@@ -75,10 +76,13 @@ function StatRow({
   className,
 }: { primary: React.ReactNode; secondary?: React.ReactNode; trailing?: React.ReactNode; className?: string }) {
   return (
-    <div className={cn("flex items-center gap-2 py-3 text-sm", className)}>
-      <span className="truncate">{primary}</span>
-      {secondary && <span className="truncate text-muted-foreground">{secondary}</span>}
-      {trailing && <span className="ml-auto shrink-0 text-muted-foreground tabular-nums">{trailing}</span>}
+    <div className={cn("flex items-center gap-3 py-3 text-sm", className)}>
+      {/* Narrow card: secondary text sits under the primary text. Wide card: inline, Polar-style. */}
+      <span className="flex min-w-0 flex-1 flex-col @[22rem]:flex-row @[22rem]:items-baseline @[22rem]:gap-2">
+        <span className="truncate">{primary}</span>
+        {secondary && <span className="truncate text-muted-foreground">{secondary}</span>}
+      </span>
+      {trailing && <span className="shrink-0 whitespace-nowrap text-muted-foreground tabular-nums">{trailing}</span>}
     </div>
   );
 }

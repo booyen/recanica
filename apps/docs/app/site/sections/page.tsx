@@ -1,38 +1,38 @@
 import Link from "next/link";
-import { web as webMap } from "@/__registry__";
-import { groupBy, web } from "@/lib/docs";
+import { web } from "@/lib/docs";
 
 export const metadata = { title: "All sections" };
 
-// Every section in the web library, rendered live and grouped by category.
+// Index of the web library. Each section opens on its own page, alone, so spacing and behaviour can be judged in isolation.
 export default function SectionsPage() {
-  const groups = groupBy(web);
+  const categories = new Set(web.map((w) => w.category)).size;
   return (
-    <div className="pb-section">
-      <div className="mx-auto max-w-content px-gutter py-section-sm">
-        <h1 className="text-display-sm tracking-tight">All web sections</h1>
-        <p className="mt-3 max-w-copy text-muted-foreground">{web.length} sections in {groups.length} categories, rendered live. Each one links to its docs page with code and install command.</p>
-        <nav className="mt-8 flex flex-wrap gap-2" aria-label="Categories">
-          {groups.map(([cat]) => <a key={cat} href={`#${cat.toLowerCase().replace(/\W+/g, "-")}`} className="rounded-full border px-3 py-1 text-sm text-muted-foreground hover:bg-accent hover:text-foreground">{cat}</a>)}
-        </nav>
+    <div className="mx-auto max-w-content px-gutter py-section-sm">
+      <h1 className="text-display-sm tracking-tight">All web sections</h1>
+      <p className="mt-3 max-w-copy text-muted-foreground">
+        {web.length} sections in {categories} categories. Open one to see it on its own page at mobile, tablet and desktop widths.
+      </p>
+      <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {web.map((i) => (
+          <Link key={i.slug} href={`/site/sections/${i.slug}`} data-kit-item={i.slug} className="group overflow-hidden rounded-2xl border bg-card transition-colors hover:border-foreground/25">
+            {/* Desktop-width render scaled to a thumbnail. */}
+            <div className="relative aspect-[16/10] overflow-hidden border-b bg-background">
+              <iframe
+                src={`/view/web/${i.slug}`}
+                title={i.title}
+                loading="lazy"
+                tabIndex={-1}
+                aria-hidden
+                className="pointer-events-none absolute top-0 left-0 h-[400%] w-[400%] origin-top-left scale-25 border-0"
+              />
+            </div>
+            <div className="px-4 py-3">
+              <p className="truncate text-sm">{i.title}</p>
+              <p className="truncate text-xs text-muted-foreground">{i.category}</p>
+            </div>
+          </Link>
+        ))}
       </div>
-      {groups.map(([cat, items]) => (
-        <section key={cat} id={cat.toLowerCase().replace(/\W+/g, "-")} className="scroll-mt-20 border-t">
-          {items.map((i) => {
-            const C = webMap[i.slug];
-            return (
-              <div key={i.slug} className="border-b last:border-b-0">
-                <div className="mx-auto flex max-w-content flex-wrap items-baseline gap-x-3 px-gutter pt-6 text-sm">
-                  <span className="text-muted-foreground">{cat}</span>
-                  <span>{i.title}</span>
-                  <Link href={`/docs/web/${i.slug}`} className="ml-auto font-mono text-xs text-muted-foreground hover:text-foreground">{i.slug} →</Link>
-                </div>
-                <div className="relative isolate overflow-hidden [&_header.sticky]:static">{C && <C />}</div>
-              </div>
-            );
-          })}
-        </section>
-      ))}
     </div>
   );
 }

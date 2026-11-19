@@ -4,13 +4,14 @@ import * as React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { CheckIcon, LockIcon } from "lucide-react";
-import { Button } from "@rekanica/ui/components/button";
-import { Empty, EmptyDescription, EmptyHeader, EmptyTitle } from "@rekanica/ui/components/empty";
-import { Field, FieldError, FieldLabel } from "@rekanica/ui/components/field";
-import { Input } from "@rekanica/ui/components/input";
-import { NativeSelect, NativeSelectOption } from "@rekanica/ui/components/native-select";
-import { Separator } from "@rekanica/ui/components/separator";
-import { Spinner } from "@rekanica/ui/components/spinner";
+import { Button } from "@recanica/ui/components/button";
+import { Empty, EmptyDescription, EmptyHeader, EmptyTitle } from "@recanica/ui/components/empty";
+import { Field, FieldError, FieldLabel, FieldMessage } from "@recanica/ui/components/field";
+import { focusFirstInvalid } from "@/components/demo/ui";
+import { Input } from "@recanica/ui/components/input";
+import { NativeSelect, NativeSelectOption } from "@recanica/ui/components/native-select";
+import { Separator } from "@recanica/ui/components/separator";
+import { Spinner } from "@recanica/ui/components/spinner";
 import { COUNTRIES } from "@/lib/demo/countries";
 import { money2, price, uid, useDemo } from "@/lib/demo/store";
 
@@ -49,7 +50,7 @@ export default function CheckoutPage({ params }: { params: Promise<{ linkId: str
   const pay = (e: React.FormEvent) => {
     e.preventDefault();
     setTouched(true);
-    if (errors.name || errors.email) return;
+    if (errors.name || errors.email) { focusFirstInvalid(e.currentTarget as HTMLElement); return; }
     setBusy(true);
     const orderId = uid("ord");
     setTimeout(() => {
@@ -63,7 +64,7 @@ export default function CheckoutPage({ params }: { params: Promise<{ linkId: str
       {/* Summary */}
       <section className="border-b bg-sidebar px-gutter py-10 lg:border-r lg:border-b-0 lg:py-16">
         <div className="mx-auto max-w-md space-y-8 lg:mr-0 lg:ml-auto lg:pr-12">
-          <div className="flex items-center gap-2"><span className="size-6 rounded-md bg-metallic" /><span>{state.org.name}</span></div>
+          <div className="flex items-center gap-2"><span className="size-6 rounded-md bg-brand text-brand-foreground" /><span>{state.org.name}</span></div>
           <div>
             <p className="text-sm text-muted-foreground">{product.name}</p>
             <p className="mt-1 text-display-sm font-light tracking-tight tabular-nums">
@@ -112,10 +113,13 @@ export default function CheckoutPage({ params }: { params: Promise<{ linkId: str
               Simulated card · nothing is charged. Payment details are not collected in this demo.
             </div>
           </div>
+          {touched && (errors.name || errors.email) && (
+            <FieldMessage tone="error">Check the {[errors.email, errors.name].filter(Boolean).length === 2 ? "2 highlighted fields" : "highlighted field"} before paying.</FieldMessage>
+          )}
           <Button type="submit" size="lg" variant="brand" disabled={busy} className="w-full">
             {busy ? <><Spinner /> Processing…</> : <>Pay {money2(product.price)}</>}
           </Button>
-          <p className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground"><LockIcon className="size-3" /> Demo checkout powered by Rekanica · {price(product)}</p>
+          <p className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground"><LockIcon className="size-3" /> Demo checkout powered by Recanica · {price(product)}</p>
         </form>
       </section>
     </main>

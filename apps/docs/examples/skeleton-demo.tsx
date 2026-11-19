@@ -1,6 +1,6 @@
 "use client";
 
-import { Skeleton } from "@rekanica/ui/components/skeleton";
+import { Skeleton } from "@recanica/ui/components/skeleton";
 
 export default function SkeletonDemo() {
   return (

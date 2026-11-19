@@ -11,10 +11,10 @@
   },
   "iconLibrary": "lucide",
   "aliases": {
-    "components": "@rekanica/ui/components",
-    "utils": "@rekanica/ui/lib/utils",
-    "hooks": "@rekanica/ui/hooks",
-    "lib": "@rekanica/ui/lib",
-    "ui": "@rekanica/ui/components"
+    "components": "@recanica/ui/components",
+    "utils": "@recanica/ui/lib/utils",
+    "hooks": "@recanica/ui/hooks",
+    "lib": "@recanica/ui/lib",
+    "ui": "@recanica/ui/components"
   }
 }
