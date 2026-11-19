@@ -3,7 +3,7 @@ import catalog from "../lib/catalog.json";
 /** Every route worth checking, generated from the catalog so new items are covered automatically. */
 export const publicPages = [
   "/", "/docs", "/docs/installation", "/docs/theming", "/docs/ai",
-  ...["colors", "typography", "spacing", "surfaces", "finish", "iconography", "motion", "logo"].map((s) => `/docs/foundations/${s}`),
+  ...["colors", "typography", "spacing", "surfaces", "finish", "iconography", "motion"].map((s) => `/docs/foundations/${s}`),
   "/docs/components", "/docs/patterns", "/docs/blocks",
   ...catalog.components.map((c) => `/docs/components/${c.slug}`),
   ...catalog.patterns.map((p) => `/view/patterns/${p.slug}`),

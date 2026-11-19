@@ -17,7 +17,6 @@ export const foundations: CatalogItem[] = [
   { slug: "finish", title: "Brand Finish", category: "Foundations", description: "Flat, mesh or chrome: one switch for every brand surface." },
   { slug: "iconography", title: "Iconography", category: "Foundations", description: "Lucide icons, sizes and stroke." },
   { slug: "motion", title: "Motion", category: "Foundations", description: "Durations, easing and reduced motion." },
-  { slug: "logo", title: "Logo Concepts", category: "Foundations", description: "Aturanica Labs mark exploration from Islamic geometric art." },
 ];
 
 export const gettingStarted: NavLink[] = [
