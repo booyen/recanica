@@ -112,7 +112,8 @@
       "slug": "calendar",
       "title": "Calendar",
       "category": "Forms",
-      "description": "Date picker grid."
+      "description": "Date picker grid.",
+      "minWidth": 256
     },
     {
       "slug": "avatar",
@@ -223,6 +224,12 @@
       "description": "Indeterminate loading indicator."
     },
     {
+      "slug": "loader",
+      "title": "Loader",
+      "category": "Feedback",
+      "description": "Logo loader with 10 animations. Uses the project's logo, then the Recanica mark, or five shapes."
+    },
+    {
       "slug": "sonner",
       "title": "Toast",
       "category": "Feedback",
@@ -256,7 +263,8 @@
       "slug": "navigation-menu",
       "title": "Navigation Menu",
       "category": "Navigation",
-      "description": "Marketing site nav with dropdown panels."
+      "description": "Marketing site nav with dropdown panels.",
+      "minWidth": 320
     },
     {
       "slug": "menubar",

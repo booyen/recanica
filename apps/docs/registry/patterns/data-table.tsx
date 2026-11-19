@@ -83,7 +83,7 @@ export default function DataTable() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-10 pl-4">
+              <TableHead className="w-10">
                 <Checkbox
                   aria-label="Select all"
                   checked={allSelected}
@@ -101,7 +101,7 @@ export default function DataTable() {
           <TableBody>
             {rows.map((o) => (
               <TableRow key={o.id} data-state={selected.includes(o.id) ? "selected" : undefined}>
-                <TableCell className="pl-4">
+                <TableCell>
                   <Checkbox
                     aria-label={`Select ${o.customer}`}
                     checked={selected.includes(o.id)}

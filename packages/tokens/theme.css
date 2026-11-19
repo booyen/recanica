@@ -72,6 +72,39 @@
   :focus-visible { outline: 2px solid var(--color-ring); outline-offset: 2px; }
 }
 
+
+/* ---------- Loader animations (used by @recanica/ui Loader) ----------
+ * Monochrome, transform/opacity only. All stop under prefers-reduced-motion (see .rc-loader rules below). */
+@theme {
+  --animate-loader-pulse: loader-pulse 1.4s var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1)) infinite;
+  --animate-loader-breathe: loader-breathe 2s ease-in-out infinite;
+  --animate-loader-spin: loader-spin 1.6s linear infinite;
+  --animate-loader-orbit: loader-spin 1.2s linear infinite;
+  --animate-loader-bounce: loader-bounce 1s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  --animate-loader-flip: loader-flip 1.8s ease-in-out infinite;
+  --animate-loader-reveal: loader-reveal 1.6s ease-in-out infinite;
+  --animate-loader-ring: loader-ring 1.4s ease-in-out infinite;
+  --animate-loader-ripple: loader-ripple 1.6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  --animate-loader-sway: loader-sway 1.6s ease-in-out infinite;
+  --animate-loader-wave: loader-wave 1.2s ease-in-out infinite;
+
+  @keyframes loader-pulse { 0%, 100% { transform: scale(1); opacity: 1 } 50% { transform: scale(0.86); opacity: 0.55 } }
+  @keyframes loader-breathe { 0%, 100% { opacity: 0.25 } 50% { opacity: 1 } }
+  @keyframes loader-spin { to { transform: rotate(360deg) } }
+  @keyframes loader-bounce { 0%, 100% { transform: translateY(0) } 40% { transform: translateY(-22%) } 60% { transform: translateY(0) } 75% { transform: translateY(-6%) } }
+  @keyframes loader-flip { 0% { transform: perspective(200px) rotateY(0) } 50% { transform: perspective(200px) rotateY(180deg) } 100% { transform: perspective(200px) rotateY(360deg) } }
+  @keyframes loader-reveal { 0% { clip-path: inset(0 100% 0 0) } 45%, 55% { clip-path: inset(0 0 0 0) } 100% { clip-path: inset(0 0 0 100%) } }
+  @keyframes loader-ring { 0% { stroke-dashoffset: 100 } 50% { stroke-dashoffset: 25 } 100% { stroke-dashoffset: -100 } }
+  @keyframes loader-ripple { 0% { transform: scale(0.5); opacity: 0.6 } 100% { transform: scale(1); opacity: 0 } }
+  @keyframes loader-sway { 0%, 100% { transform: rotate(-8deg) } 50% { transform: rotate(8deg) } }
+  @keyframes loader-wave { 0%, 100% { transform: translateY(0); opacity: 0.35 } 40% { transform: translateY(-40%); opacity: 1 } }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-slot=loader] *, [data-slot=loader] { animation-duration: 0s !important; animation-iteration-count: 1 !important; }
+  [data-slot=loader] [data-loader-motion] { opacity: 0.6; }
+}
+
 /* Docs/code highlighting (shiki dual theme) */
 .shiki, .shiki span { color: var(--shiki-light); background-color: transparent !important; }
 .dark .shiki, .dark .shiki span { color: var(--shiki-dark); }

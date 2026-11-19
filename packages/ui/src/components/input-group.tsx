@@ -137,6 +137,8 @@ function InputGroupInput({
       data-slot="input-group-control"
       className={cn(
         "flex-1 rounded-none border-0 bg-transparent shadow-none focus-visible:ring-0 dark:bg-transparent",
+        // The group draws the invalid state; the inner control stays plain so it isn't highlighted twice.
+        "aria-invalid:bg-transparent aria-invalid:ring-0 group-data-[invalid=true]/field:bg-transparent group-data-[invalid=true]/field:ring-0",
         className
       )}
       {...props}
@@ -152,7 +154,7 @@ function InputGroupTextarea({
     <Textarea
       data-slot="input-group-control"
       className={cn(
-        "flex-1 resize-none rounded-none border-0 bg-transparent py-3 shadow-none focus-visible:ring-0 dark:bg-transparent",
+        "flex-1 resize-none rounded-none border-0 bg-transparent py-3 shadow-none focus-visible:ring-0 dark:bg-transparent aria-invalid:bg-transparent aria-invalid:ring-0 group-data-[invalid=true]/field:bg-transparent group-data-[invalid=true]/field:ring-0",
         className
       )}
       {...props}

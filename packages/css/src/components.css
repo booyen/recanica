@@ -143,6 +143,14 @@ html.dark .rc-tab[aria-selected="true"] { background: var(--input); box-shadow: 
 .rc-bar { flex: 1; height: 2px; border-radius: 9999px; background: var(--border); position: relative; }
 .rc-bar > span { position: absolute; inset-block: 0; left: 0; border-radius: inherit; background: color-mix(in oklab, var(--muted-foreground) 40%, transparent); }
 .rc-bar--active > span { background: var(--foreground); }
+/* Bar row: label column fits the longest label (max 40%), then truncates; never overlaps the bar. */
+.rc-list:has(> .rc-bar-row) { display: grid; grid-template-columns: fit-content(40%) minmax(3rem, 1fr) auto; }
+.rc-list:has(> .rc-bar-row) > * { grid-column: 1 / -1; }
+.rc-bar-row { display: grid; grid-template-columns: fit-content(40%) minmax(3rem, 1fr) auto; column-gap: 1rem; align-items: center; }
+.rc-list > .rc-bar-row { grid-template-columns: subgrid; }
+.rc-bar-row > :first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rc-bar-row > .rc-bar { flex: none; }
+.rc-bar-row > :last-child { white-space: nowrap; font-variant-numeric: tabular-nums; }
 
 /* ---------- feedback ---------- */
 .rc-alert { display: grid; gap: 0.25rem; padding: 1rem; border: 1px solid var(--border); border-radius: var(--rc-radius-xl); background: var(--card); }

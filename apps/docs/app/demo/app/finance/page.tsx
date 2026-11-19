@@ -124,11 +124,11 @@ export default function FinancePage() {
       <Section title="Payouts">
         <div className="overflow-hidden rounded-2xl border bg-card">
           <Table>
-            <TableHeader><TableRow><TableHead className="pl-4">Date</TableHead><TableHead>Status</TableHead><TableHead className="text-right">Amount</TableHead></TableRow></TableHeader>
+            <TableHeader><TableRow><TableHead>Date</TableHead><TableHead>Status</TableHead><TableHead className="text-right">Amount</TableHead></TableRow></TableHeader>
             <TableBody>
               {state.payouts.map((p) => (
                 <TableRow key={p.id}>
-                  <TableCell className="pl-4">{date(p.at)}</TableCell>
+                  <TableCell>{date(p.at)}</TableCell>
                   <TableCell><Badge variant={p.status === "paid" ? "success" : "warning"}>{p.status === "paid" ? "Paid" : "In transit"}</Badge></TableCell>
                   <TableCell className="text-right tabular-nums">{money2(p.amount)}</TableCell>
                 </TableRow>

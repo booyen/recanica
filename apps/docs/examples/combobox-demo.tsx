@@ -7,7 +7,7 @@ const countries = ["Malaysia", "Singapore", "Indonesia", "Thailand", "Philippine
 export default function ComboboxDemo() {
   return (
     <Combobox items={countries}>
-      <ComboboxInput aria-label="Country" placeholder="Select a country" className="w-64" />
+      <ComboboxInput aria-label="Country" placeholder="Select a country" className="w-full max-w-64" />
       <ComboboxContent>
         <ComboboxEmpty>No country found.</ComboboxEmpty>
         <ComboboxList>

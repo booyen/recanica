@@ -268,7 +268,7 @@ function FieldMessage({
       role={tone === "error" ? "alert" : "status"}
       data-slot="field-message"
       data-tone={tone}
-      className={cn("flex w-fit max-w-full items-start gap-2 rounded-lg px-2.5 py-1.5 text-[13px] leading-snug", t.className, className)}
+      className={cn("flex w-full items-start gap-2 rounded-lg px-2.5 py-1.5 text-[13px] leading-snug", t.className, className)}
       {...props}
     >
       <Icon className="mt-px size-3.5 shrink-0" aria-hidden />

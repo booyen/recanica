@@ -122,7 +122,7 @@ function CustomersInner() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="pl-4">Customer</TableHead>
+              <TableHead>Customer</TableHead>
               <TableHead className="hidden sm:table-cell">Since</TableHead>
               <TableHead className="text-right">Spent</TableHead>
             </TableRow>
@@ -132,7 +132,7 @@ function CustomersInner() {
               const spent = state.orders.filter((o) => o.customerId === c.id && o.status === "paid").reduce((a, o) => a + o.amount, 0);
               return (
                 <TableRow key={c.id} className="cursor-pointer" onClick={() => router.push(`/demo/app/customers/${c.id}`)}>
-                  <TableCell className="pl-4">
+                  <TableCell>
                     <Link href={`/demo/app/customers/${c.id}`} className="flex items-center gap-3" onClick={(e) => e.stopPropagation()}>
                       <Avatar className="size-8"><AvatarFallback>{initials(c.name)}</AvatarFallback></Avatar>
                       <span>{c.name}<span className="block text-xs text-muted-foreground">{c.email}</span></span>

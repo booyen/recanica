@@ -1,83 +1,21 @@
 import type { Page } from "@playwright/test";
+// One rule set for this repo and every project that uses Recanica (`npx recanica audit`).
+import { auditPage, auditSpec, UX_RULES, type Issue } from "../../../packages/cli/src/audit-browser.js";
+import { COPY_RULES_SOURCE } from "../../../packages/cli/src/copy-rules.js";
 
-export type Issue = { rule: string; detail: string };
+export type { Issue };
 
-/**
- * Runs in the page. Rules:
- *  - page-overflow     the page scrolls horizontally
- *  - text-overflow     text sticks out of its own box (long unbroken strings)
- *  - clipped-text      text is cut by overflow:hidden without an ellipsis
- *  - stretched-rows    a single-column grid spreads its rows apart (gap much larger than declared):
- *                      the bug class where a grid inherits height from a taller sibling
- */
+/** Layout rules: overflow, clipped text, wrapped labels, overlap, table edges, surface padding, stretched rows. */
 export async function auditLayout(page: Page): Promise<Issue[]> {
-  return page.evaluate(() => {
-    const issues: { rule: string; detail: string }[] = [];
-    const describe = (el: Element) => {
-      const cls = (el.getAttribute("class") ?? "").split(/\s+/).slice(0, 4).join(".");
-      const text = (el.textContent ?? "").trim().replace(/\s+/g, " ").slice(0, 40);
-      return `<${el.tagName.toLowerCase()}${cls ? "." + cls : ""}> "${text}"`;
-    };
-    const visible = (el: Element) => {
-      const cs = getComputedStyle(el);
-      const r = el.getBoundingClientRect();
-      return cs.display !== "none" && cs.visibility !== "hidden" && r.width > 0 && r.height > 0;
-    };
-    const insideScroller = (el: Element) => {
-      for (let p = el.parentElement; p; p = p.parentElement) {
-        const o = getComputedStyle(p).overflowX;
-        if (o === "auto" || o === "scroll") return true;
-      }
-      return false;
-    };
+  return (await page.evaluate(auditPage)).filter((i) => !UX_RULES.includes(i.rule));
+}
 
-    if (document.documentElement.scrollWidth > window.innerWidth + 1) {
-      issues.push({ rule: "page-overflow", detail: `${document.documentElement.scrollWidth}px wide in a ${window.innerWidth}px viewport` });
-    }
+/** UX rules: unnamed controls, small touch targets, dead links, unlabelled fields, duplicate ids. */
+export async function auditUx(page: Page): Promise<Issue[]> {
+  return (await page.evaluate(auditPage)).filter((i) => UX_RULES.includes(i.rule));
+}
 
-    for (const el of Array.from(document.querySelectorAll("body *"))) {
-      if (!visible(el) || el.closest("svg, pre, code, [data-audit-ignore], nextjs-portal, .sr-only")) continue;
-      const cs = getComputedStyle(el);
-      // Visually-hidden (screen-reader only) boxes are 1px on purpose.
-      if (cs.clip !== "auto" && cs.clip !== "" || el.getBoundingClientRect().width <= 1) continue;
-      const hasOwnText = Array.from(el.childNodes).some((n) => n.nodeType === 3 && (n.textContent ?? "").trim().length > 0);
-      const isBlockish = cs.display !== "inline" && cs.display !== "contents";
-
-      if (hasOwnText && isBlockish && el.scrollWidth > el.clientWidth + 2 && !insideScroller(el)) {
-        const clipped = cs.overflowX === "hidden" || cs.overflowX === "clip";
-        if (clipped && cs.textOverflow !== "ellipsis") issues.push({ rule: "clipped-text", detail: describe(el) });
-        else if (!clipped) issues.push({ rule: "text-overflow", detail: `${describe(el)} (${el.scrollWidth}px in ${el.clientWidth}px)` });
-      }
-
-      // Short control labels (buttons, badges, tabs, table headers) must never break onto two lines.
-      // Counts the rendered lines of each text run, so tall buttons and multi-line cards don't trip it.
-      if (el.matches("button, [data-slot=badge], [role=tab], th, [data-slot=button]")) {
-        const label = (el.textContent ?? "").trim().replace(/\s+/g, " ");
-        if (label && label.length <= 32) {
-          const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
-          let wrapped = false;
-          for (let n = walker.nextNode(); n && !wrapped; n = walker.nextNode()) {
-            if (!(n.textContent ?? "").trim()) continue;
-            const r = document.createRange();
-            r.selectNodeContents(n);
-            const tops = new Set(Array.from(r.getClientRects()).filter((b) => b.width > 0).map((b) => Math.round(b.top)));
-            if (tops.size > 1) wrapped = true;
-          }
-          if (wrapped) issues.push({ rule: "wrapped-label", detail: describe(el) });
-        }
-      }
-
-      if (cs.display === "grid") {
-        const kids = Array.from(el.children).filter(visible).map((k) => k.getBoundingClientRect());
-        const singleColumn = kids.length >= 3 && kids.every((k) => Math.abs(k.left - kids[0].left) < 2);
-        if (singleColumn) {
-          const declared = parseFloat(cs.rowGap) || 0;
-          const gaps = kids.slice(1).map((k, i) => k.top - kids[i].bottom);
-          const worst = Math.max(...gaps);
-          if (worst > declared + 32) issues.push({ rule: "stretched-rows", detail: `${describe(el)} gap ${Math.round(worst)}px vs declared ${declared}px` });
-        }
-      }
-    }
-    return issues;
-  });
+/** Recanica spec + consistency: token colours only, no bold, pill buttons, radius scale, same component = same look, no AI-jargon copy. */
+export async function auditRecanicaSpec(page: Page): Promise<Issue[]> {
+  return page.evaluate(auditSpec, COPY_RULES_SOURCE);
 }

@@ -15,7 +15,8 @@ const addr = (a?: Address) => (a ? [a.line1, a.line2, `${a.postcode} ${a.city}`,
  */
 function Unbreakable({ text }: { text: string }) {
   const tokens = text.split(/(\s+)/);
-  return <>{tokens.map((t, i) => (/^\s+$/.test(t) ? t : <span key={i} className="whitespace-nowrap">{t}</span>))}</>;
+  // Keep IDs and short words whole; tokens longer than a line (long emails) may break anywhere.
+  return <>{tokens.map((t, i) => (/^\s+$/.test(t) || t.length > 24 ? t : <span key={i} className="whitespace-nowrap">{t}</span>))}</>;
 }
 
 function Party({ title, lines }: { title: string; lines: (string | undefined | false)[] }) {

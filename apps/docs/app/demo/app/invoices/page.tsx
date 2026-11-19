@@ -69,7 +69,7 @@ export default function InvoicesPage() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="pl-4">Invoice</TableHead>
+                <TableHead>Invoice</TableHead>
                 <TableHead className="hidden sm:table-cell">Customer</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead className="hidden md:table-cell">Next due</TableHead>
@@ -81,7 +81,7 @@ export default function InvoicesPage() {
                 const c = state.customers.find((x) => x.id === i.customerId);
                 return (
                   <TableRow key={i.id} className="cursor-pointer" onClick={() => router.push(`/demo/app/invoices/${i.id}`)}>
-                    <TableCell className="pl-4">
+                    <TableCell>
                       <Link href={`/demo/app/invoices/${i.id}`} onClick={(e) => e.stopPropagation()} className="font-mono text-xs hover:underline">{i.number}</Link>
                       <span className="block text-xs text-muted-foreground sm:hidden">{c?.name}</span>
                     </TableCell>

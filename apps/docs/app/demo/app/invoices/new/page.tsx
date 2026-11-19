@@ -222,9 +222,9 @@ function NewInvoiceInner() {
               <ShieldCheckIcon className="size-4 shrink-0" /> Sending submits this invoice to LHDN MyInvois (simulated) and adds the validation QR code.
             </p>
           )}
-          <div className="flex gap-2 lg:flex-col">
-            <Button className="flex-1" onClick={() => save(true)}><SendIcon /> Send invoice</Button>
-            <Button className="flex-1" variant="outline" onClick={() => save(false)}>Save draft</Button>
+          <div className="grid grid-cols-2 gap-2 lg:grid-cols-1">
+            <Button onClick={() => save(true)}><SendIcon /> Send invoice</Button>
+            <Button variant="outline" onClick={() => save(false)}>Save draft</Button>
           </div>
         </div>
       </div>

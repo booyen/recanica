@@ -12,7 +12,8 @@
     "typecheck": "tsc --noEmit",
     "registry:build": "node scripts/gen-registry.mjs && shadcn build --output public/r",
     "test:layout": "playwright test tests/layout.spec.ts",
-    "test:audit": "playwright test tests/layout.spec.ts tests/coverage.spec.ts tests/links.spec.ts tests/ux.spec.ts",
+    "test:qa": "playwright test tests/qa.spec.ts --project=desktop",
+    "test:audit": "playwright test tests/layout.spec.ts tests/spec.spec.ts tests/coverage.spec.ts tests/links.spec.ts tests/ux.spec.ts",
     "test:visual": "playwright test tests/visual.spec.ts",
     "test": "playwright test"
   },

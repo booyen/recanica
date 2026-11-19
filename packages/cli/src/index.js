@@ -6,6 +6,7 @@
  *   npx recanica add <pattern-or-block>
  *   npx recanica tokens <format> [--out <file>]
  *   npx recanica check [paths…] [--all] [--json] [--warn]
+ *   npx recanica audit <url> [--paths /,/pricing] [--widths 375,900,1280] [--crawl] [--json]
  *   npx recanica rules
  *   npx recanica mcp
  */
@@ -15,6 +16,7 @@ import { createRequire } from "node:module";
 import { dirname, join, relative } from "node:path";
 import { createInterface } from "node:readline/promises";
 import { runCheck } from "./check.js";
+import { runAudit } from "./audit.js";
 
 const require = createRequire(import.meta.url);
 const data = JSON.parse(readFileSync(require.resolve("@recanica/mcp/data"), "utf8"));
@@ -111,7 +113,8 @@ This project uses **Recanica**, the UI framework by Aturanica Labs (stack: ${sta
 - ${USAGE[stack]}
 - New project or new page: make a mockup first from existing patterns and review it with the user before building (see "Workflow: mockup first" below).
 - Before building a screen, check the patterns and blocks (MCP tool \`list_patterns\`, or ${data.site}/docs/patterns) and adapt the closest one.
-- Before finishing any UI change, run \`npx recanica check\` and fix every error.
+- Before finishing any UI change, run \`npx recanica check\` and fix every error, then \`npx recanica audit <dev-server-url> --crawl\` (layout, consistency, Recanica spec, copy, accessibility at 375/900/1280px).
+- When a component misbehaves, fix the component, never patch around it at the call site.
 - MCP server for live rules, tokens and source: \`claude mcp add recanica -- npx -y @recanica/mcp\`
 
 ${data.rules}
@@ -233,6 +236,8 @@ Usage
   npx recanica add <pattern-or-block>      copy a pattern/block into your app (shadcn registry)
   npx recanica tokens <format> [--out f]   ${Object.keys(data.tokens).join(" | ")}
   npx recanica check [paths] [--all]       flag colours, bold type, gradients, radii and copy that break Recanica
+  npx recanica audit <url> [--crawl]       audit a running site at 375/900/1280px: overflow, overlap, wrapped labels,
+                                           table edges, tap targets, labels, dead links (needs playwright)
   npx recanica rules                       print the design rules (for any LLM)
   npx recanica mcp                         print MCP setup for AI tools
 `;
@@ -242,6 +247,7 @@ switch (cmd) {
   case "add": add(); break;
   case "tokens": tokens(); break;
   case "check": process.exitCode = runCheck(cwd, flags._, flags, log); break;
+  case "audit": process.exitCode = await runAudit(flags._, flags, log); break;
   case "rules": process.stdout.write(data.rules + "\n"); break;
   case "mcp": log('Claude Code:  claude mcp add recanica -- npx -y @recanica/mcp\nOthers:       { "mcpServers": { "recanica": { "command": "npx", "args": ["-y", "@recanica/mcp"] } } }'); break;
   case "-v": case "--version": log(VERSION); break;

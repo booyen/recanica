@@ -28,5 +28,5 @@ export default defineConfig({
   ],
   webServer: process.env.BASE_URL
     ? undefined
-    : { command: `pnpm start --port ${PORT}`, url: baseURL, reuseExistingServer: !process.env.CI, timeout: 120_000 },
+    : { command: `pnpm start --port ${PORT}`, url: baseURL, reuseExistingServer: !!process.env.REUSE_SERVER, timeout: 120_000 }, // never silently reuse a server that may serve an older build
 });

@@ -46,10 +46,10 @@ export default function ProductsPage() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="pl-4">Product</TableHead>
+                <TableHead>Product</TableHead>
                 <TableHead className="hidden sm:table-cell">Type</TableHead>
-                <TableHead>Price</TableHead>
                 <TableHead className="hidden text-right md:table-cell">Revenue</TableHead>
+                <TableHead className="text-right">Price</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -57,13 +57,13 @@ export default function ProductsPage() {
                 const revenue = state.orders.filter((o) => o.productId === p.id && o.status === "paid").reduce((a, o) => a + o.amount, 0);
                 return (
                   <TableRow key={p.id} className="cursor-pointer" onClick={() => router.push(`/demo/app/products/${p.id}`)}>
-                    <TableCell className="pl-4">
+                    <TableCell>
                       <Link href={`/demo/app/products/${p.id}`} className="hover:underline" onClick={(e) => e.stopPropagation()}>{p.name}</Link>
                       <span className="block max-w-xs truncate text-xs text-muted-foreground">{p.description || "No description"}</span>
                     </TableCell>
                     <TableCell className="hidden sm:table-cell"><Badge variant="muted">{p.type === "recurring" ? "Subscription" : "One-time"}</Badge></TableCell>
-                    <TableCell className="tabular-nums">{price(p)}</TableCell>
                     <TableCell className="hidden text-right tabular-nums md:table-cell">{money(revenue)}</TableCell>
+                    <TableCell className="text-right tabular-nums">{price(p)}</TableCell>
                   </TableRow>
                 );
               })}

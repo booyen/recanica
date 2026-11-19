@@ -40,6 +40,7 @@ export const examples: Record<string, ComponentType> = {
   "progress": dynamic(() => import("@/examples/progress-demo")),
   "skeleton": dynamic(() => import("@/examples/skeleton-demo")),
   "spinner": dynamic(() => import("@/examples/spinner-demo")),
+  "loader": dynamic(() => import("@/examples/loader-demo")),
   "sonner": dynamic(() => import("@/examples/sonner-demo")),
   "empty": dynamic(() => import("@/examples/empty-demo")),
   "tabs": dynamic(() => import("@/examples/tabs-demo")),

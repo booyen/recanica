@@ -20,6 +20,8 @@ Every pull request runs these in CI (`.github/workflows/ci.yml`). Each one catch
 | Package tests | `pnpm test` | CLI `init` and `check` on fixture projects for every stack; MCP server smoke test |
 | Layout audit | `pnpm test:layout` | Every page at 375px, 900px and 1280px: page overflow, text overflow, clipped text, **wrapped button, tab, badge and table-header labels**, stretched rows, runtime errors |
 | Demo coverage | `pnpm test:audit` | A component, pattern, block or web section in the catalog that no demo shows |
+| Recanica spec + consistency | `pnpm test:audit` | Rendered colours not in the token palette, weight above medium, non-pill buttons or off-scale heights, radius off the scale, the same component rendered differently on one page, AI jargon in visible text |
+| Component QA | `pnpm test:qa` | Every component at 240px, 400px and full width (`/qa/<slug>`): spills, overlap, wrapped labels, runtime errors, plus a screenshot per component |
 | UX audit | `pnpm test:audit` | Unnamed controls, tap targets under 24px (WCAG 2.5.8), unlabelled fields, duplicate ids |
 | Link check | `pnpm test:audit` | Links that 404, and dead `#` links |
 | Visual regression | `pnpm test:visual` | Unintended visual changes (screenshot diff) |
@@ -54,7 +56,10 @@ The MCP server (`@recanica/mcp`) serves the same rules live, along with tokens, 
 
 Colours, radii, spacing and type come from `@recanica/tokens`. A project that uses `bg-card` and `text-muted-foreground` is updated automatically when Recanica changes. A project that types `#1a1a1a` is not, and `recanica check` flags it.
 
-**3. `npx recanica check`**
+**3. `npx recanica check` and `npx recanica audit`**
+
+`check` reads source code. `audit` loads the running site in a browser at 375/900/1280px and applies the same layout, spec, consistency, copy and accessibility rules this repo uses (`npx recanica audit http://localhost:3000 --crawl`). Run both in CI.
+
 
 The guard. Run it in CI or a pre-commit hook:
 

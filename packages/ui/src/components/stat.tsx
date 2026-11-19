@@ -58,14 +58,32 @@ function StatValue({
 }: { value: React.ReactNode; caption?: React.ReactNode; className?: string }) {
   return (
     <div className={cn("flex flex-wrap items-baseline gap-x-3 gap-y-1", className)}>
-      <span className="text-metric font-light whitespace-nowrap tabular-nums">{value}</span>
+      {/* Long numbers scale down to fit the stat's width (Stat is a container) instead of running into the next stat. */}
+      <span
+        className="font-light whitespace-nowrap tabular-nums [font-size:min(var(--text-metric),calc(100cqi/(var(--stat-chars,6)*0.6)))] leading-none"
+        style={{ "--stat-chars": typeof value === "string" || typeof value === "number" ? Math.max(6, String(value).length) : 6 } as React.CSSProperties}
+      >
+        {value}
+      </span>
       {caption && <span className="text-sm whitespace-nowrap text-muted-foreground">{caption}</span>}
     </div>
   );
 }
 
 function StatList({ className, ...props }: React.ComponentProps<"div">) {
-  return <div data-slot="stat-list" className={cn("flex flex-col divide-y border-t", className)} {...props} />;
+  // A grid so BarRows share columns (subgrid): every bar starts at the same x, sized by the longest label.
+  // Other children (StatRow, custom rows) span the full width.
+  return (
+    <div
+      data-slot="stat-list"
+      className={cn(
+        "grid grid-cols-[fit-content(40%)_minmax(3rem,1fr)_auto] divide-y border-t",
+        "*:col-span-full [&>[data-slot=bar-row]]:grid-cols-subgrid",
+        className
+      )}
+      {...props}
+    />
+  );
 }
 
 /** One line in a StatList: primary text, muted secondary text, trailing meta. */
@@ -87,7 +105,11 @@ function StatRow({
   );
 }
 
-/** Label, a thin progress track, and a value. The active row is highlighted. */
+/**
+ * Label, a thin progress track, and a value. The active row is highlighted.
+ * The label column fits the longest label up to 40% of the row, then truncates (full text on hover),
+ * so long names never run into the bar. Inside a StatList all rows share one label column.
+ */
 function BarRow({
   label,
   value,
@@ -96,15 +118,22 @@ function BarRow({
   className,
 }: { label: React.ReactNode; value: React.ReactNode; percent: number; active?: boolean; className?: string }) {
   return (
-    <div className={cn("flex items-center gap-4 py-3 text-sm", !active && "text-muted-foreground", className)}>
-      <span className="w-8 shrink-0">{label}</span>
-      <div className="relative h-0.5 flex-1 rounded-full bg-border">
+    <div
+      data-slot="bar-row"
+      className={cn(
+        "grid grid-cols-[fit-content(40%)_minmax(3rem,1fr)_auto] items-center gap-x-4 py-3 text-sm",
+        !active && "text-muted-foreground",
+        className
+      )}
+    >
+      <span className="min-w-0 truncate" title={typeof label === "string" ? label : undefined}>{label}</span>
+      <div className="relative h-0.5 rounded-full bg-border">
         <div
           className={cn("absolute inset-y-0 left-0 rounded-full", active ? "bg-foreground" : "bg-muted-foreground/40")}
           style={{ width: `${Math.max(0, Math.min(100, percent))}%` }}
         />
       </div>
-      <span className={cn("shrink-0 tabular-nums", active && "text-foreground")}>{value}</span>
+      <span className={cn("whitespace-nowrap tabular-nums", active && "text-foreground")}>{value}</span>
     </div>
   );
 }

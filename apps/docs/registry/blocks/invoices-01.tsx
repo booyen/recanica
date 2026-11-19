@@ -95,7 +95,7 @@ export function Invoices01() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="pl-4">Invoice</TableHead>
+                <TableHead>Invoice</TableHead>
                 <TableHead className="hidden sm:table-cell">Customer</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead className="hidden md:table-cell">Due</TableHead>
@@ -106,7 +106,7 @@ export function Invoices01() {
             <TableBody>
               {rows.map((i) => (
                 <TableRow key={i.id} className="cursor-pointer" onClick={() => setOpen(i)}>
-                  <TableCell className="pl-4">
+                  <TableCell>
                     <span className="font-mono text-xs">{i.id}</span>
                     <span className="block text-xs text-muted-foreground sm:hidden">{i.customer}</span>
                   </TableCell>

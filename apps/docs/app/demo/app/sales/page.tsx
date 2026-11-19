@@ -49,7 +49,7 @@ export default function SalesPage() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="pl-4">Customer</TableHead>
+              <TableHead>Customer</TableHead>
               <TableHead className="hidden md:table-cell">Product</TableHead>
               <TableHead>Status</TableHead>
               <TableHead className="hidden sm:table-cell">Date</TableHead>
@@ -60,7 +60,7 @@ export default function SalesPage() {
           <TableBody>
             {rows.map(({ o, c, p }) => (
               <TableRow key={o.id}>
-                <TableCell className="pl-4">
+                <TableCell>
                   {c ? <Link href={`/demo/app/customers/${c.id}`} className="hover:underline">{c.name}</Link> : "—"}
                   <span className="block text-xs text-muted-foreground md:hidden">{p?.name}</span>
                 </TableCell>

@@ -28,10 +28,10 @@ export default function SubscriptionsPage() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="pl-4">Customer</TableHead>
-              <TableHead>Plan</TableHead>
+              <TableHead>Customer</TableHead>
               <TableHead className="hidden sm:table-cell">Status</TableHead>
-              <TableHead className="hidden text-right md:table-cell">Renews</TableHead>
+              <TableHead className="hidden md:table-cell">Renews</TableHead>
+              <TableHead className="text-right">Plan</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -40,10 +40,10 @@ export default function SubscriptionsPage() {
               const p = state.products.find((x) => x.id === s.productId);
               return (
                 <TableRow key={s.id}>
-                  <TableCell className="pl-4">{c ? <Link className="hover:underline" href={`/demo/app/customers/${c.id}`}>{c.name}</Link> : "—"}</TableCell>
-                  <TableCell>{p?.name}<span className="block text-xs text-muted-foreground">{p && price(p)}</span></TableCell>
+                  <TableCell>{c ? <Link className="hover:underline" href={`/demo/app/customers/${c.id}`}>{c.name}</Link> : "—"}</TableCell>
                   <TableCell className="hidden sm:table-cell"><Badge variant={s.status === "active" ? "success" : "muted"}>{s.status === "active" ? "Active" : "Canceled"}</Badge></TableCell>
-                  <TableCell className="hidden text-right text-muted-foreground md:table-cell">{s.status === "active" ? shortDate(s.renewsAt) : "—"}</TableCell>
+                  <TableCell className="hidden text-muted-foreground md:table-cell">{s.status === "active" ? shortDate(s.renewsAt) : "—"}</TableCell>
+                  <TableCell className="text-right">{p?.name}<span className="block text-xs text-muted-foreground">{p && price(p)}</span></TableCell>
                 </TableRow>
               );
             })}

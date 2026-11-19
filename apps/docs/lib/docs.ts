@@ -1,6 +1,6 @@
 import catalog from "./catalog.json";
 
-export type CatalogItem = { slug: string; title: string; description: string; category: string; height?: number; use?: string };
+export type CatalogItem = { slug: string; title: string; description: string; category: string; height?: number; use?: string; minWidth?: number };
 export type NavLink = { title: string; href: string };
 export type NavGroup = { title?: string; items: NavLink[] };
 export type NavSection = { title: string; href?: string; groups: NavGroup[] };
@@ -22,6 +22,7 @@ export const foundations: CatalogItem[] = [
 
 export const gettingStarted: NavLink[] = [
   { title: "Introduction", href: "/docs" },
+  { title: "Design language", href: "/docs/design-language" },
   { title: "Installation", href: "/docs/installation" },
   { title: "Theming", href: "/docs/theming" },
   { title: "Use with AI", href: "/docs/ai" },

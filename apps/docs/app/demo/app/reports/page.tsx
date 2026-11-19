@@ -50,7 +50,7 @@ export default function ReportsPage() {
       </div>
       <section className="mt-stack rounded-2xl border bg-card p-panel">
         <h2>Revenue by product</h2>
-        <StatList className="mt-4">{byProduct.map((p, i) => <BarRow key={p.name} label={<span className="block w-40 truncate">{p.name}</span>} value={money(p.value)} percent={(p.value / max) * 100} active={i === 0} />)}</StatList>
+        <StatList className="mt-4">{byProduct.map((p, i) => <BarRow key={p.name} label={p.name} value={money(p.value)} percent={(p.value / max) * 100} active={i === 0} />)}</StatList>
       </section>
     </>
   );

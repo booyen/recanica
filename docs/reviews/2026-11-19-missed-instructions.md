@@ -57,3 +57,18 @@ These are mechanisms rather than promises: each one is in a file that runs or is
 | Your corrections saved as standing memory, loaded at the start of every session. | memory: `recanica-working-rules` |
 | How results are reported: always say what a check does *not* cover, and include a screenshot of each new page type at desktop and mobile before calling it done. | memory: `recanica-working-rules` |
 | Large requests: finish one item, look at it in the browser, then start the next. | memory: `recanica-working-rules` |
+
+## Follow-up: the bar rows (same day)
+
+"Revenue by product" showed long product names running through the progress bars.
+
+- **Cause in the component.** `BarRow` gave its label a fixed 32px column (`w-8`), sized for short labels like "Nov". Any longer label spilled over the bar.
+- **Cause in the process.** When the reports page hit this earlier, it was patched at the call site with a wider `w-40 truncate` span. That span sits *inside* the 32px column, so the patch itself overflowed. A local workaround hid a component bug instead of fixing it.
+- **Why the audit missed it.** The overflow rule only checked elements that hold text directly. The overflowing element was a wrapper around the text.
+
+**Fixes**
+
+- `BarRow` and `StatList` now share a column grid (subgrid). The label column fits the longest label up to 40% of the row, then truncates, with the full text on hover. Every bar starts at the same point. The CSS package got the same fix (`rc-bar-row`).
+- The layout audit has a new `overlap` rule: content painting past its box into the next item in a row. It was verified both ways: 4 failures on the old component, a pass on the fix.
+- New rule: no fixed-width label columns in components. Size them to their content with a cap, and truncate.
+- New working rule: when a component misbehaves, fix the component. Never patch around it at the call site.

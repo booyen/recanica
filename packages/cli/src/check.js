@@ -14,6 +14,7 @@
  */
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
+import { COPY_RULES } from "./copy-rules.js";
 
 const SKIP_DIRS = new Set(["node_modules", ".next", ".nuxt", ".svelte-kit", ".turbo", ".git", "dist", "build", "out", "coverage", "generated", "__registry__", "vendor", "Pods", ".dart_tool"]);
 const EXT = /\.(tsx|jsx|ts|js|mjs|vue|svelte|astro|html|php|erb|css|scss|dart|swift|kt)$/;
@@ -43,13 +44,8 @@ export const RULES = [
     "Arbitrary pixel spacing", "use the 4px scale (p-4, gap-6) or layout tokens (p-panel, px-gutter)"],
   ["uppercase-label", "warn", /\buppercase\b(?=[^"'`]*tracking-(?:wide|wider|widest))/,
     "Shouty uppercase label", "use sentence case; small muted text carries the hierarchy"],
-  // Copy: same rules as the docs copy lint (docs/COPY_AUDIT.md).
-  ["copy", "error", /\b(?:seamless(?:ly)?|leverag(?:e|es|ing)|empower(?:s|ing)?|effortless(?:ly)?|supercharg\w*|revolutioni[sz]\w*|game[- ]chang\w*|delve|tapestry|synerg\w*)\b/i,
-    "AI-style filler word", "say what actually happens"],
-  ["copy", "error", /\b(?:cutting[- ]edge|state[- ]of[- ]the[- ]art|best[- ]in[- ]class|world[- ]class|next[- ]level|look no further|say goodbye to|at your fingertips|lorem ipsum)\b/i,
-    "Cliché or placeholder copy", "replace with a concrete fact"],
-  ["copy", "warn", /\b(?:unlock(?:s|ing)?|elevate[sd]?|streamlin(?:e|ed|es|ing)|robust|innovative|holistic|AI[- ]powered)\b/i,
-    "Vague marketing word", "name the concrete benefit"],
+  // Copy rules come from copy-rules.js (shared with the repo copy lint and the page audit).
+  ...COPY_RULES.map(([re, msg, level]) => ["copy", level, re, msg, "say what actually happens, with a number or a real noun"]),
 ];
 
 function loadConfig(root) {

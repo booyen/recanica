@@ -39,11 +39,11 @@ export default function Page() {
       <P>Raw values. Never reference them from components; remap the semantic tier instead.</P>
       <div className="mt-6 space-y-4">
         <div className="flex overflow-hidden rounded-xl border">
-          {grays.map((g) => <div key={g} className="h-14 flex-1" style={{ background: `var(--rc-gray-${g})` }} title={`--rc-gray-${g}`} />)}
+          {grays.map((g) => <div key={g} data-audit-ignore className="h-14 flex-1" style={{ background: `var(--rc-gray-${g})` }} title={`--rc-gray-${g}`} />)}
         </div>
         <div className="flex justify-between font-mono text-[10px] text-muted-foreground">{grays.map((g) => <span key={g}>{g}</span>)}</div>
         <div className="flex overflow-hidden rounded-xl border">
-          {silvers.map((g) => <div key={g} className="h-14 flex-1" style={{ background: `var(--rc-silver-${g})` }} title={`--rc-silver-${g}`} />)}
+          {silvers.map((g) => <div key={g} data-audit-ignore className="h-14 flex-1" style={{ background: `var(--rc-silver-${g})` }} title={`--rc-silver-${g}`} />)}
         </div>
         <p className="text-xs text-muted-foreground">Silver: a whisper of cool tint so metal reads as metal.</p>
       </div>

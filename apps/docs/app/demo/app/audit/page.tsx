@@ -26,15 +26,15 @@ export default function AuditPage() {
       <InputGroup className="mb-4 sm:max-w-sm"><InputGroupAddon><SearchIcon /></InputGroupAddon><InputGroupInput placeholder="Filter by person, action or object" aria-label="Filter by person, action or object" value={q} onChange={(e) => setQ(e.target.value)} /></InputGroup>
       <div className="overflow-hidden rounded-2xl border bg-card">
         <Table>
-          <TableHeader><TableRow><TableHead className="pl-4">When</TableHead><TableHead>Actor</TableHead><TableHead>Action</TableHead><TableHead className="hidden md:table-cell">Details</TableHead><TableHead className="hidden lg:table-cell">IP</TableHead></TableRow></TableHeader>
+          <TableHeader><TableRow><TableHead>When</TableHead><TableHead>Actor</TableHead><TableHead className="hidden md:table-cell">Details</TableHead><TableHead className="hidden lg:table-cell">IP</TableHead><TableHead className="text-right">Action</TableHead></TableRow></TableHeader>
           <TableBody>
             {rows.map((r) => (
               <TableRow key={r[0] + r[2]}>
-                <TableCell className="pl-4 text-muted-foreground tabular-nums">{r[0]}</TableCell>
+                <TableCell className="text-muted-foreground tabular-nums">{r[0]}</TableCell>
                 <TableCell>{r[1]}</TableCell>
-                <TableCell><Badge variant="outline" className="font-mono">{r[2]}</Badge></TableCell>
                 <TableCell className="hidden text-muted-foreground md:table-cell">{r[3]}</TableCell>
                 <TableCell className="hidden font-mono text-xs text-muted-foreground lg:table-cell">{r[4]}</TableCell>
+                <TableCell className="text-right"><Badge variant="outline" className="font-mono">{r[2]}</Badge></TableCell>
               </TableRow>
             ))}
             {rows.length === 0 && <TableRow><TableCell colSpan={5} className="h-24 text-center text-muted-foreground">No matching entries.</TableCell></TableRow>}

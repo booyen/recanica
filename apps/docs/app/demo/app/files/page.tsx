@@ -31,13 +31,13 @@ export default function FilesPage() {
       </BreadcrumbList></Breadcrumb>
       <div className="overflow-hidden rounded-2xl border bg-card">
         <Table>
-          <TableHeader><TableRow><TableHead className="pl-4">Name</TableHead><TableHead className="hidden sm:table-cell">Size</TableHead><TableHead className="hidden md:table-cell">Modified</TableHead><TableHead className="w-10" /></TableRow></TableHeader>
+          <TableHeader><TableRow><TableHead>Name</TableHead><TableHead className="hidden sm:table-cell">Size</TableHead><TableHead className="hidden md:table-cell">Modified</TableHead><TableHead className="w-10" /></TableRow></TableHeader>
           <TableBody>
             {tree[dir].map((f) => {
               const I = icon[f.kind];
               return (
                 <TableRow key={f.name} className={f.kind === "folder" ? "cursor-pointer" : undefined} onClick={() => f.kind === "folder" && setDir(f.name)}>
-                  <TableCell className="pl-4"><span className="flex items-center gap-3"><I className="size-4 text-muted-foreground" />{f.name}</span></TableCell>
+                  <TableCell><span className="flex items-center gap-3"><I className="size-4 text-muted-foreground" />{f.name}</span></TableCell>
                   <TableCell className="hidden text-muted-foreground sm:table-cell">{f.size ?? "—"}</TableCell>
                   <TableCell className="hidden text-muted-foreground md:table-cell">{f.date}</TableCell>
                   <TableCell onClick={(e) => e.stopPropagation()}>

@@ -32,3 +32,17 @@ or list paths in `recanica.config.json`:
 ```json
 { "ignore": ["emails/**"], "rules": { "arbitrary-radius": "off" } }
 ```
+
+## Audit the rendered site
+
+```bash
+npm i -D playwright && npx playwright install chromium
+npx recanica audit http://localhost:3000 --crawl              # every reachable page at 375/900/1280px
+npx recanica audit https://staging.example --paths /,/pricing --json
+```
+
+Same rules as Recanica's own CI:
+- **Layout:** overflow, overlap, wrapped labels, table edges, surface padding.
+- **Recanica spec:** token colours only, no bold, pill buttons, radius scale, same component = same look.
+- **Copy:** AI jargon and placeholder text in rendered copy.
+- **Accessibility:** names, labels, 24px targets, dead links.

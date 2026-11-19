@@ -74,8 +74,8 @@ export default function Page() {
           head={["Token", "Light", "Dark"]}
           rows={colorTable().map((c) => [
             `--${c.token}`,
-            <span key="l" className="flex items-center gap-2"><span className="size-4 rounded border" style={{ background: c.light }} /><span className="font-mono text-xs">{c.light}</span></span>,
-            <span key="d" className="flex items-center gap-2"><span className="size-4 rounded border" style={{ background: c.dark }} /><span className="font-mono text-xs">{c.dark}</span></span>,
+            <span key="l" className="flex items-center gap-2"><span data-audit-ignore className="size-4 rounded border" style={{ background: c.light }} /><span className="font-mono text-xs">{c.light}</span></span>,
+            <span key="d" className="flex items-center gap-2"><span data-audit-ignore className="size-4 rounded border" style={{ background: c.dark }} /><span className="font-mono text-xs">{c.dark}</span></span>,
           ])}
         />
       </div>

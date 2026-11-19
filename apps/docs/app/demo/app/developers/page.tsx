@@ -26,7 +26,7 @@ export default function DevelopersPage() {
       <ul className="divide-y rounded-2xl border bg-card">
         {keys.map((k) => (
           <li key={k.name} className="flex flex-wrap items-center gap-3 p-4">
-            <div className="min-w-0 flex-1 text-sm"><p>{k.name}</p><p className="text-muted-foreground">Created {k.created} · last used {k.used}</p></div>
+            <div className="min-w-[12rem] flex-1 text-sm"><p className="truncate">{k.name}</p><p className="text-muted-foreground">Created {k.created} · last used {k.used}</p></div>
             <code className="rounded-lg bg-muted px-2 py-1 font-mono text-xs">{shown === k.name ? k.key : "sk_test_demo_••••••••"}</code>
             <Button variant="ghost" size="icon-sm" aria-label={shown === k.name ? "Hide key" : "Reveal key"} onClick={() => setShown(shown === k.name ? null : k.name)}>{shown === k.name ? <EyeOffIcon /> : <EyeIcon />}</Button>
             <Button variant="ghost" size="icon-sm" aria-label="Copy key" onClick={() => { navigator.clipboard?.writeText(k.key).catch(() => {}); toast("Key copied"); }}><CopyIcon /></Button>

@@ -71,3 +71,37 @@ assert.ok(!report.hits.some((h) => h.file.startsWith("legacy")), "config ignore 
 const good = fixture({ "app/page.tsx": '<div className="rounded-2xl border bg-card p-panel text-muted-foreground">Invoices</div>' });
 assert.match(run(good, "check"), /0 errors/);
 console.log("✓ check");
+
+// Browser audits: prove each Recanica spec rule fires on a real violation (needs playwright, present in the repo).
+{
+  const { createRequire } = await import("node:module");
+  const req = createRequire(join(import.meta.dirname, "../../../apps/docs/package.json"));
+  let pw = null;
+  try { pw = await import(req.resolve("playwright")); } catch { try { pw = await import(req.resolve("@playwright/test")); } catch {} }
+  if (!pw) console.log("- skipped browser audit test (playwright not installed)");
+  else {
+    const { auditPage, auditSpec } = await import("./audit-browser.js");
+    const { COPY_RULES_SOURCE } = await import("./copy-rules.js");
+    const chromium = pw.chromium ?? pw.default.chromium;
+    const browser = await chromium.launch();
+    const page = await browser.newPage({ viewport: { width: 800, height: 600 } });
+    await page.setContent(`<html style="--radius:12px;--font-sans:Arial;--background:#fff;--foreground:#111;--border:#e5e5e5;--muted-foreground:#737373;--primary:#111;--primary-foreground:#fff">
+      <body style="font-family:Arial;background:#fff;color:#111;margin:0">
+        <p style="color:#ff0000">Red text</p>
+        <p style="font-weight:700">Bold text</p>
+        <button data-slot="button" style="height:36px;border-radius:4px">Square</button>
+        <button data-slot="button" style="height:36px;border-radius:999px;padding-left:16px">A</button>
+        <button data-slot="button" style="height:36px;border-radius:999px;padding-left:16px">B</button>
+        <button data-slot="button" style="height:36px;border-radius:999px;padding-left:24px">Odd one out</button>
+        <div style="border:1px solid #e5e5e5;border-radius:7px;width:300px;height:80px"></div>
+        <p>A seamless experience.</p>
+        <div style="display:flex;width:200px"><span style="width:20px;white-space:nowrap">A very long label here</span><span>Bar</span></div>
+      </body></html>`);
+    const spec = new Set((await page.evaluate(auditSpec, COPY_RULES_SOURCE)).map((i) => i.rule));
+    const layout = new Set((await page.evaluate(auditPage)).map((i) => i.rule));
+    await browser.close();
+    for (const r of ["spec-color", "spec-weight", "spec-button", "spec-radius", "spec-copy", "inconsistent"]) assert.ok(spec.has(r), `audit: ${r} should fire`);
+    assert.ok(layout.has("overlap"), "audit: overlap should fire");
+    console.log("✓ audit rules fire on violations");
+  }
+}

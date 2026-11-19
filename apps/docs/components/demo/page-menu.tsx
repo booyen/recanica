@@ -32,12 +32,12 @@ export function PageMenu() {
       <Button
         onClick={() => setOpen(true)}
         aria-label="All demo pages (⌘J)"
-        className="fixed right-4 bottom-4 z-50 h-10 gap-2 rounded-full pr-3 pl-3.5 shadow-float"
+        className="fixed right-4 bottom-4 z-50 size-11 rounded-full p-0 shadow-float lg:w-auto lg:gap-2 lg:pr-3 lg:pl-3.5"
         data-page-menu
       >
         <LayoutGridIcon />
-        <span className="hidden max-w-40 truncate sm:inline">{current?.label ?? "Pages"}</span>
-        <Kbd className="hidden bg-primary-foreground/15 text-primary-foreground md:inline-flex">⌘J</Kbd>
+        <span className="hidden max-w-40 truncate lg:inline">{current?.label ?? "Pages"}</span>
+        <Kbd className="hidden bg-primary-foreground/15 text-primary-foreground lg:inline-flex">⌘J</Kbd>
       </Button>
       <CommandDialog open={open} onOpenChange={setOpen} title="All demo pages" description="Jump to any page in the demos">
         <CommandInput placeholder="Find a page: invoice, pricing, forms…" />

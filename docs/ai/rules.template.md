@@ -73,6 +73,7 @@ Skip the mockup only for small edits to an existing, already-approved screen.
 - Components respond to their container, not just the viewport: use container queries (`@container`, `@md:`) for cards, stats, headers and toolbars that can sit in narrow columns.
 - Buttons, badges, tabs, nav items and table headers never wrap: `whitespace-nowrap`. When space runs out, change the form instead: actions wrap as a group onto a new row, nav items move into a "More" menu or a sheet, tables scroll inside their own frame.
 - Nothing overflows the page. Long text truncates (`truncate`, with the full text in a title/tooltip) or wraps as prose; it never pushes layout wider.
+- No fixed-width label columns (`w-8`, `w-24`): size label columns to their content with a cap (`fit-content(40%)`) and truncate, so a long label never runs into the next element.
 - Labels and values sit side by side when there is room and stack cleanly (label above value) when there is not, never squeezed into one word per line.
 - Navigation: side nav (hideable, ⌘B) for dashboards with many sections; top nav with priority+ "More" overflow for few flat sections; a sheet below 768px. See the Navigation foundation.
 
