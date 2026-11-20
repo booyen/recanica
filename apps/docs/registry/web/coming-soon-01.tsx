@@ -3,6 +3,7 @@
 import * as React from "react";
 import { Button } from "@recanica/ui/components/button";
 import { Input } from "@recanica/ui/components/input";
+import { WebSectionTitle } from "@recanica/ui/components/web-section";
 
 export function ComingSoon01() {
   const [done, setDone] = React.useState(false);
@@ -16,7 +17,7 @@ export function ComingSoon01() {
       <div className="w-full max-w-lg space-y-8 text-center">
         <span className="mx-auto block size-10 rounded-xl bg-brand text-brand-foreground" />
         <div className="space-y-3">
-          <h1 className="text-display-sm tracking-tight">Our online shop opens soon</h1>
+          <WebSectionTitle as="h1">Our online shop opens soon</WebSectionTitle>
           <p className="text-muted-foreground">We&apos;re photographing 40 products and writing the delivery rules. Leave your email and we&apos;ll tell you the day it opens.</p>
         </div>
         <div className="flex justify-center gap-3 tabular-nums">

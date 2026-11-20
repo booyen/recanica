@@ -8,6 +8,9 @@ import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@recanica/ui/comp
 import { Tabs, TabsList, TabsTrigger } from "@recanica/ui/components/tabs";
 import { BarRow, Stat, StatGroup, StatHeader, StatList, StatRow, StatValue } from "@recanica/ui/components/stat";
 import { cn } from "@recanica/ui/lib/utils";
+import { Heading } from "@recanica/ui/components/page";
+import { Surface } from "@recanica/ui/components/surface";
+import { AppSidebar, AppShell, AppSidebarHeader, AppSidebarSub, AppPanel } from "@recanica/ui/components/app-shell";
 
 const nav = [
   { label: "Overview", icon: LayoutGridIcon, active: true },
@@ -35,33 +38,33 @@ function NavItem({ label, icon: Icon, active }: { label: string; icon: typeof Bo
 
 function SidebarContents() {
   return (
-    <div className="flex h-full flex-col gap-1 p-3">
-      <div className="mb-4 flex items-center justify-between px-2 py-1">
+    <AppSidebar>
+      <AppSidebarHeader>
         <span className="size-6 rounded-md bg-brand text-brand-foreground" aria-label="Aturanica" />
         <div className="flex">
           <Button size="icon" variant="ghost" aria-label="Notifications"><BellIcon /></Button>
           <Button size="icon" variant="ghost" aria-label="Search"><SearchIcon /></Button>
         </div>
-      </div>
+      </AppSidebarHeader>
       {nav.map((n) => (
         <div key={n.label}>
           <NavItem label={n.label} icon={n.icon} active={n.active} />
           {n.children && (
-            <div className="my-1 ml-5 flex flex-col border-l pl-3">
+            <AppSidebarSub>
               {n.children.map((c) => (
                 <a key={c} href="#" className="py-1.5 text-sm text-sidebar-foreground transition-colors hover:text-foreground">{c}</a>
               ))}
-            </div>
+            </AppSidebarSub>
           )}
         </div>
       ))}
 
       <div className="mt-auto space-y-1">
-        <div className="mb-3 rounded-xl border bg-panel p-4 text-sm">
+        <Surface size="sm" tone="panel" inset="sm" className="mb-3 text-sm">
           <p>Introducing Aturanica Pro</p>
           <p className="mt-1 text-muted-foreground">Advanced reports and a lower 2.5% fee.</p>
           <a href="#" className="mt-3 inline-block font-medium text-brand">Upgrade</a>
-        </div>
+        </Surface>
         <NavItem label="Support" icon={LifeBuoyIcon} />
         <NavItem label="Documentation" icon={ArrowUpRightIcon} />
         <div className="mt-2 flex items-center gap-3 border-t px-2 pt-3 text-sm">
@@ -70,13 +73,13 @@ function SidebarContents() {
           <ChevronDownIcon className="ml-auto size-4 text-muted-foreground" />
         </div>
       </div>
-    </div>
+    </AppSidebar>
   );
 }
 
 export function DashboardShell01() {
   return (
-    <div className="flex h-svh overflow-hidden bg-sidebar text-foreground">
+    <AppShell>
       <aside className="hidden h-full w-sidebar shrink-0 overflow-y-auto md:block">
         <SidebarContents />
       </aside>
@@ -94,7 +97,7 @@ export function DashboardShell01() {
           <span className="text-sm">Acme Studio</span>
         </div>
         {/* Fixed frame: content scrolls inside so the rounded border stays in place */}
-        <main className="min-h-0 flex-1 overflow-y-auto overscroll-contain rounded-2xl border bg-panel">
+        <AppPanel>
           <div className="mx-auto max-w-content space-y-stack px-gutter py-6">
             <header className="hidden items-center gap-3 md:flex">
               <Avatar><AvatarFallback>AS</AvatarFallback></Avatar>
@@ -106,7 +109,7 @@ export function DashboardShell01() {
               </div>
             </header>
 
-            <h1 className="text-title">Overview</h1>
+            <Heading level={1}>Overview</Heading>
 
             <StatGroup>
               <Stat>
@@ -167,7 +170,7 @@ export function DashboardShell01() {
             </StatGroup>
 
             <div className="flex flex-wrap items-center gap-3">
-              <h2 className="text-heading">Metrics</h2>
+              <Heading level={2}>Metrics</Heading>
               <Tabs defaultValue="30d" className="order-last w-full overflow-x-auto sm:order-none sm:ml-auto sm:w-auto">
                 <TabsList>
                   {["All time", "12m", "3m", "30d", "Today"].map((r) => (
@@ -178,9 +181,9 @@ export function DashboardShell01() {
               <Button variant="outline" size="sm" className="ml-auto sm:ml-0"><SlidersHorizontalIcon /> Customize</Button>
             </div>
           </div>
-        </main>
+        </AppPanel>
       </div>
-    </div>
+    </AppShell>
   );
 }
 

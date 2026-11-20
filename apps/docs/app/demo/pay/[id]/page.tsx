@@ -12,6 +12,8 @@ import { InvoiceDocument } from "@/components/demo/invoice-document";
 import { PaymentMethodPicker, methodLabel, type PayMethod } from "@/components/demo/my-ui";
 import { FPX_BANKS } from "@/lib/demo/my";
 import { dmy, invoiceBalance, invoiceGrand, invoicePaid, money2, nextInstallment, useDemo } from "@/lib/demo/store";
+import { Surface } from "@recanica/ui/components/surface";
+import { IconBadge } from "@recanica/ui/components/layout";
 
 export default function PayInvoicePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = React.use(params);
@@ -48,11 +50,11 @@ export default function PayInvoicePage({ params }: { params: Promise<{ id: strin
         <div className="order-2 lg:order-1"><InvoiceDocument invoice={inv} /></div>
 
         <aside className="order-1 space-y-4 lg:sticky lg:top-6 lg:order-2 lg:self-start">
-          <div className="space-y-5 rounded-2xl border bg-panel p-5">
+          <Surface tone="panel" className="space-y-5">
             <div className="flex items-center gap-2 text-sm"><span className="size-5 rounded-md bg-brand text-brand-foreground" /> {state.org.name}</div>
             {inv.status === "paid" ? (
               <div className="space-y-3 text-center">
-                <span className="mx-auto flex size-12 items-center justify-center rounded-full bg-brand text-brand-foreground"><CheckIcon className="size-5" /></span>
+                <IconBadge className="mx-auto"><CheckIcon className="size-5" /></IconBadge>
                 <p className="text-title">Paid in full</p>
                 <p className="text-sm text-muted-foreground">Terima kasih! {money2(total)} received{inv.paidAt ? ` on ${dmy(inv.paidAt)}` : ""}.</p>
               </div>
@@ -83,7 +85,7 @@ export default function PayInvoicePage({ params }: { params: Promise<{ id: strin
                 <p className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground"><LockIcon className="size-3" /> Simulated payment · nothing is charged</p>
               </>
             )}
-          </div>
+          </Surface>
         </aside>
       </div>
     </main>

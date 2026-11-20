@@ -178,7 +178,7 @@ export function pageContext(kind: "component" | "pattern" | "block", title: stri
       : `Recreate the Recanica **${title}** ${kind} in this project. ${description}`;
   return `${intro}
 
-Follow Recanica's rules: monochrome semantic tokens only, regular/light type (no bold), pill buttons, rounded-2xl bordered surfaces without shadows, mobile-first.
+Follow Recanica's rules: calm, semantic tokens only (the project's --brand is the one accent), regular/light type (no bold), pill buttons, rounded-2xl bordered surfaces without shadows, mobile-first.
 Full rules: ${SITE}/llms-full.txt
 
 Reference implementation:

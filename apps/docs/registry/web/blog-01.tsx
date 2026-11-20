@@ -3,6 +3,8 @@
 import * as React from "react";
 import { Badge } from "@recanica/ui/components/badge";
 import { Tabs, TabsList, TabsTrigger } from "@recanica/ui/components/tabs";
+import { WebSectionTitle, WebSectionHeader } from "@recanica/ui/components/web-section";
+import { Heading } from "@recanica/ui/components/page";
 
 const posts = [
   { title: "What changes for small businesses with e-Invoice in 2026", cat: "Tax", date: "12 Nov 2026", read: "6 min", excerpt: "Who needs to comply, by when, and what the validation QR on your invoice actually does." },
@@ -25,18 +27,15 @@ export function Blog01() {
   return (
     <section className="px-gutter py-section-sm">
       <div className="mx-auto max-w-content space-y-12">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <div><h1 className="text-display-sm tracking-tight">Blog</h1><p className="mt-2 text-muted-foreground">Guides on billing, tax and running a small business in Malaysia.</p></div>
-          <div className="-mx-1 overflow-x-auto px-1">
+        <WebSectionHeader titleAs="h1" title="Blog" description="Guides on billing, tax and running a small business in Malaysia." actions={<div className="-mx-1 overflow-x-auto px-1">
             <Tabs value={cat} onValueChange={setCat}><TabsList>{cats.map((c) => <TabsTrigger key={c} value={c}>{c}</TabsTrigger>)}</TabsList></Tabs>
-          </div>
-        </div>
+          </div>} />
         {cat === "All" && (
           <a href="/site/blog/e-invoice-2026" className="group grid gap-6 lg:grid-cols-2 lg:items-center">
             <Cover className="aspect-[16/10]" />
             <div className="space-y-3">
               <Badge variant="outline">{featured.cat}</Badge>
-              <h2 className="text-heading text-balance group-hover:underline sm:text-title">{featured.title}</h2>
+              <Heading level={2} className="text-balance group-hover:underline sm:text-title">{featured.title}</Heading>
               <p className="text-muted-foreground">{featured.excerpt}</p>
               <p className="text-sm text-muted-foreground">{featured.date} · {featured.read} read</p>
             </div>

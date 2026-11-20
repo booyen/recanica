@@ -46,3 +46,19 @@ Same rules as Recanica's own CI:
 - **Recanica spec:** token colours only, no bold, pill buttons, radius scale, same component = same look.
 - **Copy:** AI jargon and placeholder text in rendered copy.
 - **Accessibility:** names, labels, 24px targets, dead links.
+
+## Rework an existing project (not just reskin)
+
+```bash
+npx recanica review http://localhost:3000 --crawl   # writes recanica-review.md
+```
+
+For every page the review lists what makes it busy, with the Recanica fix for each item:
+- competing primary buttons
+- too many text sizes, colours or borders
+- nested cards
+- a crowded first screen
+- wide tables, long unsectioned forms, long nav
+- tiny text, or a missing title
+
+It also suggests the Recanica pattern to rebuild the page as, and leaves a keep / change / remove table to agree **before** changing code.

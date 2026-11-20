@@ -5,6 +5,8 @@ import { MinusIcon, PlusIcon, Trash2Icon } from "lucide-react";
 import { Button } from "@recanica/ui/components/button";
 import { Input } from "@recanica/ui/components/input";
 import { Separator } from "@recanica/ui/components/separator";
+import { Heading } from "@recanica/ui/components/page";
+import { SplitLayout } from "@recanica/ui/components/layout";
 
 const initial = [
   { id: "p1", name: "Kopi Ais Blend", variant: "500g · Whole beans", price: 38, qty: 2 },
@@ -23,9 +25,9 @@ export function Cart01() {
   const setQty = (id: string, d: number) => setItems((x) => x.map((i) => (i.id === id ? { ...i, qty: Math.max(1, i.qty + d) } : i)));
   return (
     <section className="px-gutter py-section-sm">
-      <div className="mx-auto grid max-w-content gap-10 lg:grid-cols-[1fr_22rem]">
+      <SplitLayout>
         <div>
-          <h1 className="text-title">Your cart</h1>
+          <Heading level={1}>Your cart</Heading>
           {items.length === 0 ? (
             <p className="mt-8 text-muted-foreground">Your cart is empty. <a href="/site/shop" className="text-foreground underline underline-offset-4">Continue shopping</a></p>
           ) : (
@@ -64,7 +66,7 @@ export function Cart01() {
           </dl>
           <Button variant="brand" className="w-full" disabled={!items.length}>Checkout</Button>
         </aside>
-      </div>
+      </SplitLayout>
     </section>
   );
 }

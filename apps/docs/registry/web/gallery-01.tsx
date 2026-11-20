@@ -4,6 +4,8 @@ import * as React from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { Button } from "@recanica/ui/components/button";
 import { Dialog, DialogContent, DialogTitle } from "@recanica/ui/components/dialog";
+import { WebSectionTitle } from "@recanica/ui/components/web-section";
+import { Surface } from "@recanica/ui/components/surface";
 
 const shots = [
   { label: "Office, level 12", ratio: "aspect-[4/5]" }, { label: "Team lunch", ratio: "aspect-square" }, { label: "Workshop room", ratio: "aspect-[4/3]" },
@@ -17,12 +19,12 @@ export function Gallery01() {
   return (
     <section className="px-gutter py-section-sm">
       <div className="mx-auto max-w-content">
-        <h2 className="text-display-sm tracking-tight">Life at Acme</h2>
+        <WebSectionTitle>Life at Acme</WebSectionTitle>
         <div className="mt-10 columns-2 gap-3 md:columns-3 lg:columns-4">
           {shots.map((s, i) => (
-            <button key={s.label} onClick={() => setOpen(i)} className={`mb-3 block w-full break-inside-avoid rounded-2xl border bg-muted ${s.ratio} text-xs text-muted-foreground transition-opacity hover:opacity-80`} aria-label={`Open ${s.label}`}>
+            <Surface as="button" type="button" key={s.label} onClick={() => setOpen(i)} tone="muted" inset="none" className={`mb-3 block w-full break-inside-avoid ${s.ratio} text-xs text-muted-foreground transition-opacity hover:opacity-80`} aria-label={`Open ${s.label}`}>
               {s.label}
-            </button>
+            </Surface>
           ))}
         </div>
       </div>

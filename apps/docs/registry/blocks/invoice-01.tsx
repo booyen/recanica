@@ -4,6 +4,7 @@ import { DownloadIcon, PrinterIcon, SendIcon } from "lucide-react";
 import { Badge } from "@recanica/ui/components/badge";
 import { Button } from "@recanica/ui/components/button";
 import { Separator } from "@recanica/ui/components/separator";
+import { Heading } from "@recanica/ui/components/page";
 
 const invoice = {
   number: "INV-2026-0042",
@@ -43,14 +44,14 @@ export function Invoice01() {
         </div>
       </div>
 
-      <article className="mx-auto max-w-narrow rounded-2xl border bg-panel p-6 sm:p-10 print:max-w-none print:rounded-none print:border-0 print:text-black">
+      <article /* recanica-ignore: printable invoice document with print styles */ className="mx-auto max-w-narrow rounded-2xl border bg-panel p-6 sm:p-10 print:max-w-none print:rounded-none print:border-0 print:text-black">
         <header className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
           <div className="flex items-center gap-2">
             <span className="size-7 rounded-lg bg-brand text-brand-foreground print:bg-black" />
             <span className="text-lg">Acme Studio</span>
           </div>
           <div className="sm:text-right">
-            <h1 className="text-title">Tax Invoice</h1>
+            <Heading level={1}>Tax Invoice</Heading>
             <p className="font-mono text-sm text-muted-foreground">{invoice.number}</p>
           </div>
         </header>

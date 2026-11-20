@@ -1,21 +1,19 @@
 import Link from "next/link";
 import { ArrowUpRightIcon } from "lucide-react";
-import { Badge } from "@recanica/ui/components/badge";
 import { DocsPageHeader, H2, P } from "@/components/docs/page-header";
 import { Pager } from "@/components/docs/pager";
 import catalog from "@/lib/catalog.json";
 import { slugify } from "@/lib/kit";
+import { Surface } from "@recanica/ui/components/surface";
 
 export const metadata = { title: "Page Library", description: "Common dashboard, portal and website page types, and what in Recanica implements each." };
 
-const tone = { demo: "default", pattern: "outline", component: "muted", web: "secondary", block: "outline" } as const;
 const slug = slugify;
 
 export default function Page() {
   return (
     <>
       <DocsPageHeader
-        eyebrow="Library"
         title="Page Library"
         description={`${catalog.appLibrary.length} dashboard and portal page types, and ${catalog.webRecipes.length} website page recipes. Start every new screen here instead of designing from scratch.`}
       />
@@ -23,21 +21,21 @@ export default function Page() {
       <P>Each page type links to a working demo page and the patterns or components it&apos;s built from.</P>
       <div className="mt-6 grid gap-4 md:grid-cols-2">
         {catalog.appLibrary.map((c) => (
-          <section key={c.category} id={slug(c.category)} className="scroll-mt-20 rounded-2xl border bg-panel p-5">
+          <Surface as="section" tone="panel" className="scroll-mt-20" key={c.category} id={slug(c.category)}>
             <h3>{c.category}</h3>
             <p className="mt-1 text-sm text-muted-foreground">{c.description}</p>
             <ul className="mt-4 space-y-1.5">
               {c.items.map((i) => (
                 <li key={i.href}>
                   <Link href={i.href} className="group flex items-center gap-2 py-1 text-sm hover:underline">
-                    <Badge variant={tone[i.kind as keyof typeof tone]} className="w-20 justify-center">{i.kind}</Badge>
+                    <span className="w-20 shrink-0 text-sm text-muted-foreground">{i.kind}</span>
                     <span className="min-w-0 truncate">{i.label}</span>
                     {i.kind === "demo" && <ArrowUpRightIcon className="size-3.5 shrink-0 text-muted-foreground" />}
                   </Link>
                 </li>
               ))}
             </ul>
-          </section>
+          </Surface>
         ))}
       </div>
       <H2 id="website">Website page recipes</H2>

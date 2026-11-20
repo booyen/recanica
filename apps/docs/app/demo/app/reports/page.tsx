@@ -9,6 +9,7 @@ import { BarRow, Stat, StatGroup, StatHeader, StatList, StatValue } from "@recan
 import { Tabs, TabsList, TabsTrigger } from "@recanica/ui/components/tabs";
 import { PageHeader } from "@/components/demo/ui";
 import { metrics, money, useDemo } from "@/lib/demo/store";
+import { Surface } from "@recanica/ui/components/surface";
 
 const cfg = { value: { label: "Revenue", color: "var(--chart-1)" }, customers: { label: "New customers", color: "var(--chart-3)" } } satisfies ChartConfig;
 
@@ -35,23 +36,23 @@ export default function ReportsPage() {
         <Stat><StatHeader title="Fees" /><StatValue value={money(Math.round(m.fees))} /></Stat>
       </StatGroup>
       <div className="grid gap-6 lg:grid-cols-2">
-        <section className="rounded-2xl border bg-card p-panel">
+        <Surface as="section" inset="lg">
           <h2 className="mb-6">Revenue</h2>
           <ChartContainer config={cfg} className="h-56 w-full">
             <BarChart data={m.months}><CartesianGrid vertical={false} /><XAxis dataKey="label" tickLine={false} axisLine={false} /><ChartTooltip content={<ChartTooltipContent formatter={(v) => money(Number(v))} />} /><Bar dataKey="value" fill="var(--color-value)" radius={6} /></BarChart>
           </ChartContainer>
-        </section>
-        <section className="rounded-2xl border bg-card p-panel">
+        </Surface>
+        <Surface as="section" inset="lg">
           <h2 className="mb-6">New customers</h2>
           <ChartContainer config={cfg} className="h-56 w-full">
             <LineChart data={custByMonth}><CartesianGrid vertical={false} /><XAxis dataKey="label" tickLine={false} axisLine={false} /><ChartTooltip content={<ChartTooltipContent />} /><Line dataKey="customers" stroke="var(--color-customers)" strokeWidth={1.5} dot={false} /></LineChart>
           </ChartContainer>
-        </section>
+        </Surface>
       </div>
-      <section className="mt-stack rounded-2xl border bg-card p-panel">
+      <Surface as="section" inset="lg" className="mt-stack">
         <h2>Revenue by product</h2>
         <StatList className="mt-4">{byProduct.map((p, i) => <BarRow key={p.name} label={p.name} value={money(p.value)} percent={(p.value / max) * 100} active={i === 0} />)}</StatList>
-      </section>
+      </Surface>
     </>
   );
 }

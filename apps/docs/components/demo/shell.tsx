@@ -23,6 +23,10 @@ import { ScrollArea } from "@recanica/ui/components/scroll-area";
 import { Sheet, SheetContent, SheetTitle } from "@recanica/ui/components/sheet";
 import { cn } from "@recanica/ui/lib/utils";
 import { ago, initials, useDemo } from "@/lib/demo/store";
+import { Page } from "@recanica/ui/components/page";
+import { Surface } from "@recanica/ui/components/surface";
+import { AppSidebar, AppShell, AppSidebarHeader, AppSidebarSub, AppPanel } from "@recanica/ui/components/app-shell";
+import { NavItem } from "@recanica/ui/components/nav-item";
 
 type NavItem = { label: string; href: string; icon: typeof BoxIcon; children?: { label: string; href: string }[] };
 
@@ -128,15 +132,15 @@ function SidebarContents({ onNavigate, openSearch, onHide }: { onNavigate?: () =
   const router = useRouter();
   const { state, dispatch } = useDemo();
   return (
-    <div className="flex h-full flex-col gap-1 p-3">
-      <div className="mb-4 flex items-center justify-between px-2 py-1">
+    <AppSidebar>
+      <AppSidebarHeader>
         <Link href="/demo" onClick={onNavigate} aria-label="Demo home"><span className="block size-6 rounded-md bg-brand text-brand-foreground" /></Link>
         <div className="flex">
           <Notifications />
           <Button size="icon-sm" variant="ghost" aria-label="Search" onClick={openSearch}><SearchIcon /></Button>
           {onHide && <Button size="icon-sm" variant="ghost" aria-label="Hide sidebar (⌘B)" title="Hide sidebar (⌘B)" onClick={onHide}><PanelLeftCloseIcon /></Button>}
         </div>
-      </div>
+      </AppSidebarHeader>
       <nav className="flex flex-col gap-0.5">
         {NAV.map((n) => {
           const open = isActive(pathname, n.href) || n.children?.some((c) => isActive(pathname, c.href));
@@ -145,6 +149,7 @@ function SidebarContents({ onNavigate, openSearch, onHide }: { onNavigate?: () =
               <Link
                 href={n.href}
                 onClick={onNavigate}
+                aria-current={isActive(pathname, n.href) ? "page" : undefined}
                 className={cn(
                   "flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-sidebar-foreground transition-colors hover:text-foreground",
                   open && "bg-sidebar-accent text-foreground"
@@ -153,18 +158,19 @@ function SidebarContents({ onNavigate, openSearch, onHide }: { onNavigate?: () =
                 <n.icon className="size-4" /> {n.label}
               </Link>
               {n.children && open && (
-                <div className="my-1 ml-5 flex flex-col border-l pl-3">
+                <AppSidebarSub>
                   {n.children.map((c) => (
                     <Link
                       key={c.href}
                       href={c.href}
                       onClick={onNavigate}
+                      aria-current={isActive(pathname, c.href) && !n.children!.some((o) => o.href.length > c.href.length && isActive(pathname, o.href)) ? "page" : undefined}
                       className={cn("py-1.5 text-sm text-sidebar-foreground transition-colors hover:text-foreground", isActive(pathname, c.href) && !n.children!.some((o) => o.href.length > c.href.length && isActive(pathname, o.href)) && "text-foreground")}
                     >
                       {c.label}
                     </Link>
                   ))}
-                </div>
+                </AppSidebarSub>
               )}
             </div>
           );
@@ -173,18 +179,18 @@ function SidebarContents({ onNavigate, openSearch, onHide }: { onNavigate?: () =
 
       <div className="mt-auto space-y-1 pt-6">
         {!state.org.payoutConnected && (
-          <div className="mb-3 rounded-xl border bg-panel p-4 text-sm">
+          <Surface size="sm" tone="panel" inset="sm" className="mb-3 text-sm">
             <p>Connect payouts</p>
             <p className="mt-1 text-muted-foreground">Link a bank account to withdraw your balance.</p>
             <Link href="/demo/app/finance" onClick={onNavigate} className="mt-3 inline-block font-medium text-brand">Set up</Link>
-          </div>
+          </Surface>
         )}
-        <Link href="/demo/portal" className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-sidebar-foreground hover:text-foreground">
+        <NavItem variant="sidebar" as={Link} href="/demo/portal">
           <UsersIcon className="size-4" /> Customer portal
-        </Link>
-        <Link href="/docs" className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-sidebar-foreground hover:text-foreground">
+        </NavItem>
+        <NavItem variant="sidebar" as={Link} href="/docs">
           <ArrowUpRightIcon className="size-4" /> Design system
-        </Link>
+        </NavItem>
         <DropdownMenu>
           <DropdownMenuTrigger className="mt-2 flex w-full items-center gap-3 rounded-lg border-t px-2 pt-3 text-left text-sm">
             <Avatar className="size-7"><AvatarFallback>{initials(state.org.name)}</AvatarFallback></Avatar>
@@ -200,7 +206,7 @@ function SidebarContents({ onNavigate, openSearch, onHide }: { onNavigate?: () =
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-    </div>
+    </AppSidebar>
   );
 }
 
@@ -281,7 +287,7 @@ export function DemoShell({ children }: { children: React.ReactNode }) {
   const current = NAV.flatMap((n) => [n, ...(n.children ?? []).map((c) => ({ ...c, icon: n.icon }))]).filter((n) => isActive(pathname, n.href)).pop();
 
   return (
-    <div className="flex h-svh overflow-hidden bg-sidebar text-foreground">
+    <AppShell>
       <aside
         inert={hidden || undefined}
         aria-hidden={hidden || undefined}
@@ -303,9 +309,9 @@ export function DemoShell({ children }: { children: React.ReactNode }) {
           <Button variant="ghost" size="icon" className="ml-auto" aria-label="Search" onClick={() => setSearch(true)}><SearchIcon /></Button>
         </div>
         {/* Frame stays put; only the content inside scrolls, so the rounded border never moves. */}
-        <main ref={scroller} className="min-h-0 flex-1 overflow-y-auto overscroll-contain rounded-2xl border bg-panel">
-          <div className="mx-auto max-w-content px-gutter py-6 pb-16 sm:py-8">{children}</div>
-        </main>
+        <AppPanel ref={scroller}>
+          <Page width="content" className="mx-auto px-gutter py-6 pb-16 sm:py-8">{children}</Page>
+        </AppPanel>
         <p className="hidden shrink-0 px-2 pt-2 text-xs text-muted-foreground md:block">
           Demo data lives in your browser. <Kbd>⌘</Kbd> <Kbd>K</Kbd> search · <Kbd>⌘</Kbd> <Kbd>B</Kbd> sidebar.
         </p>
@@ -317,6 +323,6 @@ export function DemoShell({ children }: { children: React.ReactNode }) {
         </SheetContent>
       </Sheet>
       <CommandMenu open={search} setOpen={setSearch} />
-    </div>
+    </AppShell>
   );
 }

@@ -49,7 +49,7 @@ export function SiteHeader() {
         <Link href="/site" className="flex items-center gap-2"><span className="size-6 rounded-md bg-brand text-brand-foreground" /><span className="font-medium">Acme</span></Link>
         <nav className="hidden items-center gap-5 text-sm text-muted-foreground lg:flex">
           {SITE_PAGES.slice(1).map((p) => (
-            <Link key={p.href} href={p.href} className={cn("transition-colors hover:text-foreground", pathname.startsWith(p.href) && "text-foreground")}>{p.label}</Link>
+            <Link key={p.href} href={p.href} aria-current={pathname.startsWith(p.href) ? "page" : undefined} className={cn("transition-colors hover:text-foreground", pathname.startsWith(p.href) && "text-foreground")}>{p.label}</Link>
           ))}
         </nav>
         <div className="ml-auto flex items-center gap-2">

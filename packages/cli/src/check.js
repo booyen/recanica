@@ -15,10 +15,13 @@
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
 import { COPY_RULES } from "./copy-rules.js";
+import { globToRe, loadConfig } from "./config.js";
 
 const SKIP_DIRS = new Set(["node_modules", ".next", ".nuxt", ".svelte-kit", ".turbo", ".git", "dist", "build", "out", "coverage", "generated", "__registry__", "vendor", "Pods", ".dart_tool"]);
 const EXT = /\.(tsx|jsx|ts|js|mjs|vue|svelte|astro|html|php|erb|css|scss|dart|swift|kt)$/;
 // Token sources are allowed to hold raw values.
+// The component library itself is where raw elements belong; the hand-built rule applies to apps, pages and sections.
+const COMPONENT_SOURCE = /packages\/ui\/src\/components\//;
 const TOKEN_FILE = /(recanica[_-]?tokens|RecanicaTokens|recanica\.css|variables\.css|tailwind-theme\.css|theme\.css|tokens\.(json|ts|js))$/i;
 
 const HUES = "red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose|slate|gray|zinc|neutral|stone";
@@ -33,34 +36,26 @@ export const RULES = [
   ["arbitrary-color", "error", new RegExp(`\\b(?:${UTIL})-\\[(?:#|rgb|hsl|oklch(?!\\(from))`, "i"),
     "Arbitrary colour utility", "use a semantic colour utility"],
   ["palette-hue", "error", new RegExp(`\\b(?:${UTIL})-(?:${HUES})-(?:50|[1-9]00|950)\\b`),
-    "Tailwind palette colour", "Recanica is monochrome: use foreground/muted/border, or success / warning / destructive for status"],
-  ["bold-weight", "error", /\bfont-(?:semibold|bold|extrabold|black)\b|font-weight\s*:\s*(?:[6-9]00|bold|bolder)\b|FontWeight\.(?:w[6-9]00|bold)\b|\.(?:semibold|bold|heavy|black)\b(?=\s*[),])|fontWeight\s*[:=]\s*["']?(?:[6-9]00|bold)/,
+    "Tailwind palette colour", "keep it calm: neutrals (foreground/muted/border), your one brand colour (bg-brand, text-brand; set --brand in CSS), or success / warning / destructive for status"],
+  ["bold-weight", "warn", /\bfont-(?:semibold|bold|extrabold|black)\b|font-weight\s*:\s*(?:[6-9]00|bold|bolder)\b|FontWeight\.(?:w[6-9]00|bold)\b|\.(?:semibold|bold|heavy|black)\b(?=\s*[),])|fontWeight\s*[:=]\s*["']?(?:[6-9]00|bold)/,
     "Heavy font weight", "Recanica type is light or regular; use font-normal / font-light and size for hierarchy"],
-  ["gradient", "error", /\bbg-(?:gradient-to|linear|radial|conic)-|\b(?:linear|radial|conic)-gradient\(|LinearGradient\(|Brush\.(?:linear|radial)Gradient/,
+  ["gradient", "warn", /\bbg-(?:gradient-to|linear|radial|conic)-|\b(?:linear|radial|conic)-gradient\(|LinearGradient\(|Brush\.(?:linear|radial)Gradient/,
     "Gradient", "Brand colour is flat: bg-brand / text-brand"],
   ["arbitrary-radius", "warn", /\brounded(?:-[trblse]{1,2})?-\[[^\]]+\]/,
     "Arbitrary radius", "use the scale: rounded-lg (controls), rounded-full (pills), rounded-2xl (surfaces)"],
   ["arbitrary-spacing", "warn", /\b(?:p|px|py|pt|pb|pl|pr|m|mx|my|mt|mb|ml|mr|gap|gap-x|gap-y|space-x|space-y)-\[\d+px\]/,
     "Arbitrary pixel spacing", "use the 4px scale (p-4, gap-6) or layout tokens (p-panel, px-gutter)"],
+  ["structure", "warn", /<h[123]\b[^>]*className="[^"]*\btext-(?:display-(?:sm|md|lg)|title|heading)\b/,
+    "Hand-made page structure", "use the shared parts: PageHeader / Heading / Section (apps), WebSectionTitle / WebHeroTitle / WebSection (sites), so rhythm and titles come from one place"],
+  ["hand-built", "warn", /<(?:button|input|select|textarea|table)\b(?![^>]*recanica-ignore)/,
+    "Hand-built element", "use the component: Button / Toggle / Item, Input, NativeSelect / Select, Textarea, Table / ReferenceTable"],
+  ["hand-built", "warn", /className="[^"]*\brounded-(?:xl|2xl) border\b[^"]*\bp-(?:\d|panel|inset)/,
+    "Hand-made card", "use Surface (tone, inset) or Card"],
   ["uppercase-label", "warn", /\buppercase\b(?=[^"'`]*tracking-(?:wide|wider|widest))/,
     "Shouty uppercase label", "use sentence case; small muted text carries the hierarchy"],
   // Copy rules come from copy-rules.js (shared with the repo copy lint and the page audit).
   ...COPY_RULES.map(([re, msg, level]) => ["copy", level, re, msg, "say what actually happens, with a number or a real noun"]),
 ];
-
-function loadConfig(root) {
-  const p = join(root, "recanica.config.json");
-  if (!existsSync(p)) return { ignore: [], rules: {} };
-  try {
-    const c = JSON.parse(readFileSync(p, "utf8"));
-    return { ignore: c.ignore ?? [], rules: c.rules ?? {} };
-  } catch {
-    return { ignore: [], rules: {} };
-  }
-}
-
-const globToRe = (g) =>
-  new RegExp("^" + g.replace(/[.+^${}()|[\]\\]/g, "\\$&").replace(/\*\*\/?/g, "§").replace(/\*/g, "[^/]*").replace(/§/g, ".*") + "$");
 
 /** Lines that are code structure, not UI: imports, and comment-only lines are skipped for copy rules. */
 const isComment = (line) => /^\s*(\/\/|\*|\/\*|#(?!\w)|<!--)/.test(line);
@@ -87,9 +82,11 @@ export function check(root, paths, { all = false } = {}) {
     lines.forEach((line, i) => {
       if (line.includes("recanica-ignore") || /^\s*import\b/.test(line)) return;
       for (const [id, defLevel, re, msg, fix] of RULES) {
-        const level = cfg.rules[id] ?? defLevel;
-        if (level === "off" || (level === "warn" && !all)) continue;
+        const set = cfg.rules[id];
+        const level = set === "must" ? "error" : set === "should" ? "warn" : set ?? defLevel;
+        if (level === "off") continue;
         if (id === "copy" && isComment(line)) continue;
+        if (id === "hand-built" && (COMPONENT_SOURCE.test(abs) || abs.endsWith(".html"))) continue; // plain HTML uses the rc-* CSS package
         if (id === "hard-coded-color" && (isComment(line) || /\bmeta\b.*theme-color|<svg|xmlns/.test(line))) continue;
         const m = line.match(re);
         // "#1042" style ticket/issue numbers are not colours.
@@ -97,6 +94,33 @@ export function check(root, paths, { all = false } = {}) {
         if (m) hits.push({ file: rel, line: i + 1, col: (m.index ?? 0) + 1, rule: id, level, message: msg, match: m[0].trim(), fix });
       }
     });
+  }
+  // Repetition: the same long utility string in 3+ places means a part is missing, whatever it looks like.
+  // Shape-specific rules only catch shapes we've already seen; this catches the next one too.
+  const repeatLevel = cfg.rules["repeated-classes"] === "must" ? "error" : cfg.rules["repeated-classes"] === "off" ? "off" : "warn";
+  if (repeatLevel !== "off") {
+    const seen = new Map();
+    for (const abs of files) {
+      if (COMPONENT_SOURCE.test(abs) || !/\.(tsx|jsx|vue|svelte|astro|html|php|erb)$/.test(abs)) continue;
+      readFileSync(abs, "utf8").split("\n").forEach((line, i) => {
+        if (line.includes("recanica-ignore")) return;
+        for (const m of line.matchAll(/class(?:Name)?="([^"{}$]+)"/g)) {
+          const tokens = m[1].trim().split(/\s+/);
+          if (tokens.length < 5) continue;
+          const key = [...tokens].sort().join(" ");
+          if (!seen.has(key)) seen.set(key, []);
+          seen.get(key).push({ file: relative(root, abs), line: i + 1, col: (m.index ?? 0) + 1, match: m[1].slice(0, 70) });
+        }
+      });
+    }
+    for (const [, uses] of seen) {
+      // A section and its starter-template copy (same file name) are one source distributed twice, not two decisions.
+      const sources = new Set(uses.map((u) => u.file.split("/").pop() + ":" + u.match));
+      if (uses.length < 3 || new Set(uses.map((u) => u.file.split("/").pop())).size < 2 && sources.size < 3) continue;
+      if (new Set(uses.map((u) => u.file.split("/").pop())).size < 3 && uses.every((u, _, a) => a.filter((x) => x.file.split("/").pop() === u.file.split("/").pop()).length >= 1) && new Set(uses.map((u) => u.file.split("/").pop() + "@" + u.line)).size < 3) continue;
+      for (const u of uses) hits.push({ ...u, rule: "repeated-classes", level: repeatLevel,
+        message: `Repeated class string (${uses.length}× in the codebase)`, fix: "a part is missing: make it a component (and an rc-* class), then use it everywhere" });
+    }
   }
   return { files: files.length, hits };
 }
@@ -108,7 +132,7 @@ export function runCheck(root, args, flags, log) {
     process.stdout.write(JSON.stringify({ files, errors: errors.length, warnings: hits.length - errors.length, hits }, null, 2) + "\n");
   } else {
     for (const h of hits) log(`${h.level === "error" ? "✗" : "!"} ${h.file}:${h.line}:${h.col}  ${h.message}: “${h.match}”\n    → ${h.fix}  [${h.rule}]`);
-    log(`\nrecanica check: ${files} files · ${errors.length} errors · ${hits.length - errors.length} warnings${flags.all ? "" : " (--all shows warnings)"}`);
+    log(`\nrecanica check: ${files} files · ${errors.length} must-fix · ${hits.length - errors.length} should (deviate with a recanica-ignore reason)`);
     if (errors.length) log("Fix with tokens, or add `recanica-ignore` with a reason on the line. Rules: npx recanica rules");
   }
   return errors.length && !flags.warn ? 1 : 0;

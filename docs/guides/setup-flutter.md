@@ -1,5 +1,8 @@
 # Flutter
 
+
+> **Your own font:** Geist is only the default. Load any calm sans with light/regular weights and tabular numerals, then set `--font-sans` / `--font-mono` to it.
+
 Copy [`packages/tokens/generated/flutter/recanica_tokens.dart`](../../packages/tokens/generated/flutter/recanica_tokens.dart) into `lib/theme/`
 (or run `npx recanica init --stack flutter` in the project root).
 

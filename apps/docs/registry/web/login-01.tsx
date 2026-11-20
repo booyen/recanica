@@ -5,6 +5,7 @@ import { Checkbox } from "@recanica/ui/components/checkbox";
 import { Field, FieldLabel } from "@recanica/ui/components/field";
 import { Input } from "@recanica/ui/components/input";
 import { Label } from "@recanica/ui/components/label";
+import { Heading } from "@recanica/ui/components/page";
 
 export function Login01() {
   return (
@@ -19,7 +20,7 @@ export function Login01() {
       <div className="flex items-center justify-center px-gutter py-12">
         <form className="w-full max-w-sm space-y-6" onSubmit={(e) => e.preventDefault()}>
           <div className="space-y-1">
-            <h1 className="text-title">Sign in</h1>
+            <Heading level={1}>Sign in</Heading>
             <p className="text-sm text-muted-foreground">New here? <a href="/site/coming-soon" className="text-foreground underline-offset-4 hover:underline">Create an account</a></p>
           </div>
           <Field><FieldLabel htmlFor="l-email">Email</FieldLabel><Input id="l-email" type="email" autoComplete="email" required /></Field>

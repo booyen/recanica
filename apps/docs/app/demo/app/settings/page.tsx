@@ -16,6 +16,7 @@ import { PageHeader } from "@/components/demo/ui";
 import { useDemo } from "@/lib/demo/store";
 import { STATES, TAX } from "@/lib/demo/my";
 import type { Org, TaxCode } from "@/lib/demo/types";
+import { Surface } from "@recanica/ui/components/surface";
 
 function Row({ title, description, children }: { title: string; description: string; children: React.ReactNode }) {
   return (
@@ -97,24 +98,24 @@ export default function SettingsPage() {
           <Field><FieldLabel htmlFor="o-bank">Bank</FieldLabel><Input id="o-bank" value={draft.bank.name} onChange={(e) => set({ bank: { ...draft.bank, name: e.target.value } })} /></Field>
           <Field><FieldLabel htmlFor="o-acct">Account no.</FieldLabel><Input id="o-acct" value={draft.bank.account} onChange={(e) => set({ bank: { ...draft.bank, account: e.target.value } })} /></Field>
         </div>
-        <label className="flex items-start justify-between gap-4 rounded-xl border p-4">
+        <Surface as="label" size="sm" tone="plain" inset="sm" className="flex items-start justify-between gap-4">
           <span>
             <span className="block text-sm">LHDN MyInvois e-Invoice</span>
             <span className="block text-sm text-muted-foreground">Submit invoices for validation when sent and print the validation QR code. Simulated in this demo.</span>
           </span>
           <Switch checked={draft.einvoice} onCheckedChange={(c) => set({ einvoice: c })} />
-        </label>
+        </Surface>
       </Row>
       <Row title="Notifications" description="What appears in your activity feed emails.">
         {([["orders", "New orders", "Every successful payment."], ["cancellations", "Cancellations", "When a subscription is canceled."], ["weekly", "Weekly summary", "Revenue every Monday."]] as const).map(([k, t, d]) => (
-          <label key={k} className="flex items-start justify-between gap-4 rounded-xl border p-4">
+          <Surface as="label" size="sm" tone="plain" inset="sm" className="flex items-start justify-between gap-4" key={k}>
             <span><span className="block text-sm">{t}</span><span className="block text-sm text-muted-foreground">{d}</span></span>
             <Switch checked={draft.notify[k]} onCheckedChange={(c) => set({ notify: { ...draft.notify, [k]: c } })} />
-          </label>
+          </Surface>
         ))}
       </Row>
       <Row title="Demo data" description="Start over with the original sample data.">
-        <div className="flex flex-col gap-3 rounded-2xl border border-destructive/40 p-5 sm:flex-row sm:items-center sm:justify-between">
+        <Surface tone="plain" className="flex flex-col gap-3 border-destructive/40 sm:flex-row sm:items-center sm:justify-between">
           <div><p className="text-sm">Reset everything</p><p className="text-sm text-muted-foreground">Products, customers, orders and invoices go back to the seed.</p></div>
           <AlertDialog onOpenChange={() => setConfirm("")}>
             <AlertDialogTrigger asChild><Button variant="destructive">Reset</Button></AlertDialogTrigger>
@@ -133,7 +134,7 @@ export default function SettingsPage() {
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
-        </div>
+        </Surface>
       </Row>
 
       <div className={`fixed inset-x-0 bottom-0 z-30 border-t bg-background/90 backdrop-blur transition-transform duration-300 ease-out-soft ${dirty ? "translate-y-0" : "translate-y-full"}`}>

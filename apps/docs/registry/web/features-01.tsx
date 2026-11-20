@@ -1,4 +1,6 @@
 import { BarChart3Icon, GlobeIcon, KeyRoundIcon, LayersIcon, ReceiptIcon, ZapIcon } from "lucide-react";
+import { WebSectionTitle } from "@recanica/ui/components/web-section";
+import { SurfaceGrid } from "@recanica/ui/components/surface";
 
 const features = [
   { icon: ZapIcon, title: "Checkout in one line", body: "Drop-in hosted checkout or embed it. Live in minutes." },
@@ -14,10 +16,10 @@ export function Features01() {
     <section className="px-gutter py-section">
       <div className="mx-auto max-w-content">
         <div className="max-w-2xl">
-          <h2 className="text-display-sm tracking-tight">Everything to sell software</h2>
+          <WebSectionTitle>Everything to sell software</WebSectionTitle>
           <p className="mt-4 text-muted-foreground sm:text-lg">One platform, from first checkout to thousandth renewal.</p>
         </div>
-        <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border bg-border sm:grid-cols-2 lg:grid-cols-3">
+        <SurfaceGrid className="mt-12 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((f) => (
             <div key={f.title} className="space-y-3 bg-background p-panel">
               <span className="flex size-10 items-center justify-center rounded-xl border bg-muted"><f.icon className="size-5" /></span>
@@ -25,7 +27,7 @@ export function Features01() {
               <p className="text-sm text-muted-foreground">{f.body}</p>
             </div>
           ))}
-        </div>
+        </SurfaceGrid>
       </div>
     </section>
   );

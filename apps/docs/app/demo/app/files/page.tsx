@@ -26,7 +26,7 @@ export default function FilesPage() {
     <>
       <PageHeader title="Files" description="Contracts, tax documents and brand assets. 2.1 GB of 10 GB used." actions={<Button onClick={() => toast("Upload is simulated in the demo")}><UploadIcon /> Upload</Button>} />
       <Breadcrumb className="mb-4"><BreadcrumbList>
-        <BreadcrumbItem>{dir ? <BreadcrumbLink asChild><button onClick={() => setDir("")}>All files</button></BreadcrumbLink> : <BreadcrumbPage>All files</BreadcrumbPage>}</BreadcrumbItem>
+        <BreadcrumbItem>{dir ? <BreadcrumbLink asChild><Button variant="link" size="inline" onClick={() => setDir("")}>All files</Button></BreadcrumbLink> : <BreadcrumbPage>All files</BreadcrumbPage>}</BreadcrumbItem>
         {dir && <><BreadcrumbSeparator /><BreadcrumbItem><BreadcrumbPage>{dir}</BreadcrumbPage></BreadcrumbItem></>}
       </BreadcrumbList></Breadcrumb>
       <div className="overflow-hidden rounded-2xl border bg-card">

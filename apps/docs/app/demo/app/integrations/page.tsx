@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { Button } from "@recanica/ui/components/button";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@recanica/ui/components/input-group";
 import { PageHeader } from "@/components/demo/ui";
+import { Surface } from "@recanica/ui/components/surface";
 
 const apps = [
   { name: "Xero", cat: "Accounting", body: "Sync invoices and payouts to your ledger." },
@@ -30,7 +31,7 @@ export default function IntegrationsPage() {
         {list.map((a) => {
           const connected = on.has(a.name);
           return (
-            <li key={a.name} className="flex flex-col gap-4 rounded-2xl border bg-card p-5">
+            <Surface as="li" className="flex flex-col gap-4" key={a.name}>
               <div className="flex items-center gap-3">
                 <span className="flex size-10 items-center justify-center rounded-xl border bg-muted text-sm">{a.name[0]}</span>
                 <div><p>{a.name}</p><p className="text-xs text-muted-foreground">{a.cat}</p></div>
@@ -39,7 +40,7 @@ export default function IntegrationsPage() {
               <Button variant={connected ? "outline" : "default"} size="sm" className="self-start" onClick={() => { setOn((s) => { const n = new Set(s); if (connected) n.delete(a.name); else n.add(a.name); return n; }); toast(connected ? `${a.name} disconnected` : `${a.name} connected`); }}>
                 {connected ? "Disconnect" : "Connect"}
               </Button>
-            </li>
+            </Surface>
           );
         })}
       </ul>

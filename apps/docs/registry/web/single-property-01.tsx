@@ -7,6 +7,8 @@ import { Badge } from "@recanica/ui/components/badge";
 import { Button } from "@recanica/ui/components/button";
 import { Input } from "@recanica/ui/components/input";
 import { Textarea } from "@recanica/ui/components/textarea";
+import { Heading } from "@recanica/ui/components/page";
+import { SurfaceGrid } from "@recanica/ui/components/surface";
 
 const facts = [["Price", "RM 1,280,000"], ["Bedrooms", "3"], ["Bathrooms", "2"], ["Built-up", "1,420 sqft"], ["Tenure", "Freehold"], ["Furnishing", "Partly furnished"]];
 const amenities = ["24-hour security", "Swimming pool", "Gym", "2 car parks", "Near international schools", "5 min to Publika"];
@@ -25,18 +27,18 @@ export function SingleProperty01() {
           <div className="space-y-8">
             <div className="space-y-2">
               <Badge variant="outline">For sale</Badge>
-              <h1 className="text-title">Corner unit at Mont Kiara</h1>
+              <Heading level={1}>Corner unit at Mont Kiara</Heading>
               <p className="text-muted-foreground">Jalan Kiara 3, Mont Kiara, 50480 Kuala Lumpur</p>
             </div>
-            <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border bg-border sm:grid-cols-3">
+            <SurfaceGrid as="dl" className="grid-cols-2 sm:grid-cols-3">
               {facts.map(([k, v]) => <div key={k} className="bg-background p-4"><dt className="text-xs text-muted-foreground">{k}</dt><dd className="mt-1">{v}</dd></div>)}
-            </dl>
+            </SurfaceGrid>
             <div className="space-y-3">
-              <h2 className="text-heading">About this home</h2>
+              <Heading level={2}>About this home</Heading>
               <p className="max-w-copy text-muted-foreground">A bright corner unit on the 18th floor with windows on two sides. Renovated kitchen, built-in wardrobes and a balcony facing the Kiara hills. Walking distance to cafés and the international school.</p>
             </div>
             <div className="space-y-3">
-              <h2 className="text-heading">Amenities</h2>
+              <Heading level={2}>Amenities</Heading>
               <ul className="grid gap-2 text-sm sm:grid-cols-2">{amenities.map((a) => <li key={a} className="flex items-center gap-2"><CheckIcon className="size-4" /> {a}</li>)}</ul>
             </div>
           </div>

@@ -12,8 +12,8 @@ export function PreviewTabs({ preview, html, raw }: { preview: React.ReactNode; 
         <TabsTrigger value="code">Code</TabsTrigger>
       </TabsList>
       <TabsContent value="preview">
-        <div className="flex min-h-[320px] w-full items-center justify-center overflow-x-auto rounded-2xl border bg-panel p-6 sm:p-10">
-          <div className="w-full max-w-full [&>*]:mx-auto">{preview}</div>
+        <div /* recanica-ignore: preview frame with responsive padding */ className="flex min-h-[320px] w-full items-center justify-center overflow-x-auto rounded-2xl border bg-panel p-6 sm:p-10">
+          <div data-preview className="w-full max-w-full [&>*]:mx-auto">{preview}</div>
         </div>
       </TabsContent>
       <TabsContent value="code">

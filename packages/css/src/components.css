@@ -169,3 +169,47 @@ html.dark .rc-tab[aria-selected="true"] { background: var(--input); box-shadow: 
 .rc-brand { background: var(--brand); color: var(--brand-foreground); }
 .rc-brand-text { color: var(--brand); }
 .rc-logo { display: inline-block; width: 1.5rem; height: 1.5rem; border-radius: var(--rc-radius-sm); background: var(--brand); }
+
+/* ---------- Page structure (twins of @recanica/ui Page, PageHeader, Section, Surface, SurfaceGrid, ChoiceCard,
+ * WebSection, WebSectionTitle, WebHeroTitle). The rhythm lives in the container: blocks carry no margins. ---------- */
+.rc-flow > * { margin-bottom: 0; }
+.rc-flow > * + * { margin-top: var(--rc-space-flow); }
+.rc-flow > * + :is(h2, h3, section, .rc-section) { margin-top: var(--rc-space-stack); }
+.rc-flow > :is(h2, h3, .rc-section__head) + * { margin-top: var(--rc-space-group); }
+.rc-flow > .rc-page-header + * { margin-top: var(--rc-space-stack); }
+.rc-reading { width: 100%; max-width: 48rem; }
+.rc-page-header { display: flex; flex-direction: column; gap: var(--rc-space-group); }
+.rc-page-header__title { font-size: var(--rc-text-title); line-height: 1.2; letter-spacing: -0.02em; font-weight: 400; margin: 0; }
+.rc-page-header__desc { color: var(--muted-foreground); max-width: 65ch; margin: 0; }
+.rc-section { display: flex; flex-direction: column; }
+.rc-section__head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem 1rem; }
+.rc-section__title { font-size: var(--rc-text-heading); line-height: 1.25; font-weight: 400; margin: 0; }
+.rc-surface { border: 1px solid var(--border); border-radius: calc(var(--radius) + 8px); background: var(--card); padding: var(--rc-space-inset); }
+.rc-surface--sm { border-radius: calc(var(--radius) + 4px); padding: var(--rc-space-inset-sm); }
+.rc-surface--lg { padding: var(--rc-space-panel); }
+.rc-surface--panel { background: var(--panel); }
+.rc-surface--plain { background: transparent; }
+.rc-surface-grid { display: grid; gap: 1px; overflow: hidden; border: 1px solid var(--border); border-radius: calc(var(--radius) + 8px); background: var(--border); }
+.rc-surface-grid > * { background: var(--card); }
+.rc-choice { display: flex; align-items: center; gap: 0.75rem; border: 1px solid var(--border); border-radius: calc(var(--radius) + 4px); padding: var(--rc-space-inset-sm); background: transparent; text-align: left; font: inherit; color: inherit; cursor: pointer; }
+.rc-choice:hover, .rc-choice[aria-checked="true"] { background: var(--accent); }
+.rc-choice[aria-checked="true"] { border-color: color-mix(in oklab, var(--foreground) 40%, transparent); }
+.rc-web-section { padding: var(--rc-space-section) var(--rc-space-gutter); }
+.rc-web-section > * { max-width: var(--rc-container-content); margin-inline: auto; display: flex; flex-direction: column; gap: var(--rc-space-stack); }
+.rc-section-title { font-size: var(--rc-text-display-sm); line-height: 1.1; letter-spacing: -0.02em; font-weight: 400; text-wrap: balance; margin: 0; }
+.rc-hero-title { font-size: var(--rc-text-display-md); line-height: 1.05; letter-spacing: -0.03em; font-weight: 400; text-wrap: balance; margin: 0; }
+
+/* ---------- Layout and app-shell parts (twins of @recanica/ui layout.tsx, app-shell.tsx, nav-item.tsx).
+ * App shell maps to the existing classes: AppShell = .rc-shell, AppSidebar = .rc-sidebar, AppPanel = .rc-panel. ---------- */
+.rc-centered-page { display: flex; min-height: 100svh; align-items: center; justify-content: center; background: var(--background); padding: 3rem var(--rc-space-gutter); }
+.rc-split { margin-inline: auto; display: grid; max-width: var(--rc-container-content); gap: 2.5rem; }
+@media (min-width: 64rem) { .rc-split { grid-template-columns: minmax(0, 1fr) 22rem; align-items: start; } .rc-split > :last-child { position: sticky; top: 5rem; } }
+.rc-top-bar { position: sticky; top: 0; z-index: 40; border-bottom: 1px solid var(--border); background: color-mix(in oklab, var(--background) 80%, transparent); backdrop-filter: blur(12px); }
+.rc-list-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem; padding: var(--rc-space-inset-sm) var(--rc-space-inset); color: inherit; text-decoration: none; }
+a.rc-list-row, button.rc-list-row { transition: background-color 150ms; } a.rc-list-row:hover, button.rc-list-row:hover { background: var(--accent); }
+.rc-icon-badge { display: inline-flex; flex-shrink: 0; align-items: center; justify-content: center; border-radius: 9999px; width: 3rem; height: 3rem; background: var(--brand); color: var(--brand-foreground); }
+.rc-icon-badge--sm { width: 2rem; height: 2rem; } .rc-icon-badge--muted { background: var(--muted); color: var(--muted-foreground); }
+.rc-sidebar__header { margin-bottom: 1rem; display: flex; align-items: center; justify-content: space-between; padding: 0.25rem 0.5rem; }
+.rc-sidebar__sub { margin: 0.25rem 0 0.25rem 1.25rem; display: flex; flex-direction: column; border-left: 1px solid var(--border); padding-left: 0.75rem; }
+.rc-nav-item--pill { width: auto; border-radius: 9999px; padding: 0.375rem 0.75rem; white-space: nowrap; }
+.rc-nav-item--tab { flex-direction: column; align-items: center; gap: 0.25rem; padding: 0.625rem 0; font-size: 0.75rem; }

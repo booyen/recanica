@@ -13,6 +13,8 @@ import { Input } from "@recanica/ui/components/input";
 import { NativeSelect, NativeSelectOption } from "@recanica/ui/components/native-select";
 import { PageHeader, Section } from "@/components/demo/ui";
 import { initials } from "@/lib/demo/store";
+import { SurfaceGrid } from "@recanica/ui/components/surface";
+import { ListRow } from "@recanica/ui/components/layout";
 
 type Role = "Owner" | "Admin" | "Finance" | "Viewer";
 const ROLES: Record<Role, string> = {
@@ -37,7 +39,7 @@ export default function TeamPage() {
       <PageHeader title="Team" description={`${members.length} members`} actions={<Button onClick={() => setOpen(true)}><UserPlusIcon /> Invite</Button>} />
       <ul className="divide-y rounded-2xl border bg-card">
         {members.map((m, i) => (
-          <li key={m.email} className="flex flex-wrap items-center gap-3 p-4">
+          <ListRow as="li" key={m.email}>
             <Avatar><AvatarFallback>{initials(m.name)}</AvatarFallback></Avatar>
             <div className="min-w-0 flex-1 text-sm"><p className="truncate">{m.name}</p><p className="truncate text-muted-foreground">{m.email}</p></div>
             {m.status === "Invited" && <Badge variant="warning">Invited</Badge>}
@@ -52,13 +54,13 @@ export default function TeamPage() {
                 <DropdownMenuItem variant="destructive" onSelect={() => { setMembers((x) => x.filter((_, j) => j !== i)); toast(`${m.name} removed`); }}>Remove</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-          </li>
+          </ListRow>
         ))}
       </ul>
       <Section title="Roles">
-        <dl className="grid gap-px overflow-hidden rounded-2xl border bg-border sm:grid-cols-2">
+        <SurfaceGrid as="dl" className="sm:grid-cols-2">
           {(Object.entries(ROLES) as [Role, string][]).map(([r, d]) => <div key={r} className="bg-card p-5"><dt>{r}</dt><dd className="mt-1 text-sm text-muted-foreground">{d}</dd></div>)}
-        </dl>
+        </SurfaceGrid>
       </Section>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent>

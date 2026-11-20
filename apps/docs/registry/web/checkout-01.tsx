@@ -8,6 +8,9 @@ import { Input } from "@recanica/ui/components/input";
 import { NativeSelect, NativeSelectOption } from "@recanica/ui/components/native-select";
 import { Separator } from "@recanica/ui/components/separator";
 import { cn } from "@recanica/ui/lib/utils";
+import { Heading } from "@recanica/ui/components/page";
+import { ChoiceCard, ChoiceIndicator } from "@recanica/ui/components/choice-card";
+import { SplitLayout } from "@recanica/ui/components/layout";
 
 const STATES = ["Johor", "Kedah", "Kelantan", "Melaka", "Negeri Sembilan", "Pahang", "Perak", "Perlis", "Pulau Pinang", "Sabah", "Sarawak", "Selangor", "Terengganu", "W.P. Kuala Lumpur", "W.P. Labuan", "W.P. Putrajaya"];
 const methods = [{ id: "fpx", label: "FPX online banking", icon: BuildingIcon }, { id: "duitnow", label: "DuitNow QR", icon: QrCodeIcon }, { id: "card", label: "Card", icon: CreditCardIcon }];
@@ -18,9 +21,9 @@ export function Checkout01() {
   const total = items.reduce((a, [, p]) => a + p, 0);
   return (
     <section className="px-gutter py-section-sm">
-      <form className="mx-auto grid max-w-content gap-10 lg:grid-cols-[1fr_22rem]" onSubmit={(e) => e.preventDefault()}>
+      <SplitLayout onSubmit={(e) => e.preventDefault()}>
         <div className="space-y-10">
-          <h1 className="text-title">Checkout</h1>
+          <Heading level={1}>Checkout</Heading>
           <fieldset className="grid gap-4 sm:grid-cols-2">
             <legend className="mb-4 text-heading">Contact</legend>
             <Field><FieldLabel htmlFor="co-email">Email</FieldLabel><Input id="co-email" type="email" autoComplete="email" required /></Field>
@@ -40,9 +43,9 @@ export function Checkout01() {
             <legend className="mb-4 text-heading">Payment</legend>
             <div role="radiogroup" className="grid gap-2">
               {methods.map((m) => (
-                <button type="button" key={m.id} role="radio" aria-checked={method === m.id} onClick={() => setMethod(m.id)} className={cn("flex items-center gap-3 rounded-xl border p-4 text-left text-sm transition-colors hover:bg-accent", method === m.id && "border-foreground/40 bg-accent")}>
-                  <m.icon className="size-4 text-muted-foreground" /><span className="flex-1">{m.label}</span><span className={cn("size-4 rounded-full border", method === m.id && "border-[5px] border-foreground")} />
-                </button>
+                <ChoiceCard key={m.id} checked={method === m.id} onSelect={() => setMethod(m.id)}>
+                  <m.icon className="size-4 text-muted-foreground" /><span className="flex-1">{m.label}</span><ChoiceIndicator checked={method === m.id} />
+                </ChoiceCard>
               ))}
             </div>
           </fieldset>
@@ -56,7 +59,7 @@ export function Checkout01() {
           <Button type="submit" variant="brand" className="w-full">Pay RM{total.toFixed(2)}</Button>
           <p className="text-center text-xs text-muted-foreground">You&apos;ll be redirected to your bank or payment app.</p>
         </aside>
-      </form>
+      </SplitLayout>
     </section>
   );
 }

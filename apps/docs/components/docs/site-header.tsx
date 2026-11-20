@@ -8,6 +8,8 @@ import { RecanicaLogo } from "./logo";
 import { MobileNav } from "./mobile-nav";
 import { SearchCommand } from "./search-command";
 import { ThemeToggle } from "./theme-toggle";
+import { Surface } from "@recanica/ui/components/surface";
+import { TopBar } from "@recanica/ui/components/layout";
 
 type Item = { href: string; title: string; body: string; icon: typeof BoxIcon };
 const menus: { label: string; items: Item[]; aside?: { title: string; body: string; href: string } }[] = [
@@ -43,7 +45,7 @@ const menus: { label: string; items: Item[]; aside?: { title: string; body: stri
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 border-b bg-background/80 backdrop-blur-md">
+    <TopBar>
       <div className="mx-auto flex h-14 max-w-screen-2xl items-center gap-2 px-gutter">
         <MobileNav />
         <Link href="/" className="mr-4 flex items-center" aria-label="Recanica home"><RecanicaLogo /></Link>
@@ -66,7 +68,7 @@ export function SiteHeader() {
                         </li>
                       ))}
                     </ul>
-                    <div className="hidden rounded-xl border bg-muted/50 p-4 text-sm md:block">
+                    <Surface size="sm" tone="muted" inset="sm" className="hidden text-sm md:block">
                       {m.aside ? (
                         <>
                           <p>{m.aside.title}</p>
@@ -79,7 +81,7 @@ export function SiteHeader() {
                           <p className="mt-1 text-muted-foreground">{m.label === "Demos" ? "Demos use fake data stored in your browser. Reset anytime." : "Start with Installation, then pick a pattern."}</p>
                         </>
                       )}
-                    </div>
+                    </Surface>
                   </div>
                 </NavigationMenuContent>
               </NavigationMenuItem>
@@ -94,6 +96,6 @@ export function SiteHeader() {
           <ThemeToggle />
         </div>
       </div>
-    </header>
+    </TopBar>
   );
 }

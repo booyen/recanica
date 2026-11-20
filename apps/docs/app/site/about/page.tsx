@@ -8,7 +8,7 @@ export const metadata = { title: "About" };
 export default function Page() {
   return (
     <>
-      <Timeline01 />
+      <Timeline01 titleAs="h1" />
       <Team01 />
       <Gallery01 />
       <Cta02 />

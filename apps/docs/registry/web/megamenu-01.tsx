@@ -1,5 +1,7 @@
 "use client";
 
+import { Surface } from "@recanica/ui/components/surface";
+
 import { BarChart3Icon, BookOpenIcon, CreditCardIcon, FileTextIcon, LifeBuoyIcon, ReceiptIcon, RepeatIcon, UsersIcon } from "lucide-react";
 import { Button } from "@recanica/ui/components/button";
 import {
@@ -32,7 +34,7 @@ function Panel({ items, aside }: { items: typeof product; aside: React.ReactNode
           </li>
         ))}
       </ul>
-      <div className="hidden rounded-xl border bg-muted/50 p-4 text-sm md:block">{aside}</div>
+      <Surface size="sm" tone="muted" inset="sm" className="hidden text-sm md:block">{aside}</Surface>
     </div>
   );
 }

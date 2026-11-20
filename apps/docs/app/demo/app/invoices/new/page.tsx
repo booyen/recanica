@@ -18,6 +18,7 @@ import { PageHeader, focusFirstInvalid } from "@/components/demo/ui";
 import { PLAN_TEMPLATES, TAX, amountInWords, buildPlan, customParts } from "@/lib/demo/my";
 import { dmy, money2, uid, useDemo } from "@/lib/demo/store";
 import type { TaxCode } from "@/lib/demo/types";
+import { Surface } from "@recanica/ui/components/surface";
 
 type Row = { key: string; description: string; qty: string; unit: string };
 const blank = (): Row => ({ key: uid("row"), description: "", qty: "1", unit: "" });
@@ -126,7 +127,7 @@ function NewInvoiceInner() {
             <CardHeader><CardTitle>Line items</CardTitle><CardDescription>Prices exclude SST.</CardDescription></CardHeader>
             <CardContent className="space-y-3">
               {rows.map((r, idx) => (
-                <div key={r.key} className="grid grid-cols-[1fr_auto] gap-2 rounded-xl border p-3 sm:grid-cols-[1fr_5rem_9rem_auto] sm:border-0 sm:p-0">
+                <div key={r.key} /* recanica-ignore: line item is a card on phones and a table row from sm */ className="grid grid-cols-[1fr_auto] gap-2 rounded-xl border p-3 sm:grid-cols-[1fr_5rem_9rem_auto] sm:border-0 sm:p-0">
                   <Input aria-label={`Item ${idx + 1} description`} placeholder="Description" value={r.description} onChange={(e) => set(r.key, { description: e.target.value })} className="col-span-2 sm:col-span-1" />
                   <Input aria-label="Quantity" inputMode="numeric" value={r.qty} onChange={(e) => set(r.key, { qty: e.target.value.replace(/\D/g, "") })} />
                   <InputGroup>
@@ -218,9 +219,9 @@ function NewInvoiceInner() {
             </CardContent>
           </Card>
           {state.org.einvoice && (
-            <p className="flex gap-2 rounded-xl border p-3 text-xs text-muted-foreground">
+            <Surface as="p" size="sm" tone="plain" inset="sm" className="flex gap-2 text-xs text-muted-foreground">
               <ShieldCheckIcon className="size-4 shrink-0" /> Sending submits this invoice to LHDN MyInvois (simulated) and adds the validation QR code.
-            </p>
+            </Surface>
           )}
           <div className="grid grid-cols-2 gap-2 lg:grid-cols-1">
             <Button onClick={() => save(true)}><SendIcon /> Send invoice</Button>

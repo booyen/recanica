@@ -1,16 +1,16 @@
 import { ArrowRightIcon } from "lucide-react";
 import { Button } from "@recanica/ui/components/button";
 import { BarRow, Stat, StatGroup, StatHeader, StatList, StatValue } from "@recanica/ui/components/stat";
+import { WebHeroTitle } from "@recanica/ui/components/web-section";
 
 export function Hero02() {
   return (
     <section className="overflow-hidden px-gutter pt-section">
       <div className="mx-auto max-w-content">
         <div className="max-w-2xl space-y-6">
-          <p className="text-sm text-muted-foreground">Billing infrastructure for software</p>
-          <h1 className="text-display-sm tracking-tight text-balance sm:text-display-md">
+          <WebHeroTitle>
             Sell software <span className="text-brand">without building billing</span>
-          </h1>
+          </WebHeroTitle>
           <p className="max-w-xl text-base text-muted-foreground sm:text-lg">
             Checkout, subscriptions, tax and payouts, handled. You ship the product, we run the money.
           </p>

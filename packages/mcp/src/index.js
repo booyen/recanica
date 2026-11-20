@@ -81,6 +81,21 @@ server.registerTool("get_page_library", {
   inputSchema: {},
 }, async () => text(data.appLibrary.map((c) => `## ${c.category}\n${c.description}\n${c.items.map((i) => `- ${i.kind}: ${i.label} (${data.site}${i.href})`).join("\n")}`).join("\n\n")));
 
+server.registerTool("get_page_anatomy", {
+  title: "How a page is built",
+  description: "For a page type (overview, list, detail, form, settings, sign-in, checkout, landing, article, docs): its shell, its regions in reading order and the exact part for each, plus the parts table (React component + rc-* class). Call before building any page.",
+  inputSchema: { type: z.string().optional().describe("Page type, e.g. 'list' or 'checkout'. Omit for all types.") },
+}, async ({ type }) => {
+  const a = data.anatomy;
+  const types = type ? a.types.filter((t) => t.type.toLowerCase().includes(type.toLowerCase())) : a.types;
+  const out = [
+    "# Page anatomy", "", ...a.thinking, "",
+    ...types.flatMap((t) => [`## ${t.type}`, t.use, `Shell: ${t.shell}`, ...t.regions.map((r) => `- ${r.region}: ${r.part}${r.note ? ` (${r.note})` : ""}`), ""]),
+    "## Parts (React · CSS)", ...data.parts.map((p) => `- ${p.part}: ${p.react} · .${p.css}`),
+  ];
+  return { content: [{ type: "text", text: out.join("\n") }] };
+});
+
 server.registerTool("get_pattern", {
   title: "Get pattern or block",
   description: "Full source of a pattern or block, plus its install command. Adapt it rather than starting from scratch.",
@@ -118,23 +133,56 @@ server.registerTool("get_setup", {
 
 server.registerPrompt("apply-recanica", {
   title: "Apply Recanica to this project",
-  description: "Restyle the current project to Recanica (detects the stack, installs tokens, updates shared components).",
-  argsSchema: { stack: z.string().optional().describe("Known stack, e.g. nextjs, flutter. Leave empty to detect.") },
-}, ({ stack }) => ({
+  description: "Adopt Recanica in an existing project: review busy pages, agree a rework plan, rebuild pages from Recanica patterns (not a reskin).",
+  argsSchema: {
+    stack: z.string().optional().describe("Known stack, e.g. nextjs, flutter. Leave empty to detect."),
+    mode: z.enum(["rework", "reskin"]).optional().describe("rework (default): restructure pages. reskin: tokens and colours only."),
+  },
+}, ({ stack, mode }) => ({
+  messages: [{
+    role: "user",
+    content: {
+      type: "text",
+      text: (mode === "reskin" ? [
+        "Reskin this project with Recanica tokens only (colours, type, radius). Keep layouts and behaviour.",
+        stack ? `The stack is ${stack}.` : "First tell me the stack and where global styles live.",
+        "Install tokens (call get_setup), restyle shared components, run `npx recanica check`, list changed files.",
+      ] : [
+        "Adopt Recanica in this project. This is a REWORK, not a reskin: pages should end up calmer and simpler, not just recoloured.",
+        stack ? `The stack is ${stack}.` : "First tell me the stack, styling approach and where global styles live.",
+        "1. Install tokens and components for this stack (call get_setup).",
+        "2. Start the dev server and run `npx recanica review <url> --crawl`. Read recanica-review.md.",
+        "3. For each page, busiest first: tell me what the page is for, the one action that matters, what you would keep, change, merge or remove, and which Recanica pattern it becomes (call get_page_library / get_pattern). Wait for my answer before changing that page.",
+        "4. Rebuild agreed pages from the pattern with Recanica components. Don't restyle the old markup. Remove what we agreed to remove.",
+        "5. After each page: `npx recanica review` (no busy signals), `npx recanica check`, `npx recanica audit`. Show me the before/after list of what changed.",
+      ]).concat(["", "Follow these rules exactly:", "", data.rules]).join("\n"),
+    },
+  }],
+}));
+
+server.registerPrompt("recanica-page", {
+  title: "Design or explain a page the Recanica way",
+  description: "Write a page brief (purpose, reader, their questions in order, structure, alternatives rejected) before building; check the rendered page; or explain why an existing page is laid out as it is.",
+  argsSchema: {
+    route: z.string().describe("The page route, e.g. /dashboard/invoices"),
+    mode: z.enum(["build", "explain"]).optional().describe("build (default): new page, redesign or rework. explain: reconstruct the reasoning of an existing page."),
+  },
+}, ({ route, mode }) => ({
   messages: [{
     role: "user",
     content: {
       type: "text",
       text: [
-        "Restyle this project to the Recanica design system (UI framework by Aturanica Labs).",
-        stack ? `The stack is ${stack}.` : "First inspect the project and tell me its stack, styling approach and where global styles live.",
-        "Before changing code, show me a short mockup plan: the screens you will restyle, the Recanica patterns each maps to,",
-        "and anything you would change or drop. Wait for my answer, then:",
-        "install the tokens for this stack (call get_setup), load Geist, default to dark mode,",
-        "restyle shared components first (button, input, card, table, nav, dialog), keep behavior/routes/copy unchanged,",
-        "check 375px, ~900px and 1280px widths (no horizontal scroll, no wrapped button or nav labels),",
-        "run `npx recanica check` and fix every error, and list every changed file. Follow these rules exactly:",
+        mode === "explain"
+          ? `Explain the page ${route}: follow step E of the skill below. Be honest where the reasoning is weak.`
+          : `Design the page ${route}: follow steps 1–6 of the skill below. Write the brief and show it to me before building.`,
+        "Brief template:",
         "",
+        data.skills["recanica-page"]["brief-template.md"],
+        "",
+        data.skills["recanica-page"]["SKILL.md"],
+        "",
+        "Recanica rules:",
         data.rules,
       ].join("\n"),
     },

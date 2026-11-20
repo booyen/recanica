@@ -1,4 +1,5 @@
 import { ArrowUpRightIcon, CameraIcon, MailIcon, MessageCircleIcon } from "lucide-react";
+import { Heading } from "@recanica/ui/components/page";
 
 const links = [
   { label: "Order online (delivery & pickup)", href: "/site/shop" },
@@ -14,7 +15,7 @@ export function LinkPage01() {
       <div className="w-full max-w-sm space-y-8 text-center">
         <div className="space-y-3">
           <div className="mx-auto flex size-20 items-center justify-center rounded-full border bg-muted text-xl font-light" role="img" aria-label="Profile photo">KP</div>
-          <h1 className="text-heading">Kedai Kopi Pak Mat</h1>
+          <Heading level={1} size="heading">Kedai Kopi Pak Mat</Heading>
           <p className="text-sm text-muted-foreground">Kopi, kaya toast and nasi lemak since 1986. Jonker Walk, Melaka. Open 7am–3pm, closed Tuesdays.</p>
         </div>
         <ul className="space-y-3">

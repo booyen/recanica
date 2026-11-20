@@ -8,6 +8,8 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } f
 import { BarRow, Stat, StatGroup, StatHeader, StatList, StatRow, StatValue } from "@recanica/ui/components/stat";
 import { PageHeader } from "@/components/demo/ui";
 import { ago, invoiceBalance, metrics, money, useDemo } from "@/lib/demo/store";
+import { Heading } from "@recanica/ui/components/page";
+import { Surface } from "@recanica/ui/components/surface";
 
 const chartConfig = { value: { label: "Revenue", color: "var(--chart-1)" } } satisfies ChartConfig;
 
@@ -32,13 +34,13 @@ export default function Overview() {
       />
 
       {!state.org.payoutConnected && (
-        <div className="mb-stack flex flex-col gap-3 rounded-2xl border bg-card p-5 sm:flex-row sm:items-center">
+        <Surface className="mb-stack flex flex-col gap-3 sm:flex-row sm:items-center">
           <div className="flex-1">
             <p>You have <span className="text-brand">{money(m.balance)}</span> ready to withdraw</p>
             <p className="text-sm text-muted-foreground">Connect a bank account to receive payouts.</p>
           </div>
           <Button asChild variant="brand"><Link href="/demo/app/finance">Connect payouts <ArrowRightIcon /></Link></Button>
-        </div>
+        </Surface>
       )}
 
       <div className="space-y-stack">
@@ -92,9 +94,9 @@ export default function Overview() {
           </Stat>
         </StatGroup>
 
-        <section className="rounded-2xl border bg-card p-panel">
+        <Surface as="section" inset="lg">
           <div className="mb-6 flex items-baseline justify-between">
-            <h2 className="text-heading">Revenue</h2>
+            <Heading level={2}>Revenue</Heading>
             <span className="text-sm text-muted-foreground">Last 6 months</span>
           </div>
           <ChartContainer config={chartConfig} className="h-56 w-full">
@@ -105,7 +107,7 @@ export default function Overview() {
               <Area dataKey="value" type="monotone" stroke="var(--color-value)" fill="var(--color-value)" fillOpacity={0.08} strokeWidth={1.5} />
             </AreaChart>
           </ChartContainer>
-        </section>
+        </Surface>
       </div>
     </>
   );

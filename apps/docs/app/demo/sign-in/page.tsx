@@ -8,6 +8,8 @@ import { Field, FieldLabel } from "@recanica/ui/components/field";
 import { Input } from "@recanica/ui/components/input";
 import { Spinner } from "@recanica/ui/components/spinner";
 import { useDemo } from "@/lib/demo/store";
+import { Heading } from "@recanica/ui/components/page";
+import { CenteredPage } from "@recanica/ui/components/layout";
 
 export default function SignInPage() {
   const { state, dispatch } = useDemo();
@@ -25,11 +27,11 @@ export default function SignInPage() {
   };
 
   return (
-    <main className="flex min-h-svh items-center justify-center bg-background px-gutter py-12">
+    <CenteredPage>
       <div className="w-full max-w-sm space-y-6">
         <div className="flex flex-col items-center gap-3 text-center">
           <span className="size-9 rounded-xl bg-brand text-brand-foreground" />
-          <h1 className="text-title">Sign in to Acme Studio</h1>
+          <Heading level={1}>Sign in to Acme Studio</Heading>
           <p className="text-sm text-muted-foreground">Demo account. Any password works.</p>
         </div>
         <form className="grid gap-4" onSubmit={submit}>
@@ -47,6 +49,6 @@ export default function SignInPage() {
         </form>
         <p className="text-center text-sm text-muted-foreground"><Link href="/demo" className="hover:text-foreground">← Demo home</Link></p>
       </div>
-    </main>
+    </CenteredPage>
   );
 }

@@ -3,6 +3,13 @@ import dynamic from "next/dynamic";
 import type { ComponentType } from "react";
 
 export const examples: Record<string, ComponentType> = {
+  "page": dynamic(() => import("@/examples/page-demo")),
+  "web-section": dynamic(() => import("@/examples/web-section-demo")),
+  "app-shell": dynamic(() => import("@/examples/app-shell-demo")),
+  "layout": dynamic(() => import("@/examples/layout-demo")),
+  "surface": dynamic(() => import("@/examples/surface-demo")),
+  "nav-item": dynamic(() => import("@/examples/nav-item-demo")),
+  "choice-card": dynamic(() => import("@/examples/choice-card-demo")),
   "button": dynamic(() => import("@/examples/button-demo")),
   "button-group": dynamic(() => import("@/examples/button-group-demo")),
   "toggle": dynamic(() => import("@/examples/toggle-demo")),

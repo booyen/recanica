@@ -8,6 +8,7 @@ import {
 import { Button } from "@recanica/ui/components/button";
 import { Field, FieldLabel } from "@recanica/ui/components/field";
 import { Input } from "@recanica/ui/components/input";
+import { Heading } from "@recanica/ui/components/page";
 
 const NAME = "acme-studio";
 
@@ -24,7 +25,7 @@ export default function DangerZone() {
   const [value, setValue] = React.useState("");
   return (
     <div className="mx-auto max-w-narrow space-y-4 px-gutter py-8">
-      <h2 className="text-heading">Danger zone</h2>
+      <Heading level={2}>Danger zone</Heading>
       <div className="divide-y rounded-2xl border border-destructive/40">
         <Row title="Transfer ownership" body="Move this organization to another member." action={<Button variant="outline">Transfer</Button>} />
         <Row

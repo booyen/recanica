@@ -1,5 +1,8 @@
 # Tailwind CSS v3
 
+
+> **Your own font:** Geist is only the default. Load any calm sans with light/regular weights and tabular numerals, then set `--font-sans` / `--font-mono` to it.
+
 ```bash
 npm i @recanica/tokens
 ```

@@ -41,7 +41,7 @@ export function InvoiceDocument({ invoice, org, customer }: { invoice: Invoice; 
   const ei = invoice.einvoice;
 
   return (
-    <article className="@container rounded-2xl border bg-card p-6 text-card-foreground @2xl:p-10">
+    <article /* recanica-ignore: printable invoice document with print styles */ className="@container rounded-2xl border bg-card p-6 text-card-foreground @2xl:p-10">
       <header className="flex flex-col gap-6 @xl:flex-row @xl:items-start @xl:justify-between">
         <div className="flex items-center gap-2"><span className="size-7 rounded-lg bg-brand text-brand-foreground" /><span className="text-lg">{o.name}</span></div>
         <div className="@xl:text-right">

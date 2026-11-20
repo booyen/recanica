@@ -6,6 +6,7 @@
  *   npx recanica add <pattern-or-block>
  *   npx recanica tokens <format> [--out <file>]
  *   npx recanica check [paths…] [--all] [--json] [--warn]
+ *   npx recanica review <url> [--crawl] [--out recanica-review.md]
  *   npx recanica audit <url> [--paths /,/pricing] [--widths 375,900,1280] [--crawl] [--json]
  *   npx recanica rules
  *   npx recanica mcp
@@ -17,6 +18,7 @@ import { dirname, join, relative } from "node:path";
 import { createInterface } from "node:readline/promises";
 import { runCheck } from "./check.js";
 import { runAudit } from "./audit.js";
+import { runReview } from "./review.js";
 
 const require = createRequire(import.meta.url);
 const data = JSON.parse(readFileSync(require.resolve("@recanica/mcp/data"), "utf8"));
@@ -105,19 +107,40 @@ const USAGE = {
   compose: "Use recanicaColorScheme() and RecanicaRadius / RecanicaSpacing / RecanicaTextSize from RecanicaTokens.kt.",
 };
 function agentsMd(stack) {
+  // Short on purpose: this file is read on every request. Full rules load on demand (npx recanica rules / MCP get_rules);
+  // the build enforces the rest (npx recanica check), so nothing here relies on being remembered.
   return `<!-- recanica:start -->
 # UI: Recanica
 
-This project uses **Recanica**, the UI framework by Aturanica Labs (stack: ${stack}). Follow these rules for every UI change.
+This project uses **Recanica** (UI framework by Aturanica Labs, stack: ${stack}). ${USAGE[stack]}
 
-- ${USAGE[stack]}
-- New project or new page: make a mockup first from existing patterns and review it with the user before building (see "Workflow: mockup first" below).
-- Before building a screen, check the patterns and blocks (MCP tool \`list_patterns\`, or ${data.site}/docs/patterns) and adapt the closest one.
-- Before finishing any UI change, run \`npx recanica check\` and fix every error, then \`npx recanica audit <dev-server-url> --crawl\` (layout, consistency, Recanica spec, copy, accessibility at 375/900/1280px).
-- When a component misbehaves, fix the component, never patch around it at the call site.
-- MCP server for live rules, tokens and source: \`claude mcp add recanica -- npx -y @recanica/mcp\`
+**Build from the parts, never by hand:**
+- **Page structure** from \`@recanica/ui\`:
+  - apps: \`Page\`, \`PageHeader\`, \`Section\`, \`Heading\`, \`Stack\`
+  - surfaces and tables: \`Surface\`, \`SurfaceGrid\`, \`ReferenceTable\`
+  - sites: \`WebSection\`, \`WebSectionTitle\`, \`WebHeroTitle\`
+  - without React, use the \`rc-*\` twins: \`rc-flow\`, \`rc-surface\`, \`rc-section\`, etc.
+- **Controls:** \`Button\`, \`NavItem\`, \`ChoiceCard\`, \`Input\`, \`NativeSelect\`, \`Table\`. No raw \`<button>\`, \`<input>\` or \`<select>\`, and no hand-made cards.
+- **Missing part:** if none fits, extend or add the part first. Never patch a part on one page.
+- **Spacing and width:** owned by the container (\`Page\`/\`.flow\`, \`gap-*\`). Blocks carry no margins. Use rhythm tokens by role: group · flow · stack · section · inset.
 
-${data.rules}
+**Calm:**
+- neutral base, one brand colour (\`--brand\`), status colours only for status, no gradients
+- light/regular type, no bold
+- one primary action per view
+- no eyebrows unless they add information
+- no AI jargon
+
+**Workflow:**
+- New project: run the recanica-kickoff skill.
+- Every page: pick its type in the page anatomy (MCP \`get_page_anatomy\`), fill the listed regions with the listed parts, and use the recanica-page skill (brief → build → look at 375/1280px).
+
+**Checks (they run in CI; run them before you finish):**
+- \`npx recanica check\`: code
+- \`npx recanica audit <url>\`: rendered pages
+- \`npx recanica review <url>\`: score
+
+Full rules: \`npx recanica rules\`, or MCP \`get_rules\` (\`claude mcp add recanica -- npx -y @recanica/mcp\`).
 <!-- recanica:end -->
 `;
 }
@@ -133,6 +156,35 @@ function writeAgents(stack) {
     if (!dry) writeFileSync(p, next);
   } else write("AGENTS.md", block);
   write("CLAUDE.md", "@AGENTS.md\n", { onlyIfMissing: true });
+  // Enforcement that costs no tokens: config (structure + hand-built as must), a CI check and a script.
+  write("recanica.config.json", JSON.stringify({
+    $comment: "How strict Recanica is in this project. must = fails the build; should = reported. Loosen a rule only with a reason; record accepted deviations in allow.",
+    rules: { "hand-built": "must", structure: "must" },
+    thresholds: {},
+    allow: [],
+  }, null, 2) + "\n", { onlyIfMissing: true });
+  write(".github/workflows/recanica.yml", `name: Recanica
+on: [push, pull_request]
+jobs:
+  ui:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: npx -y recanica check
+`, { onlyIfMissing: true });
+  const pkgPath = join(cwd, "package.json");
+  const pkg = readJson(pkgPath);
+  if (pkg && !pkg.scripts?.["check:ui"]) {
+    pkg.scripts = { ...(pkg.scripts ?? {}), "check:ui": "recanica check" };
+    changes.push("update package.json (check:ui script)");
+    if (!dry) writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + "\n");
+  }
+  // Skills: how every page is designed, explained and checked (Claude Code reads .claude/skills; other tools use the MCP prompt).
+  for (const [name, files] of Object.entries(data.skills ?? {})) {
+    for (const [f, content] of Object.entries(files)) write(`.claude/skills/${name}/${f}`, content);
+  }
 }
 
 /* ---------- stacks ---------- */
@@ -143,13 +195,13 @@ const STACKS = {
     const css = findFirst(CSS_CANDIDATES);
     if (css) patchCss(css, ['@import "@recanica/tokens/theme.css";', '@source "../node_modules/@recanica/ui";']);
     else log(c.warn("  No global CSS found. Add the imports from the Next.js guide manually."));
-    return ["Load Geist with next/font and set --font-geist-sans / --font-geist-mono on <html> (see guide).", 'Add class="dark" to <html> (or use next-themes).'];
+    return ["Load your font with next/font and set --font-sans / --font-mono (default Geist: --font-geist-sans / --font-geist-mono; see guide).", 'Add class="dark" to <html> (or use next-themes).'];
   },
   async "vite-react"(pm) {
     install(pm, ["@recanica/ui", "@recanica/tokens"]);
     const css = findFirst(CSS_CANDIDATES);
     if (css) patchCss(css, ['@import "@recanica/tokens/theme.css";', '@source "../node_modules/@recanica/ui";']);
-    return ['Make sure Tailwind v4 is set up (@tailwindcss/vite) and @import "tailwindcss" comes first.', 'Load Geist and add class="dark" to <html>.'];
+    return ['Make sure Tailwind v4 is set up (@tailwindcss/vite) and @import "tailwindcss" comes first.', 'Load your font and set --font-sans (default Geist), and add class="dark" to <html>.'];
   },
   async "tailwind-v3"(pm) {
     install(pm, ["@recanica/tokens"]);
@@ -163,15 +215,15 @@ const STACKS = {
   },
   async html() {
     write("recanica/recanica.css", data.tokens["plain-css"] ?? "");
-    return ['Link it: <link rel="stylesheet" href="/recanica/recanica.css" />', 'Add class="dark" to <html> and load Geist from Google Fonts.'];
+    return ['Link it: <link rel="stylesheet" href="/recanica/recanica.css" />', 'Add class="dark" to <html> and load your font and set --font-sans (default Geist from Google Fonts).'];
   },
   async flutter() {
     write("lib/theme/recanica_tokens.dart", data.tokens.flutter);
-    return ["Use: MaterialApp(theme: recanicaTheme(Brightness.light), darkTheme: recanicaTheme(Brightness.dark))", "Add Geist font files to pubspec.yaml (see guide)."];
+    return ["Use: MaterialApp(theme: recanicaTheme(Brightness.light), darkTheme: recanicaTheme(Brightness.dark))", "Add your font files (default Geist) to pubspec.yaml (see guide)."];
   },
   async swiftui() {
     write("Recanica/RecanicaTokens.swift", data.tokens.swiftui);
-    return ["Add Recanica/RecanicaTokens.swift to your Xcode target.", "Add Geist fonts under UIAppFonts in Info.plist."];
+    return ["Add Recanica/RecanicaTokens.swift to your Xcode target.", "Add your fonts (default Geist) under UIAppFonts in Info.plist."];
   },
   async compose() {
     write("app/src/main/java/com/aturanica/recanica/RecanicaTokens.kt", data.tokens.compose);
@@ -236,6 +288,8 @@ Usage
   npx recanica add <pattern-or-block>      copy a pattern/block into your app (shadcn registry)
   npx recanica tokens <format> [--out f]   ${Object.keys(data.tokens).join(" | ")}
   npx recanica check [paths] [--all]       flag colours, bold type, gradients, radii and copy that break Recanica
+  npx recanica review <url> [--crawl]      existing project: measure what makes each page busy and write a
+                                           rework plan (recanica-review.md): fixes, patterns, keep/change/remove
   npx recanica audit <url> [--crawl]       audit a running site at 375/900/1280px: overflow, overlap, wrapped labels,
                                            table edges, tap targets, labels, dead links (needs playwright)
   npx recanica rules                       print the design rules (for any LLM)
@@ -248,6 +302,7 @@ switch (cmd) {
   case "tokens": tokens(); break;
   case "check": process.exitCode = runCheck(cwd, flags._, flags, log); break;
   case "audit": process.exitCode = await runAudit(flags._, flags, log); break;
+  case "review": process.exitCode = await runReview(flags._, flags, log, data); break;
   case "rules": process.stdout.write(data.rules + "\n"); break;
   case "mcp": log('Claude Code:  claude mcp add recanica -- npx -y @recanica/mcp\nOthers:       { "mcpServers": { "recanica": { "command": "npx", "args": ["-y", "@recanica/mcp"] } } }'); break;
   case "-v": case "--version": log(VERSION); break;

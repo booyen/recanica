@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { web } from "@/lib/docs";
+import { WebSectionTitle } from "@recanica/ui/components/web-section";
 
 export const metadata = { title: "All sections" };
 
@@ -8,7 +9,7 @@ export default function SectionsPage() {
   const categories = new Set(web.map((w) => w.category)).size;
   return (
     <div className="mx-auto max-w-content px-gutter py-section-sm">
-      <h1 className="text-display-sm tracking-tight">All web sections</h1>
+      <WebSectionTitle as="h1">All web sections</WebSectionTitle>
       <p className="mt-3 max-w-copy text-muted-foreground">
         {web.length} sections in {categories} categories. Open one to see it on its own page at mobile, tablet and desktop widths.
       </p>

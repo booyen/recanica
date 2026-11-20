@@ -1,4 +1,8 @@
 {
-  "$comment": "Exceptions for `npx recanica check`. Email HTML needs inline hex (clients ignore CSS variables); the theming guide shows raw token overrides on purpose.",
-  "ignore": ["templates/email/**", "apps/docs/app/(docs)/docs/theming/**"]
+  "$comment": "Recanica's own exceptions. Email HTML needs inline hex (clients ignore CSS variables); the theming guide shows raw token overrides on purpose. Foundation pages that SHOW colours or type sizes deviate from the busyness defaults because that is their content.",
+  "ignore": ["templates/email/**", "apps/docs/app/(docs)/docs/theming/**"],
+  "allow": [
+    { "rule": "busy-surfaces", "path": "/docs/foundations/colors", "reason": "The colours page displays the palette; many backgrounds are the content" },
+    { "rule": "busy-type", "path": "/docs/foundations/typography", "reason": "The typography page displays the type scale; many sizes are the content" }
+  ]
 }

@@ -58,7 +58,10 @@ export function auditPage() {
 
       // Short control labels (buttons, badges, tabs, table headers) must never break onto two lines.
       // Counts the rendered lines of each text run, so tall buttons and multi-line cards don't trip it.
-      if (el.matches("button, [data-slot=badge], [role=tab], th, [data-slot=button]")) {
+      // Includes a table's label column (first body cell), except code (mono) cells, which may break.
+      const labelCell = el.matches("td:first-child") && !/mono/i.test(getComputedStyle(el).fontFamily) && (el.textContent ?? "").trim().split(/\s+/).length <= 4;
+      // Rows (ListRow, NavItem, ChoiceCard) hold content, not a short label, so their text may wrap.
+      if ((el.matches("button, [data-slot=badge], [role=tab], th, [data-slot=button]") && !el.matches("[data-slot=list-row], [data-slot=nav-item], [data-slot=choice-card]")) || labelCell) {
         const label = (el.textContent ?? "").trim().replace(/\s+/g, " ");
         if (label && label.length <= 32) {
           const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
@@ -278,3 +281,275 @@ export function auditSpec(copyRules = []) {
 }
 
 export const SPEC_RULES = ["spec-color", "spec-weight", "spec-font", "spec-button", "spec-radius", "spec-copy", "inconsistent"];
+
+/**
+ * Busyness audit: what makes a page feel crowded, measured, with the Recanica way to fix each one.
+ * Used by `recanica review` to turn "make it less busy" into a concrete rework plan per page.
+ * Measures the first screen of the main content (header, nav and sidebars excluded) and the whole page.
+ * Returns { metrics, findings: [{ rule, detail, fix }], signals } — signals help pick a Recanica pattern.
+ */
+export function auditBusyness(limits = {}) {
+  const T = { primaryActions: 1, actions: 18, textSizes: 6, textSizesWithHero: 7, backgrounds: 5, borders: 70, nesting: 3, badges: 8, icons: 24, textChars: 1800, tableColumns: 6, formFields: 10, navRun: 15, ...limits };
+  const vh = window.innerHeight;
+  const root = getComputedStyle(document.documentElement);
+  const main = document.querySelector("main") ?? document.body;
+  // Chrome (header/nav/sidebars) and illustrations (product previews drawn inside a hero, marked data-preview) don't count.
+  const chrome = (el) => !!el.closest("header, nav, aside, footer, [data-slot=sidebar], [role=navigation], [data-audit-ignore], [data-preview], [role=img], nextjs-portal");
+  const visible = (el) => { const r = el.getBoundingClientRect(); const s = getComputedStyle(el); return r.width > 0 && r.height > 0 && s.visibility !== "hidden" && s.display !== "none" && parseFloat(s.opacity) > 0; };
+  const firstScreen = (el) => { const r = el.getBoundingClientRect(); return r.top < vh && r.bottom > 0; };
+  const all = [...main.querySelectorAll("*")].filter((el) => visible(el) && !chrome(el));
+  const above = all.filter(firstScreen);
+  const ctx = document.createElement("canvas").getContext("2d");
+  const rgb = (c) => { ctx.clearRect(0, 0, 1, 1); ctx.fillStyle = "#000"; ctx.fillStyle = c; ctx.fillRect(0, 0, 1, 1); const d = ctx.getImageData(0, 0, 1, 1).data; return d[3] < 250 ? null : `${d[0]},${d[1]},${d[2]}`; };
+  const primary = rgb(root.getPropertyValue("--primary").trim() || "#000");
+  const ownText = (el) => [...el.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim());
+
+  const actions = above.filter((el) => el.matches("button, a[href], [role=button], input[type=submit]") && !el.closest("table"));
+  const primaries = above.filter((el) => el.matches("button, a[href], [role=button]") && (el.getAttribute("data-variant") === "default" || el.getAttribute("data-variant") === "brand" || (primary && rgb(getComputedStyle(el).backgroundColor) === primary)));
+  const fontSizes = new Set(above.filter((el) => ownText(el) && !el.closest("pre, code, kbd")).map((el) => getComputedStyle(el).fontSize)); // what you see at once; code is its own register
+  const tinyText = all.filter((el) => ownText(el) && parseFloat(getComputedStyle(el).fontSize) < 12);
+  const bgs = new Set(above.map((el) => rgb(getComputedStyle(el).backgroundColor)).filter(Boolean));
+  const lines = above.filter((el) => { const s = getComputedStyle(el); return ["Top", "Right", "Bottom", "Left"].some((k) => parseFloat(s[`border${k}Width`]) > 0); });
+  const badges = above.filter((el) => el.matches("[data-slot=badge]") || (getComputedStyle(el).borderRadius.includes("9999") && ownText(el) && el.getBoundingClientRect().height < 26 && !el.matches("button, a")));
+  const icons = above.filter((el) => el.matches("svg") && el.getBoundingClientRect().width <= 24);
+  const textChars = above.filter(ownText).reduce((n, el) => n + [...el.childNodes].filter((c) => c.nodeType === 3).map((c) => c.textContent.trim()).join("").length, 0);
+  const isSurface = (el) => { const s = getComputedStyle(el); return (parseFloat(s.borderTopWidth) > 0 && parseFloat(s.borderBottomWidth) > 0 && parseFloat(s.borderTopLeftRadius) >= 6) || (s.boxShadow !== "none" && parseFloat(s.borderTopLeftRadius) >= 6); };
+  let depth = 0, deepest = null;
+  for (const el of all) {
+    if (!isSurface(el) || el.getBoundingClientRect().width < 80) continue;
+    let d = 1;
+    for (let p = el.parentElement; p && p !== main.parentElement; p = p.parentElement) if (isSurface(p)) d++;
+    if (d > depth) { depth = d; deepest = el; }
+  }
+  const tables = [...main.querySelectorAll("table")].filter(visible);
+  const maxCols = Math.max(0, ...tables.map((t) => [...(t.querySelector("tr")?.children ?? [])].filter(visible).length));
+  const forms = [...main.querySelectorAll("form")].filter(visible);
+  const fieldsIn = (f) => [...f.querySelectorAll("input:not([type=hidden]), select, textarea, [role=combobox], [role=switch], [role=checkbox]")].filter(visible).length;
+  const groupsIn = (f) => f.querySelectorAll("fieldset, section, [data-slot=field-set], h2, h3").length;
+  const longForm = forms.map((f) => ({ f, n: fieldsIn(f), g: groupsIn(f) })).sort((a, b) => b.n - a.n)[0];
+  // Longest single list of links in a navigation (grouped navs are measured per group, not in total).
+  let maxNav = 0;
+  for (const n of [...document.querySelectorAll("nav, aside, [data-slot=sidebar]")].filter(visible)) {
+    for (const box of [n, ...n.querySelectorAll("*")]) {
+      const links = [...box.children].filter((c) => visible(c) && (c.matches("a[href], button") || (c.matches("li, div") && c.children.length === 1 && c.firstElementChild.matches("a[href], button"))));
+      maxNav = Math.max(maxNav, links.length);
+    }
+  }
+  const h1 = [...document.querySelectorAll("h1")].some(visible);
+  const bigNumbers = all.filter((el) => ownText(el) && parseFloat(getComputedStyle(el).fontSize) >= 24 && /[\d]/.test(el.textContent) && el.textContent.trim().length <= 16).length;
+
+  const metrics = {
+    primaryActionsFirstScreen: primaries.length, actionsFirstScreen: actions.length, fontSizes: fontSizes.size, backgroundsFirstScreen: bgs.size,
+    linesFirstScreen: lines.length, badgesFirstScreen: badges.length, iconsFirstScreen: icons.length, textCharsFirstScreen: textChars,
+    surfaceDepth: depth, maxTableColumns: maxCols, longestFormFields: longForm?.n ?? 0, navItems: maxNav, hasTitle: h1,
+  };
+  const findings = [];
+  const add = (rule, detail, fix) => findings.push({ rule, detail, fix });
+  if (primaries.length > T.primaryActions) add("busy-primary", `${primaries.length} primary buttons on the first screen`, "Keep one primary action per view. Make the rest outline/ghost, or move them into a ••• menu (DropdownMenu).");
+  if (actions.length > T.actions) add("busy-actions", `${actions.length} buttons and links on the first screen`, "Show the 3–5 actions people use most; put the rest in a ••• menu, a row menu, or the page's secondary nav.");
+  // Marketing pages with a display-size hero use one more step of the scale; app pages stay at 6.
+  const typeLimit = above.some((el) => ownText(el) && parseFloat(getComputedStyle(el).fontSize) >= 44) ? T.textSizesWithHero : T.textSizes;
+  if (fontSizes.size > typeLimit) add("busy-type", `${fontSizes.size} different text sizes on the first screen (limit ${typeLimit})`, "Use the type scale: one title, one body size, one small/muted size, one metric size. Hierarchy comes from muted vs foreground, not more sizes.");
+  if (bgs.size > T.backgrounds) add("busy-surfaces", `${bgs.size} different background colours on the first screen`, "Use the layer order only: background → panel → card → accent for hover. Remove tinted boxes that don't mean status.");
+  if (lines.length > T.borders) add("busy-lines", `${lines.length} bordered elements on the first screen`, "Group related things in one bordered container with hairline dividers (StatGroup, divide-y lists) instead of a border around each item.");
+  if (depth >= T.nesting) add("busy-nesting", `boxes nested ${depth} deep (card in card in card)`, "One bordered surface per group. Inner groups use spacing and a heading, not another card.");
+  if (badges.length > T.badges) add("busy-badges", `${badges.length} badges/pills on the first screen`, "Use a badge only for status that changes. Plain muted text for categories and metadata.");
+  if (icons.length > T.icons) add("busy-icons", `${icons.length} small icons on the first screen`, "Icons only where they speed up scanning (nav, primary actions). Drop decorative icons next to every label.");
+  if (textChars > T.textChars) add("busy-text", `${textChars} characters of text on the first screen`, "Lead with the one thing people came for. Move explanations into descriptions, tooltips or a details page.");
+  if (maxCols > T.tableColumns) add("busy-table", `a table with ${maxCols} visible columns`, "Keep 4–6 columns; hide secondary ones below md, or use the List / detail pattern with a side panel.");
+  if (longForm && longForm.n > T.formFields && longForm.g < 2) add("busy-form", `a form with ${longForm.n} fields and no sections`, "Split into titled sections (Settings page pattern) or steps (Onboarding steps / wizard). Optional fields go behind 'More options'.");
+  if (maxNav > T.navRun) add("busy-nav", `a navigation list with ${maxNav} items in one run`, "Top level holds 5–8 items. Group the rest as sub-items (App Sidebar) or move them into a More menu (App Top Nav).");
+  if (tinyText.length) add("tiny-text", `${tinyText.length} text elements below 12px`, "Nothing below text-xs (12px). Make the element bigger or drop the text.");
+  if (!h1) add("no-title", "no visible page title (h1)", "Every page starts with a Page Header: title, one-line description, actions.");
+
+  const signals = { tables: tables.length, maxTableColumns: maxCols, formFields: longForm?.n ?? 0, bigNumbers, path: location.pathname, title: document.querySelector("h1")?.textContent?.trim() ?? document.title };
+  return { metrics, findings, signals, deepest: deepest ? deepest.outerHTML.slice(0, 120) : null };
+}
+
+export const BUSY_RULES = ["busy-primary", "busy-actions", "busy-type", "busy-surfaces", "busy-lines", "busy-nesting", "busy-badges", "busy-icons", "busy-text", "busy-table", "busy-form", "busy-nav", "tiny-text", "no-title"];
+
+/**
+ * Quality audit: UI, layout, readability and usability measures that define a good Recanica page.
+ * Returns { measures, findings: [{ dimension, rule, detail, fix }] }. Feeds the scorecard in `recanica review`.
+ */
+export function auditQuality() {
+  const vh = window.innerHeight;
+  const main = document.querySelector("main") ?? document.body;
+  const skip = (el) => !!el.closest("[data-audit-ignore], [data-preview], [role=img], nextjs-portal, svg, pre, code");
+  const visible = (el) => { const r = el.getBoundingClientRect(); const s = getComputedStyle(el); return r.width > 0 && r.height > 0 && s.visibility !== "hidden" && s.display !== "none" && parseFloat(s.opacity) > 0.1; };
+  const ownText = (el) => [...el.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim().length > 1);
+  const textEls = [...main.querySelectorAll("*")].filter((el) => !skip(el) && ownText(el) && visible(el));
+  const findings = [];
+  const add = (dimension, rule, detail, fix) => findings.push({ dimension, rule, detail, fix });
+
+  // --- Readability: contrast (WCAG 2.2 AA), line length, minimum size
+  const ctx = document.createElement("canvas").getContext("2d");
+  const rgba = (c) => { ctx.clearRect(0, 0, 1, 1); ctx.fillStyle = "rgba(0,0,0,0)"; ctx.fillStyle = c; ctx.fillRect(0, 0, 1, 1); const d = ctx.getImageData(0, 0, 1, 1).data; return [d[0], d[1], d[2], d[3] / 255]; };
+  const lum = ([r, g, b]) => { const f = (v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }; return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b); };
+  const bgOf = (el) => {
+    const layers = [];
+    for (let p = el; p; p = p.parentElement) { const c = rgba(getComputedStyle(p).backgroundColor); if (c[3] > 0) { layers.push(c); if (c[3] >= 0.99) break; } }
+    let out = rgba(getComputedStyle(document.body).backgroundColor); if (out[3] < 0.99) out = [255, 255, 255, 1];
+    for (const c of layers.reverse()) out = [0, 1, 2].map((i) => c[i] * c[3] + out[i] * (1 - c[3])).concat(1);
+    return out;
+  };
+  let lowContrast = 0, worst = null;
+  for (const el of textEls) {
+    const cs = getComputedStyle(el);
+    if (el.closest("button:disabled, [aria-disabled=true], [data-disabled]")) continue;
+    const fg = rgba(cs.color), bg = bgOf(el);
+    const mixed = [0, 1, 2].map((i) => fg[i] * fg[3] + bg[i] * (1 - fg[3]));
+    const L1 = lum(mixed), L2 = lum(bg); const ratio = (Math.max(L1, L2) + 0.05) / (Math.min(L1, L2) + 0.05);
+    const large = parseFloat(cs.fontSize) >= 24 || (parseFloat(cs.fontSize) >= 18.66 && parseInt(cs.fontWeight) >= 700);
+    if (ratio < (large ? 3 : 4.5)) { lowContrast++; if (!worst || ratio < worst.ratio) worst = { ratio, el }; }
+  }
+  if (lowContrast) add("readability", "contrast", `${lowContrast} text elements below WCAG AA contrast (worst ${worst.ratio.toFixed(2)}:1, "${worst.el.textContent.trim().slice(0, 30)}")`, "Body text needs 4.5:1, large text 3:1. Use foreground or muted-foreground on background/card; don't fade text with opacity.");
+  const paras = textEls.filter((el) => el.matches("p, li, dd, blockquote") && el.textContent.trim().length > 120);
+  const longLines = paras.filter((el) => { const cs = getComputedStyle(el); const chars = el.getBoundingClientRect().width / (parseFloat(cs.fontSize) * 0.5); return chars > 95; });
+  if (longLines.length) add("readability", "line-length", `${longLines.length} paragraphs run past ~90 characters per line`, "Cap reading width at max-w-copy (about 65ch). Long lines are hard to track back.");
+
+  // --- Hierarchy: one clear largest element near the top; a real step between title and body
+  const sizes = textEls.map((el) => ({ el, s: parseFloat(getComputedStyle(el).fontSize), top: el.getBoundingClientRect().top + scrollY }));
+  const firstScreen = sizes.filter((x) => x.top < vh);
+  const maxS = Math.max(0, ...firstScreen.map((x) => x.s));
+  const atMax = firstScreen.filter((x) => x.s === maxS).length;
+  const bodyS = (() => { const c = {}; for (const x of sizes) c[x.s] = (c[x.s] ?? 0) + x.el.textContent.length; return Number(Object.entries(c).sort((a, b) => b[1] - a[1])[0]?.[0] ?? 14); })();
+  // Pages that are mostly an embedded frame (previews, viewers) can't be judged on hierarchy from outside the frame.
+  const framed = [...document.querySelectorAll("iframe")].some((f) => visible(f) && f.getBoundingClientRect().height > vh * 0.5);
+  if (!framed && atMax > 2) add("hierarchy", "no-focal-point", `${atMax} elements share the largest text size on the first screen`, "One element leads (the page title or hero). Section titles step down.");
+  if (!framed && maxS && maxS / bodyS < 1.4) add("hierarchy", "flat-hierarchy", `largest text is only ${(maxS / bodyS).toFixed(2)}× the body size`, "Give the title a real step up (title or display size) and keep body at one size.");
+
+  // --- Clarity: title + the main action visible without scrolling (on pages that have actions)
+  const h1 = [...document.querySelectorAll("h1")].find(visible);
+  if (h1 && h1.getBoundingClientRect().top > vh) add("clarity", "title-below-fold", "the page title is below the first screen", "Start the page with its title (Page Header).");
+  const mainActions = [...main.querySelectorAll("button, a[data-slot=button], [role=button]")].filter((el) => visible(el) && !skip(el) && (el.getAttribute("data-variant") === "default" || el.getAttribute("data-variant") === "brand"));
+  // Task pages (forms, tables) need their action up front; story pages may end with a call to action.
+  const taskPage = !!main.querySelector("table") || [...main.querySelectorAll("form")].some((f) => f.querySelectorAll("input:not([type=hidden]), select, textarea").length >= 3);
+  if (taskPage && mainActions.length && !mainActions.some((el) => el.getBoundingClientRect().top < vh)) add("clarity", "action-below-fold", "the main action only appears after scrolling", "Put the primary action in the Page Header or the first screen.");
+
+  // --- Layout: alignment edges, spacing rhythm, content width
+  // Centred text starts at a different x on every line by design, so only left-aligned blocks count.
+  const blocks = textEls.filter((el) => { const cs = getComputedStyle(el); return cs.display !== "inline" && cs.textAlign !== "center" && !el.closest("[class*=text-center], [class*=items-center][class*=flex-col]") && el.getBoundingClientRect().top < vh * 1.5 && el.getBoundingClientRect().width > 120; });
+  const lefts = new Set(blocks.map((el) => Math.round(el.getBoundingClientRect().left / 4) * 4));
+  if (lefts.size > 8) add("layout", "alignment", `text starts at ${lefts.size} different left edges on the first screen`, "Align to a few columns: page gutter, card padding, one inner indent.");
+  const offScale = [];
+  for (const el of main.querySelectorAll("*")) {
+    if (skip(el) || !visible(el)) continue;
+    const cs = getComputedStyle(el);
+    // Odd whole pixels (7px, 13px) are off the grid; fractional values come from fluid clamp() tokens and 1px is a hairline.
+      for (const v of [cs.rowGap, cs.columnGap, cs.paddingTop, cs.paddingLeft, cs.marginTop]) { const n = parseFloat(v); if (n > 1 && Number.isInteger(n) && n % 2 !== 0) offScale.push(`${n}px`); }
+  }
+  if (offScale.length > 6) add("layout", "spacing-rhythm", `${offScale.length} spacings off the 4px grid (e.g. ${[...new Set(offScale)].slice(0, 4).join(", ")})`, "Use the spacing scale (4px steps) and layout tokens (p-panel, px-gutter, gap-6).");
+  // Two right edges: paragraphs capped narrower than full-width siblings in the same column (decide width per column, not per element).
+  let ragged = 0;
+  for (const col of main.querySelectorAll("*")) {
+    if (skip(col) || !visible(col)) continue;
+    const kids = [...col.children].filter((k) => visible(k) && getComputedStyle(k).display !== "inline" && getComputedStyle(k).position !== "absolute");
+    if (kids.length < 3) continue;
+    const full = col.getBoundingClientRect().width - parseFloat(getComputedStyle(col).paddingLeft) - parseFloat(getComputedStyle(col).paddingRight);
+    if (full < 600 || getComputedStyle(col).display.includes("flex") && !getComputedStyle(col).flexDirection.startsWith("column") || getComputedStyle(col).display === "grid" && getComputedStyle(col).gridTemplateColumns.split(" ").length > 1) continue;
+    const wide = kids.some((k) => !k.matches("p, h1, h2, h3, h4, li, ul, ol") && k.getBoundingClientRect().width >= full * 0.98);
+    const capped = kids.filter((k) => k.matches("p") && k.textContent.trim().length > 120 && k.getBoundingClientRect().width < full * 0.8);
+    if (wide && capped.length) ragged += capped.length;
+  }
+  if (ragged) add("layout", "two-right-edges", `${ragged} paragraphs stop well short of the full-width blocks beside them`, "Decide width per column, not per element: give the whole column a reading width (max-w-3xl) so text, tables and cards share one right edge.");
+  // Uneven columns: side-by-side columns where one runs far longer than another, leaving large empty holes.
+  let uneven = 0;
+  for (const row of main.querySelectorAll("*")) {
+    if (skip(row) || !visible(row)) continue;
+    const cs = getComputedStyle(row);
+    const cols = cs.display === "grid" ? cs.gridTemplateColumns.split(" ").length : 0;
+    if (cols < 2 || cols > 4) continue;
+    const kids = [...row.children].filter(visible);
+    if (kids.length !== cols) continue; // one row of columns, not a card grid
+    const hs = kids.map((k) => { const kids2 = [...k.children].filter(visible); if (!kids2.length) return 0; const r0 = k.getBoundingClientRect(); return Math.max(...kids2.map((c) => c.getBoundingClientRect().bottom)) - r0.top; });
+    const tall = Math.max(...hs), short = Math.min(...hs);
+    // "Label left, content right" (a heading column beside its content) is a deliberate pattern, not a hole.
+    const labelColumn = hs.indexOf(short) === 0 && kids[0].querySelector("h1, h2, h3") && kids[0].children.length <= 3;
+    // A pinned (sticky) short column follows the reader, so it isn't a hole (list / detail).
+    const pinned = getComputedStyle(kids[hs.indexOf(short)]).position === "sticky" || [...kids[hs.indexOf(short)].children].some((c) => getComputedStyle(c).position === "sticky");
+    if (tall > 160 && short > 0 && tall / short > 2.5 && !labelColumn && !pinned) uneven++;
+  }
+  if (uneven) add("layout", "uneven-columns", `${uneven} rows of side-by-side columns where one column is over 2.5× longer than another`, "Put the main content in one column and move short supporting details to a footer line, or balance what goes in each column.");
+  // Rhythm: in a column of stacked blocks, the gaps between blocks come from one or two values (block gap, section gap),
+  // and a text block never sits cramped against a bordered surface. Catches spacing decided per element instead of by the container.
+  let cramped = 0, irregular = 0;
+  for (const col of main.querySelectorAll("*")) {
+    if (skip(col) || !visible(col)) continue;
+    const cs = getComputedStyle(col);
+    if (cs.display.includes("grid") || (cs.display.includes("flex") && !cs.flexDirection.startsWith("column"))) continue;
+    const kids = [...col.children].filter((k) => visible(k) && !["absolute", "fixed"].includes(getComputedStyle(k).position) && getComputedStyle(k).display !== "inline");
+    if (kids.length < 4) continue;
+    const gaps = [];
+    for (let i = 1; i < kids.length; i++) {
+      const a = kids[i - 1].getBoundingClientRect(), b = kids[i].getBoundingClientRect();
+      if (Math.abs(a.left - b.left) > 2) continue; // not stacked in the same column
+      const g = Math.round(b.top - a.bottom);
+      gaps.push(g);
+      const surface = (el) => parseFloat(getComputedStyle(el).borderTopWidth) > 0 && parseFloat(getComputedStyle(el).borderTopLeftRadius) >= 8;
+      if (g < 10 && (surface(kids[i]) || surface(kids[i - 1])) && !(surface(kids[i]) && surface(kids[i - 1]))) cramped++;
+    }
+    const distinct = [...new Set(gaps.filter((g) => g >= 0).map((g) => Math.round(g / 4) * 4))];
+    if (gaps.length >= 4 && distinct.length > 3) irregular++;
+  }
+  if (cramped) add("layout", "cramped", `${cramped} places where text sits almost touching a bordered block`, "Let the container own spacing: put blocks in a .flow column (or gap-*) instead of margins on each block.");
+  if (irregular) add("layout", "rhythm", `${irregular} columns with more than three different gaps between blocks`, "One rhythm per column: --spacing-flow between blocks, --spacing-stack before a heading (.flow does both).");
+  const mainW = main.getBoundingClientRect().width;
+  if (window.innerWidth >= 1280 && mainW > 1600) add("layout", "content-width", `content spans ${Math.round(mainW)}px`, "Constrain content to max-w-content; very wide layouts scatter attention.");
+
+  // --- Eyebrows: small muted labels right above a heading. Fine once or twice when they add information
+  // (a date, a status, where you are); slop when every section has one or it repeats the heading.
+  const isHeading = (el) => el && (el.matches("h1, h2, h3, [data-slot=heading], [data-slot=web-section-title], [data-slot=web-hero-title]"));
+  const eyebrows = [];
+  for (const el of main.querySelectorAll("p, span, div")) {
+    if (skip(el) || !visible(el) || !ownText(el) || el.children.length) continue;
+    const next = el.nextElementSibling;
+    const cs = getComputedStyle(el);
+    if (!isHeading(next) || parseFloat(cs.fontSize) > 14 || parseFloat(getComputedStyle(next).fontSize) < parseFloat(cs.fontSize) * 1.3) continue;
+    eyebrows.push({ text: el.textContent.trim(), heading: next.textContent.trim() });
+  }
+  const words = (t) => new Set(t.toLowerCase().match(/[a-z]{4,}/g) ?? []);
+  const redundant = eyebrows.filter((e) => { const a = words(e.text), b = words(e.heading); const shared = [...a].filter((w) => b.has(w) || [...b].some((x) => x.startsWith(w.slice(0, 5)))); return a.size && shared.length / a.size >= 0.5; });
+  if (eyebrows.length > 2) add("calm", "eyebrows", `${eyebrows.length} small labels above headings ("${eyebrows.slice(0, 3).map((e) => e.text).join('", "')}")`, "Use an eyebrow only when it adds information the heading doesn't (a date, a status, where you are), and at most once or twice per page.");
+  if (redundant.length) add("calm", "redundant-eyebrow", `eyebrow repeats its heading ("${redundant[0].text}" above "${redundant[0].heading.slice(0, 40)}")`, "Remove it, or replace it with information the heading doesn't give.");
+
+  // --- Usability: verbs on buttons, descriptive links, current nav state, error wiring, focus styles
+  const vague = /^(submit|ok|okay|click here|here|go|yes|no|continue|next|more|read more|learn more|details|link)$/i;
+  const vagueBtns = [...document.querySelectorAll("button, [role=button], a[data-slot=button]")].filter((el) => visible(el) && !skip(el) && vague.test((el.innerText || "").trim()));
+  if (vagueBtns.length) add("usability", "vague-labels", `${vagueBtns.length} actions with vague labels (${[...new Set(vagueBtns.map((b) => b.innerText.trim()))].slice(0, 3).join(", ")})`, "Buttons and links say what happens: 'Send invoice', 'View all orders', not 'Submit' or 'Learn more'.");
+  const navs = [...document.querySelectorAll("nav, aside, [data-slot=sidebar]")].filter(visible);
+  // Only navs that contain the current page have something to mark.
+  const here = location.pathname.replace(/\/$/, "") || "/";
+  const navWithLinks = navs.filter((n) => [...n.querySelectorAll("a[href]")].some((a) => { try { return (new URL(a.href).pathname.replace(/\/$/, "") || "/") === here; } catch { return false; } }));
+  const hasCurrent = navWithLinks.some((n) => n.querySelector("[aria-current], [data-active=true], [data-state=active]"));
+  if (navWithLinks.length && !hasCurrent) add("usability", "no-current-nav", "navigation doesn't mark the current page", "Mark the active item (aria-current=\"page\" plus the accent background) so people know where they are.");
+  const invalid = [...document.querySelectorAll("[aria-invalid=true]")].filter(visible);
+  const unwired = invalid.filter((el) => !el.getAttribute("aria-describedby") && !el.closest("[data-slot=field], [data-slot=form-item]"));
+  if (unwired.length) add("usability", "error-wiring", `${unwired.length} invalid fields without a linked message`, "Show the error under the field (FieldError) and link it with aria-describedby.");
+
+  const measures = {
+    lowContrast, longLines: longLines.length, focalElements: atMax, titleToBody: maxS && bodyS ? +(maxS / bodyS).toFixed(2) : 0,
+    leftEdges: lefts.size, offScaleSpacing: offScale.length, vagueLabels: vagueBtns.length, navMarksCurrent: navWithLinks.length ? hasCurrent : null,
+  };
+  return { measures, findings };
+}
+
+/**
+ * How strict each rule is.
+ *  must    — never broken: accessibility, broken layout, token use, honest copy. Fails `recanica audit`.
+ *  should  — the strong default. A project may deviate when the content needs it, with a written reason
+ *            (recanica.config.json "allow" entry or a recanica-ignore comment). Reported and scored, never fails the build.
+ * Everything else (brand colour, font, locale, density, thresholds) is a project choice, set in tokens or config.
+ */
+export const RULE_LEVELS = {
+  must: ["page-overflow", "text-overflow", "clipped-text", "overlap", "wrapped-label", "contrast", "unnamed-control", "unlabelled-field",
+    "small-target", "dead-link", "duplicate-id", "focus-visible", "spec-copy", "tiny-text", "no-title", "error-wiring", "broken-page", "runtime-error"],
+  should: ["spec-color", "spec-weight", "spec-font", "spec-button", "spec-radius", "inconsistent", "table-edges", "surface-padding", "stretched-rows",
+    "busy-primary", "busy-actions", "busy-type", "busy-surfaces", "busy-lines", "busy-nesting", "busy-badges", "busy-icons", "busy-text",
+    "busy-table", "busy-form", "busy-nav", "no-focal-point", "flat-hierarchy", "title-below-fold", "action-below-fold", "alignment",
+    "spacing-rhythm", "content-width", "two-right-edges", "uneven-columns", "cramped", "rhythm", "line-length", "vague-labels", "no-current-nav", "eyebrows", "redundant-eyebrow"],
+};
+export const levelOf = (rule) => (RULE_LEVELS.must.includes(rule) ? "must" : "should");
+
+/** Default thresholds for the busyness rules. A project can change any of them in recanica.config.json "thresholds". */
+export const DEFAULT_THRESHOLDS = { primaryActions: 1, actions: 18, textSizes: 6, textSizesWithHero: 7, backgrounds: 5, borders: 70, nesting: 3, badges: 8, icons: 24, textChars: 1800, tableColumns: 6, formFields: 10, navRun: 15 };

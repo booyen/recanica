@@ -11,7 +11,7 @@ function Table({ className, ...props }: React.ComponentProps<"table">) {
     >
       <table
         data-slot="table"
-        className={cn("w-full caption-bottom text-sm [--table-edge:--spacing(5)]", className)}
+        className={cn("w-full caption-bottom text-sm [--table-edge:var(--spacing-inset)]", className)}
         {...props}
       />
     </div>

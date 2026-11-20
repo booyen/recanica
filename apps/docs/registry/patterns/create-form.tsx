@@ -11,6 +11,7 @@ import { Label } from "@recanica/ui/components/label";
 import { Switch } from "@recanica/ui/components/switch";
 import { Textarea } from "@recanica/ui/components/textarea";
 import { ToggleGroup, ToggleGroupItem } from "@recanica/ui/components/toggle-group";
+import { Heading } from "@recanica/ui/components/page";
 
 const benefits = ["License key", "Discord role", "GitHub repository access", "File downloads"];
 
@@ -20,7 +21,7 @@ export default function CreateForm() {
     <form className="mx-auto grid max-w-content gap-6 px-gutter py-8 lg:grid-cols-[minmax(0,1fr)_20rem]" onSubmit={(e) => e.preventDefault()}>
       <div className="space-y-6">
         <div>
-          <h1 className="text-title">New product</h1>
+          <Heading level={1}>New product</Heading>
           <p className="mt-1 text-sm text-muted-foreground">Create a product your customers can buy.</p>
         </div>
 

@@ -8,6 +8,8 @@ import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTi
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@recanica/ui/components/select";
 import { Separator } from "@recanica/ui/components/separator";
 import { cn } from "@recanica/ui/lib/utils";
+import { Heading } from "@recanica/ui/components/page";
+import { NavItem } from "@recanica/ui/components/nav-item";
 
 const links = [
   { id: "1", label: "Black Friday", product: "Pro Yearly", visits: 1240, conversions: 86, active: true },
@@ -40,16 +42,13 @@ export default function ListDetail() {
         <ul className="flex flex-col gap-0.5 px-2 pb-2">
           {links.map((l) => (
             <li key={l.id}>
-              <button
-                onClick={() => setSelected(l.id)}
-                className={cn("flex w-full flex-col gap-0.5 rounded-xl px-3 py-2.5 text-left transition-colors hover:bg-accent", selected === l.id && "bg-accent")}
-              >
+              <NavItem onClick={() => setSelected(l.id)} active={selected === l.id} className="flex-col gap-0.5">
                 <span className="flex items-center justify-between text-sm">
                   {l.label}
                   {!l.active && <Badge variant="muted">Paused</Badge>}
                 </span>
                 <span className="text-xs text-muted-foreground">{l.product} · {l.conversions} sales</span>
-              </button>
+              </NavItem>
             </li>
           ))}
         </ul>
@@ -62,7 +61,7 @@ export default function ListDetail() {
             <Button variant="ghost" size="sm" className="-ml-2 md:hidden" onClick={() => setSelected(null)}><ArrowLeftIcon /> Back</Button>
             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div>
-                <h1 className="text-title">{link.label}</h1>
+                <Heading level={1}>{link.label}</Heading>
                 <p className="text-sm text-muted-foreground">{link.product}</p>
               </div>
               <div className="flex gap-2">

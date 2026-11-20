@@ -21,7 +21,7 @@ const marketing = [
 export default function Page() {
   return (
     <>
-      <DocsPageHeader eyebrow="Foundations" title="Typography" description="Geist Sans and Geist Mono. Light and regular weights, generous size contrast, never bold." />
+      <DocsPageHeader title="Typography" description="Your project's font, set with --font-sans and --font-mono (Geist by default)." />
       <H2 id="product">Product scale</H2>
       <P>For dashboards and app surfaces.</P>
       <Frame className="mt-6 divide-y">

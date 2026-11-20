@@ -1,6 +1,7 @@
 import { DocsPageHeader, H2, P } from "@/components/docs/page-header";
 import { Frame, TokenTable } from "@/components/docs/frame";
 import { Pager } from "@/components/docs/pager";
+import { Surface } from "@recanica/ui/components/surface";
 
 export const metadata = { title: "Surfaces & Radius" };
 
@@ -9,18 +10,18 @@ const radii = [["sm", "rounded-sm", "8px"], ["md", "rounded-md", "10px"], ["lg",
 export default function Page() {
   return (
     <>
-      <DocsPageHeader eyebrow="Foundations" title="Surfaces & Radius" description="Depth comes from stacked surfaces and hairline borders, not shadows." />
+      <DocsPageHeader title="Surfaces & Radius" description="Depth comes from stacked surfaces and hairline borders, not shadows." />
       <H2 id="layers">Layers</H2>
       <P>Each layer is one step lighter in dark mode (one step whiter in light). Never skip a layer.</P>
-      <div className="mt-6 rounded-2xl border bg-background p-3">
+      <div /* recanica-ignore: demonstrates the layer order */ className="mt-6 rounded-2xl border bg-background p-3">
         <p className="px-2 pb-2 font-mono text-xs text-muted-foreground">background</p>
-        <div className="rounded-2xl border bg-panel p-4">
+        <Surface tone="panel" inset="sm">
           <p className="pb-3 font-mono text-xs text-muted-foreground">panel</p>
-          <div className="rounded-2xl border bg-card p-4">
+          <Surface inset="sm">
             <p className="pb-3 font-mono text-xs text-muted-foreground">card</p>
             <div className="rounded-xl bg-accent px-4 py-3 font-mono text-xs">accent · hover / active</div>
-          </div>
-        </div>
+          </Surface>
+        </Surface>
       </div>
       <H2 id="radius">Radius</H2>
       <P>Base radius is 12px. Controls are pills; containers get rounder as they get bigger.</P>
@@ -43,8 +44,8 @@ export default function Page() {
       <P>Shadows are only for things floating above the page: popovers, dialogs, toasts.</P>
       <div className="mt-6 grid gap-4 sm:grid-cols-3">
         <Frame className="p-5 text-sm">none<p className="text-xs text-muted-foreground">Cards, panels. Border only.</p></Frame>
-        <div className="rounded-2xl border bg-popover p-5 text-sm shadow-soft">shadow-soft<p className="text-xs text-muted-foreground">Menus, popovers</p></div>
-        <div className="rounded-2xl border bg-popover p-5 text-sm shadow-float">shadow-float<p className="text-xs text-muted-foreground">Dialogs, featured cards</p></div>
+        <div /* recanica-ignore: demonstrates elevation */ className="rounded-2xl border bg-popover p-5 text-sm shadow-soft">shadow-soft<p className="text-xs text-muted-foreground">Menus, popovers</p></div>
+        <div /* recanica-ignore: demonstrates elevation */ className="rounded-2xl border bg-popover p-5 text-sm shadow-float">shadow-float<p className="text-xs text-muted-foreground">Dialogs, featured cards</p></div>
       </div>
       <Pager href="/docs/foundations/surfaces" />
     </>

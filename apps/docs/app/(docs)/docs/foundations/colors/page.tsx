@@ -26,7 +26,7 @@ function Swatch({ token, use }: { token: string; use: string }) {
 export default function Page() {
   return (
     <>
-      <DocsPageHeader eyebrow="Foundations" title="Colors" description="Black, white and gray. Color is reserved for status; everything else is hierarchy through value." />
+      <DocsPageHeader title="Colors" description="Black, white and gray. Color is reserved for status; everything else is hierarchy through value." />
       <H2 id="semantic">Semantic tokens</H2>
       <P>Components only use these. They swap automatically between light and dark. Toggle the theme to compare.</P>
       <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
@@ -41,7 +41,7 @@ export default function Page() {
         <div className="flex overflow-hidden rounded-xl border">
           {grays.map((g) => <div key={g} data-audit-ignore className="h-14 flex-1" style={{ background: `var(--rc-gray-${g})` }} title={`--rc-gray-${g}`} />)}
         </div>
-        <div className="flex justify-between font-mono text-[10px] text-muted-foreground">{grays.map((g) => <span key={g}>{g}</span>)}</div>
+        <div className="flex justify-between font-mono text-xs text-muted-foreground">{grays.map((g) => <span key={g}>{g}</span>)}</div>
         <div className="flex overflow-hidden rounded-xl border">
           {silvers.map((g) => <div key={g} data-audit-ignore className="h-14 flex-1" style={{ background: `var(--rc-silver-${g})` }} title={`--rc-silver-${g}`} />)}
         </div>
@@ -49,11 +49,14 @@ export default function Page() {
       </div>
       <H2 id="charts">Chart ramp</H2>
       <P>Five monochrome steps. Order series from most to least important.</P>
-      <div className="mt-6 flex h-12 overflow-hidden rounded-xl border">
-        {[1, 2, 3, 4, 5].map((n) => <div key={n} className="flex flex-1 items-end p-2 font-mono text-[10px] mix-blend-difference text-white" style={{ background: `var(--chart-${n})` }}>chart-{n}</div>)}
+      <div>
+        <div className="flex h-12 overflow-hidden rounded-xl border">
+          {[1, 2, 3, 4, 5].map((n) => <div key={n} data-audit-ignore className="flex-1" style={{ background: `var(--chart-${n})` }} title={`chart-${n}`} />)}
+        </div>
+        <div className="mt-1.5 flex font-mono text-xs text-muted-foreground">{[1, 2, 3, 4, 5].map((n) => <span key={n} className="flex-1">chart-{n}</span>)}</div>
       </div>
       <H2 id="usage">Usage</H2>
-      <TokenTable
+      <TokenTable keys="code"
         head={["Utility", "Use for"]}
         rows={[
           ["text-foreground", "Titles, values, primary labels"],

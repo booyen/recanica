@@ -1,6 +1,7 @@
 import { SearchIcon } from "lucide-react";
 import { Button } from "@recanica/ui/components/button";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@recanica/ui/components/input-group";
+import { Heading } from "@recanica/ui/components/page";
 
 const links = [["Home", "Start again from the home page", "/site"], ["Shop", "Products and prices", "/site/shop"], ["Contact", "Ask us directly", "/site/contact"]];
 
@@ -10,7 +11,7 @@ export function Error01() {
       <div className="w-full max-w-md space-y-8 text-center">
         <p className="text-display-lg font-light text-brand">404</p>
         <div className="space-y-2">
-          <h1 className="text-title">We can&apos;t find that page</h1>
+          <Heading level={1}>We can&apos;t find that page</Heading>
           <p className="text-muted-foreground">The link may be old, or the page was moved. Try searching, or go to one of these:</p>
         </div>
         <InputGroup><InputGroupAddon><SearchIcon /></InputGroupAddon><InputGroupInput placeholder="Search the site" aria-label="Search the site" /></InputGroup>

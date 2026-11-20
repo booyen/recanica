@@ -10,13 +10,14 @@ import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,
 } from "@recanica/ui/components/dropdown-menu";
 import { Tabs, TabsList, TabsTrigger } from "@recanica/ui/components/tabs";
+import { Heading } from "@recanica/ui/components/page";
 
 export default function PageHeader() {
   return (
     <div className="mx-auto max-w-content px-gutter py-8">
       <Breadcrumb>
         <BreadcrumbList>
-          <BreadcrumbItem><BreadcrumbLink href="#">Products</BreadcrumbLink></BreadcrumbItem>
+          <BreadcrumbItem><BreadcrumbLink href="/demo/app/products">Products</BreadcrumbLink></BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem><BreadcrumbPage>Catalogue</BreadcrumbPage></BreadcrumbItem>
         </BreadcrumbList>
@@ -25,7 +26,7 @@ export default function PageHeader() {
       <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <h1 className="text-title">Catalogue</h1>
+            <Heading level={1}>Catalogue</Heading>
             <Badge variant="muted">24</Badge>
           </div>
           <p className="text-sm text-muted-foreground">Products, prices and the benefits they grant.</p>

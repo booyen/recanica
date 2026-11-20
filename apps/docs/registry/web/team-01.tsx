@@ -1,3 +1,4 @@
+import { WebSectionTitle } from "@recanica/ui/components/web-section";
 const team = [
   ["Nadia Rahman", "Co-founder, CEO"], ["Tan Wei Ming", "Co-founder, CTO"], ["Arjun Mehta", "Engineering"], ["Mei Kato", "Design"],
   ["Hana Lee", "Customer support"], ["Sam Ortiz", "Partnerships"], ["Chloe Martin", "Finance"], ["Leo Tan", "Engineering"],
@@ -9,7 +10,7 @@ export function Team01() {
     <section className="px-gutter py-section">
       <div className="mx-auto max-w-content">
         <div className="max-w-2xl">
-          <h2 className="text-display-sm tracking-tight">The team</h2>
+          <WebSectionTitle>The team</WebSectionTitle>
           <p className="mt-4 text-muted-foreground">Twelve people in Kuala Lumpur and Penang. We answer support emails ourselves.</p>
         </div>
         <ul className="mt-12 grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-4">

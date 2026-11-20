@@ -1,6 +1,6 @@
 # Recanica
 
-**A comprehensive UI framework by Aturanica Labs.** Monochrome, calm, dark-first, and usable from any stack or AI tool.
+**A comprehensive UI framework by Aturanica Labs.** Calm by rule, monochrome by default (bring your own brand colour), dark-first, and usable from any stack or AI tool.
 
 | Package | What |
 |---|---|

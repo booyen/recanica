@@ -8,7 +8,7 @@ export default function Page() {
   return (
     <>
       <Banner01 />
-      <Products01 />
+      <Products01 titleAs="h1" />
       <CategoryFilters01 />
     </>
   );

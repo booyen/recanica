@@ -46,6 +46,12 @@ const data = {
   ],
   appLibrary: catalog.appLibrary,
   webRecipes: catalog.webRecipes,
+  anatomy: JSON.parse(read("docs/ai/anatomy.json")),
+  parts: JSON.parse(read("packages/ui/parts.json")).parts,
+  // Skills shipped to projects (Claude Code skills; also served as MCP prompts for other AI tools).
+  skills: Object.fromEntries(
+    readdirSync(join(repo, "docs/ai/skills")).map((name) => [name, Object.fromEntries(readdirSync(join(repo, "docs/ai/skills", name)).map((f) => [f, read("docs/ai/skills", name, f)]))])
+  ),
   guides: Object.fromEntries(
     readdirSync(join(repo, "docs/guides")).filter((f) => f.endsWith(".md")).map((f) => [f.replace(/\.md$/, ""), read("docs/guides", f)])
   ),

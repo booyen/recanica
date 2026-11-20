@@ -4,6 +4,8 @@ import { Button } from "@recanica/ui/components/button";
 import { Field, FieldLabel } from "@recanica/ui/components/field";
 import { Input } from "@recanica/ui/components/input";
 import { Separator } from "@recanica/ui/components/separator";
+import { Heading } from "@recanica/ui/components/page";
+import { CenteredPage } from "@recanica/ui/components/layout";
 
 function GitHubMark() {
   return (
@@ -15,11 +17,11 @@ function GitHubMark() {
 
 export default function SignIn() {
   return (
-    <div className="flex min-h-svh items-center justify-center bg-background px-gutter py-12">
+    <CenteredPage>
       <div className="w-full max-w-sm space-y-6">
         <div className="flex flex-col items-center gap-3 text-center">
           <span className="size-9 rounded-xl bg-brand text-brand-foreground" />
-          <h1 className="text-title">Welcome back</h1>
+          <Heading level={1}>Welcome back</Heading>
           <p className="text-sm text-muted-foreground">Sign in to your Aturanica account.</p>
         </div>
         <div className="grid gap-2">
@@ -34,7 +36,7 @@ export default function SignIn() {
           <Field>
             <div className="flex items-center justify-between">
               <FieldLabel htmlFor="si-pass">Password</FieldLabel>
-              <a href="#" className="text-sm text-muted-foreground hover:text-foreground">Forgot?</a>
+              <a href="/demo/sign-in" className="text-sm text-muted-foreground hover:text-foreground">Forgot?</a>
             </div>
             <Input id="si-pass" type="password" autoComplete="current-password" />
           </Field>
@@ -42,9 +44,9 @@ export default function SignIn() {
           <Button type="button" variant="ghost" className="w-full">Email me a sign-in link</Button>
         </form>
         <p className="text-center text-sm text-muted-foreground">
-          No account? <a href="#" className="text-foreground underline-offset-4 hover:underline">Create one</a>
+          No account? <a href="/demo/sign-in" className="text-foreground underline-offset-4 hover:underline">Create one</a>
         </p>
       </div>
-    </div>
+    </CenteredPage>
   );
 }

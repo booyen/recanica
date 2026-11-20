@@ -7,6 +7,7 @@ import { Field, FieldLabel } from "@recanica/ui/components/field";
 import { Input } from "@recanica/ui/components/input";
 import { NativeSelect, NativeSelectOption } from "@recanica/ui/components/native-select";
 import { Textarea } from "@recanica/ui/components/textarea";
+import { WebSectionTitle } from "@recanica/ui/components/web-section";
 
 const details = [
   { icon: MailIcon, label: "Email", value: "hello@acme.example" },
@@ -22,7 +23,7 @@ export function Contact01() {
       <div className="mx-auto grid max-w-content gap-12 lg:grid-cols-[1fr_1.2fr]">
         <div className="space-y-8">
           <div>
-            <h1 className="text-display-sm tracking-tight">Contact us</h1>
+            <WebSectionTitle as="h1">Contact us</WebSectionTitle>
             <p className="mt-3 text-muted-foreground">We reply within one business day. For account issues, sign in and use in-app chat for a faster answer.</p>
           </div>
           <dl className="space-y-5">

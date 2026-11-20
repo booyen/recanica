@@ -1,12 +1,13 @@
 import { Avatar, AvatarFallback } from "@recanica/ui/components/avatar";
 import { Badge } from "@recanica/ui/components/badge";
+import { WebHeroTitle } from "@recanica/ui/components/web-section";
 
 export function PostHero01() {
   return (
     <header className="px-gutter pt-section-sm">
       <div className="mx-auto max-w-narrow space-y-6 text-center">
         <Badge variant="outline">Tax</Badge>
-        <h1 className="text-display-sm tracking-tight text-balance sm:text-display-md">What changes for small businesses with e-Invoice in 2026</h1>
+        <WebHeroTitle>What changes for small businesses with e-Invoice in 2026</WebHeroTitle>
         <p className="text-muted-foreground sm:text-lg">Who needs to comply, by when, and what the validation QR on your invoice actually does.</p>
         <div className="flex items-center justify-center gap-3 text-sm">
           <Avatar><AvatarFallback>TW</AvatarFallback></Avatar>

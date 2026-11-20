@@ -1,4 +1,5 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@recanica/ui/components/accordion";
+import { WebSectionTitle } from "@recanica/ui/components/web-section";
 
 const faqs = [
   ["How much does it cost?", "Free to start. We take 4% + 40¢ per transaction, including tax handling and payouts."],
@@ -13,7 +14,7 @@ export function Faq01() {
     <section className="px-gutter py-section">
       <div className="mx-auto grid max-w-content gap-10 lg:grid-cols-[1fr_1.6fr] lg:gap-16">
         <div>
-          <h2 className="text-display-sm tracking-tight">Questions</h2>
+          <WebSectionTitle>Questions</WebSectionTitle>
           <p className="mt-4 text-muted-foreground">Can't find an answer? <a href="/site/contact" className="text-foreground underline underline-offset-4">Talk to us</a>.</p>
         </div>
         <Accordion type="single" collapsible className="w-full">

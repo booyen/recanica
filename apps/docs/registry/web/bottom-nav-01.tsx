@@ -3,6 +3,8 @@
 import * as React from "react";
 import { HomeIcon, ReceiptIcon, SearchIcon, ShoppingBagIcon, UserIcon } from "lucide-react";
 import { cn } from "@recanica/ui/lib/utils";
+import { Heading } from "@recanica/ui/components/page";
+import { NavItem } from "@recanica/ui/components/nav-item";
 
 const tabs = [
   { id: "home", label: "Home", icon: HomeIcon },
@@ -17,7 +19,7 @@ export function BottomNav01() {
   return (
     <div className="relative mx-auto flex min-h-[600px] max-w-sm flex-col border-x bg-background">
       <main className="flex-1 space-y-3 p-4 pb-24">
-        <h1 className="text-title capitalize">{active}</h1>
+        <Heading level={1} className="capitalize">{active}</Heading>
         {Array.from({ length: 4 }).map((_, i) => <div key={i} className="h-20 rounded-2xl border bg-muted/50" />)}
       </main>
       {/* Fixed to the viewport in real apps: use `fixed inset-x-0 bottom-0` and pad for the safe area */}
@@ -25,15 +27,11 @@ export function BottomNav01() {
         <ul className="grid grid-cols-5">
           {tabs.map((t) => (
             <li key={t.id}>
-              <button
-                onClick={() => setActive(t.id)}
-                aria-current={active === t.id ? "page" : undefined}
-                className={cn("relative flex w-full flex-col items-center gap-1 py-2.5 text-[11px] text-muted-foreground transition-colors", active === t.id && "text-foreground")}
-              >
+              <NavItem variant="tab" active={active === t.id} onClick={() => setActive(t.id)} className="relative">
                 <t.icon className="size-5" strokeWidth={active === t.id ? 2.25 : 1.75} />
                 {t.label}
-                {t.badge && <span className="absolute top-1.5 left-1/2 ml-2 flex size-4 items-center justify-center rounded-full bg-foreground text-[10px] text-background">{t.badge}</span>}
-              </button>
+                {t.badge && <span className="absolute top-1.5 left-1/2 ml-2 flex h-5 min-w-5 items-center justify-center rounded-full bg-foreground px-1 text-xs text-background">{t.badge}</span>}
+              </NavItem>
             </li>
           ))}
         </ul>

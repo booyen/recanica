@@ -124,6 +124,47 @@
           "css": "15rem"
         }
       }
+    },
+    "flow": {
+      "$type": "dimension",
+      "$value": "20px",
+      "$extensions": {
+        "com.recanica": {
+          "css": "1.25rem"
+        }
+      },
+      "$description": "Gap between consecutive blocks in a column (paragraph \u2192 table \u2192 paragraph). Owned by the .flow container, never by the blocks."
+    },
+    "$description": "Visual rhythm, by role. Pages and components use these roles, never raw numbers: inset (inside a surface) \u00b7 group (within a group: heading\u2192content, label\u2192field) \u00b7 flow (between blocks) \u00b7 stack (between sections) \u00b7 section (page bands on marketing pages).",
+    "group": {
+      "$type": "dimension",
+      "$value": "12px",
+      "$extensions": {
+        "com.recanica": {
+          "css": "0.75rem"
+        }
+      },
+      "$description": "Within a group: a heading and its content, a label and its field."
+    },
+    "inset-sm": {
+      "$type": "dimension",
+      "$value": "16px",
+      "$extensions": {
+        "com.recanica": {
+          "css": "1rem"
+        }
+      },
+      "$description": "Padding inside compact surfaces (list rows, small cards)."
+    },
+    "inset": {
+      "$type": "dimension",
+      "$value": "20px",
+      "$extensions": {
+        "com.recanica": {
+          "css": "1.25rem"
+        }
+      },
+      "$description": "Padding inside surfaces (cards, tables' edge inset)."
     }
   },
   "container": {

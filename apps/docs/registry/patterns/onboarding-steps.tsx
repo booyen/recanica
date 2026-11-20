@@ -5,6 +5,7 @@ import { ArrowRightIcon, CheckIcon } from "lucide-react";
 import { Button } from "@recanica/ui/components/button";
 import { Progress } from "@recanica/ui/components/progress";
 import { cn } from "@recanica/ui/lib/utils";
+import { Heading } from "@recanica/ui/components/page";
 
 const steps = [
   { title: "Create your organization", body: "Name, logo and store URL.", cta: "Edit" },
@@ -20,7 +21,7 @@ export default function OnboardingSteps() {
       <div className="space-y-3">
         <div className="flex items-end justify-between gap-4">
           <div>
-            <h1 className="text-title">Get started</h1>
+            <Heading level={1}>Get started</Heading>
             <p className="mt-1 text-sm text-muted-foreground">Four steps to your first sale.</p>
           </div>
           <span className="text-sm text-muted-foreground tabular-nums">{done} / {steps.length}</span>

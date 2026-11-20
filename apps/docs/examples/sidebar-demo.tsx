@@ -15,7 +15,7 @@ const items = [
 export default function SidebarDemo() {
   return (
     <SidebarProvider className="min-h-0 w-auto">
-      <div className="w-60 rounded-2xl border bg-sidebar p-2 text-left">
+      <div /* recanica-ignore: shows the sidebar surface tone */ className="w-60 rounded-2xl border bg-sidebar p-2 text-left">
         <SidebarGroup>
           <SidebarGroupLabel>Acme Studio</SidebarGroupLabel>
           <SidebarGroupContent>

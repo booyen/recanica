@@ -23,6 +23,7 @@ export const foundations: CatalogItem[] = [
 export const gettingStarted: NavLink[] = [
   { title: "Introduction", href: "/docs" },
   { title: "Design language", href: "/docs/design-language" },
+  { title: "Page anatomy", href: "/docs/page-anatomy" },
   { title: "Installation", href: "/docs/installation" },
   { title: "Theming", href: "/docs/theming" },
   { title: "Use with AI", href: "/docs/ai" },

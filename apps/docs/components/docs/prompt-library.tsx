@@ -5,6 +5,7 @@ import { CheckIcon, CopyIcon, DownloadIcon } from "lucide-react";
 import { Button } from "@recanica/ui/components/button";
 import { cn } from "@recanica/ui/lib/utils";
 import type { LlmPrompt } from "@/lib/llm";
+import { NavItem } from "@recanica/ui/components/nav-item";
 
 export function CopyPromptButton({ text, label = "Copy prompt", className, size = "default", variant = "brand" }: {
   text: string; label?: string; className?: string; size?: "default" | "sm" | "lg"; variant?: "brand" | "outline" | "secondary";
@@ -37,19 +38,12 @@ export function PromptLibrary({ prompts }: { prompts: LlmPrompt[] }) {
 
   return (
     <div className="grid gap-4 lg:grid-cols-[16rem_minmax(0,1fr)]">
-      <div className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 lg:mx-0 lg:flex-col lg:overflow-visible lg:px-0">
+      <div className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 lg:sticky lg:top-20 lg:mx-0 lg:flex-col lg:self-start lg:overflow-visible lg:px-0">
         {prompts.map((x, i) => (
-          <button
-            key={x.id}
-            onClick={() => setActive(x.id)}
-            className={cn(
-              "flex shrink-0 items-start gap-3 rounded-xl border px-3 py-2.5 text-left text-sm transition-colors hover:bg-accent lg:shrink",
-              active === x.id ? "bg-accent text-foreground" : "text-muted-foreground"
-            )}
-          >
+          <NavItem key={x.id} onClick={() => setActive(x.id)} active={active === x.id} className={cn("w-auto shrink-0 border lg:w-full lg:shrink", active !== x.id && "text-muted-foreground")}>
             <span className="font-mono text-xs text-muted-foreground">{String(i + 1).padStart(2, "0")}</span>
             <span className="whitespace-nowrap lg:whitespace-normal">{x.title}</span>
-          </button>
+          </NavItem>
         ))}
       </div>
 
@@ -61,7 +55,7 @@ export function PromptLibrary({ prompts }: { prompts: LlmPrompt[] }) {
           </div>
           <div className="flex shrink-0 gap-2">
             <Button variant="outline" size="icon" aria-label="Download as markdown" onClick={download}><DownloadIcon /></Button>
-            <CopyPromptButton text={p.body} />
+            <CopyPromptButton text={p.body} variant="outline" />
           </div>
         </div>
         <pre className="max-h-[520px] overflow-auto p-5 font-mono text-[12.5px] leading-6 whitespace-pre-wrap text-muted-foreground">{p.body}</pre>

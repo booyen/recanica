@@ -3,6 +3,7 @@
 import * as React from "react";
 import { ArrowRightIcon, XIcon } from "lucide-react";
 import { Button } from "@recanica/ui/components/button";
+import { Heading } from "@recanica/ui/components/page";
 
 function useCountdown(target: number) {
   const [now, setNow] = React.useState<number | null>(null);
@@ -26,7 +27,7 @@ export function Banner01() {
           <p className="flex-1 text-center">
             Year-end sale: 20% off all annual plans until 31 December. <a href="/site/shop" className="underline underline-offset-4">See plans</a>
           </p>
-          <button aria-label="Dismiss announcement" onClick={() => setOpen(false)} className="rounded-full p-1 opacity-70 hover:opacity-100"><XIcon className="size-4" /></button>
+          <Button variant="ghost" size="icon-sm" aria-label="Dismiss announcement" onClick={() => setOpen(false)} className="text-current hover:bg-white/10"><XIcon /></Button>
         </div>
       )}
       <section className="px-gutter">
@@ -43,7 +44,7 @@ export function Banner01() {
             </div>
           </div>
           <div className="flex-1 space-y-3">
-            <h2 className="text-heading">Annual plans, 20% off</h2>
+            <Heading level={2}>Annual plans, 20% off</Heading>
             <p className="text-muted-foreground">Lock in this year&apos;s price for the next 12 months. Applies to new and upgrading customers.</p>
             <Button variant="brand">Claim the discount <ArrowRightIcon /></Button>
           </div>

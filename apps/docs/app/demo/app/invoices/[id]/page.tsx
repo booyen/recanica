@@ -18,6 +18,7 @@ import { Progress } from "@recanica/ui/components/progress";
 import { InvoiceDocument } from "@/components/demo/invoice-document";
 import { InvoiceBadge, NotFound, PageHeader } from "@/components/demo/ui";
 import { date, dmy, invoiceBalance, invoiceGrand, invoicePaid, isOverdue, money2, nextInstallment, useDemo } from "@/lib/demo/store";
+import { Surface } from "@recanica/ui/components/surface";
 
 const METHODS = ["FPX · Maybank2u", "FPX · CIMB Clicks", "DuitNow QR", "DuitNow Transfer", "JomPAY", "Bank transfer (IBG)", "Cash", "Cheque"];
 
@@ -138,7 +139,7 @@ export default function InvoicePage({ params }: { params: Promise<{ id: string }
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_18rem]">
         <InvoiceDocument invoice={inv} />
         <aside className="space-y-6">
-          <section className="space-y-3 rounded-2xl border bg-card p-5">
+          <Surface as="section" className="space-y-3">
             <div className="flex items-baseline justify-between text-sm"><span className="text-muted-foreground">Paid</span><span className="tabular-nums">{money2(paid)} / {money2(total)}</span></div>
             <Progress value={total ? (paid / total) * 100 : 0} className="h-1.5" />
             {inv.plan && (
@@ -152,16 +153,16 @@ export default function InvoicePage({ params }: { params: Promise<{ id: string }
                 ))}
               </ol>
             )}
-          </section>
+          </Surface>
 
           {inv.einvoice && (
-            <section className="space-y-2 rounded-2xl border bg-card p-5 text-sm">
+            <Surface as="section" className="space-y-2 text-sm">
               <p className="flex items-center gap-2"><ShieldCheckIcon className="size-4" /> MyInvois</p>
               {inv.einvoice.status === "valid"
                 ? <Badge variant="success">Valid</Badge>
                 : <Badge variant="warning">Submitted · validating…</Badge>}
               <p className="font-mono text-xs break-all text-muted-foreground">{inv.einvoice.uuid}</p>
-            </section>
+            </Surface>
           )}
 
           <section className="space-y-3">

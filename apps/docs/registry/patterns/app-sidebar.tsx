@@ -9,6 +9,9 @@ import { Avatar, AvatarFallback } from "@recanica/ui/components/avatar";
 import { Button } from "@recanica/ui/components/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@recanica/ui/components/sheet";
 import { cn } from "@recanica/ui/lib/utils";
+import { Surface } from "@recanica/ui/components/surface";
+import { NavItem } from "@recanica/ui/components/nav-item";
+import { AppSidebar as SidebarColumn, AppSidebarHeader, AppSidebarSub } from "@recanica/ui/components/app-shell";
 
 const nav = [
   { label: "Overview", icon: LayoutGridIcon },
@@ -22,61 +25,51 @@ const nav = [
 
 function SidebarContents({ active, onSelect, onHide }: { active: string; onSelect: (v: string) => void; onHide?: () => void }) {
   return (
-    <div className="flex h-full flex-col gap-1 p-3">
-      <div className="mb-4 flex items-center justify-between px-2 py-1">
+    <SidebarColumn>
+      <AppSidebarHeader>
         <span className="size-6 rounded-md bg-brand text-brand-foreground" aria-label="Aturanica" />
         <div className="flex">
           <Button size="icon-sm" variant="ghost" aria-label="Notifications"><BellIcon /></Button>
           <Button size="icon-sm" variant="ghost" aria-label="Search"><SearchIcon /></Button>
           {onHide && <Button size="icon-sm" variant="ghost" aria-label="Hide sidebar (⌘B)" title="Hide sidebar (⌘B)" onClick={onHide}><PanelLeftCloseIcon /></Button>}
         </div>
-      </div>
+      </AppSidebarHeader>
       <nav className="flex flex-col gap-0.5">
         {nav.map((n) => {
           const open = n.label === active || n.children?.includes(active);
           return (
             <div key={n.label}>
-              <button
-                onClick={() => onSelect(n.children ? n.children[0] : n.label)}
-                className={cn(
-                  "flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-sm text-sidebar-foreground transition-colors hover:text-foreground",
-                  open && "bg-sidebar-accent text-foreground"
-                )}
-              >
+              <NavItem variant="sidebar" active={open} onClick={() => onSelect(n.children ? n.children[0] : n.label)}>
                 <n.icon className="size-4" /> {n.label}
-              </button>
+              </NavItem>
               {n.children && open && (
-                <div className="my-1 ml-5 flex flex-col border-l pl-3">
+                <AppSidebarSub>
                   {n.children.map((c) => (
-                    <button
-                      key={c}
-                      onClick={() => onSelect(c)}
-                      className={cn("py-1.5 text-left text-sm text-sidebar-foreground transition-colors hover:text-foreground", active === c && "text-foreground")}
-                    >
+                    <NavItem key={c} variant="sub" active={active === c} onClick={() => onSelect(c)}>
                       {c}
-                    </button>
+                    </NavItem>
                   ))}
-                </div>
+                </AppSidebarSub>
               )}
             </div>
           );
         })}
       </nav>
       <div className="mt-auto space-y-1 pt-6">
-        <div className="mb-3 rounded-xl border bg-panel p-4 text-sm">
+        <Surface size="sm" tone="panel" inset="sm" className="mb-3 text-sm">
           <p>Introducing Aturanica Pro</p>
           <p className="mt-1 text-muted-foreground">Lower fees with a subscription plan.</p>
-          <a href="#" className="mt-3 inline-block font-medium text-brand">Upgrade</a>
-        </div>
-        <a href="#" className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-sidebar-foreground hover:text-foreground"><LifeBuoyIcon className="size-4" /> Support</a>
-        <a href="#" className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-sidebar-foreground hover:text-foreground"><ArrowUpRightIcon className="size-4" /> Documentation</a>
-        <button className="mt-2 flex w-full items-center gap-3 border-t px-2 pt-3 text-sm">
+          <a href="/demo/app/settings" className="mt-3 inline-block font-medium text-brand">Upgrade</a>
+        </Surface>
+        <NavItem variant="sidebar" as="a" href="/demo/app/support"><LifeBuoyIcon className="size-4" /> Support</NavItem>
+        <NavItem variant="sidebar" as="a" href="/docs"><ArrowUpRightIcon className="size-4" /> Documentation</NavItem>
+        <NavItem variant="sidebar" className="mt-2 rounded-none border-t px-2 pt-3">
           <Avatar className="size-7"><AvatarFallback>AS</AvatarFallback></Avatar>
           <span className="truncate">Acme Studio</span>
           <ChevronDownIcon className="ml-auto size-4 text-muted-foreground" />
-        </button>
+        </NavItem>
       </div>
-    </div>
+    </SidebarColumn>
   );
 }
 
@@ -115,7 +108,7 @@ export default function AppSidebar() {
           <span className="size-5 rounded-md bg-brand text-brand-foreground" />
           <span className="text-sm">{active}</span>
         </header>
-        <main className="flex min-h-0 flex-1 items-center justify-center overflow-y-auto rounded-2xl border bg-panel p-6 text-sm text-muted-foreground">
+        <main /* recanica-ignore: app shell content panel */ className="flex min-h-0 flex-1 items-center justify-center overflow-y-auto rounded-2xl border bg-panel p-6 text-sm text-muted-foreground">
           {active}
         </main>
       </div>

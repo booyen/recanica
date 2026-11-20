@@ -14,6 +14,7 @@ import { Stat, StatGroup, StatHeader, StatValue } from "@recanica/ui/components/
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@recanica/ui/components/table";
 import { PageHeader, Section } from "@/components/demo/ui";
 import { FEE_FIXED, FEE_RATE, date, metrics, money2, useDemo } from "@/lib/demo/store";
+import { Surface } from "@recanica/ui/components/surface";
 
 function ConnectDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (o: boolean) => void }) {
   const { state, dispatch } = useDemo();
@@ -111,14 +112,14 @@ export default function FinancePage() {
       </StatGroup>
 
       <Section title="Payout account">
-        <div className="flex flex-col gap-3 rounded-2xl border bg-card p-5 sm:flex-row sm:items-center">
+        <Surface className="flex flex-col gap-3 sm:flex-row sm:items-center">
           <LandmarkIcon className="size-5 text-muted-foreground" />
           <div className="flex-1">
             <p>{state.org.payoutConnected ? "Maybank •••• 0000 (demo)" : "No account connected"}</p>
             <p className="text-sm text-muted-foreground">{state.org.payoutConnected ? "Payouts arrive in 2–3 business days." : "Connect a bank account to withdraw your balance."}</p>
           </div>
           {state.org.payoutConnected ? <Badge variant="success">Connected</Badge> : <Button variant="outline" onClick={() => setConnect(true)}>Connect</Button>}
-        </div>
+        </Surface>
       </Section>
 
       <Section title="Payouts">

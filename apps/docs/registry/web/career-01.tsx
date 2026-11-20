@@ -4,6 +4,9 @@ import * as React from "react";
 import { ArrowUpRightIcon } from "lucide-react";
 import { Badge } from "@recanica/ui/components/badge";
 import { Tabs, TabsList, TabsTrigger } from "@recanica/ui/components/tabs";
+import { WebSectionTitle } from "@recanica/ui/components/web-section";
+import { Heading } from "@recanica/ui/components/page";
+import { SurfaceGrid } from "@recanica/ui/components/surface";
 
 const roles = [
   { title: "Senior Frontend Engineer", team: "Engineering", place: "Kuala Lumpur · Hybrid", type: "Full-time" },
@@ -22,15 +25,15 @@ export function Career01() {
     <section className="px-gutter py-section-sm">
       <div className="mx-auto max-w-content space-y-12">
         <div className="max-w-2xl">
-          <h1 className="text-display-sm tracking-tight">Work with us</h1>
+          <WebSectionTitle as="h1">Work with us</WebSectionTitle>
           <p className="mt-4 text-muted-foreground">We&apos;re a small team building billing tools for Malaysian businesses. Every role here ships to customers in the first month.</p>
         </div>
-        <ul className="grid gap-px overflow-hidden rounded-2xl border bg-border sm:grid-cols-2 lg:grid-cols-4">
+        <SurfaceGrid as="ul" className="sm:grid-cols-2 lg:grid-cols-4">
           {perks.map((p) => <li key={p} className="bg-background p-5 text-sm">{p}</li>)}
-        </ul>
+        </SurfaceGrid>
         <div className="space-y-4">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <h2 className="text-heading">Open roles <span className="text-muted-foreground">({list.length})</span></h2>
+            <Heading level={2}>Open roles <span className="text-muted-foreground">({list.length})</span></Heading>
             <div className="-mx-1 overflow-x-auto px-1"><Tabs value={team} onValueChange={setTeam}><TabsList>{teams.map((t) => <TabsTrigger key={t} value={t}>{t}</TabsTrigger>)}</TabsList></Tabs></div>
           </div>
           <ul className="divide-y rounded-2xl border">

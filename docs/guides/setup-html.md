@@ -1,5 +1,8 @@
 # Plain HTML, WordPress, Laravel, Django, Rails
 
+
+> **Your own font:** Geist is only the default. Load any calm sans with light/regular weights and tabular numerals, then set `--font-sans` / `--font-mono` to it.
+
 No build step, no React, no Tailwind:
 
 ```html

@@ -6,6 +6,8 @@ import { Badge } from "@recanica/ui/components/badge";
 import { Button } from "@recanica/ui/components/button";
 import { Tabs, TabsList, TabsTrigger } from "@recanica/ui/components/tabs";
 import { cn } from "@recanica/ui/lib/utils";
+import { Heading, PageHeader } from "@recanica/ui/components/page";
+import { SurfaceGrid } from "@recanica/ui/components/surface";
 
 const plans = [
   { id: "starter", name: "Starter", monthly: 0, fee: "5% + 40¢", current: true },
@@ -25,20 +27,16 @@ export default function PricingTable() {
   const price = (m: number) => (cycle === "yearly" ? Math.round(m * 0.8) : m);
   return (
     <div className="mx-auto max-w-content space-y-6 px-gutter py-8">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <h1 className="text-title">Plans</h1>
-          <p className="mt-1 text-sm text-muted-foreground">Lower your fees as you grow. Change anytime.</p>
-        </div>
+      <PageHeader title="Plans" description="Lower your fees as you grow. Change anytime." actions={
         <Tabs value={cycle} onValueChange={setCycle}>
           <TabsList>
             <TabsTrigger value="monthly">Monthly</TabsTrigger>
             <TabsTrigger value="yearly">Yearly <Badge variant="success">-20%</Badge></TabsTrigger>
           </TabsList>
         </Tabs>
-      </div>
+      } />
 
-      <div className="grid gap-px overflow-hidden rounded-2xl border bg-border md:grid-cols-3">
+      <SurfaceGrid className="md:grid-cols-3">
         {plans.map((p, pi) => (
           <div key={p.id} className={cn("flex flex-col gap-6 bg-card p-panel", p.featured && "bg-accent/40")}>
             <div className="flex items-center justify-between">
@@ -62,7 +60,7 @@ export default function PricingTable() {
             </Button>
           </div>
         ))}
-      </div>
+      </SurfaceGrid>
     </div>
   );
 }

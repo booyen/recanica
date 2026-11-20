@@ -10,7 +10,8 @@
 import { createRequire } from "node:module";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
-import { auditPage, auditSpec } from "./audit-browser.js";
+import { auditPage, auditSpec, levelOf } from "./audit-browser.js";
+import { classify, loadConfig } from "./config.js";
 import { COPY_RULES_SOURCE } from "./copy-rules.js";
 
 // Resolve Playwright from the project being audited (cwd), not from this package.
@@ -65,14 +66,21 @@ export async function runAudit(args, flags, log) {
   } finally {
     await browser.close();
   }
-  const total = results.reduce((n, r) => n + r.issues.length, 0);
-  if (flags.json) process.stdout.write(JSON.stringify({ total, results }, null, 2) + "\n");
+  // Must-rules fail the run. Should-rules are reported (deviate with a reason in recanica.config.json "allow"). --strict fails on both.
+  const config = loadConfig();
+  for (const r of results) Object.assign(r, classify(r.issues, new URL(r.url).pathname, config, levelOf));
+  const must = results.reduce((n, r) => n + r.must.length, 0);
+  const should = results.reduce((n, r) => n + r.should.length, 0);
+  const accepted = results.reduce((n, r) => n + r.accepted.length, 0);
+  if (flags.json) process.stdout.write(JSON.stringify({ must, should, accepted, results }, null, 2) + "\n");
   else {
     for (const r of results) {
+      if (!r.must.length && !r.should.length) continue;
       log(`\n${r.url} @ ${r.width}px`);
-      for (const i of r.issues) log(`  ✗ ${i.rule}  ${i.detail}`);
+      for (const i of r.must) log(`  ✗ must    ${i.rule}  ${i.detail}`);
+      for (const i of r.should) log(`  ! should  ${i.rule}  ${i.detail}`);
     }
-    log(`\nrecanica audit: ${total} issue${total === 1 ? "" : "s"} across ${widths.join("/")}px.`);
+    log(`\nrecanica audit: ${must} must-fix · ${should} should (deviation needs a reason) · ${accepted} accepted deviations · ${widths.join("/")}px`);
   }
-  return total ? 1 : 0;
+  return must || (flags.strict && should) ? 1 : 0;
 }

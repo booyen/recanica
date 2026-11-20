@@ -110,6 +110,10 @@ object RecanicaSpacing {
     val Panel = 28.dp
     val Stack = 40.dp
     val Sidebar = 240.dp
+    val Flow = 20.dp
+    val Group = 12.dp
+    val InsetSm = 16.dp
+    val Inset = 20.dp
 }
 
 object RecanicaTextSize {

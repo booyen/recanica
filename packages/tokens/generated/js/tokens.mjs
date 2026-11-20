@@ -125,7 +125,11 @@ export const tokens = {
     "sectionSm": 48,
     "panel": 28,
     "stack": 40,
-    "sidebar": 240
+    "sidebar": 240,
+    "flow": 20,
+    "group": 12,
+    "insetSm": 16,
+    "inset": 20
   },
   "container": {
     "content": 1152,

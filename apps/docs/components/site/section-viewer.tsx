@@ -20,7 +20,7 @@ export function SectionViewer({ item, prev, next, index, total }: { item: Catalo
           <Link href="/site/sections" aria-label="All sections"><ArrowLeftIcon /> <span className="hidden sm:inline">All sections</span></Link>
         </Button>
         <div className="min-w-0 flex-1">
-          <p className="truncate text-sm">{item.title}</p>
+          <h1 className="truncate text-sm">{item.title}</h1>
           <p className="truncate text-xs text-muted-foreground">{item.category} · {index} of {total}</p>
         </div>
         <ToggleGroup type="single" value={size} onValueChange={(v) => v && setSize(v as keyof typeof widths)} variant="outline" size="sm" className="hidden md:flex" aria-label="Preview width">

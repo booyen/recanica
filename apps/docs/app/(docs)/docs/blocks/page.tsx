@@ -8,7 +8,7 @@ export const metadata = { title: "Blocks" };
 export default function Page() {
   return (
     <>
-      <DocsPageHeader eyebrow="Library" title="Blocks" description="Application blocks: app shells and invoicing. Website sections live in the Web Library." />
+      <DocsPageHeader title="Blocks" description="Application blocks: app shells and invoicing. Website sections live in the Web Library." />
       <CatalogGrid items={blocks} base="/docs/blocks" />
       <Pager href="/docs/blocks" />
     </>

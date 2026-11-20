@@ -105,6 +105,18 @@
   [data-slot=loader] [data-loader-motion] { opacity: 0.6; }
 }
 
+/* ---------- Layout primitives: ONE source for column rhythm and reading width ----------
+ * .flow     the container owns the vertical spacing between its blocks: --spacing-flow between blocks,
+ *           --spacing-stack before a heading. Blocks carry no outer margin of their own; any they do carry is overridden.
+ * .reading  a reading column (≈ 85 characters at 16px); everything inside shares one right edge.
+ * Unlayered on purpose, so the container wins over any margin utility on a child. */
+.flow > * { margin-bottom: 0; }
+.flow > * + * { margin-top: var(--spacing-flow, 1.25rem); }
+.flow > * + :is(h2, h3, section, [data-slot=section]) { margin-top: var(--spacing-stack, 2.5rem); }
+.flow > :is(h2, h3, [data-slot=section-header]) + * { margin-top: var(--spacing-group, 0.75rem); }
+.flow > [data-slot=page-header] + * { margin-top: var(--spacing-stack, 2.5rem); }
+.reading { width: 100%; max-width: 48rem; }
+
 /* Docs/code highlighting (shiki dual theme) */
 .shiki, .shiki span { color: var(--shiki-light); background-color: transparent !important; }
 .dark .shiki, .dark .shiki span { color: var(--shiki-dark); }

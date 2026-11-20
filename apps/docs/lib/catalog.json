@@ -1,6 +1,48 @@
 {
   "components": [
     {
+      "slug": "page",
+      "title": "Page",
+      "category": "Layout",
+      "description": "Page structure: Page, PageHeader, Section, Heading, Stack, ReferenceTable. The single source for visual rhythm and page layout."
+    },
+    {
+      "slug": "web-section",
+      "title": "Web Section",
+      "category": "Layout",
+      "description": "Marketing section shell and the one section title and hero headline: WebSection, WebSectionTitle, WebHeroTitle."
+    },
+    {
+      "slug": "app-shell",
+      "title": "App Shell",
+      "category": "Layout",
+      "description": "Sidebar next to an inset panel that scrolls on its own: AppShell, AppSidebar, AppSidebarHeader, AppSidebarSub, AppPanel."
+    },
+    {
+      "slug": "layout",
+      "title": "Layout",
+      "category": "Layout",
+      "description": "Page-level shapes: CenteredPage, SplitLayout (main + aside), TopBar, ListRow, IconBadge."
+    },
+    {
+      "slug": "surface",
+      "title": "Surface",
+      "category": "Layout",
+      "description": "The one bordered box (tone, inset) and SurfaceGrid for hairline-divided cells. Use instead of hand-written cards."
+    },
+    {
+      "slug": "nav-item",
+      "title": "Nav Item",
+      "category": "Navigation",
+      "description": "The one selectable row: sidebar, top-nav pills, list rows, bottom tabs. Active state included."
+    },
+    {
+      "slug": "choice-card",
+      "title": "Choice Card",
+      "category": "Forms",
+      "description": "One option among several, picked by clicking the card (radio semantics); media variant for thumbnails."
+    },
+    {
       "slug": "button",
       "title": "Button",
       "category": "Actions",

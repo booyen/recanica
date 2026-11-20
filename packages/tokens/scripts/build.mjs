@@ -25,10 +25,12 @@ const refPath = (v) => (typeof v === "string" && /^\{.+\}$/.test(v) ? v.slice(1,
 const resolve = (v) => { const p = refPath(v); return p ? resolve(get(p).$value) : v; };
 
 /* ---------- colors ---------- */
-const primitives = Object.entries(T.rc).flatMap(([fam, steps]) =>
-  Object.entries(steps).map(([step, t]) => ({ name: `rc-${fam}-${step}`, key: `${fam}-${step}`, hex: t.$value, oklch: ext(t).oklch }))
+// W3C groups may carry $description / $type metadata: never treat those keys as tokens.
+const entries = (o) => Object.entries(o).filter(([k]) => !k.startsWith("$"));
+const primitives = entries(T.rc).flatMap(([fam, steps]) =>
+  entries(steps).map(([step, t]) => ({ name: `rc-${fam}-${step}`, key: `${fam}-${step}`, hex: t.$value, oklch: ext(t).oklch }))
 );
-const semantic = Object.entries(T.color).map(([name, t]) => {
+const semantic = entries(T.color).map(([name, t]) => {
   const darkRef = ext(t).dark ?? t.$value;
   return { name, lightRef: t.$value, darkRef, light: resolve(t.$value), dark: resolve(darkRef), hasDark: !!ext(t).dark };
 });
@@ -39,16 +41,24 @@ const px = (v) => parseFloat(v);
 const rem = (v) => `${+(px(v) / 16).toFixed(4)}rem`;
 
 /* ---------- scales ---------- */
-const radius = Object.entries(T.radius).map(([k, t]) => ({ k, px: px(t.$value), css: ext(t).css ?? t.$value }));
-const spacing = Object.entries(T.spacing).map(([k, t]) => ({ k, px: px(t.$value), css: ext(t).css ?? t.$value, desc: t.$description }));
-const containers = Object.entries(T.container).map(([k, t]) => ({ k, px: px(t.$value), css: ext(t).css ?? t.$value }));
-const text = Object.entries(T.text).map(([k, t]) => ({ k, size: px(t.$value.fontSize), lh: t.$value.lineHeight, ls: t.$value.letterSpacing ? parseFloat(t.$value.letterSpacing) : 0 }));
-const weights = Object.fromEntries(Object.entries(T.font.weight).map(([k, t]) => [k, t.$value]));
-const fonts = Object.fromEntries(Object.entries(T.font.family).map(([k, t]) => [k, { stack: t.$value, css: ext(t).css ?? t.$value.join(", ") }]));
-const durations = Object.entries(T.duration).map(([k, t]) => ({ k, ms: parseFloat(t.$value) }));
-const easings = Object.entries(T.easing).map(([k, t]) => ({ k, v: t.$value }));
+const radius = entries(T.radius).map(([k, t]) => ({ k, px: px(t.$value), css: ext(t).css ?? t.$value }));
+const spacing = entries(T.spacing).map(([k, t]) => ({ k, px: px(t.$value), css: ext(t).css ?? t.$value, desc: t.$description }));
+const containers = entries(T.container).map(([k, t]) => ({ k, px: px(t.$value), css: ext(t).css ?? t.$value }));
+const text = entries(T.text).map(([k, t]) => ({ k, size: px(t.$value.fontSize), min: t.$extensions?.["com.recanica"]?.fluidMin ? px(t.$extensions["com.recanica"].fluidMin) : null, lh: t.$value.lineHeight, ls: t.$value.letterSpacing ? parseFloat(t.$value.letterSpacing) : 0 }));
+// Fluid type for CSS: scales linearly from `min` at a 375px viewport to `size` at 1280px, in rem so browser zoom still works.
+// Native platforms (Flutter, SwiftUI, Compose) get the fixed `size`.
+const cssSize = (t) => {
+  if (!t.min) return rem(t.size + "px");
+  const slope = (t.size - t.min) / (1280 - 375);
+  const base = (t.min - slope * 375) / 16;
+  return `clamp(${+(t.min / 16).toFixed(4)}rem, ${+base.toFixed(4)}rem + ${+(slope * 100).toFixed(4)}vw, ${+(t.size / 16).toFixed(4)}rem)`;
+};
+const weights = Object.fromEntries(entries(T.font.weight).map(([k, t]) => [k, t.$value]));
+const fonts = Object.fromEntries(entries(T.font.family).map(([k, t]) => [k, { stack: t.$value, css: ext(t).css ?? t.$value.join(", ") }]));
+const durations = entries(T.duration).map(([k, t]) => ({ k, ms: parseFloat(t.$value) }));
+const easings = entries(T.easing).map(([k, t]) => ({ k, v: t.$value }));
 const shadowCss = (t) => t.$value.map((s) => `${s.offsetX} ${s.offsetY} ${s.blur} ${s.spread} ${s.color}`.replace(/(^| )0px/g, "$10")).join(", ");
-const shadows = Object.entries(T.shadow).map(([k, t]) => ({ k, css: shadowCss(t) }));
+const shadows = entries(T.shadow).map(([k, t]) => ({ k, css: shadowCss(t) }));
 const productText = new Set(["heading", "title", "metric", "display-sm", "display-md", "display-lg"]);
 
 /* ---------- outputs ---------- */
@@ -65,7 +75,7 @@ ${radius.filter((r) => r.k !== "base").map((r) => `  --rc-radius-${r.k}: ${r.css
 ${spacing.map((s) => `  --rc-space-${s.k}: ${s.css};`).join("\n")}
 ${containers.map((c) => `  --rc-container-${c.k}: ${c.css};`).join("\n")}
 ${Object.entries(fonts).map(([k, f]) => `  --rc-font-${k}: ${f.css};`).join("\n")}
-${text.map((t) => `  --rc-text-${t.k}: ${rem(t.size + "px")};`).join("\n")}
+${text.map((t) => `  --rc-text-${t.k}: ${cssSize(t)};`).join("\n")}
 ${durations.map((d) => `  --rc-duration-${d.k}: ${d.ms}ms;`).join("\n")}
 ${easings.map((e) => `  --rc-ease-${e.k}: cubic-bezier(${e.v.join(", ")});`).join("\n")}
 ${shadows.map((s) => `  --rc-shadow-${s.k}: ${s.css};`).join("\n")}
@@ -93,7 +103,7 @@ ${spacing.filter((s) => s.k !== "unit").map((s) => `  --spacing-${s.k}: ${s.css}
 ${containers.map((c) => `  --container-${c.k}: ${c.css};`).join("\n")}
 
 ${text.filter((t) => productText.has(t.k)).map((t) => [
-  `  --text-${t.k}: ${rem(t.size + "px")};`,
+  `  --text-${t.k}: ${cssSize(t)};`,
   `  --text-${t.k}--line-height: ${t.lh};`,
   ...(t.ls ? [`  --text-${t.k}--letter-spacing: ${t.ls}em;`] : []),
 ].join("\n")).join("\n")}
@@ -135,7 +145,7 @@ module.exports = {
       fontFamily: { sans: ${JSON.stringify(fonts.sans.stack)}, mono: ${JSON.stringify(fonts.mono.stack)} },
       spacing: ${JSON.stringify(Object.fromEntries(spacing.filter((s) => s.k !== "unit").map((s) => [s.k, s.css])))},
       maxWidth: ${JSON.stringify(Object.fromEntries(containers.map((c) => [c.k, c.css])))},
-      fontSize: ${JSON.stringify(Object.fromEntries(text.filter((t) => productText.has(t.k)).map((t) => [t.k, [rem(t.size + "px"), { lineHeight: String(t.lh), ...(t.ls ? { letterSpacing: `${t.ls}em` } : {}) }]])))},
+      fontSize: ${JSON.stringify(Object.fromEntries(text.filter((t) => productText.has(t.k)).map((t) => [t.k, [cssSize(t), { lineHeight: String(t.lh), ...(t.ls ? { letterSpacing: `${t.ls}em` } : {}) }]])))},
       boxShadow: ${JSON.stringify(Object.fromEntries(shadows.map((s) => [s.k, s.css])))},
       transitionTimingFunction: ${JSON.stringify(Object.fromEntries(easings.map((e) => [e.k, `cubic-bezier(${e.v.join(", ")})`])))},
     },

@@ -7,9 +7,9 @@ export const metadata = { title: "Motion" };
 export default function Page() {
   return (
     <>
-      <DocsPageHeader eyebrow="Foundations" title="Motion" description="Quick, soft and functional. Motion explains a change; it never decorates." />
+      <DocsPageHeader title="Motion" description="Quick, soft and functional. Motion explains a change; it never decorates." />
       <H2 id="durations">Durations</H2>
-      <TokenTable
+      <TokenTable keys="code"
         head={["Utility", "Duration", "Use"]}
         rows={[
           ["duration-150", "150ms", "Hover, press, color changes"],

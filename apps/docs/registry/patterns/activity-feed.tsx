@@ -3,6 +3,7 @@
 import { CreditCardIcon, RefreshCwIcon, UserPlusIcon, XCircleIcon } from "lucide-react";
 import { Badge } from "@recanica/ui/components/badge";
 import { Button } from "@recanica/ui/components/button";
+import { Heading } from "@recanica/ui/components/page";
 
 const days = [
   {
@@ -26,7 +27,7 @@ export default function ActivityFeed() {
   return (
     <div className="mx-auto max-w-narrow space-y-8 px-gutter py-8">
       <div className="flex items-center justify-between">
-        <h1 className="text-title">Activity</h1>
+        <Heading level={1}>Activity</Heading>
         <Button variant="outline" size="sm">Export</Button>
       </div>
       {days.map((d) => (

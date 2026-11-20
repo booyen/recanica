@@ -5,6 +5,8 @@ import { BuildingIcon, CreditCardIcon, QrCodeIcon } from "lucide-react";
 import { NativeSelect, NativeSelectOption } from "@recanica/ui/components/native-select";
 import { cn } from "@recanica/ui/lib/utils";
 import { FPX_BANKS, hash } from "@/lib/demo/my";
+import { Surface } from "@recanica/ui/components/surface";
+import { ChoiceCard } from "@recanica/ui/components/choice-card";
 
 /**
  * Deterministic QR-looking grid for demos (NOT a scannable QR code).
@@ -51,18 +53,11 @@ export function PaymentMethodPicker({ amountLabel, value, onChange, bank, onBank
     <div className="space-y-3">
       <div role="radiogroup" aria-label="Payment method" className="grid gap-2">
         {methods.map((m) => (
-          <button
-            key={m.id}
-            type="button"
-            role="radio"
-            aria-checked={value === m.id}
-            onClick={() => onChange(m.id)}
-            className={cn("flex items-center gap-3 rounded-xl border p-3 text-left text-sm transition-colors hover:bg-accent", value === m.id && "border-foreground/40 bg-accent")}
-          >
+          <ChoiceCard key={m.id} checked={value === m.id} onSelect={() => onChange(m.id)}>
             <m.icon className="size-4 text-muted-foreground" />
             <span className="flex-1">{m.label}<span className="block text-xs text-muted-foreground">{m.hint}</span></span>
             <span className={cn("size-4 rounded-full border", value === m.id && "border-[5px] border-foreground")} />
-          </button>
+          </ChoiceCard>
         ))}
       </div>
       {value === "fpx" && (
@@ -71,16 +66,16 @@ export function PaymentMethodPicker({ amountLabel, value, onChange, bank, onBank
         </NativeSelect>
       )}
       {value === "duitnow" && (
-        <div className="flex items-center gap-4 rounded-xl border p-4">
+        <Surface size="sm" tone="plain" inset="sm" className="flex items-center gap-4">
           <DemoQr value={reference} size={96} label="DuitNow QR (demo)" />
           <div className="text-sm">
             <p>Scan to pay {amountLabel}</p>
             <p className="text-xs text-muted-foreground">Demo QR, not scannable. Click pay to simulate a successful transfer.</p>
           </div>
-        </div>
+        </Surface>
       )}
       {value === "card" && (
-        <p className="rounded-xl border bg-muted/40 p-3 text-sm text-muted-foreground">Simulated card. No card details are collected in this demo.</p>
+        <Surface as="p" size="sm" tone="muted" inset="sm" className="text-sm text-muted-foreground">Simulated card. No card details are collected in this demo.</Surface>
       )}
     </div>
   );

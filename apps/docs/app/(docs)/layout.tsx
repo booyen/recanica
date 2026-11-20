@@ -2,6 +2,7 @@ import { DocsNav } from "@/components/docs/docs-nav";
 import { SiteFooter } from "@/components/docs/site-footer";
 import { SiteHeader } from "@/components/docs/site-header";
 import { Toc } from "@/components/docs/toc";
+import { DocsColumn } from "@/components/docs/docs-column";
 
 export default function DocsLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -12,7 +13,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
           <DocsNav />
         </aside>
         <main data-docs-content className="min-w-0 py-8 lg:py-12">
-          {children}
+          <DocsColumn>{children}</DocsColumn>
         </main>
         <aside className="sticky top-14 hidden h-[calc(100svh-3.5rem)] overflow-y-auto py-12 xl:block">
           <Toc />

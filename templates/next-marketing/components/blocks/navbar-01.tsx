@@ -4,13 +4,14 @@ import * as React from "react";
 import { MenuIcon } from "lucide-react";
 import { Button } from "@recanica/ui/components/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@recanica/ui/components/sheet";
+import { TopBar } from "@recanica/ui/components/layout";
 
 const links = [["Features", "#features"], ["Pricing", "#pricing"], ["FAQ", "#faq"]];
 
 export function Navbar01() {
   const [open, setOpen] = React.useState(false);
   return (
-    <header className="sticky top-0 z-40 border-b bg-background/80 backdrop-blur-md">
+    <TopBar>
       <div className="mx-auto flex h-16 max-w-content items-center gap-8 px-gutter">
         <a href="/" className="flex items-center gap-2">
           <span className="size-6 rounded-md bg-brand text-brand-foreground" />
@@ -41,7 +42,7 @@ export function Navbar01() {
           </SheetContent>
         </Sheet>
       </div>
-    </header>
+    </TopBar>
   );
 }
 

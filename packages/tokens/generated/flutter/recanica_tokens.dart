@@ -183,6 +183,10 @@ class RecanicaSpacing {
   static const double panel = 28; // Card / stat padding
   static const double stack = 40; // Gap between dashboard blocks
   static const double sidebar = 240;
+  static const double flow = 20; // Gap between consecutive blocks in a column (paragraph → table → paragraph). Owned by the .flow container, never by the blocks.
+  static const double group = 12; // Within a group: a heading and its content, a label and its field.
+  static const double insetSm = 16; // Padding inside compact surfaces (list rows, small cards).
+  static const double inset = 20; // Padding inside surfaces (cards, tables' edge inset).
 }
 
 class RecanicaText {

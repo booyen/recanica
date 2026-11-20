@@ -61,6 +61,10 @@ public enum Recanica {
         public static let panel: CGFloat = 28
         public static let stack: CGFloat = 40
         public static let sidebar: CGFloat = 240
+        public static let flow: CGFloat = 20
+        public static let group: CGFloat = 12
+        public static let insetSm: CGFloat = 16
+        public static let inset: CGFloat = 20
     }
     public enum Typography {
         public static let xs = Font.custom("Geist", size: 12).weight(.regular)

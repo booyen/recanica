@@ -1,6 +1,7 @@
 import { MailIcon } from "lucide-react";
 import { Badge } from "@recanica/ui/components/badge";
 import { Button } from "@recanica/ui/components/button";
+import { WebSectionTitle } from "@recanica/ui/components/web-section";
 
 export function SingleTeam01() {
   return (
@@ -10,7 +11,7 @@ export function SingleTeam01() {
         <div className="space-y-6">
           <div>
             <p className="text-sm text-muted-foreground">Design</p>
-            <h1 className="text-display-sm tracking-tight">Mei Kato</h1>
+            <WebSectionTitle as="h1">Mei Kato</WebSectionTitle>
           </div>
           <p className="max-w-copy text-muted-foreground">Mei leads design at Acme. Before joining, she spent six years designing banking apps in Tokyo and Singapore. She cares about invoices that customers can read without squinting.</p>
           <div className="flex flex-wrap gap-2">{["Product design", "Design systems", "Accessibility"].map((t) => <Badge key={t} variant="outline">{t}</Badge>)}</div>

@@ -22,6 +22,8 @@ jobs:
         run: pnpm tokens:check
       - name: Copy lint (AI jargon, placeholders)
         run: pnpm lint:copy
+      - name: Parts exist in both forms (React + rc-* CSS)
+        run: pnpm lint:parts
       - name: Design lint (recanica check)
         run: pnpm lint:design
       - run: pnpm build

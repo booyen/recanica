@@ -4,6 +4,7 @@ import { SlidersHorizontalIcon } from "lucide-react";
 import { Button } from "@recanica/ui/components/button";
 import { BarRow, Stat, StatGroup, StatHeader, StatList, StatRow, StatValue } from "@recanica/ui/components/stat";
 import { Tabs, TabsList, TabsTrigger } from "@recanica/ui/components/tabs";
+import { Heading } from "@recanica/ui/components/page";
 
 const ranges = ["All time", "12m", "3m", "30d", "Today"];
 
@@ -11,7 +12,7 @@ export default function StatOverview() {
   return (
     <div className="mx-auto max-w-content space-y-stack px-gutter py-8">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-        <h1 className="text-title">Overview</h1>
+        <Heading level={1}>Overview</Heading>
         <div className="flex items-center gap-2 sm:ml-auto">
           <div className="-mx-1 overflow-x-auto px-1">
             <Tabs defaultValue="30d">
@@ -26,7 +27,7 @@ export default function StatOverview() {
 
       <StatGroup>
         <Stat>
-          <StatHeader title="Revenue" href="#" />
+          <StatHeader title="Revenue" href="/demo/app/reports" />
           <StatValue value="$4,820" caption="November" />
           <StatList>
             <BarRow label="Nov" value="$4,820" percent={100} active />
@@ -36,7 +37,7 @@ export default function StatOverview() {
           </StatList>
         </Stat>
         <Stat>
-          <StatHeader title="Activity" href="#" />
+          <StatHeader title="Activity" href="/demo/app/notifications" />
           <StatValue value="14" caption="events today" />
           <StatList>
             <StatRow primary="Order paid" secondary="Nadia Rahman" trailing="now" />
@@ -46,7 +47,7 @@ export default function StatOverview() {
           </StatList>
         </Stat>
         <Stat>
-          <StatHeader title="Available balance" href="#" />
+          <StatHeader title="Available balance" href="/demo/app/finance" />
           <StatValue value={<span className="text-brand">$1,206</span>} />
           <div className="mt-auto text-sm">
             <p>Next payout on 1 Dec</p>
@@ -57,7 +58,7 @@ export default function StatOverview() {
 
       <StatGroup>
         <Stat>
-          <StatHeader title="Top customers" href="#" />
+          <StatHeader title="Top customers" href="/demo/app/customers" />
           <StatValue value="62%" caption="of revenue" />
           <StatList>
             <StatRow primary="Nadia Rahman" secondary="12 orders" trailing="$1,840" />
@@ -65,14 +66,14 @@ export default function StatOverview() {
           </StatList>
         </Stat>
         <Stat>
-          <StatHeader title="At risk" href="#" />
+          <StatHeader title="At risk" href="/demo/app/subscriptions" />
           <StatValue value="1" />
           <StatList>
             <StatRow primary="Sam Ortiz" secondary="Pro Yearly" trailing="Cancels 18 Dec" />
           </StatList>
         </Stat>
         <Stat>
-          <StatHeader title="Gross margin" href="#" />
+          <StatHeader title="Gross margin" href="/demo/app/reports" />
           <StatValue value="86%" caption="Last 30 days" />
           <StatList>
             <BarRow label="Oct" value="84%" percent={84} />

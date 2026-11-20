@@ -29,6 +29,8 @@ const buttonVariants = cva(
         "icon-xs": "size-6 rounded-full [&_svg:not([class*='size-'])]:size-3",
         "icon-sm": "size-8",
         "icon-lg": "size-10",
+        // A text action inside a sentence ("Resend code", "browse"): no height or padding, keeps the line's rhythm.
+        inline: "h-auto rounded-sm p-0 align-baseline",
       },
     },
     defaultVariants: {

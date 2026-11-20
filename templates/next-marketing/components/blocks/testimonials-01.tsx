@@ -1,4 +1,6 @@
 import { Avatar, AvatarFallback } from "@recanica/ui/components/avatar";
+import { WebSectionTitle } from "@recanica/ui/components/web-section";
+import { Surface } from "@recanica/ui/components/surface";
 
 const quotes = [
   { body: "We moved our entire billing over in an afternoon. Taxes stopped being a weekly fire drill.", name: "Nadia Rahman", role: "Founder, Lumen", initials: "NR" },
@@ -13,16 +15,16 @@ export function Testimonials01() {
   return (
     <section className="px-gutter py-section">
       <div className="mx-auto max-w-content">
-        <h2 className="max-w-xl text-display-sm tracking-tight">Loved by builders</h2>
+        <WebSectionTitle className="max-w-xl">Loved by builders</WebSectionTitle>
         <div className="mt-12 columns-1 gap-4 sm:columns-2 lg:columns-3">
           {quotes.map((q) => (
-            <figure key={q.name} className="mb-4 break-inside-avoid rounded-2xl border bg-card p-panel">
+            <Surface as="figure" inset="lg" className="mb-4 break-inside-avoid" key={q.name}>
               <blockquote className="text-pretty">“{q.body}”</blockquote>
               <figcaption className="mt-6 flex items-center gap-3 text-sm">
                 <Avatar><AvatarFallback>{q.initials}</AvatarFallback></Avatar>
                 <span>{q.name}<span className="block text-muted-foreground">{q.role}</span></span>
               </figcaption>
-            </figure>
+            </Surface>
           ))}
         </div>
       </div>

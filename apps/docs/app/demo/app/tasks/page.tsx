@@ -8,6 +8,8 @@ import { Button } from "@recanica/ui/components/button";
 import { Input } from "@recanica/ui/components/input";
 import { cn } from "@recanica/ui/lib/utils";
 import { PageHeader } from "@/components/demo/ui";
+import { Surface } from "@recanica/ui/components/surface";
+import { NativeSelect, NativeSelectOption } from "@recanica/ui/components/native-select";
 
 type Col = "To do" | "In progress" | "Done";
 type Task = { id: number; title: string; col: Col; who: string; tag?: string };
@@ -33,7 +35,7 @@ export default function TasksPage() {
       </form>
       <div className="grid gap-4 md:grid-cols-3">
         {COLS.map((col) => (
-          <section key={col} onDragOver={(e) => e.preventDefault()} onDrop={() => drag !== null && move(drag, col)} className="min-h-48 rounded-2xl border bg-muted/30 p-3" aria-label={col}>
+          <Surface as="section" tone="muted" inset="sm" className="min-h-48" key={col} onDragOver={(e) => e.preventDefault()} onDrop={() => drag !== null && move(drag, col)} aria-label={col}>
             <h2 className="mb-3 flex items-center justify-between px-1 text-sm">{col}<span className="text-muted-foreground">{tasks.filter((t) => t.col === col).length}</span></h2>
             <ul className="space-y-2">
               {tasks.filter((t) => t.col === col).map((t) => (
@@ -42,14 +44,12 @@ export default function TasksPage() {
                   <div className="flex items-center gap-2">
                     <Avatar className="size-6"><AvatarFallback>{t.who}</AvatarFallback></Avatar>
                     {t.tag && <Badge variant="outline">{t.tag}</Badge>}
-                    <select aria-label="Move to column" value={t.col} onChange={(e) => move(t.id, e.target.value as Col)} className="ml-auto rounded-md bg-transparent text-xs text-muted-foreground md:hidden">
-                      {COLS.map((c) => <option key={c}>{c}</option>)}
-                    </select>
+                    <NativeSelect aria-label="Move to column" value={t.col} onChange={(e) => move(t.id, e.target.value as Col)} className="ml-auto h-8 w-auto text-xs md:hidden">{COLS.map((c) => <NativeSelectOption key={c} value={c}>{c}</NativeSelectOption>)}</NativeSelect>
                   </div>
                 </li>
               ))}
             </ul>
-          </section>
+          </Surface>
         ))}
       </div>
     </>

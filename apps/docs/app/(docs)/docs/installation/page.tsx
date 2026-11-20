@@ -7,12 +7,12 @@ export const metadata = { title: "Installation" };
 export default function Page() {
   return (
     <>
-      <DocsPageHeader eyebrow="Getting started" title="Installation" description="Add Recanica to a Next.js app in the monorepo, then pull patterns and blocks from the registry." />
+      <DocsPageHeader title="Installation" description="Add Recanica to a Next.js app in the monorepo, then pull patterns and blocks from the registry." />
       <H2 id="packages">1. Add the packages</H2>
       <CodeBlock lang="bash" code={`pnpm add @recanica/ui@workspace:* @recanica/tokens@workspace:*`} />
       <H2 id="css">2. Import the tokens</H2>
       <P>Tailwind v4 reads tokens from CSS. Point <InlineCode>@source</InlineCode> at the UI package so its classes are generated.</P>
-      <div className="mt-4"><CodeBlock title="app/globals.css" lang="css" code={`@import "tailwindcss";
+      <div><CodeBlock title="app/globals.css" lang="css" code={`@import "tailwindcss";
 @import "@recanica/tokens/theme.css";
 
 @source "../../../packages/ui/src";`} /></div>

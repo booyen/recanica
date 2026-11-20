@@ -15,6 +15,7 @@ import { InvoiceDocument } from "@/components/demo/invoice-document";
 import { PageHeader } from "@/components/demo/ui";
 import { seed } from "@/lib/demo/seed";
 import type { Customer, Invoice, Org } from "@/lib/demo/types";
+import { Heading } from "@recanica/ui/components/page";
 
 const LONG = "Syarikat Perniagaan Teknologi Maklumat Dan Perkhidmatan Digital Antarabangsa Berhad";
 const EMAIL = "accounts.payable.department+invoices-2026@a-very-long-company-domain-name.example";
@@ -48,7 +49,7 @@ function Frame({ label, width, children }: { label: string; width?: number; chil
   return (
     <section data-stress={label} className="space-y-2">
       <p className="font-mono text-xs text-muted-foreground">{label}{width ? ` · ${width}px` : ""}</p>
-      <div className="overflow-hidden rounded-2xl border border-dashed p-2" style={width ? { maxWidth: width } : undefined}>{children}</div>
+      <div /* recanica-ignore: stress-test fixture */ className="overflow-hidden rounded-2xl border border-dashed p-2" style={width ? { maxWidth: width } : undefined}>{children}</div>
     </section>
   );
 }
@@ -56,7 +57,7 @@ function Frame({ label, width, children }: { label: string; width?: number; chil
 export default function StressPage() {
   return (
     <main className="mx-auto max-w-content space-y-12 bg-background px-gutter py-10">
-      <h1 className="text-title">Layout stress test</h1>
+      <Heading level={1}>Layout stress test</Heading>
 
       <Frame label="invoice · worst case"><InvoiceDocument invoice={invoice} org={org} customer={customer} /></Frame>
       <Frame label="invoice · worst case" width={360}><InvoiceDocument invoice={invoice} org={org} customer={customer} /></Frame>

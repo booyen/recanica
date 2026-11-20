@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { SlidersHorizontalIcon, XIcon } from "lucide-react";
+import { SlidersHorizontalIcon } from "lucide-react";
 import { Badge } from "@recanica/ui/components/badge";
 import { Button } from "@recanica/ui/components/button";
 import { Checkbox } from "@recanica/ui/components/checkbox";
@@ -63,7 +63,7 @@ export function CategoryFilters01() {
           {active.length > 0 && (
             <div className="flex flex-wrap items-center gap-2">
               {active.map(([g, v]) => (
-                <Badge key={g + v} variant="secondary" className="gap-1 pr-1">{v}<button aria-label={`Remove ${v}`} onClick={() => toggle(g, v)} className="rounded-full p-0.5 hover:bg-background"><XIcon className="size-3" /></button></Badge>
+                <Badge key={g + v} variant="secondary" onRemove={() => toggle(g, v)} removeLabel={`Remove ${v}`}>{v}</Badge>
               ))}
               <Button variant="link" size="sm" onClick={() => setSel({ Category: [], Roast: [], Origin: [] })}>Clear all</Button>
             </div>

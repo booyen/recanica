@@ -28,7 +28,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 
   return (
     <>
-      <DocsPageHeader eyebrow={`Components · ${item.category}`} title={item.title} description={item.description}>
+      <DocsPageHeader title={item.title} description={item.description}>
         <CopyPromptButton text={pageContext("component", item.title, item.description, src)} label="Copy for LLM" size="sm" variant="outline" />
       </DocsPageHeader>
       <H2 id="preview">Preview</H2>

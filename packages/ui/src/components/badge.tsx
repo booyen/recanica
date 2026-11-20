@@ -33,18 +33,38 @@ function Badge({
   className,
   variant = "default",
   asChild = false,
+  onRemove,
+  removeLabel = "Remove",
+  children,
   ...props
 }: React.ComponentProps<"span"> &
-  VariantProps<typeof badgeVariants> & { asChild?: boolean }) {
+  VariantProps<typeof badgeVariants> & {
+    asChild?: boolean
+    /** Makes it a removable chip (active filters, selected tags): adds a small remove button inside the badge. */
+    onRemove?: () => void
+    removeLabel?: string
+  }) {
   const Comp = asChild ? Slot.Root : "span"
 
   return (
     <Comp
       data-slot="badge"
       data-variant={variant}
-      className={cn(badgeVariants({ variant }), className)}
+      className={cn(badgeVariants({ variant }), onRemove && "gap-1 pr-1", className)}
       {...props}
-    />
+    >
+      {children}
+      {onRemove && (
+        <button
+          type="button"
+          aria-label={removeLabel}
+          onClick={onRemove}
+          className="-my-1 inline-flex size-5 items-center justify-center rounded-full transition-colors outline-none hover:bg-background focus-visible:ring-[3px] focus-visible:ring-ring/50"
+        >
+          <svg viewBox="0 0 24 24" className="size-3" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M18 6 6 18M6 6l12 12" /></svg>
+        </button>
+      )}
+    </Comp>
   )
 }
 

@@ -1,6 +1,7 @@
 import { BathIcon, BedDoubleIcon, HeartIcon, RulerIcon } from "lucide-react";
 import { Badge } from "@recanica/ui/components/badge";
 import { Button } from "@recanica/ui/components/button";
+import { WebSectionTitle } from "@recanica/ui/components/web-section";
 
 const listings = [
   { title: "Corner unit at Mont Kiara", place: "Mont Kiara, Kuala Lumpur", price: "RM 1,280,000", beds: 3, baths: 2, sqft: 1420, tag: "New" },
@@ -11,11 +12,12 @@ const listings = [
   { title: "Bungalow with garden", place: "Bukit Damansara, KL", price: "RM 6,800,000", beds: 6, baths: 6, sqft: 6200 },
 ];
 
-export function Property01() {
+/** `titleAs="h1"` when this section is the top of its page (every page needs one h1). */
+export function Property01({ titleAs: Title = "h2" }: { titleAs?: "h1" | "h2" }) {
   return (
     <section className="px-gutter py-section-sm">
       <div className="mx-auto max-w-content">
-        <div className="flex items-end justify-between gap-4"><h2 className="text-display-sm tracking-tight">Featured properties</h2><p className="text-sm text-muted-foreground">{listings.length} listings</p></div>
+        <div className="flex items-end justify-between gap-4"><WebSectionTitle as={Title}>Featured properties</WebSectionTitle><p className="text-sm text-muted-foreground">{listings.length} listings</p></div>
         <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {listings.map((l) => (
             <li key={l.title} className="overflow-hidden rounded-3xl border bg-card">

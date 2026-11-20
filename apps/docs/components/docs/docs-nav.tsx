@@ -12,7 +12,7 @@ export function DocsNav({ onNavigate }: { onNavigate?: () => void }) {
       {nav.map((section) => (
         <div key={section.title} className="space-y-2">
           {section.href ? (
-            <Link href={section.href} onClick={onNavigate} className={cn("block px-3 font-medium", pathname === section.href ? "text-foreground" : "text-foreground/90 hover:text-foreground")}>
+            <Link href={section.href} onClick={onNavigate} aria-current={pathname === section.href ? "page" : undefined} className={cn("block px-3 font-medium", pathname === section.href ? "text-foreground" : "text-foreground/90 hover:text-foreground")}>
               {section.title}
             </Link>
           ) : (
@@ -26,6 +26,7 @@ export function DocsNav({ onNavigate }: { onNavigate?: () => void }) {
                   key={l.href}
                   href={l.href}
                   title={l.title}
+                  aria-current={pathname === l.href ? "page" : undefined}
                   onClick={onNavigate}
                   className={cn(
                     "block truncate rounded-lg px-3 py-1.5 text-muted-foreground transition-colors hover:text-foreground",

@@ -5,6 +5,8 @@ import { FileIcon, UploadCloudIcon, XIcon } from "lucide-react";
 import { Button } from "@recanica/ui/components/button";
 import { Progress } from "@recanica/ui/components/progress";
 import { cn } from "@recanica/ui/lib/utils";
+import { Heading } from "@recanica/ui/components/page";
+import { Surface } from "@recanica/ui/components/surface";
 
 type Upload = { name: string; size: number; progress: number };
 
@@ -28,7 +30,7 @@ export default function FileUpload() {
   return (
     <div className="mx-auto max-w-narrow space-y-4 px-gutter py-8">
       <div>
-        <h1 className="text-title">Downloadables</h1>
+        <Heading level={1}>Downloadables</Heading>
         <p className="mt-1 text-sm text-muted-foreground">Files customers can download after purchase.</p>
       </div>
       <div
@@ -42,14 +44,14 @@ export default function FileUpload() {
       >
         <span className="flex size-11 items-center justify-center rounded-full border bg-muted"><UploadCloudIcon className="size-5" /></span>
         <div>
-          <p className="text-sm">Drop files here or <button type="button" className="underline underline-offset-4" onClick={() => input.current?.click()}>browse</button></p>
+          <p className="text-sm">Drop files here or <Button variant="link" size="inline" onClick={() => input.current?.click()}>browse</Button></p>
           <p className="text-xs text-muted-foreground">Up to 2 GB per file.</p>
         </div>
-        <input ref={input} type="file" multiple hidden onChange={(e) => add(e.target.files)} />
+        <input /* recanica-ignore: hidden native file input behind the drop zone */ ref={input} type="file" multiple hidden onChange={(e) => add(e.target.files)} />
       </div>
       <ul className="space-y-2">
         {files.map((f, i) => (
-          <li key={f.name + i} className="flex items-center gap-3 rounded-xl border p-3">
+          <Surface as="li" size="sm" tone="plain" inset="sm" className="flex items-center gap-3" key={f.name + i}>
             <FileIcon className="size-5 shrink-0 text-muted-foreground" />
             <div className="min-w-0 flex-1 space-y-1.5">
               <div className="flex justify-between gap-2 text-sm">
@@ -61,7 +63,7 @@ export default function FileUpload() {
             <Button variant="ghost" size="icon-sm" aria-label={`Remove ${f.name}`} onClick={() => setFiles((x) => x.filter((_, j) => j !== i))}>
               <XIcon />
             </Button>
-          </li>
+          </Surface>
         ))}
       </ul>
     </div>

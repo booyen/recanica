@@ -251,7 +251,7 @@ function Inputs() {
             <FieldLegend variant="label">Payment method</FieldLegend>
             <RadioGroup defaultValue="fpx" className="grid gap-2 sm:grid-cols-3">
               {[["fpx", "FPX", "Online banking"], ["duitnow", "DuitNow QR", "Any bank app"], ["card", "Card", "Visa, Mastercard"]].map(([v, t, d]) => (
-                <FieldLabel key={v} htmlFor={`pm-${v}`} className="rounded-xl border p-3 has-data-[state=checked]:border-foreground/40 has-data-[state=checked]:bg-accent/50">
+                <FieldLabel key={v} htmlFor={`pm-${v}`} /* recanica-ignore: RadioGroup item shown as a card (accessible form field) */ className="rounded-xl border p-3 has-data-[state=checked]:border-foreground/40 has-data-[state=checked]:bg-accent/50">
                   <Field orientation="horizontal">
                     <FieldContent><FieldTitle>{t}</FieldTitle><FieldDescription>{d}</FieldDescription></FieldContent>
                     <RadioGroupItem value={v} id={`pm-${v}`} />
@@ -305,7 +305,7 @@ function Inputs() {
             <div className="flex items-center gap-1.5">
               <FieldLabel>Verification code</FieldLabel>
               <Tooltip>
-                <TooltipTrigger asChild><button type="button" aria-label="About the code" className="text-muted-foreground"><InfoIcon className="size-3.5" /></button></TooltipTrigger>
+                <TooltipTrigger asChild><Button variant="ghost" size="icon-xs" aria-label="About the code" className="text-muted-foreground"><InfoIcon /></Button></TooltipTrigger>
                 <TooltipContent>Sent by SMS to +60 12-345 6789</TooltipContent>
               </Tooltip>
             </div>

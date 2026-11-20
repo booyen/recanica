@@ -29,7 +29,7 @@ export function Popup01() {
                 <Button type="submit" className="shrink-0">Get my code</Button>
               </form>
             )}
-            {!done && <button onClick={() => setOpen(false)} className="w-full text-center text-sm text-muted-foreground hover:text-foreground">No thanks</button>}
+            {!done && <Button variant="ghost" onClick={() => setOpen(false)} className="w-full text-muted-foreground">No thanks</Button>}
           </div>
         </DialogContent>
       </Dialog>

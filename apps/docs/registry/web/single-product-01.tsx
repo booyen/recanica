@@ -7,6 +7,8 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@r
 import { Button } from "@recanica/ui/components/button";
 import { ToggleGroup, ToggleGroupItem } from "@recanica/ui/components/toggle-group";
 import { cn } from "@recanica/ui/lib/utils";
+import { Heading } from "@recanica/ui/components/page";
+import { ChoiceCard } from "@recanica/ui/components/choice-card";
 
 export function SingleProduct01() {
   const [img, setImg] = React.useState(0);
@@ -20,12 +22,12 @@ export function SingleProduct01() {
         <div className="space-y-3">
           <div className="flex aspect-square items-center justify-center rounded-3xl border bg-muted text-sm text-muted-foreground" role="img" aria-label={`Product image ${img + 1}`}>Image {img + 1}</div>
           <div className="grid grid-cols-4 gap-3">
-            {[0, 1, 2, 3].map((i) => <button key={i} onClick={() => setImg(i)} aria-label={`Show image ${i + 1}`} className={cn("aspect-square rounded-xl border bg-muted", img === i && "ring-2 ring-foreground ring-offset-2 ring-offset-background")} />)}
+            {[0, 1, 2, 3].map((i) => <ChoiceCard key={i} variant="media" checked={img === i} onSelect={() => setImg(i)} aria-label={`Show image ${i + 1}`} className="aspect-square" />)}
           </div>
         </div>
         <div className="space-y-6">
           <div className="space-y-2">
-            <h1 className="text-title">Kopi Ais Blend</h1>
+            <Heading level={1}>Kopi Ais Blend</Heading>
             <p className="flex items-center gap-1 text-sm text-muted-foreground"><StarIcon className="size-3.5 fill-current" /> 4.8 · 214 reviews</p>
             <p className="text-metric font-light tabular-nums">RM{price}</p>
             <p className="text-muted-foreground">Robusta and liberica roasted with butter and sugar, the way kopitiams have done it for decades. Made for iced coffee.</p>

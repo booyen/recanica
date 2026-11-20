@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { Tabs, TabsList, TabsTrigger } from "@recanica/ui/components/tabs";
+import { WebSectionTitle, WebSectionHeader } from "@recanica/ui/components/web-section";
 
 const work = [
   { title: "Kopi Pak Mat ordering", client: "Kedai Kopi Pak Mat", tag: "Product", year: "2026" },
@@ -18,10 +19,7 @@ export function Portfolio01() {
   return (
     <section className="px-gutter py-section-sm">
       <div className="mx-auto max-w-content space-y-10">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <h1 className="text-display-sm tracking-tight">Selected work</h1>
-          <Tabs value={tag} onValueChange={setTag}><TabsList>{["All", "Product", "Web", "Brand"].map((t) => <TabsTrigger key={t} value={t}>{t}</TabsTrigger>)}</TabsList></Tabs>
-        </div>
+        <WebSectionHeader titleAs="h1" title="Selected work" actions={<Tabs value={tag} onValueChange={setTag}><TabsList>{["All", "Product", "Web", "Brand"].map((t) => <TabsTrigger key={t} value={t}>{t}</TabsTrigger>)}</TabsList></Tabs>} />
         <div className="grid gap-x-6 gap-y-10 md:grid-cols-2">
           {list.map((w) => (
             <a key={w.title} href="/site/work/kopitiam-ordering" className="group space-y-3">

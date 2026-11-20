@@ -1,3 +1,5 @@
+import { WebSectionTitle } from "@recanica/ui/components/web-section";
+import { SurfaceGrid } from "@recanica/ui/components/surface";
 const steps = [
   { title: "Create your account", body: "Sign up with your work email. Takes two minutes." },
   { title: "Add your business details", body: "SSM number, TIN and bank account for payouts." },
@@ -9,8 +11,8 @@ export function Process01() {
   return (
     <section className="px-gutter py-section">
       <div className="mx-auto max-w-content">
-        <h2 className="max-w-xl text-display-sm tracking-tight">How it works</h2>
-        <ol className="mt-12 grid gap-px overflow-hidden rounded-2xl border bg-border sm:grid-cols-2 lg:grid-cols-4">
+        <WebSectionTitle className="max-w-xl">How it works</WebSectionTitle>
+        <SurfaceGrid as="ol" className="mt-12 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((s, i) => (
             <li key={s.title} className="space-y-3 bg-background p-panel">
               <span className="flex size-8 items-center justify-center rounded-full border font-mono text-xs">{i + 1}</span>
@@ -18,7 +20,7 @@ export function Process01() {
               <p className="text-sm text-muted-foreground">{s.body}</p>
             </li>
           ))}
-        </ol>
+        </SurfaceGrid>
       </div>
     </section>
   );

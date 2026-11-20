@@ -13,6 +13,7 @@ import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetT
 import { Stat, StatGroup, StatHeader, StatValue } from "@recanica/ui/components/stat";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@recanica/ui/components/table";
 import { Tabs, TabsList, TabsTrigger } from "@recanica/ui/components/tabs";
+import { Heading, PageHeader } from "@recanica/ui/components/page";
 
 type Status = "Draft" | "Open" | "Paid" | "Overdue" | "Void";
 type Invoice = { id: string; customer: string; email: string; status: Status; issued: string; due: string; amount: number };
@@ -45,16 +46,14 @@ export function Invoices01() {
 
   return (
     <div className="mx-auto max-w-content space-y-stack px-gutter py-8">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <h1 className="text-title">Invoices</h1>
-          <p className="mt-1 text-sm text-muted-foreground">Bill customers and track what you're owed.</p>
-        </div>
-        <div className="flex gap-2">
+      <PageHeader
+        title="Invoices"
+        description="Bill customers and track what you're owed."
+        actions={<>
           <Button variant="outline" className="hidden sm:inline-flex"><DownloadIcon /> Export</Button>
           <Button className="flex-1 sm:flex-none"><PlusIcon /> New invoice</Button>
-        </div>
-      </div>
+        </>}
+      />
 
       <StatGroup>
         <Stat>

@@ -20,6 +20,9 @@ import { StatList, StatRow } from "@recanica/ui/components/stat";
 import { Switch } from "@recanica/ui/components/switch";
 import { cn } from "@recanica/ui/lib/utils";
 import { ago, money, price, uid, useDemo } from "@/lib/demo/store";
+import { Heading } from "@recanica/ui/components/page";
+import { Surface, SurfaceGrid } from "@recanica/ui/components/surface";
+import { NavItem } from "@recanica/ui/components/nav-item";
 
 function CreateLinkDialog({ open, onOpenChange, onCreated }: { open: boolean; onOpenChange: (o: boolean) => void; onCreated: (id: string) => void }) {
   const { state, dispatch } = useDemo();
@@ -87,7 +90,7 @@ function LinksPageInner() {
     <div className="-mx-gutter -my-6 flex min-h-[calc(100svh-3rem)] flex-col gap-2 sm:-my-8 md:flex-row">
       <section className={cn("flex flex-col border-b md:w-80 md:shrink-0 md:border-r md:border-b-0", link && "hidden md:flex")}>
         <header className="flex items-center justify-between px-4 py-4">
-          <h1 className="text-heading">Checkout Links</h1>
+          <Heading level={1} size="heading">Checkout Links</Heading>
           <Button size="icon-sm" aria-label="New link" onClick={() => setCreating(true)}><PlusIcon /></Button>
         </header>
         <ul className="flex flex-col gap-0.5 px-2 pb-2">
@@ -96,13 +99,10 @@ function LinksPageInner() {
             const sales = state.orders.filter((o) => o.linkId === l.id && o.status === "paid").length;
             return (
               <li key={l.id}>
-                <button
-                  onClick={() => select(l.id)}
-                  className={cn("flex w-full flex-col gap-0.5 rounded-xl px-3 py-2.5 text-left transition-colors hover:bg-accent", selectedId === l.id && "bg-accent")}
-                >
+                <NavItem onClick={() => select(l.id)} active={selectedId === l.id} className="flex-col gap-0.5">
                   <span className="flex items-center justify-between gap-2 text-sm">{l.label}{!l.active && <Badge variant="muted">Paused</Badge>}</span>
                   <span className="text-xs text-muted-foreground">{p?.name ?? "Deleted product"} · {sales} sales</span>
-                </button>
+                </NavItem>
               </li>
             );
           })}
@@ -116,7 +116,7 @@ function LinksPageInner() {
             <Button variant="ghost" size="sm" className="-ml-2 md:hidden" onClick={() => select(null)}><ArrowLeftIcon /> All links</Button>
             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div>
-                <h2 className="text-title">{link.label}</h2>
+                <Heading level={2} size="title">{link.label}</Heading>
                 <p className="text-sm text-muted-foreground">{product ? `${product.name} · ${price(product)}` : "Product deleted"}</p>
               </div>
               <div className="flex gap-2">
@@ -144,19 +144,19 @@ function LinksPageInner() {
               </InputGroupAddon>
             </InputGroup>
 
-            <label className="flex items-center justify-between gap-4 rounded-xl border p-4">
+            <Surface as="label" size="sm" tone="plain" inset="sm" className="flex items-center justify-between gap-4">
               <span><span className="block text-sm">Accepting payments</span><span className="block text-sm text-muted-foreground">Paused links show a closed page.</span></span>
               <Switch checked={link.active} onCheckedChange={(c) => { dispatch({ type: "upsertLink", link: { ...link, active: c } }); toast(c ? "Link resumed" : "Link paused"); }} />
-            </label>
+            </Surface>
 
-            <dl className="grid grid-cols-3 gap-px overflow-hidden rounded-2xl border bg-border">
+            <SurfaceGrid as="dl" className="grid-cols-3">
               {[["Visits", link.visits], ["Sales", orders.filter((o) => o.status === "paid").length], ["Conversion", link.visits ? `${((orders.length / link.visits) * 100).toFixed(1)}%` : "—"]].map(([k, v]) => (
                 <div key={k as string} className="bg-card p-4">
                   <dt className="text-xs text-muted-foreground">{k}</dt>
                   <dd className="text-2xl font-light tabular-nums">{v}</dd>
                 </div>
               ))}
-            </dl>
+            </SurfaceGrid>
 
             <div>
               <h3 className="mb-2 text-sm text-muted-foreground">Orders from this link</h3>

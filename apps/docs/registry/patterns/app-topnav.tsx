@@ -9,6 +9,7 @@ import {
 } from "@recanica/ui/components/dropdown-menu";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@recanica/ui/components/sheet";
 import { cn } from "@recanica/ui/lib/utils";
+import { NavItem } from "@recanica/ui/components/nav-item";
 
 const items = ["Overview", "Products", "Customers", "Invoices", "Analytics", "Sales", "Finance", "Settings"];
 
@@ -77,13 +78,9 @@ export default function AppTopNav() {
               <SheetTitle className="sr-only">Navigation</SheetTitle>
               <nav className="mt-10 flex flex-col gap-0.5">
                 {items.map((i) => (
-                  <button
-                    key={i}
-                    onClick={() => { setActive(i); setSheet(false); }}
-                    className={cn("rounded-lg px-3 py-2 text-left text-sm text-muted-foreground hover:text-foreground", active === i && "bg-accent text-foreground")}
-                  >
+                  <NavItem key={i} active={active === i} onClick={() => { setActive(i); setSheet(false); }} className="py-2">
                     {i}
-                  </button>
+                  </NavItem>
                 ))}
               </nav>
             </SheetContent>
@@ -99,9 +96,9 @@ export default function AppTopNav() {
 
           <nav ref={bar} aria-label="Main" className="hidden min-w-0 flex-1 items-center gap-1 overflow-hidden md:flex">
             {shown.map((i) => (
-              <button key={i} onClick={() => setActive(i)} aria-current={active === i ? "page" : undefined} className={itemClass(active === i)}>
+              <NavItem key={i} variant="pill" active={active === i} onClick={() => setActive(i)}>
                 {i}
-              </button>
+              </NavItem>
             ))}
             {overflow.length > 0 && (
               <DropdownMenu>

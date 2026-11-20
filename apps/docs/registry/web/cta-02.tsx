@@ -3,6 +3,7 @@
 import * as React from "react";
 import { Button } from "@recanica/ui/components/button";
 import { Input } from "@recanica/ui/components/input";
+import { Heading } from "@recanica/ui/components/page";
 
 export function Cta02() {
   const [done, setDone] = React.useState(false);
@@ -10,7 +11,7 @@ export function Cta02() {
     <section className="px-gutter py-section-sm">
       <div className="mx-auto flex max-w-content flex-col gap-6 rounded-3xl border bg-card p-6 sm:p-10 md:flex-row md:items-center">
         <div className="flex-1">
-          <h2 className="text-heading">One useful email a month</h2>
+          <Heading level={2}>One useful email a month</Heading>
           <p className="mt-1 text-sm text-muted-foreground">Tax deadlines, product updates and one customer story. No spam.</p>
         </div>
         {done ? (

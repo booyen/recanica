@@ -1,0 +1,130 @@
+{
+  "$description": "How a Recanica page is built: for each page type, its regions in reading order and the part that fills each region. Single source for the docs (/docs/page-anatomy), the recanica-page skill and AI tools. A page that needs a region not listed here needs a brief, and maybe a new part.",
+  "thinking": [
+    "1. Purpose: what is the page for, who arrives, what's the one main action.",
+    "2. Page type: pick the closest type below. It fixes the shell and the region order.",
+    "3. Regions: fill each region with its part, in order. Skip regions the page doesn't need; don't invent new ones.",
+    "4. Content: put real content in each part (longest and shortest cases).",
+    "5. Look: render at 375px and 1280px; check reader order, shared edges, one primary action.",
+    "6. Measure: recanica review (85+), audit (0 must-fix), check (0 must-fix)."
+  ],
+  "types": [
+    {
+      "type": "App overview",
+      "example": "/demo/app",
+      "use": "Daily landing page of an app: status at a glance, what needs attention.",
+      "shell": "AppShell > AppSidebar + AppPanel > Page width=\"content\"",
+      "regions": [
+        { "region": "Header", "part": "PageHeader", "note": "Title, one-line description, at most one primary action" },
+        { "region": "Key numbers", "part": "StatGroup + Stat", "note": "3–4 stats in one surface, hairline dividers" },
+        { "region": "Trends", "part": "Section + Card/Surface + Chart or BarRow", "note": "One chart per question" },
+        { "region": "Recent activity", "part": "Section + Surface + ListRow (divide-y)", "note": "5–8 rows, 'View all' link in the section actions" }
+      ]
+    },
+    {
+      "type": "App list (index)",
+      "example": "/demo/app/invoices",
+      "use": "Find, filter and act on many items.",
+      "shell": "AppShell > AppPanel > Page width=\"content\"",
+      "regions": [
+        { "region": "Header", "part": "PageHeader", "note": "Create action in actions" },
+        { "region": "Summary (optional)", "part": "StatGroup", "note": "Only numbers that change what you do next" },
+        { "region": "Filters", "part": "Tabs or ToggleGroup + InputGroup (search)", "note": "One row; wraps as a group" },
+        { "region": "Items", "part": "Surface + Table (or ListRow on phones)", "note": "4–6 columns; hide secondary columns below md; never hide the last" },
+        { "region": "Empty", "part": "Empty", "note": "What appears here, one action" }
+      ]
+    },
+    {
+      "type": "App detail",
+      "example": "/demo/app/invoices/inv_2",
+      "use": "One record: its state, its facts, what you can do with it.",
+      "shell": "AppShell > AppPanel > Page width=\"content\"",
+      "regions": [
+        { "region": "Header", "part": "PageHeader (back link, status Badge, actions)", "note": "Primary action for the record's next step" },
+        { "region": "Body + side facts", "part": "SplitLayout", "note": "Main content left; key facts and secondary actions in the aside" },
+        { "region": "Sections", "part": "Section + Surface / ReferenceTable", "note": "One section per question the reader asks" },
+        { "region": "Danger zone", "part": "Section + Surface (destructive Button)", "note": "Last, if any" }
+      ]
+    },
+    {
+      "type": "Create / edit form",
+      "example": "/demo/app/invoices/new",
+      "use": "Enter or change one thing, then save.",
+      "shell": "AppShell > AppPanel > Page width=\"reading\"",
+      "regions": [
+        { "region": "Header", "part": "PageHeader (back link)", "note": "No actions here; the save is at the end" },
+        { "region": "Field groups", "part": "Section + Field / FieldGroup", "note": "One column; 10+ fields → titled sections or steps" },
+        { "region": "Actions", "part": "Button (primary) + Button variant=\"ghost\"", "note": "Verb that says what happens: 'Send invoice'" }
+      ]
+    },
+    {
+      "type": "Settings",
+      "example": "/demo/app/settings",
+      "use": "Change how the account behaves, a group at a time.",
+      "shell": "AppShell > AppPanel > Page width=\"content\"",
+      "regions": [
+        { "region": "Header", "part": "PageHeader", "note": "" },
+        { "region": "Groups", "part": "Section per group (title + description left, fields right on desktop)", "note": "Each group saves on its own" },
+        { "region": "Danger zone", "part": "Section + Surface", "note": "Last" }
+      ]
+    },
+    {
+      "type": "Sign-in / single task",
+      "example": "/demo/sign-in",
+      "use": "One focused task with nothing around it.",
+      "shell": "CenteredPage",
+      "regions": [
+        { "region": "Mark", "part": "Logo or IconBadge", "note": "" },
+        { "region": "Task", "part": "Heading + Field + Button", "note": "One column, ~22rem wide" },
+        { "region": "Way out", "part": "Button variant=\"link\" size=\"inline\"", "note": "Back, help, or sign up" }
+      ]
+    },
+    {
+      "type": "Cart / checkout",
+      "example": "/site/shop/checkout",
+      "use": "Review and pay, with the total always visible.",
+      "shell": "WebSection size=\"compact\" > SplitLayout",
+      "regions": [
+        { "region": "Steps or items", "part": "Section + Field / ChoiceCard / ListRow", "note": "Left column" },
+        { "region": "Summary", "part": "Surface (sticky aside) + primary Button", "note": "Total and the one action" }
+      ]
+    },
+    {
+      "type": "Marketing landing",
+      "example": "/site",
+      "use": "Explain one product to someone deciding.",
+      "shell": "TopBar (Navbar) + sections + Footer",
+      "regions": [
+        { "region": "Hero", "part": "Hero01/02/03 (WebHeroTitle)", "note": "One promise, one primary action" },
+        { "region": "Proof", "part": "Logo cloud or Stats (SurfaceGrid)", "note": "" },
+        { "region": "How it works / features", "part": "WebSection + Content/Features/Bento sections", "note": "3–6 points" },
+        { "region": "Pricing", "part": "Pricing01", "note": "" },
+        { "region": "Questions", "part": "Faq01", "note": "" },
+        { "region": "Final call", "part": "Cta01/Cta02", "note": "Same action as the hero" }
+      ]
+    },
+    {
+      "type": "Article / content",
+      "example": "/site/blog/e-invoice-2026",
+      "use": "Read one piece end to end.",
+      "shell": "Page width=\"reading\"",
+      "regions": [
+        { "region": "Header", "part": "PostHero01 (title, meta)", "note": "" },
+        { "region": "Body", "part": "Prose in .flow", "note": "~65ch lines" },
+        { "region": "Next", "part": "Blog01 (related) or Cta02", "note": "" }
+      ]
+    },
+    {
+      "type": "Docs / reference",
+      "example": "/docs/design-language",
+      "use": "Look things up; scan, then read one part.",
+      "shell": "TopBar + docs nav + Page width=\"reading\" + table of contents",
+      "regions": [
+        { "region": "Header", "part": "PageHeader", "note": "No eyebrow; the nav shows where you are" },
+        { "region": "Overview", "part": "Surface + ListRow list, or ReferenceTable", "note": "Scannable in seconds" },
+        { "region": "Detail", "part": "Heading + paragraphs + ReferenceTable / CodeBlock", "note": "Main content in foreground" },
+        { "region": "Next", "part": "Pager", "note": "" }
+      ]
+    }
+  ]
+}

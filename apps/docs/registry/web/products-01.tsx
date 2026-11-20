@@ -4,6 +4,7 @@ import { PlusIcon, StarIcon } from "lucide-react";
 import { toast } from "sonner";
 import { Badge } from "@recanica/ui/components/badge";
 import { Button } from "@recanica/ui/components/button";
+import { WebSectionTitle } from "@recanica/ui/components/web-section";
 
 export const products = [
   { id: "p1", name: "Kopi Ais Blend, 500g", price: 38, rating: 4.8, reviews: 214, tag: "Bestseller" },
@@ -17,12 +18,13 @@ export const products = [
 ];
 export const rm = (n: number) => `RM${n.toLocaleString("en-MY", { minimumFractionDigits: n % 1 ? 2 : 0 })}`;
 
-export function Products01() {
+/** `titleAs="h1"` when this section is the top of its page (every page needs one h1). */
+export function Products01({ titleAs: Title = "h2" }: { titleAs?: "h1" | "h2" }) {
   return (
     <section className="px-gutter py-section-sm">
       <div className="mx-auto max-w-content">
         <div className="flex items-end justify-between gap-4">
-          <h2 className="text-display-sm tracking-tight">Shop</h2>
+          <WebSectionTitle as={Title}>Shop</WebSectionTitle>
           <a href="/site/shop" className="-my-1 py-1 text-sm text-muted-foreground hover:text-foreground">View all</a>
         </div>
         <ul className="mt-10 grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 lg:grid-cols-4">

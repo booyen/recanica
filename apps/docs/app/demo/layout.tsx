@@ -7,7 +7,7 @@ export const metadata = { title: { default: "Demo", template: "%s · Acme Studio
 export default function DemoLayout({ children }: { children: React.ReactNode }) {
   // The demo company's logo becomes the default for every <Loader /> in the demo.
   return (
-    <LoaderProvider logo={<span className="block aspect-square h-full rounded-[28%] bg-brand" />}>
+    <LoaderProvider logo={<span className="block aspect-square h-full rounded-[28%] bg-brand" /* recanica-ignore: the demo company's logo shape */ />}>
       <DemoProvider>{children}<PageMenu /></DemoProvider>
     </LoaderProvider>
   );

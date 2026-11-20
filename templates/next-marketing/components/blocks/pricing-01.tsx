@@ -3,6 +3,7 @@ import { Badge } from "@recanica/ui/components/badge";
 import { Button } from "@recanica/ui/components/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@recanica/ui/components/card";
 import { cn } from "@recanica/ui/lib/utils";
+import { WebSectionTitle } from "@recanica/ui/components/web-section";
 
 const tiers = [
   { name: "Starter", price: "$0", blurb: "For individuals trying things out.", features: ["1 workspace", "Community support", "Basic analytics"] },
@@ -14,7 +15,7 @@ export function Pricing01() {
   return (
     <section className="mx-auto max-w-content px-gutter py-section">
       <div className="mb-12 text-center">
-        <h2 className="text-display-sm tracking-tight">Simple pricing</h2>
+        <WebSectionTitle>Simple pricing</WebSectionTitle>
         <p className="mt-3 text-muted-foreground">Start free. Upgrade when you're ready.</p>
       </div>
       <div className="grid gap-4 md:grid-cols-3">

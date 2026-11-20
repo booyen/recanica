@@ -8,6 +8,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@recanica/ui/components
 import { ScrollArea } from "@recanica/ui/components/scroll-area";
 import { Tabs, TabsList, TabsTrigger } from "@recanica/ui/components/tabs";
 import { cn } from "@recanica/ui/lib/utils";
+import { NavItem } from "@recanica/ui/components/nav-item";
 
 const seed = [
   { id: 1, who: "Nadia Rahman", initials: "NR", text: "purchased Pro Yearly", time: "2m", unread: true },
@@ -50,17 +51,14 @@ export default function Notifications() {
             <ul className="p-2">
               {shown.map((n) => (
                 <li key={n.id}>
-                  <button
-                    onClick={() => setItems((x) => x.map((i) => (i.id === n.id ? { ...i, unread: false } : i)))}
-                    className="flex w-full items-start gap-3 rounded-xl p-2.5 text-left transition-colors hover:bg-accent"
-                  >
+                  <NavItem onClick={() => setItems((x) => x.map((i) => (i.id === n.id ? { ...i, unread: false } : i)))}>
                     <Avatar className="size-8"><AvatarFallback>{n.initials}</AvatarFallback></Avatar>
                     <span className="flex-1 text-sm">
                       <span>{n.who}</span> <span className="text-muted-foreground">{n.text}</span>
                       <span className="block text-xs text-muted-foreground">{n.time} ago</span>
                     </span>
                     <span className={cn("mt-1.5 size-2 rounded-full", n.unread ? "bg-foreground" : "bg-transparent")} />
-                  </button>
+                  </NavItem>
                 </li>
               ))}
               {shown.length === 0 && <li className="py-12 text-center text-sm text-muted-foreground">You're all caught up.</li>}

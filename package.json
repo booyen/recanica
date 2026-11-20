@@ -17,6 +17,7 @@
     "version-packages": "changeset version",
     "release": "turbo build --filter=./packages/* && changeset publish",
     "lint:copy": "node scripts/copy-lint.mjs",
+    "lint:parts": "node scripts/parts-check.mjs",
     "lint:design": "node packages/cli/src/index.js check apps/docs/registry apps/docs/examples apps/docs/components apps/docs/app templates packages/ui/src"
   },
   "devDependencies": {

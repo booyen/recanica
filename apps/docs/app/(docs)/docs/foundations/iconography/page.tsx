@@ -14,7 +14,7 @@ const icons = { LayoutGridIcon, BoxIcon, UsersIcon, TrendingUpIcon, DollarSignIc
 export default function Page() {
   return (
     <>
-      <DocsPageHeader eyebrow="Foundations" title="Iconography" description="Lucide icons at 2px stroke. Icons support labels; they rarely replace them." />
+      <DocsPageHeader title="Iconography" description="Lucide icons at 2px stroke. Icons support labels; they rarely replace them." />
       <H2 id="sizes">Sizes</H2>
       <div className="mt-2 grid gap-4 sm:grid-cols-3">
         {[["size-3.5", "14px", "Inline with xs text, “View all →”"], ["size-4", "16px", "Default: buttons, nav, menus"], ["size-5", "20px", "Feature tiles, empty states"]].map(([c, px, u]) => (

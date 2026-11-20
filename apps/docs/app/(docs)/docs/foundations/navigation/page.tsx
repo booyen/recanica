@@ -9,7 +9,6 @@ export default function Page() {
   return (
     <>
       <DocsPageHeader
-        eyebrow="Foundations"
         title="Navigation"
         description="Which navigation to use, and exactly how each one behaves as space shrinks. Labels never wrap; navigation changes form instead."
       />

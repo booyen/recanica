@@ -9,6 +9,8 @@ import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupText } from "@r
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@recanica/ui/components/select";
 import { Switch } from "@recanica/ui/components/switch";
 import { Textarea } from "@recanica/ui/components/textarea";
+import { Heading } from "@recanica/ui/components/page";
+import { Surface } from "@recanica/ui/components/surface";
 
 function Section({ title, description, children }: { title: string; description: string; children: React.ReactNode }) {
   return (
@@ -24,13 +26,13 @@ function Section({ title, description, children }: { title: string; description:
 
 function ToggleRow({ title, body, defaultChecked }: { title: string; body: string; defaultChecked?: boolean }) {
   return (
-    <label className="flex items-start justify-between gap-4 rounded-xl border p-4">
+    <Surface as="label" size="sm" tone="plain" inset="sm" className="flex items-start justify-between gap-4">
       <span>
         <span className="block text-sm">{title}</span>
         <span className="block text-sm text-muted-foreground">{body}</span>
       </span>
       <Switch defaultChecked={defaultChecked} />
-    </label>
+    </Surface>
   );
 }
 
@@ -38,7 +40,7 @@ export default function SettingsPage() {
   const [dirty, setDirty] = React.useState(false);
   return (
     <div className="mx-auto max-w-content px-gutter py-8 pb-28" onChange={() => setDirty(true)}>
-      <h1 className="text-title">Settings</h1>
+      <Heading level={1}>Settings</Heading>
       <p className="mt-1 text-sm text-muted-foreground">Manage your organization profile and preferences.</p>
 
       <Section title="Profile" description="How your organization appears to customers.">

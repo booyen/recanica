@@ -4,6 +4,7 @@ import { TokenTable } from "@/components/docs/frame";
 import { Pager } from "@/components/docs/pager";
 import { CopyPromptButton, PromptLibrary } from "@/components/docs/prompt-library";
 import { SITE, brandGuide, colorTable, prompts } from "@/lib/llm";
+import { SurfaceGrid } from "@recanica/ui/components/surface";
 
 export const metadata = { title: "Use with AI", description: "Copy-paste prompts that teach any LLM the Recanica brand, style and tokens." };
 
@@ -24,7 +25,6 @@ export default function Page() {
   return (
     <>
       <DocsPageHeader
-        eyebrow="Getting started"
         title="Use with AI"
         description="Recanica is written to be read by LLMs. Copy a prompt, paste it into your AI tool inside any project, and it will apply the Recanica brand, style and colors."
       >
@@ -35,7 +35,7 @@ export default function Page() {
       </DocsPageHeader>
 
       <H2 id="how">How it works</H2>
-      <ol className="grid gap-px overflow-hidden rounded-2xl border bg-border sm:grid-cols-3">
+      <SurfaceGrid as="ol" className="sm:grid-cols-3">
         {steps.map(([t, b], i) => (
           <li key={t} className="bg-panel p-panel">
             <span className="font-mono text-xs text-muted-foreground">{i + 1}</span>
@@ -43,7 +43,7 @@ export default function Page() {
             <p className="mt-1 text-sm text-muted-foreground">{b}</p>
           </li>
         ))}
-      </ol>
+      </SurfaceGrid>
 
       <H2 id="prompts">Prompts</H2>
       <P>Each prompt embeds the complete Recanica rules and token values, generated from the live token file, so it never goes out of date.</P>
@@ -70,7 +70,7 @@ export default function Page() {
       <H2 id="colors">Color tokens (hex)</H2>
       <P>The same values the prompts use, for design tools and non-CSS stacks.</P>
       <div className="mt-6">
-        <TokenTable
+        <TokenTable keys="code"
           head={["Token", "Light", "Dark"]}
           rows={colorTable().map((c) => [
             `--${c.token}`,

@@ -9,7 +9,7 @@ const scale = [1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24];
 export default function Page() {
   return (
     <>
-      <DocsPageHeader eyebrow="Foundations" title="Spacing & Layout" description="A 4px grid inside components, semantic tokens between them, and mobile-first breakpoints." />
+      <DocsPageHeader title="Spacing & Layout" description="A 4px grid inside components, semantic tokens between them, and mobile-first breakpoints." />
       <H2 id="scale">Spacing scale</H2>
       <P>Tailwind's default scale: <InlineCode>p-1</InlineCode> = 4px. Inside components use 1–6; between groups use 8–12.</P>
       <Frame className="mt-6 space-y-2 p-5">
@@ -24,7 +24,7 @@ export default function Page() {
       <H2 id="layout-tokens">Layout tokens</H2>
       <P>Use these instead of hand-picked numbers so every page shares one rhythm.</P>
       <div className="mt-6">
-        <TokenTable
+        <TokenTable keys="code"
           head={["Utility", "Value", "Use"]}
           rows={[
             ["px-gutter", "clamp(16px, 3vw, 40px)", "Page side padding. Scales with the viewport"],
@@ -35,14 +35,14 @@ export default function Page() {
             ["w-sidebar", "240px", "App sidebar"],
             ["max-w-content", "1152px", "Main content column"],
             ["max-w-narrow", "768px", "Forms, feeds, settings"],
-            ["max-w-copy", "640px", "Long-form text"],
+            ["max-w-copy", "640px", "A column of long-form text (set it on the column, not on each paragraph)"],
           ]}
         />
       </div>
       <H2 id="breakpoints">Breakpoints</H2>
       <P>Mobile-first. Write the phone layout first, then add <InlineCode>sm:</InlineCode>, <InlineCode>md:</InlineCode>… to enhance.</P>
       <div className="mt-6">
-        <TokenTable
+        <TokenTable keys="code"
           head={["Prefix", "Min width", "What typically changes"]}
           rows={[
             ["(none)", "0", "Single column, full-width buttons, sheet navigation"],
@@ -54,7 +54,7 @@ export default function Page() {
         />
       </div>
       <H2 id="responsive-rules">Responsive rules</H2>
-      <ul className="mt-2 max-w-copy list-disc space-y-2 pl-5 text-muted-foreground">
+      <ul className="mt-2 list-disc space-y-2 pl-5 text-muted-foreground">
         <li>Sidebars become a <a className="underline underline-offset-4" href="/docs/components/sheet">Sheet</a> below md.</li>
         <li>Segmented controls and tab lists scroll horizontally rather than wrap.</li>
         <li>Tables hide secondary columns (<InlineCode>hidden md:table-cell</InlineCode>) before they scroll.</li>

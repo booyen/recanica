@@ -5,7 +5,7 @@ export const metadata = { title: "Property" };
 export default function Page() {
   return (
     <>
-      <Property01 />
+      <Property01 titleAs="h1" />
     </>
   );
 }

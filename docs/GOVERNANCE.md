@@ -94,7 +94,7 @@ Email HTML is the usual case, because email clients don't support CSS variables.
 
 ### Each project keeps its own values
 
-Recanica fixes the *language*: monochrome, light type, calm surfaces, plain copy. A project adds its *content and identity* on top:
+Recanica fixes the *language*: calm, light type, quiet surfaces, plain copy. A project adds its *content and identity* on top:
 
 - **Brand colour:** override `--brand` / `--brand-foreground` in the project's CSS. This is the one colour that is meant to change.
 - **Font:** swap `--font-sans` if the brand has its own typeface.

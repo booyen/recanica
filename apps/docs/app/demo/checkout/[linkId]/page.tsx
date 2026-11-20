@@ -14,6 +14,8 @@ import { Separator } from "@recanica/ui/components/separator";
 import { Spinner } from "@recanica/ui/components/spinner";
 import { COUNTRIES } from "@/lib/demo/countries";
 import { money2, price, uid, useDemo } from "@/lib/demo/store";
+import { Heading } from "@recanica/ui/components/page";
+import { Surface } from "@recanica/ui/components/surface";
 
 export default function CheckoutPage({ params }: { params: Promise<{ linkId: string }> }) {
   const { linkId } = React.use(params);
@@ -90,7 +92,7 @@ export default function CheckoutPage({ params }: { params: Promise<{ linkId: str
       {/* Payment */}
       <section className="px-gutter py-10 lg:py-16">
         <form onSubmit={pay} noValidate className="mx-auto grid max-w-md gap-5 lg:mr-auto lg:ml-0 lg:pl-12">
-          <h1 className="text-heading">Pay {state.org.name}</h1>
+          <Heading level={1} size="heading">Pay {state.org.name}</Heading>
           <Field data-invalid={touched && !!errors.email}>
             <FieldLabel htmlFor="email">Email</FieldLabel>
             <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" autoComplete="off" />
@@ -109,9 +111,9 @@ export default function CheckoutPage({ params }: { params: Promise<{ linkId: str
           </Field>
           <div className="space-y-2">
             <p className="text-sm">Payment</p>
-            <div className="rounded-xl border bg-muted/40 p-4 text-sm text-muted-foreground">
+            <Surface size="sm" tone="muted" inset="sm" className="text-sm text-muted-foreground">
               Simulated card · nothing is charged. Payment details are not collected in this demo.
-            </div>
+            </Surface>
           </div>
           {touched && (errors.name || errors.email) && (
             <FieldMessage tone="error">Check the {[errors.email, errors.name].filter(Boolean).length === 2 ? "2 highlighted fields" : "highlighted field"} before paying.</FieldMessage>

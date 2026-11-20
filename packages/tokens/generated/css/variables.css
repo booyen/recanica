@@ -42,6 +42,10 @@
   --rc-space-panel: 1.75rem;
   --rc-space-stack: 2.5rem;
   --rc-space-sidebar: 15rem;
+  --rc-space-flow: 1.25rem;
+  --rc-space-group: 0.75rem;
+  --rc-space-inset-sm: 1rem;
+  --rc-space-inset: 1.25rem;
   --rc-container-content: 72rem;
   --rc-container-narrow: 48rem;
   --rc-container-copy: 40rem;
@@ -50,12 +54,12 @@
   --rc-text-xs: 0.75rem;
   --rc-text-sm: 0.875rem;
   --rc-text-base: 1rem;
-  --rc-text-heading: 1.5rem;
-  --rc-text-title: 1.875rem;
+  --rc-text-heading: clamp(1.25rem, 1.1464rem + 0.442vw, 1.5rem);
+  --rc-text-title: clamp(1.625rem, 1.5214rem + 0.442vw, 1.875rem);
   --rc-text-metric: 2.5rem;
-  --rc-text-display-sm: 2.25rem;
-  --rc-text-display-md: 3rem;
-  --rc-text-display-lg: 4rem;
+  --rc-text-display-sm: clamp(1.75rem, 1.5428rem + 0.884vw, 2.25rem);
+  --rc-text-display-md: clamp(2.125rem, 1.7624rem + 1.547vw, 3rem);
+  --rc-text-display-lg: clamp(2.5rem, 1.8785rem + 2.6519vw, 4rem);
   --rc-duration-fast: 150ms;
   --rc-duration-base: 200ms;
   --rc-duration-slow: 300ms;

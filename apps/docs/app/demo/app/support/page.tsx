@@ -7,6 +7,7 @@ import { Button } from "@recanica/ui/components/button";
 import { Textarea } from "@recanica/ui/components/textarea";
 import { cn } from "@recanica/ui/lib/utils";
 import { PageHeader } from "@/components/demo/ui";
+import { NavItem } from "@recanica/ui/components/nav-item";
 
 type Ticket = { id: string; subject: string; status: "Open" | "Waiting on you" | "Solved"; updated: string; thread: { from: "you" | "support"; text: string; at: string }[] };
 
@@ -29,11 +30,11 @@ export default function SupportPage() {
         <ul className="divide-y rounded-2xl border bg-card">
           {tickets.map((x) => (
             <li key={x.id}>
-              <button onClick={() => setActive(x.id)} className={cn("w-full p-4 text-left text-sm hover:bg-accent/40", active === x.id && "bg-accent/60")}>
+              <NavItem onClick={() => setActive(x.id)} active={active === x.id} className="block rounded-none p-4">
                 <span className="flex items-center justify-between gap-2"><span className="font-mono text-xs text-muted-foreground">{x.id}</span><Badge variant={tone[x.status]}>{x.status}</Badge></span>
                 <span className="mt-1 block">{x.subject}</span>
                 <span className="text-xs text-muted-foreground">Updated {x.updated}</span>
-              </button>
+              </NavItem>
             </li>
           ))}
         </ul>

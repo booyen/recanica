@@ -3,6 +3,7 @@ import { ArrowRightIcon } from "lucide-react";
 import { PageHeader } from "@/components/demo/ui";
 import { kitSlug } from "@/lib/kit";
 import catalog from "@/lib/catalog.json";
+import { Surface } from "@recanica/ui/components/surface";
 
 export const metadata = { title: "UI kit" };
 
@@ -23,14 +24,14 @@ export default function Page() {
       />
       <div className="grid gap-4 sm:grid-cols-2">
         {sections.map((s) => (
-          <Link key={s.href} href={s.href} className="group rounded-2xl border bg-card p-5 transition-colors hover:bg-accent/40">
+          <Surface as={Link} className="group transition-colors hover:bg-accent/40" key={s.href} href={s.href}>
             <div className="flex items-baseline justify-between gap-3">
               <h2>{s.title}</h2>
               <span className="text-sm whitespace-nowrap text-muted-foreground">{s.count}</span>
             </div>
             <p className="mt-1 text-sm text-muted-foreground">{s.body}</p>
             <span className="mt-4 inline-flex items-center gap-1 text-sm">Open <ArrowRightIcon className="size-3.5 transition-transform group-hover:translate-x-0.5" /></span>
-          </Link>
+          </Surface>
         ))}
       </div>
 
@@ -39,7 +40,7 @@ export default function Page() {
         {categories.map((cat) => {
           const items = catalog.components.filter((c) => c.category === cat);
           return (
-            <section key={cat} className="rounded-2xl border bg-card p-5">
+            <Surface as="section" key={cat}>
               <Link href={`/demo/app/ui/${kitSlug(cat)}`} className="flex items-baseline justify-between gap-3 hover:underline">
                 <h3>{cat}</h3>
                 <span className="text-sm text-muted-foreground">{items.length}</span>
@@ -53,7 +54,7 @@ export default function Page() {
                   </li>
                 ))}
               </ul>
-            </section>
+            </Surface>
           );
         })}
       </div>
