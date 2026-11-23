@@ -453,6 +453,49 @@ export function auditQuality() {
     if (wide && capped.length) ragged += capped.length;
   }
   if (ragged) add("layout", "two-right-edges", `${ragged} paragraphs stop well short of the full-width blocks beside them`, "Decide width per column, not per element: give the whole column a reading width (max-w-3xl) so text, tables and cards share one right edge.");
+  // Ragged sections: a page section whose content is narrower than the page column and sits
+  // against the left edge, leaving an empty strip on the right next to full-width sections.
+  // A narrow block is fine when it is centred (title, content and note together) or fills the column.
+  const sections = [...main.querySelectorAll(":scope > section, :scope > [data-slot=web-section], :scope > .rc-web-section, :scope > * > section")].filter((el) => visible(el) && !skip(el));
+  const contentBox = (sec) => {
+    const kids = [...sec.querySelectorAll(":scope > *, :scope > * > *")].filter((k) => visible(k) && getComputedStyle(k).position !== "absolute" && getComputedStyle(k).position !== "fixed" && k.getBoundingClientRect().width > 40);
+    if (!kids.length) return null;
+    const rs = kids.map((k) => k.getBoundingClientRect());
+    return { left: Math.min(...rs.map((r) => r.left)), right: Math.max(...rs.map((r) => r.right)) };
+  };
+  const boxes = sections.map((sec) => ({ sec, box: contentBox(sec) })).filter((b) => b.box);
+  if (boxes.length >= 3 && window.innerWidth >= 1024) {
+    const colLeft = Math.min(...boxes.map((b) => b.box.left));
+    const colRight = Math.max(...boxes.map((b) => b.box.right));
+    const colW = colRight - colLeft;
+    const ragged = boxes.filter(({ box }) => {
+      const w = box.right - box.left;
+      const leftAligned = Math.abs(box.left - colLeft) < 8;
+      const centred = Math.abs((box.left + box.right) / 2 - (colLeft + colRight) / 2) < 12;
+      return colW > 700 && leftAligned && !centred && w < colW * 0.85;
+    });
+    if (ragged.length) {
+      const name = (sec) => (sec.querySelector("h2, h3")?.textContent ?? sec.id ?? "section").trim().slice(0, 40);
+      add("layout", "ragged-section", `${ragged.length > 1 ? `${ragged.length} sections stop` : "1 section stops"} short of the page column and hugs the left edge (${ragged.map((b) => `"${name(b.sec)}"`).slice(0, 3).join(", ")})`, "Centre the narrow block as one unit (title, content and note) or let it fill the column, so the page keeps one right edge or one centre line.");
+    }
+  }
+  // Lone words: a heading whose last line holds a single word (a widow) looks unfinished.
+  let lone = 0; const loneEx = [];
+  for (const h of main.querySelectorAll("h1, h2, h3")) {
+    if (skip(h) || !visible(h)) continue;
+    const words = [];
+    const walker = document.createTreeWalker(h, NodeFilter.SHOW_TEXT);
+    for (let n = walker.nextNode(); n; n = walker.nextNode()) {
+      const text = n.textContent ?? "";
+      for (const m of text.matchAll(/\S+/g)) {
+        const r = document.createRange(); r.setStart(n, m.index); r.setEnd(n, m.index + m[0].length);
+        const b = r.getClientRects()[0]; if (b && b.width > 0) words.push(Math.round(b.top));
+      }
+    }
+    const lines = [...new Set(words)].sort((a, b) => a - b);
+    if (lines.length > 1 && words.filter((t) => t === lines[lines.length - 1]).length === 1) { lone++; loneEx.push(h.textContent.trim().slice(0, 40)); }
+  }
+  if (lone) add("hierarchy", "lone-word", `${lone} heading${lone > 1 ? "s end" : " ends"} on a single word ("${loneEx[0]}")`, "Balance heading lines (text-wrap: balance; Recanica's base styles do this) or shorten the heading.");
   // Uneven columns: side-by-side columns where one runs far longer than another, leaving large empty holes.
   let uneven = 0;
   for (const row of main.querySelectorAll("*")) {
@@ -547,7 +590,7 @@ export const RULE_LEVELS = {
   should: ["spec-color", "spec-weight", "spec-font", "spec-button", "spec-radius", "inconsistent", "table-edges", "surface-padding", "stretched-rows",
     "busy-primary", "busy-actions", "busy-type", "busy-surfaces", "busy-lines", "busy-nesting", "busy-badges", "busy-icons", "busy-text",
     "busy-table", "busy-form", "busy-nav", "no-focal-point", "flat-hierarchy", "title-below-fold", "action-below-fold", "alignment",
-    "spacing-rhythm", "content-width", "two-right-edges", "uneven-columns", "cramped", "rhythm", "line-length", "vague-labels", "no-current-nav", "eyebrows", "redundant-eyebrow"],
+    "spacing-rhythm", "content-width", "two-right-edges", "ragged-section", "lone-word", "uneven-columns", "cramped", "rhythm", "line-length", "vague-labels", "no-current-nav", "eyebrows", "redundant-eyebrow"],
 };
 export const levelOf = (rule) => (RULE_LEVELS.must.includes(rule) ? "must" : "should");
 

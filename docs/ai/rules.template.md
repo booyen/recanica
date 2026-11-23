@@ -39,6 +39,7 @@ Shadows only on floating layers: popovers, menus, dialogs, toasts.
 - Weights: 300 light (big numbers), 400 regular (almost everything), 500 medium (buttons only). NEVER semibold or bold.
 - Product scale: metric 40px light (stat values) · title 30px (page title) · heading 24px (section) · base 16 · sm 14 (default UI text) · xs 12 (meta).
 - Landing scale: display-lg 64 · display-md 48 · display-sm 36, letter-spacing −0.02 to −0.035em, step down on mobile.
+- No lone last words: a heading never ends on a single word. Headings balance their lines (`text-wrap: balance`), paragraphs avoid a one-word last line (`text-wrap: pretty`); Recanica's base styles set both.
 - Sentence case everywhere. tabular-nums for any aligned numbers.
 
 ## Spacing & layout
@@ -143,6 +144,7 @@ Busy signals and their fixes:
 5. **Show by frequency:** daily actions visible; occasional ones in a menu; details behind a click (progressive disclosure).
 6. **Size from content, not the screen.** Decide width per column, not per element: on a reading page the whole column gets a reading width, so text, tables and cards share one right edge.
    - forms: one column, ≤ 640px
+   - a block narrower than the page column (pricing, FAQ, a short form on a marketing page) is centred as one unit (title, content and note together), or it fills the column. Never a narrow block against the left edge that leaves an empty strip on the right next to full-width sections. React: `<WebSection align="center">`; CSS: `.rc-web-section--center`.
    - reading text: ~65ch
    - tables: full content width
    - multi-column grids: only for comparable items

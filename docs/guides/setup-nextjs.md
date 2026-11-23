@@ -1,5 +1,7 @@
 # Next.js + Tailwind CSS v4
 
+> **React 19:** `@recanica/ui` needs React 19 (`react` and `react-dom` ^19). On React 18, upgrade first, or use the framework-free `@recanica/css` classes (`rc-*`) until you can.
+
 
 > **Your own font:** Geist is only the default. Load any calm sans with light/regular weights and tabular numerals, then set `--font-sans` / `--font-mono` to it.
 

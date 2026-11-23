@@ -21,6 +21,9 @@ body {
 .rc-muted { color: var(--muted-foreground); }
 .rc-mono { font-family: var(--rc-font-mono); }
 .rc-nums { font-variant-numeric: tabular-nums; }
+/* No lone last words: headings balance their lines, paragraphs avoid a one-word last line. */
+h1, h2, h3, h4 { text-wrap: balance; }
+p, li, dd, summary { text-wrap: pretty; }
 
 /* ---------- type ---------- */
 .rc-display { font-size: var(--rc-text-display-md); line-height: 1.05; letter-spacing: -0.03em; font-weight: 400; margin: 0; }
@@ -196,6 +199,9 @@ html.dark .rc-tab[aria-selected="true"] { background: var(--input); box-shadow: 
 .rc-choice[aria-checked="true"] { border-color: color-mix(in oklab, var(--foreground) 40%, transparent); }
 .rc-web-section { padding: var(--rc-space-section) var(--rc-space-gutter); }
 .rc-web-section > * { max-width: var(--rc-container-content); margin-inline: auto; display: flex; flex-direction: column; gap: var(--rc-space-stack); }
+/* A narrow block (pricing, FAQ) centred as one unit: title, content and note share the centre line. */
+.rc-web-section--center > * { align-items: center; text-align: center; }
+.rc-web-section--center > * > * { margin-inline: auto; }
 .rc-section-title { font-size: var(--rc-text-display-sm); line-height: 1.1; letter-spacing: -0.02em; font-weight: 400; text-wrap: balance; margin: 0; }
 .rc-hero-title { font-size: var(--rc-text-display-md); line-height: 1.05; letter-spacing: -0.03em; font-weight: 400; text-wrap: balance; margin: 0; }
 

@@ -21,7 +21,20 @@ import { runAudit } from "./audit.js";
 import { runReview } from "./review.js";
 
 const require = createRequire(import.meta.url);
-const data = JSON.parse(readFileSync(require.resolve("@recanica/mcp/data"), "utf8"));
+// The rules/tokens data ships with @recanica/mcp. Run from a clone of this repo (e.g. a git
+// submodule), it isn't built yet: build it once from the repo's own files (plain Node).
+const loadData = () => {
+  try {
+    return JSON.parse(readFileSync(require.resolve("@recanica/mcp/data"), "utf8"));
+  } catch {
+    const mcp = join(import.meta.dirname, "../../mcp");
+    const file = join(mcp, "data/recanica.json");
+    if (!existsSync(file) && existsSync(join(mcp, "scripts/build-data.mjs"))) spawnSync(process.execPath, [join(mcp, "scripts/build-data.mjs")], { stdio: "ignore" });
+    if (existsSync(file)) return JSON.parse(readFileSync(file, "utf8"));
+    throw new Error("recanica: rules data not found. Install the published package (npx recanica), or run `node packages/mcp/scripts/build-data.mjs` in the recanica repo.");
+  }
+};
+const data = loadData();
 const VERSION = JSON.parse(readFileSync(join(import.meta.dirname, "../package.json"), "utf8")).version;
 
 const [, , cmd, ...rest] = process.argv;

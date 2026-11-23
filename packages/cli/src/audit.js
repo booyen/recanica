@@ -58,7 +58,7 @@ export async function runAudit(args, flags, log) {
         if (crawl && status && status < 400) {
           const origin = new URL(url).origin;
           const links = await page.$$eval("a[href]", (as) => as.map((a) => a.href));
-          for (const l of links) { const u = new URL(l); u.hash = ""; if (u.origin === origin && !seen.has(u.href)) queue.push(u.href); }
+          for (const l of links) { const u = new URL(l); u.hash = ""; if (u.origin === origin && !seen.has(u.href) && !/\.(png|jpe?g|gif|webp|avif|svg|ico|mp4|webm|mov|zip|pdf|json|xml|txt|css|js|woff2?)$/i.test(u.pathname)) queue.push(u.href); }  // pages only, not images or files
         }
       }
       await ctx.close();

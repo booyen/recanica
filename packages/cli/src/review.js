@@ -134,7 +134,7 @@ export async function runReview(args, flags, log, data) {
         const origin = new URL(url).origin;
         for (const l of await page.$$eval("a[href]", (as) => as.map((a) => a.href))) {
           const u = new URL(l); u.hash = ""; u.search = "";
-          if (u.origin === origin && !seen.has(u.href)) queue.push(u.href);
+          if (u.origin === origin && !seen.has(u.href) && !/\.(png|jpe?g|gif|webp|avif|svg|ico|mp4|webm|mov|zip|pdf|json|xml|txt|css|js|woff2?)$/i.test(u.pathname)) queue.push(u.href); // pages only, not images or files
         }
       }
     }

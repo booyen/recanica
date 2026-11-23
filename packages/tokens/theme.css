@@ -70,6 +70,9 @@
     -webkit-font-smoothing: antialiased;
   }
   :focus-visible { outline: 2px solid var(--color-ring); outline-offset: 2px; }
+  /* No lone last words: headings balance their lines, paragraphs avoid a one-word last line. */
+  h1, h2, h3, h4 { text-wrap: balance; }
+  p, li, dd, summary { text-wrap: pretty; }
 }
 
 
