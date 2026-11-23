@@ -24,6 +24,8 @@ Recanica is the UI framework by Aturanica Labs. Visual reference: Polar's dashbo
 
 Rules: components only use semantic tokens (bg-panel, text-muted-foreground, bg-brand, border…). Never hard-code hex in components. A project changes colour by overriding tokens (usually just --brand), never by adding hues in components.
 
+Adopting Recanica on an existing site: map the old colour variables onto Recanica's tokens or delete them. Never re-declare a semantic name (--muted, --card, --ring, --border …) with a different meaning, and never define a variable from itself (`--ring: var(--ring)` is invalid and silently disables everything that uses it). Gradient artwork that is the product is not interface colour: record it as an accepted deviation (recanica.config.json "allow" with a "file" glob), not with ad-hoc ignores. See docs/guides/migrate-existing.md.
+
 ## Surfaces & depth
 Depth comes from stacked surfaces and 1px hairline borders, not shadows:
 background (page + sidebar) → panel (inset rounded-2xl content area, 8px from the viewport edge) → card → accent (hover / active / selected).

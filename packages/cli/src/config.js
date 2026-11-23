@@ -5,8 +5,10 @@
  *   "ignore": ["emails/**"],                         // files `recanica check` skips
  *   "rules": { "busy-table": "off" },                // per rule: "must" | "should" | "off"
  *   "thresholds": { "tableColumns": 9 },             // busyness limits (see DEFAULT_THRESHOLDS)
- *   "allow": [                                       // accepted deviations from a should-rule, each with a reason
- *     { "rule": "busy-table", "path": "/reports/**", "reason": "Finance compares 9 columns side by side" }
+ *   "allow": [                                       // accepted deviations from a should-rule, each with a reason;
+ *                                                    // "path" = page URLs (audit, review), "file" = source files (check)
+ *     { "rule": "busy-table", "path": "/reports/**", "reason": "Finance compares 9 columns side by side" },
+ *     { "rule": "gradient", "file": "src/art/**", "reason": "Gradient artwork is the product, not interface colour" }
  *   ]
  * }
  * Must-rules can't be allowed away; changing them to "should"/"off" shows up in code review like any other change.

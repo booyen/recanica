@@ -29,6 +29,11 @@ const UTIL = "bg|text|border|ring|fill|stroke|from|via|to|outline|divide|shadow|
 
 /** [id, level, pattern, message, fix] */
 export const RULES = [
+  // A custom property defined from itself (--ring: var(--ring)) is invalid: every rule that uses it falls back
+  // silently (an adopting site lost all its focus rings and card colours this way). Common when old variable names
+  // are "mapped" to Recanica's semantic names of the same spelling.
+  ["self-reference", "error", /(--[\w-]+)\s*:\s*var\(\s*\1\s*[,)]/,
+    "CSS variable defined from itself", "it becomes invalid and everything using it falls back silently: point it at the value it should mirror (e.g. var(--rc-silver-300)), or delete it when it already is the Recanica token"],
   ["hard-coded-color", "error", /(?<![\w&-])#(?:[0-9a-f]{3,4}|[0-9a-f]{6}|[0-9a-f]{8})\b(?![\w-])/i,
     "Hard-coded colour", "use a semantic token: bg-background, bg-card, text-foreground, text-muted-foreground, border"],
   ["hard-coded-color", "error", /\b(?:rgba?|hsla?|oklch|oklab|lab|lch)\(\s*[\d.]/i,
@@ -122,17 +127,27 @@ export function check(root, paths, { all = false } = {}) {
         message: `Repeated class string (${uses.length}× in the codebase)`, fix: "a part is missing: make it a component (and an rc-* class), then use it everywhere" });
     }
   }
-  return { files: files.length, hits };
+  // Accepted deviations for files: recanica.config.json "allow" entries with a "file" glob (should-rules only;
+  // must-rules can't be allowed away). E.g. gradient art: { "rule": "gradient", "file": "src/art/**", "reason": "…" }.
+  const fileAllows = cfg.allow.filter((a) => a.file).map((a) => ({ ...a, re: globToRe(a.file) }));
+  const accepted = [];
+  const kept = hits.filter((h) => {
+    if (h.level === "error") return true;
+    const a = fileAllows.find((x) => x.rule === h.rule && x.re.test(h.file));
+    if (a) { accepted.push({ ...h, reason: a.reason }); return false; }
+    return true;
+  });
+  return { files: files.length, hits: kept, accepted };
 }
 
 export function runCheck(root, args, flags, log) {
-  const { files, hits } = check(root, args, { all: !!flags.all || !!flags.warn });
+  const { files, hits, accepted = [] } = check(root, args, { all: !!flags.all || !!flags.warn });
   const errors = hits.filter((h) => h.level === "error");
   if (flags.json) {
-    process.stdout.write(JSON.stringify({ files, errors: errors.length, warnings: hits.length - errors.length, hits }, null, 2) + "\n");
+    process.stdout.write(JSON.stringify({ files, errors: errors.length, warnings: hits.length - errors.length, accepted: accepted.length, hits, acceptedHits: accepted }, null, 2) + "\n");
   } else {
     for (const h of hits) log(`${h.level === "error" ? "✗" : "!"} ${h.file}:${h.line}:${h.col}  ${h.message}: “${h.match}”\n    → ${h.fix}  [${h.rule}]`);
-    log(`\nrecanica check: ${files} files · ${errors.length} must-fix · ${hits.length - errors.length} should (deviate with a recanica-ignore reason)`);
+    log(`\nrecanica check: ${files} files · ${errors.length} must-fix · ${hits.length - errors.length} should (deviate with a recanica-ignore reason)${accepted.length ? ` · ${accepted.length} accepted (recanica.config.json "allow")` : ""}`);
     if (errors.length) log("Fix with tokens, or add `recanica-ignore` with a reason on the line. Rules: npx recanica rules");
   }
   return errors.length && !flags.warn ? 1 : 0;

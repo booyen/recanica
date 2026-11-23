@@ -81,6 +81,18 @@ assert.match(run(good, "check"), /0 must-fix/);
   const r = JSON.parse(run(rep, "check", "--json"));
   assert.equal(r.hits.filter((h) => h.rule === "repeated-classes").length, 3, "check: a class string repeated 3× is flagged as a missing part");
 }
+{
+  // A variable defined from itself is a must-fix; a file-glob "allow" accepts a should-rule (gradient art).
+  const self = fixture({
+    "site.css": ":root {\n  --ring: var(--ring);\n  --bg: var(--background);\n}\n",
+    "art/hero.css": ".art { background: linear-gradient(90deg, var(--a), var(--b)); }\n",
+    "recanica.config.json": JSON.stringify({ allow: [{ rule: "gradient", file: "art/**", reason: "Gradient artwork is the product" }] }),
+  });
+  let r; try { r = JSON.parse(run(self, "check", "--json")); } catch (e) { r = JSON.parse(e.stdout); }
+  assert.equal(r.hits.filter((h) => h.rule === "self-reference").length, 1, "check: --ring: var(--ring) is flagged, --bg: var(--background) is not");
+  assert.ok(!r.hits.some((h) => h.rule === "gradient"), "check: a file-glob allow accepts the gradient art");
+  assert.equal(r.accepted, 1, "check: accepted deviations are counted");
+}
 console.log("✓ check");
 
 // A fresh project after init: a hand-built button must fail the build (rules come from the installed config).
@@ -183,7 +195,13 @@ console.log("✓ check");
     await faq.setContent(`<main style="max-width:1152px;margin:0 auto"><section><h2 style="font:20px/1.2 monospace;width:19ch">aaaaaaaaa bbbbbbbbb c</h2><div style="height:80px"></div></section><section><h2>Two</h2><div style="height:80px"></div></section><section><h2 style="font-size:48px;max-width:720px">Free to start. Pro when you ship.</h2><div style="max-width:880px;height:80px"></div></section></main>`);
     const edges = new Set((await faq.evaluate(auditQuality)).findings.map((f) => f.rule));
     assert.ok(edges.has("ragged-section") && edges.has("lone-word"), "quality: ragged-section and lone-word fire");
-    console.log("✓ closed FAQ links are not unnamed; ragged sections and lone words fire");
+    // Gradient-filled text is measured by its colour stops: light stops on black pass, a near-black stop fails.
+    const grad = (stops) => `<main style="background:#000;padding:40px"><h1 style="font-size:16px;color:transparent;-webkit-background-clip:text;background-clip:text;background-image:linear-gradient(90deg,${stops})">Living backgrounds</h1></main>`;
+    await faq.setContent(`<html><body style="margin:0;background:#000">${grad("#f0e6ff, #c8f5ff")}</body></html>`);
+    assert.ok(!(await faq.evaluate(auditQuality)).findings.some((f) => f.rule === "contrast"), "quality: light gradient text on black passes contrast");
+    await faq.setContent(`<html><body style="margin:0;background:#000">${grad("#f0e6ff, #111111")}</body></html>`);
+    assert.ok((await faq.evaluate(auditQuality)).findings.some((f) => f.rule === "contrast"), "quality: a near-black gradient stop fails contrast");
+    console.log("✓ closed FAQ links are not unnamed; ragged sections and lone words fire; gradient text measured by its stops");
     const layout = new Set((await page.evaluate(auditPage)).map((i) => i.rule));
     await browser.close();
     for (const r of ["spec-color", "spec-weight", "spec-button", "spec-radius", "spec-copy", "inconsistent"]) assert.ok(spec.has(r), `audit: ${r} should fire`);

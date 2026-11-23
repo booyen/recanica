@@ -40,6 +40,22 @@ export const DIMENSIONS = {
   responsiveness: "Responsiveness: works at phone width without overflow, wrapping labels or overlap",
 };
 const BUSY_TO_DIM = { "no-title": "clarity", "tiny-text": "readability" };
+// Every finding says why and what to do (the page audit reports rule + element only).
+const FIXES = {
+  "page-overflow": "The page scrolls sideways: find the element wider than the screen (a table, a long word, a fixed width) and let it wrap, scroll inside its own box, or shrink.",
+  "text-overflow": "Text runs out of its box: let it wrap, or give the box room; don't fix widths on text.",
+  "clipped-text": "Text is cut off without an ellipsis: let it wrap, or add text-overflow: ellipsis with the full text in a title.",
+  "wrapped-label": "A short label breaks onto two lines: keep labels on one line (shorter words, white-space: nowrap, or more room).",
+  "overlap": "One item paints into the next: give the row room, let items wrap, or truncate the long one.",
+  "table-edges": "The first and last cells sit at different distances from the table edge: use equal padding on both ends.",
+  "surface-padding": "A card has different left and right padding: use one inset on both sides.",
+  "stretched-rows": "Rows in a one-column grid are far apart: the grid stretches to fill height; align to the top or use a flex column.",
+  "unnamed-control": "A button or link has no name for screen readers: give it visible text, or aria-label for icon-only controls.",
+  "small-target": "A touch target is under 24×24px: make the control bigger or space it from its neighbours.",
+  "dead-link": "A link goes nowhere (href=\"#\" or empty): link to the real page, or use a button for an action.",
+  "unlabelled-field": "A field has no label: add a <label for> (or aria-label), not just a placeholder.",
+  "duplicate-id": "Two elements share an id: ids must be unique, or labels and links point at the wrong one.",
+};
 const LAYOUT_RULES = new Set(["overlap", "table-edges", "surface-padding", "stretched-rows", "text-overflow", "clipped-text", "page-overflow", "wrapped-label"]);
 
 export function scorePage(p, config = { rules: {}, allow: [] }) {
@@ -48,8 +64,8 @@ export function scorePage(p, config = { rules: {}, allow: [] }) {
   for (const f of p.findings) all.push({ d: BUSY_TO_DIM[f.rule] ?? "calm", ...f });
   for (const f of p.quality) all.push({ d: f.dimension, ...f });
   for (const i of p.spec) all.push({ d: i.rule === "spec-copy" ? "readability" : "consistency", ...i });
-  for (const i of p.desktop) all.push({ d: LAYOUT_RULES.has(i.rule) ? "layout" : "usability", ...i });
-  for (const i of p.mobile) if (LAYOUT_RULES.has(i.rule)) all.push({ d: "responsiveness", ...i });
+  for (const i of p.desktop) all.push({ d: LAYOUT_RULES.has(i.rule) ? "layout" : "usability", fix: FIXES[i.rule], ...i });
+  for (const i of p.mobile) if (LAYOUT_RULES.has(i.rule)) all.push({ d: "responsiveness", fix: FIXES[i.rule], ...i });
   if (!p.focusVisible) all.push({ d: "usability", rule: "focus-visible", detail: "keyboard focus isn't visible on some controls", fix: "Every focusable element shows a focus ring (focus-visible:ring-[3px] ring-ring/50). Never remove outlines." });
   const path = p.url ? new URL(p.url).pathname : "/";
   const { must, should, accepted } = classify(all, path, config, levelOf);

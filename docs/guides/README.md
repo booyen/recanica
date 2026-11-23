@@ -13,6 +13,7 @@ Recanica is the UI framework by Aturanica Labs. Pick your stack:
 | Jetpack Compose (Android) | [setup-compose.md](setup-compose.md) | `recanicaColorScheme()` + constants |
 | Figma | [setup-figma.md](setup-figma.md) | Variables via Tokens Studio |
 | AI tools (Claude Code, Cursor, …) | [ai.md](ai.md) | MCP server, rules file, prompts, llms.txt |
+| An existing site (any stack) | [migrate-existing.md](migrate-existing.md) | Adopting Recanica on a live product: mapping, checks, page-by-page rework |
 
 Fastest path for any web project:
 

@@ -398,9 +398,13 @@ export function auditQuality() {
   for (const el of textEls) {
     const cs = getComputedStyle(el);
     if (el.closest("button:disabled, [aria-disabled=true], [data-disabled]")) continue;
-    const fg = rgba(cs.color), bg = bgOf(el);
-    const mixed = [0, 1, 2].map((i) => fg[i] * fg[3] + bg[i] * (1 - fg[3]));
-    const L1 = lum(mixed), L2 = lum(bg); const ratio = (Math.max(L1, L2) + 0.05) / (Math.min(L1, L2) + 0.05);
+    const bg = bgOf(el);
+    const ratioOf = (fg) => { const mixed = [0, 1, 2].map((i) => fg[i] * fg[3] + bg[i] * (1 - fg[3])); const L1 = lum(mixed), L2 = lum(bg); return (Math.max(L1, L2) + 0.05) / (Math.min(L1, L2) + 0.05); };
+    // Gradient-filled text (background-clip: text, transparent colour) is measured by its gradient's colour stops,
+    // the weakest one counting, not by the transparent text colour (which would read 1:1).
+    const clipText = (cs.webkitBackgroundClip || cs.backgroundClip) === "text" && /gradient\(/.test(cs.backgroundImage) && rgba(cs.color)[3] < 0.05;
+    const stops = clipText ? (cs.backgroundImage.match(/(?:rgba?|hsla?|oklab|oklch|lab|lch|color)\([^()]*(?:\([^()]*\)[^()]*)*\)|#[0-9a-f]{3,8}\b/gi) ?? []) : [];
+    const ratio = stops.length ? Math.min(...stops.map((c) => ratioOf(rgba(c)))) : ratioOf(rgba(cs.color));
     const large = parseFloat(cs.fontSize) >= 24 || (parseFloat(cs.fontSize) >= 18.66 && parseInt(cs.fontWeight) >= 700);
     if (ratio < (large ? 3 : 4.5)) { lowContrast++; if (!worst || ratio < worst.ratio) worst = { ratio, el }; }
   }
