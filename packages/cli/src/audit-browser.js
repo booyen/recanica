@@ -114,7 +114,8 @@ export function auditPage() {
     const out = [];
     const vis = (el) => { const r = el.getBoundingClientRect(); const s = getComputedStyle(el); return r.width > 0 && r.height > 0 && s.visibility !== "hidden" && s.display !== "none"; };
     const desc = (el) => `<${el.tagName.toLowerCase()}${el.id ? "#" + el.id : ""}> "${(el.textContent ?? "").trim().slice(0, 30)}"`;
-    const skip = (el) => !!el.closest("[data-audit-ignore], nextjs-portal, [aria-hidden=true], iframe");
+    // A closed <details> hides its content (not clickable, not in the tab order); only its <summary> counts.
+    const skip = (el) => !!el.closest("[data-audit-ignore], nextjs-portal, [aria-hidden=true], iframe") || (!!el.closest("details:not([open])") && !el.closest("summary"));
     const targets = [...document.querySelectorAll("button, a[href], [role=button], [role=tab], [role=menuitem]")].filter((el) => vis(el) && !skip(el) && el.getAttribute("tabindex") !== "-1");
     const rects = targets.map((t) => t.getBoundingClientRect());
     // WCAG 2.5.8 spacing exception: a target under 24px passes if a 24px circle centred on it touches no other target.
@@ -128,7 +129,7 @@ export function auditPage() {
     };
     for (const [i, el] of targets.entries()) {
       const forLabel = el.id ? document.querySelector(`label[for="${CSS.escape(el.id)}"]`) : null;
-      const name = (forLabel?.innerText || el.closest("label")?.innerText || el.getAttribute("aria-label") || el.getAttribute("title") || el.innerText || el.getAttribute("aria-labelledby") || el.querySelector("img[alt]")?.getAttribute("alt") || "").trim();
+      const name = (forLabel?.innerText || el.closest("label")?.innerText || el.getAttribute("aria-label") || el.getAttribute("title") || el.innerText || el.textContent || el.getAttribute("aria-labelledby") || el.querySelector("img[alt]")?.getAttribute("alt") || "").trim();
       if (!name) out.push({ rule: "unnamed-control", detail: `${desc(el)} ${el.outerHTML.slice(0, 80)}` });
       if (matchMedia("(pointer: coarse)").matches) {
         const r = el.getBoundingClientRect();

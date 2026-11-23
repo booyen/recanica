@@ -174,6 +174,16 @@ console.log("✓ check");
     assert.ok(scored.overall < 85, `quality: a bad page must score under 85 (got ${scored.overall})`);
     assert.ok(scored.scores.readability < 85 && scored.scores.usability < 85 && scored.scores.layout < 85 && scored.scores.responsiveness < 100, "quality: weak dimensions show up");
     console.log(`✓ quality rules fire; bad page scores ${scored.overall}/100`);
+    // Links inside a closed <details> (a collapsed FAQ answer) are not unnamed controls; an empty link is.
+    const faq = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+    await faq.setContent(`<main><details><summary>Is it free?</summary><p>See the <a href="/privacy">Privacy Policy</a>.</p></details><a href="/empty" style="display:inline-block;width:24px;height:24px"></a></main>`);
+    const unnamed = (await faq.evaluate(auditPage)).filter((i) => i.rule === "unnamed-control");
+    assert.equal(unnamed.length, 1, "audit: only the empty link is unnamed, not the link in the closed answer");
+    // Ragged section + lone word: a narrow section against the left edge, a heading ending on one word.
+    await faq.setContent(`<main style="max-width:1152px;margin:0 auto"><section><h2 style="font:20px/1.2 monospace;width:19ch">aaaaaaaaa bbbbbbbbb c</h2><div style="height:80px"></div></section><section><h2>Two</h2><div style="height:80px"></div></section><section><h2 style="font-size:48px;max-width:720px">Free to start. Pro when you ship.</h2><div style="max-width:880px;height:80px"></div></section></main>`);
+    const edges = new Set((await faq.evaluate(auditQuality)).findings.map((f) => f.rule));
+    assert.ok(edges.has("ragged-section") && edges.has("lone-word"), "quality: ragged-section and lone-word fire");
+    console.log("✓ closed FAQ links are not unnamed; ragged sections and lone words fire");
     const layout = new Set((await page.evaluate(auditPage)).map((i) => i.rule));
     await browser.close();
     for (const r of ["spec-color", "spec-weight", "spec-button", "spec-radius", "spec-copy", "inconsistent"]) assert.ok(spec.has(r), `audit: ${r} should fire`);
