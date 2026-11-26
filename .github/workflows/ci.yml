@@ -28,10 +28,10 @@ jobs:
         run: pnpm lint:design
       - run: pnpm build
       - run: pnpm typecheck
+      - name: Install Playwright (the CLI tests launch a browser too)
+        run: pnpm --filter docs exec playwright install --with-deps chromium
       - name: Package tests (CLI fixtures, MCP smoke)
         run: pnpm --filter recanica --filter @recanica/mcp test
-      - name: Install Playwright
-        run: pnpm --filter docs exec playwright install --with-deps chromium
       - name: Layout, coverage, link and UX audits (every page, mobile + desktop)
         run: pnpm test:audit
       - uses: actions/upload-artifact@v4
