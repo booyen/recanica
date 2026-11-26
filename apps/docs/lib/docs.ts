@@ -27,6 +27,7 @@ export const gettingStarted: NavLink[] = [
   { title: "Installation", href: "/docs/installation" },
   { title: "Theming", href: "/docs/theming" },
   { title: "Use with AI", href: "/docs/ai" },
+  { title: "MCP guide", href: "/docs/mcp" },
 ];
 
 function grouped(items: CatalogItem[], base: string): NavGroup[] {

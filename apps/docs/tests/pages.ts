@@ -3,7 +3,7 @@ import { slugify } from "../lib/kit";
 
 /** Every route worth checking, generated from the catalog so new items are covered automatically. */
 export const publicPages = [
-  "/", "/docs", "/docs/installation", "/docs/theming", "/docs/ai", "/docs/page-library", "/docs/design-language", "/docs/page-anatomy", "/site/sections/bottom-nav-01", "/site/sections/offcanvas-01",
+  "/", "/docs", "/docs/installation", "/docs/theming", "/docs/ai", "/docs/mcp", "/docs/page-library", "/docs/design-language", "/docs/page-anatomy", "/site/sections/bottom-nav-01", "/site/sections/offcanvas-01",
   ...["colors", "typography", "spacing", "surfaces", "iconography", "navigation", "motion"].map((s) => `/docs/foundations/${s}`),
   "/docs/components", "/docs/patterns", "/docs/blocks",
   ...catalog.components.map((c) => `/docs/components/${c.slug}`),

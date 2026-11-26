@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { DocsPageHeader, H2, InlineCode, P } from "@/components/docs/page-header";
 import { CopyButton } from "@/components/docs/copy-button";
 import { TokenTable } from "@/components/docs/frame";
@@ -53,6 +54,12 @@ export default function Page() {
       <P>
         Every component, pattern and block page has a <InlineCode>Copy for LLM</InlineCode> button. It copies that item's reference code plus the
         core rules, ideal for “build me this, but for my data”.
+      </P>
+
+      <H2 id="mcp">MCP server</H2>
+      <P>
+        For live access instead of a pasted prompt, connect your tool to the Recanica MCP server. Setup and the tool list are in
+        the <Link href="/docs/mcp" className="text-foreground underline underline-offset-4">MCP guide</Link>.
       </P>
 
       <H2 id="files">Machine-readable files</H2>

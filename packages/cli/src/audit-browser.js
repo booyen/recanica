@@ -58,8 +58,8 @@ export function auditPage() {
 
       // Short control labels (buttons, badges, tabs, table headers) must never break onto two lines.
       // Counts the rendered lines of each text run, so tall buttons and multi-line cards don't trip it.
-      // Includes a table's label column (first body cell), except code (mono) cells, which may break.
-      const labelCell = el.matches("td:first-child") && !/mono/i.test(getComputedStyle(el).fontFamily) && (el.textContent ?? "").trim().split(/\s+/).length <= 4;
+      // Includes a table's label column (first body cell), code keys too: a tool or token name split mid-word reads as two names.
+      const labelCell = el.matches("td:first-child") && (el.textContent ?? "").trim().split(/\s+/).length <= 4;
       // Rows (ListRow, NavItem, ChoiceCard) hold content, not a short label, so their text may wrap.
       if ((el.matches("button, [data-slot=badge], [role=tab], th, [data-slot=button]") && !el.matches("[data-slot=list-row], [data-slot=nav-item], [data-slot=choice-card]")) || labelCell) {
         const label = (el.textContent ?? "").trim().replace(/\s+/g, " ");

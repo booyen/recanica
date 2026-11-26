@@ -1,43 +1,43 @@
-import catalog from "@/lib/catalog.json";
 import Link from "next/link";
 import { ArrowRightIcon } from "lucide-react";
-import { Button } from "@recanica/ui/components/button";
+import { Page, PageHeader, Section } from "@recanica/ui/components/page";
+import { Surface } from "@recanica/ui/components/surface";
+import { ListRow } from "@recanica/ui/components/layout";
 import { SiteHeader } from "@/components/docs/site-header";
-import { Bento01 } from "@/registry/web/bento-01";
-import { Cta01 } from "@/registry/web/cta-01";
 import { SiteFooter } from "@/components/docs/site-footer";
-import { blocks, components, patterns } from "@/lib/docs";
-import { SurfaceGrid } from "@recanica/ui/components/surface";
+import { components } from "@/lib/docs";
 
-import { Hero01 } from "@/registry/web/hero-01";
+// Brief: docs/pages/index.md. One line on what Recanica is, then three equal entries.
+const entries = [
+  { title: "Design system", body: "Principles, foundations and the rules every page follows.", href: "/docs" },
+  { title: "Components", body: `${components.length} accessible parts for React, with rc-* classes for any other stack.`, href: "/docs/components" },
+  { title: "MCP guide", body: "Connect your AI coding tool to the rules, tokens and components.", href: "/docs/mcp" },
+];
 
-// The design system's own homepage, assembled from its blocks.
 export default function Home() {
   return (
     <>
       <SiteHeader />
-      <Hero01
-        badge="Design system for dashboards and websites"
-        title="Recanica"
-        description={`Calm and precise, monochrome by default. Tokens, ${components.length} components, ${patterns.length} patterns and ${blocks.length} blocks for dashboards and landing pages.`}
-        actions={<>
-          <Button size="lg" variant="brand" asChild><Link href="/docs">Read the docs <ArrowRightIcon /></Link></Button>
-          <Button size="lg" variant="outline" asChild><Link href="/site">Sample website</Link></Button>
-          <Button size="lg" variant="outline" asChild><Link href="/demo">Dashboard demo</Link></Button>
-        </>}
-      />
-      <section className="px-gutter py-section-sm">
-        <SurfaceGrid as="dl" className="mx-auto max-w-content grid-cols-2 lg:grid-cols-4">
-          {[[components.length, "components"], [patterns.length, "app patterns"], [blocks.length, "marketing blocks"], [catalog.web.length, "web sections"]].map(([v, l]) => (
-            <div key={l} className="bg-background p-panel">
-              <dd className="text-[2rem] leading-none font-light tracking-tight sm:text-display-sm">{v}</dd>
-              <dt className="mt-2 text-sm text-muted-foreground">{l}</dt>
-            </div>
-          ))}
-        </SurfaceGrid>
-      </section>
-      <Bento01 />
-      <Cta01 />
+      <main className="px-gutter py-section">
+        <Page width="reading" className="mx-auto">
+          <PageHeader
+            title="Recanica"
+            description="A calm, monochrome design system by Aturanica Labs for dashboards and websites."
+          />
+          <Section id="start" title="Start here">
+            <Surface as="ul" inset="none" className="divide-y overflow-hidden">
+              {entries.map((e) => (
+                <li key={e.href}>
+                  <ListRow as={Link} href={e.href}>
+                    <span className="min-w-0 flex-1">{e.title}<span className="block text-sm text-muted-foreground">{e.body}</span></span>
+                    <ArrowRightIcon aria-hidden className="size-4 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
+                  </ListRow>
+                </li>
+              ))}
+            </Surface>
+          </Section>
+        </Page>
+      </main>
       <SiteFooter />
     </>
   );

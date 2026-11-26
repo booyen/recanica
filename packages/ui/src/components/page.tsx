@@ -116,7 +116,8 @@ function Stack({ gap = "flow", className, ...props }: React.ComponentProps<"div"
 /**
  * Reference table: a key column plus description columns.
  * `keys` says what the key column holds, decided by the author, never guessed:
- *   "label" (default) → regular text that never wraps; "code" (token names, classes, commands) → mono, may break.
+ *   "label" (default) → regular text; "code" (token names, classes, commands) → mono.
+ * Keys never wrap in either case (same as `.rc-table td.rc-mono`); a long key widens the table and it scrolls.
  */
 function ReferenceTable({ head, rows, keys = "label", className }: { head: string[]; rows: React.ReactNode[][]; keys?: "label" | "code"; className?: string }) {
   const codeKeys = keys === "code"
@@ -134,7 +135,7 @@ function ReferenceTable({ head, rows, keys = "label", className }: { head: strin
                   key={j}
                   className={cn(
                     "px-(--spacing-inset-sm) py-3 align-top",
-                    j === 0 && (codeKeys ? "font-mono text-xs [overflow-wrap:anywhere]" : "whitespace-nowrap text-foreground"),
+                    j === 0 && cn("whitespace-nowrap", codeKeys ? "font-mono text-xs" : "text-foreground"),
                     j > 0 && "text-muted-foreground"
                   )}
                 >
