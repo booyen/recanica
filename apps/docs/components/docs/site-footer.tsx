@@ -2,7 +2,7 @@ import Link from "next/link";
 import { RecanicaLogo } from "./logo";
 
 const columns = [
-  { title: "Get started", links: [["Introduction", "/docs"], ["Installation", "/docs/installation"], ["Theming", "/docs/theming"], ["Use with AI", "/docs/ai"]] },
+  { title: "Get started", links: [["Introduction", "/docs"], ["Installation", "/docs/installation"], ["Start a project", "/docs/start"], ["Theming", "/docs/theming"], ["Use with AI", "/docs/ai"]] },
   { title: "Library", links: [["Components", "/docs/components"], ["Patterns", "/docs/patterns"], ["Web library", "/docs/web"], ["Page library", "/docs/page-library"]] },
   { title: "Demos", links: [["Sample website", "/site"], ["Dashboard", "/demo"], ["Customer portal", "/demo/portal"], ["All web sections", "/site/sections"]] },
   { title: "Resources", links: [["GitHub", "https://github.com/booyen/rekanica-des"], ["llms.txt", "/llms.txt"], ["Token CSS", "/recanica.css"]] },

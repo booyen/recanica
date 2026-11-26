@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { CodeBlock } from "@/components/docs/code-block";
 import { DocsPageHeader, H2, H3, InlineCode, P } from "@/components/docs/page-header";
 import { Pager } from "@/components/docs/pager";
@@ -8,6 +9,10 @@ export default function Page() {
   return (
     <>
       <DocsPageHeader title="Installation" description="Add Recanica to a Next.js app in the monorepo, then pull patterns and blocks from the registry." />
+      <P>
+        In your own project, <InlineCode>npx recanica init</InlineCode> does these steps for you and then runs the kickoff. See{" "}
+        <Link className="underline underline-offset-4" href="/docs/start">Start a project</Link> for the whole path. The steps below are the manual setup.
+      </P>
       <H2 id="packages">1. Add the packages</H2>
       <CodeBlock lang="bash" code={`pnpm add @recanica/ui@workspace:* @recanica/tokens@workspace:*`} />
       <H2 id="css">2. Import the tokens</H2>
@@ -65,7 +70,8 @@ export default function Page() {
 npx recanica check src --all  # include warnings`} />
       <P>
         Allow a deliberate exception with a <InlineCode>recanica-ignore: reason</InlineCode> comment on the line, or list paths in{" "}
-        <InlineCode>recanica.config.json</InlineCode>. New pages follow the mockup-first workflow in the rules: mock up from patterns, review, then build.
+        <InlineCode>recanica.config.json</InlineCode>. The kickoff, the decision log and the slop check that run beside it are on{" "}
+        <Link className="underline underline-offset-4" href="/docs/start">Start a project</Link>.
       </P>
       <Pager href="/docs/installation" />
     </>
