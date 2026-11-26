@@ -24,8 +24,12 @@ jobs:
         run: pnpm lint:copy
       - name: Parts exist in both forms (React + rc-* CSS)
         run: pnpm lint:parts
-      - name: Design lint (recanica check)
+      - name: Design lint (recanica check, incl. decision-log pattern guards)
         run: pnpm lint:design
+      - name: Decision log (recanica decisions lint, fails on must-fix)
+        run: pnpm lint:decisions
+      - name: AI-slop check (recanica slop apps/docs templates, fails on must-fix)
+        run: pnpm lint:slop
       - run: pnpm build
       - run: pnpm typecheck
       - name: Install Playwright (the CLI tests launch a browser too)

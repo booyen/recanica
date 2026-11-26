@@ -110,7 +110,7 @@ async function ask(detected) {
   return a;
 }
 
-function renderKickoff(a, date) {
+function renderKickoff(a, date, zones = []) {
   const strict = FLEXIBILITY[a.flexibility];
   const list = (v) => (Array.isArray(v) && v.length ? v.join(", ") : "none");
   return `# Kickoff · ${a.name || "this project"}
@@ -140,6 +140,7 @@ ${a.role === "guest"
 **${a.flexibility}.** Fixed in every mode: tokens only (no raw colours, no palette hues), valid CSS variables, no placeholder copy.
 Must in this mode: ${Object.entries(strict).filter(([, v]) => v === "must").map(([k]) => `\`${k}\``).join(", ")}.
 ${(a.openZones ?? []).length ? `Open zones (tokens fixed, composition free): ${a.openZones.map((z) => `\`${z}\``).join(", ")}.` : "No open zones."}
+${zones.filter((z) => !z.$kickoff).length ? `Other zones (recanica.config.json "zones"):\n${zones.filter((z) => !z.$kickoff).map((z) => `- \`${z.files}\`: ${z.flexibility}${z.reason ? `. ${z.reason}` : ""}`).join("\n")}` : ""}
 
 **Brand:** ${a.brand}
 
@@ -213,7 +214,7 @@ export async function runKickoff(root, flags, log, { detectStack }) {
   put("recanica.config.json", JSON.stringify(ordered, null, 2) + "\n");
 
   // 2. The readable record.
-  put("docs/ui/KICKOFF.md", renderKickoff(a, date));
+  put("docs/ui/KICKOFF.md", renderKickoff(a, date, cfg.zones ?? []));
 
   // 3. The first decisions, so the log starts with the choices everything else depends on.
   const conf = loadConfig(root);

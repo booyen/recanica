@@ -1,9 +1,65 @@
 {
-  "$comment": "Recanica's own exceptions. Email HTML needs inline hex (clients ignore CSS variables); the theming guide shows raw token overrides on purpose. Foundation pages that SHOW colours or type sizes deviate from the busyness defaults because that is their content.",
-  "project": { "name": "Recanica (the design system itself)", "role": "owner", "flexibility": "guided", "stack": "monorepo: nextjs docs + packages", "surfaces": ["docs", "app", "site", "email"], "kickoff": "n/a: this repo is the system; projects run `recanica kickoff`" },
-  "ignore": ["templates/email/**", "apps/docs/app/(docs)/docs/theming/**"],
+  "$comment": "Recanica on itself. Set by `recanica kickoff` (docs/ui/KICKOFF.md). Guided overall; the published packages are locked because every project inherits them. Email HTML needs inline hex (clients ignore CSS variables); the theming guide shows raw token overrides on purpose. Foundation pages that SHOW colours or type sizes deviate from the busyness defaults because that is their content.",
+  "project": {
+    "name": "Recanica",
+    "kickoffDate": "2026-11-26",
+    "kickoff": "docs/ui/KICKOFF.md",
+    "role": "owner",
+    "flexibility": "guided",
+    "stack": "nextjs",
+    "surfaces": [
+      "docs",
+      "site",
+      "email"
+    ],
+    "locale": "en-MY",
+    "done": {
+      "reviewTarget": 85,
+      "reviewer": "the repo owner (booyen)"
+    }
+  },
+  "zones": [
+    {
+      "files": "packages/tokens/**",
+      "flexibility": "locked",
+      "reason": "Published tokens: every project inherits them, so every deviation is a recorded decision"
+    },
+    {
+      "files": "packages/ui/**",
+      "flexibility": "locked",
+      "reason": "Published React parts: every project inherits them, so every deviation is a recorded decision"
+    },
+    {
+      "files": "packages/css/**",
+      "flexibility": "locked",
+      "reason": "Published rc-* classes: every project inherits them, so every deviation is a recorded decision"
+    },
+    {
+      "files": "apps/docs/**",
+      "flexibility": "guided",
+      "reason": "Docs pages and demos show the parts in use; style deviations need a reason"
+    },
+    {
+      "files": "templates/**",
+      "flexibility": "guided",
+      "reason": "Starter templates are copied into projects; style deviations need a reason"
+    }
+  ],
+  "decisions": "docs/ui/DECISIONS.md",
+  "ignore": [
+    "templates/email/**",
+    "apps/docs/app/(docs)/docs/theming/**"
+  ],
   "allow": [
-    { "rule": "busy-surfaces", "path": "/docs/foundations/colors", "reason": "The colours page displays the palette; many backgrounds are the content" },
-    { "rule": "busy-type", "path": "/docs/foundations/typography", "reason": "The typography page displays the type scale; many sizes are the content" }
+    {
+      "rule": "busy-surfaces",
+      "path": "/docs/foundations/colors",
+      "reason": "The colours page displays the palette; many backgrounds are the content"
+    },
+    {
+      "rule": "busy-type",
+      "path": "/docs/foundations/typography",
+      "reason": "The typography page displays the type scale; many sizes are the content"
+    }
   ]
 }

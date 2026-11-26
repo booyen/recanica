@@ -28,7 +28,7 @@ export const seed: DemoState = {
     notify: { orders: true, cancellations: true, weekly: false },
   },
   products: [
-    { id: "prod_pro_m", name: "Pro", description: "Everything you need to run a small studio.", type: "recurring", price: 49, interval: "month", benefits: ["License key", "Discord role"], archived: false, createdAt: d("2026-06-02T09:00:00Z") },
+    { id: "prod_pro_m", name: "Pro", description: "For a small studio: license keys and a Discord role for every buyer.", type: "recurring", price: 49, interval: "month", benefits: ["License key", "Discord role"], archived: false, createdAt: d("2026-06-02T09:00:00Z") },
     { id: "prod_pro_y", name: "Pro Yearly", description: "Pro, billed annually. Two months free.", type: "recurring", price: 490, interval: "year", benefits: ["License key", "Discord role"], archived: false, createdAt: d("2026-06-02T09:05:00Z") },
     { id: "prod_kit", name: "Icon Kit", description: "1,200 monochrome icons in SVG and Figma.", type: "one-time", price: 99, interval: null, benefits: ["File downloads"], archived: false, createdAt: d("2026-07-14T10:00:00Z") },
     { id: "prod_ws", name: "Onboarding Workshop", description: "Two 90-minute sessions with our team.", type: "one-time", price: 1500, interval: null, benefits: [], archived: false, createdAt: d("2026-08-01T10:00:00Z") },

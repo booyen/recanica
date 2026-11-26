@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRightIcon, BlocksIcon, BookOpenIcon, BoxIcon, GlobeIcon, LayoutDashboardIcon, LayoutTemplateIcon, LayersIcon, PaletteIcon, SparklesIcon, StoreIcon, UsersIcon } from "lucide-react";
+import { ArrowUpRightIcon, BlocksIcon, BookOpenIcon, BoxIcon, GlobeIcon, LayoutDashboardIcon, LayoutTemplateIcon, LayersIcon, PaletteIcon, PlugIcon, StoreIcon, UsersIcon } from "lucide-react";
 import {
   NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle,
 } from "@recanica/ui/components/navigation-menu";
@@ -19,7 +19,7 @@ const menus: { label: string; items: Item[]; aside?: { title: string; body: stri
       { href: "/docs", title: "Introduction", body: "Principles and how the library is layered.", icon: BookOpenIcon },
       { href: "/docs/installation", title: "Installation", body: "Next.js, Vite, Tailwind v3, HTML, Flutter, SwiftUI.", icon: LayersIcon },
       { href: "/docs/foundations/colors", title: "Foundations", body: "Color, type, spacing, surfaces, navigation.", icon: PaletteIcon },
-      { href: "/docs/ai", title: "Use with AI", body: "Prompts, MCP server and llms.txt.", icon: SparklesIcon },
+      { href: "/docs/ai", title: "Use with AI", body: "Prompts, MCP server and llms.txt.", icon: PlugIcon },
     ],
   },
   {
