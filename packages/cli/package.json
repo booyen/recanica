@@ -1,6 +1,6 @@
 {
   "name": "recanica",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Add Recanica (UI framework by Aturanica Labs) to any project: npx recanica init",
   "license": "MIT",
   "author": "Aturanica Labs",

@@ -1,6 +1,6 @@
 {
   "name": "@recanica/css",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Recanica as plain CSS: framework-free components (rc-*) for HTML, WordPress, Laravel, Django, Rails, email-safe pages.",
   "license": "MIT",
   "author": "Aturanica Labs",

@@ -1,6 +1,6 @@
 {
   "name": "@recanica/tokens",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Recanica design tokens (W3C Design Tokens format) with outputs for CSS, Tailwind v3/v4, JS/TS, Flutter, SwiftUI, Jetpack Compose and Figma (Tokens Studio).",
   "license": "MIT",
   "author": "Aturanica Labs",

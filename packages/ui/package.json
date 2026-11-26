@@ -15,7 +15,7 @@
     "prepublishOnly": "pnpm build"
   },
   "peerDependencies": {
-    "@recanica/tokens": "^0.1.0",
+    "@recanica/tokens": "^0.2.0",
     "react": "^19",
     "react-dom": "^19"
   },
