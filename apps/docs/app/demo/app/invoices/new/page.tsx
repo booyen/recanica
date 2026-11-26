@@ -188,7 +188,7 @@ function NewInvoiceInner() {
                       <li key={p.id} className="flex items-center gap-3 px-4 py-2.5 text-sm">
                         <span className="flex-1">{p.label}</span>
                         <span className="text-muted-foreground tabular-nums">{dmy(p.dueAt)}</span>
-                        <span className="w-28 text-right tabular-nums">{money2(p.amount)}</span>
+                        <span className="min-w-28 text-right tabular-nums">{money2(p.amount)}</span>
                       </li>
                     ))}
                   </ol>

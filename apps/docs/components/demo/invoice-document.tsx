@@ -78,13 +78,14 @@ export function InvoiceDocument({ invoice, org, customer }: { invoice: Invoice; 
       </div>
 
       {/* Line items: table on sm+, stacked on phones */}
-      <div className="mt-10">
-        <div className="hidden grid-cols-[2rem_1fr_3rem_7rem_7rem] gap-3 border-b pb-2 text-xs text-muted-foreground @2xl:grid">
+      {/* One column template for header and rows (subgrid); number columns size to their longest value, never a fixed width. */}
+      <div className="mt-10 @2xl:grid @2xl:grid-cols-[2rem_1fr_auto_auto_auto] @2xl:gap-x-3">
+        <div className="hidden col-span-full grid-cols-subgrid border-b pb-2 text-xs text-muted-foreground @2xl:grid">
           <span>No.</span><span>Description</span><span className="text-right">Qty</span><span className="text-right">Unit (RM)</span><span className="text-right">Amount (RM)</span>
         </div>
-        <ul className="divide-y">
+        <ul className="divide-y @2xl:col-span-full @2xl:grid @2xl:grid-cols-subgrid">
           {invoice.items.map((i, k) => (
-            <li key={k} className="grid grid-cols-[1fr_auto] gap-x-3 gap-y-1 py-3 text-sm @2xl:grid-cols-[2rem_1fr_3rem_7rem_7rem] @2xl:items-baseline">
+            <li key={k} className="grid grid-cols-[1fr_auto] gap-x-3 gap-y-1 py-3 text-sm @2xl:col-span-full @2xl:grid-cols-subgrid @2xl:items-baseline">
               <span className="hidden text-muted-foreground @2xl:block">{k + 1}</span>
               <span className="min-w-0 [overflow-wrap:anywhere]">{i.description}<span className="block text-xs text-muted-foreground @2xl:hidden">{i.qty} × {money2(i.unit)}</span></span>
               <span className="hidden text-right tabular-nums @2xl:block">{i.qty}</span>
@@ -112,7 +113,7 @@ export function InvoiceDocument({ invoice, org, customer }: { invoice: Invoice; 
               <li key={p.id} className="flex flex-wrap items-center gap-x-3 gap-y-1 px-4 py-2.5 text-sm">
                 <span className="flex-1">{p.label}</span>
                 <span className="text-muted-foreground tabular-nums">due {dmy(p.dueAt)}</span>
-                <span className="w-28 text-right tabular-nums">{money2(p.amount)}</span>
+                <span className="min-w-28 text-right tabular-nums">{money2(p.amount)}</span>
                 {p.paidAt ? <Badge variant="success"><CheckIcon /> Paid {dmy(p.paidAt)}</Badge> : <Badge variant="outline">Unpaid</Badge>}
               </li>
             ))}

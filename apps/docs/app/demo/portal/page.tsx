@@ -49,7 +49,7 @@ export default function PortalPage() {
                 <ListRow as="li" className="text-sm" key={i.id}>
                   <div className="flex-1"><p className="font-mono text-xs">{i.number}</p><p className="text-muted-foreground">Issued {dmy(i.issuedAt)}</p></div>
                   <InvoiceBadge status={i.status} overdue={isOverdue(i)} />
-                  <span className="w-28 text-right tabular-nums">{money2(invoiceGrand(i))}</span>
+                  <span className="min-w-28 text-right tabular-nums">{money2(invoiceGrand(i))}</span>
                   <Button variant="ghost" size="icon-sm" aria-label="Download PDF" onClick={() => toast("PDF download is simulated")}><DownloadIcon /></Button>
                   {invoiceBalance(i) > 0 && <Button size="sm" variant="outline" asChild><Link href={`/demo/pay/${i.id}`}>Pay</Link></Button>}
                 </ListRow>
