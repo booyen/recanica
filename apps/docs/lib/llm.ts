@@ -71,7 +71,7 @@ export function prompts(): LlmPrompt[] {
       title: "Apply Recanica to this project",
       when: "Paste into Claude Code, Cursor, Codex or any coding agent at the root of an existing project. It restyles the app to Recanica.",
       body: `You are restyling this project to the Recanica design system (UI framework by Aturanica Labs).
-Everything you need is in this message; do not invent extra brand rules.
+The rules, tokens and setup are all in this message; do not invent extra brand rules.
 
 ## Your task
 1. Inspect the project first: framework, styling approach (Tailwind v3/v4, CSS modules, styled-components, plain CSS…), component library, where global styles and the root layout live. Summarize what you found in 3–5 bullets before changing anything.

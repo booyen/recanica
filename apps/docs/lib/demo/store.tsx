@@ -217,7 +217,7 @@ export function DemoProvider({ children }: { children: React.ReactNode }) {
   if (!ready) {
     return (
       <div className="flex min-h-svh items-center justify-center bg-sidebar">
-        <span className="size-8 animate-pulse rounded-xl bg-brand text-brand-foreground" />
+        <span className="size-8 rounded-xl bg-brand text-brand-foreground" />
       </div>
     );
   }

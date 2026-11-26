@@ -25,6 +25,7 @@ export const gettingStarted: NavLink[] = [
   { title: "Design language", href: "/docs/design-language" },
   { title: "Page anatomy", href: "/docs/page-anatomy" },
   { title: "Installation", href: "/docs/installation" },
+  { title: "Start a project", href: "/docs/start" },
   { title: "Theming", href: "/docs/theming" },
   { title: "Use with AI", href: "/docs/ai" },
 ];
