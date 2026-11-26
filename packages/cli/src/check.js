@@ -15,7 +15,8 @@
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
 import { COPY_RULES } from "./copy-rules.js";
-import { globToRe, loadConfig } from "./config.js";
+import { globToRe, inScope, levelFor, loadConfig } from "./config.js";
+import { guardRules } from "./decisions.js";
 
 const SKIP_DIRS = new Set(["node_modules", ".next", ".nuxt", ".svelte-kit", ".turbo", ".git", "dist", "build", "out", "coverage", "generated", "__registry__", "vendor", "Pods", ".dart_tool"]);
 const EXT = /\.(tsx|jsx|ts|js|mjs|vue|svelte|astro|html|php|erb|css|scss|dart|swift|kt)$/;
@@ -52,12 +53,30 @@ export const RULES = [
     "Arbitrary pixel spacing", "use the 4px scale (p-4, gap-6) or layout tokens (p-panel, px-gutter)"],
   ["structure", "warn", /<h[123]\b[^>]*className="[^"]*\btext-(?:display-(?:sm|md|lg)|title|heading)\b/,
     "Hand-made page structure", "use the shared parts: PageHeader / Heading / Section (apps), WebSectionTitle / WebHeroTitle / WebSection (sites), so rhythm and titles come from one place"],
-  ["hand-built", "warn", /<(?:button|input|select|textarea|table)\b(?![^>]*recanica-ignore)/,
+  // An element carrying an rc-* class IS the part in stacks without React (HTML, Vue, Svelte, Astro, Angular).
+  ["hand-built", "warn", /<(?:button|input|select|textarea|table)\b(?![^>]*recanica-ignore)(?![^>]*\bclass(?:Name)?=["'{`][^"'}`]*\brc-[a-z])/,
     "Hand-built element", "use the component: Button / Toggle / Item, Input, NativeSelect / Select, Textarea, Table / ReferenceTable"],
   ["hand-built", "warn", /className="[^"]*\brounded-(?:xl|2xl) border\b[^"]*\bp-(?:\d|panel|inset)/,
     "Hand-made card", "use Surface (tone, inset) or Card"],
   ["uppercase-label", "warn", /\buppercase\b(?=[^"'`]*tracking-(?:wide|wider|widest))/,
     "Shouty uppercase label", "use sentence case; small muted text carries the hierarchy"],
+  // Design slop: the visual defaults generated UI falls back to. Reported (should) by default; must under "locked".
+  ["design-slop", "warn", /\bbackdrop-blur\S*[^"'`]*\bbg-[\w-]+\/(?:5|[1-4]0)\b|\bbg-[\w-]+\/(?:5|[1-4]0)\b[^"'`]*\bbackdrop-blur/,
+    "Glass card", "depth comes from stacked surfaces and hairline borders: bg-card / bg-panel with border"],
+  ["design-slop", "warn", /\bshadow-\[0_0_\d{2,}px|box-shadow\s*:\s*0(?:px)? 0(?:px)? \d{2,}px|drop-shadow-\[0_0_/,
+    "Glow", "no glows: shadows only on floating layers (menus, dialogs, toasts)"],
+  ["design-slop", "warn", /\babsolute\b[^"'`]*\bblur-(?:2xl|3xl|\[\d{2,}px\])|\bblur-(?:2xl|3xl|\[\d{2,}px\])[^"'`]*\babsolute\b/,
+    "Decorative blur blob", "remove it: calm comes from space and type; if the page needs a brand moment, use the one brand colour once"],
+  ["design-slop", "warn", /\bbg-clip-text\b|background-clip\s*:\s*text/,
+    "Gradient or clipped text", "headlines are plain foreground; emphasis comes from size and weight 300/400"],
+  ["design-slop", "warn", /(?![©®™])\p{Extended_Pictographic}/u,
+    "Emoji as decoration or icon", "use a lucide icon (16px, currentColor), or no icon"],
+  ["design-slop", "warn", /\bSparkles(?:Icon)?\b/,
+    "The AI sparkle", "name what the feature does; pick an icon for that action"],
+  ["design-slop", "warn", /\banimate-(?:bounce|ping|pulse|spin)\b(?![^"'`]*(?:skeleton|loader|spinner))/,
+    "Decorative motion", "motion explains a change (150–300ms); looping animation is only for loading states (Skeleton, Spinner, Loader)"],
+  ["design-slop", "warn", /\bshadow-(?:xl|2xl)\b/,
+    "Heavy shadow on a surface", "shadows are for floating layers only; surfaces get a hairline border"],
   // Copy rules come from copy-rules.js (shared with the repo copy lint and the page audit).
   ...COPY_RULES.map(([re, msg, level]) => ["copy", level, re, msg, "say what actually happens, with a number or a real noun"]),
 ];
@@ -81,22 +100,36 @@ export function check(root, paths, { all = false } = {}) {
   (paths.length ? paths : ["."]).forEach((p) => walk(join(root, p)));
 
   const hits = [];
+  // Decision-log globs are relative to the config's folder; so are file paths here when run from the project root.
+  const guards = guardRules(cfg);
   for (const abs of files) {
     const rel = relative(root, abs);
     const lines = readFileSync(abs, "utf8").split("\n");
     lines.forEach((line, i) => {
       if (line.includes("recanica-ignore") || /^\s*import\b/.test(line)) return;
       for (const [id, defLevel, re, msg, fix] of RULES) {
-        const set = cfg.rules[id];
+        const set = levelFor(cfg, id, rel);
         const level = set === "must" ? "error" : set === "should" ? "warn" : set ?? defLevel;
         if (level === "off") continue;
-        if (id === "copy" && isComment(line)) continue;
+        if ((id === "copy" || id === "design-slop") && isComment(line)) continue;
+        if (id === "design-slop" && /\.(css|scss)$/.test(abs) && /Pictographic|Sparkles/.test(re.source)) continue;
+        // The component library is where floating layers and loading states live; the rules are for pages that use it.
+        if (id === "design-slop" && /shadow-\(\?:xl|animate-/.test(re.source) && (COMPONENT_SOURCE.test(abs) || /tooltip|popover|dropdown|menu|dialog|toast|sheet|z-50/i.test(line))) continue;
         if (id === "hand-built" && (COMPONENT_SOURCE.test(abs) || abs.endsWith(".html"))) continue; // plain HTML uses the rc-* CSS package
         if (id === "hard-coded-color" && (isComment(line) || /\bmeta\b.*theme-color|<svg|xmlns/.test(line))) continue;
         const m = line.match(re);
         // "#1042" style ticket/issue numbers are not colours.
         if (m && id === "hard-coded-color" && /^#\d{1,4}$/.test(m[0])) continue;
         if (m) hits.push({ file: rel, line: i + 1, col: (m.index ?? 0) + 1, rule: id, level, message: msg, match: m[0].trim(), fix });
+      }
+      // Project rules from the decision log: each active entry with a pattern guard (traps fail, decisions report).
+      for (const g of guards) {
+        if (!g.files.test(rel)) continue;
+        const set = cfg.explicitRules[g.id];
+        const level = set === "off" ? "off" : set === "must" ? "error" : set === "should" ? "warn" : g.level;
+        if (level === "off") continue;
+        const m = line.match(g.re);
+        if (m) hits.push({ file: rel, line: i + 1, col: (m.index ?? 0) + 1, rule: g.id, level, message: g.message, match: m[0].trim(), fix: g.fix });
       }
     });
   }
@@ -137,17 +170,34 @@ export function check(root, paths, { all = false } = {}) {
     if (a) { accepted.push({ ...h, reason: a.reason }); return false; }
     return true;
   });
-  return { files: files.length, hits: kept, accepted };
+  // Guest projects: outside the UI scope, findings are advice for the humans who own that code. They never fail the build.
+  const advisory = [];
+  const owned = kept.filter((h) => {
+    if (h.file === "recanica.config.json" || inScope(cfg, h.file)) return true;
+    advisory.push({ ...h, level: "advisory" });
+    return false;
+  });
+  // The start-of-project questionnaire is part of the system: a project set up with `init` but never kicked off is flagged.
+  if (cfg.exists && !cfg.project && !(cfg.explicitRules.kickoff === "off"))
+    owned.push({ file: "recanica.config.json", line: 1, col: 1, rule: "kickoff", level: cfg.explicitRules.kickoff === "must" ? "error" : "warn",
+      message: "No kickoff recorded", match: "project", fix: "run `npx recanica kickoff` (or the recanica-kickoff skill) so role, flexibility, scope and stack are decided before pages" });
+  return { files: files.length, hits: owned, accepted, advisory };
 }
 
 export function runCheck(root, args, flags, log) {
-  const { files, hits, accepted = [] } = check(root, args, { all: !!flags.all || !!flags.warn });
+  const { files, hits, accepted = [], advisory = [] } = check(root, args, { all: !!flags.all || !!flags.warn });
   const errors = hits.filter((h) => h.level === "error");
   if (flags.json) {
-    process.stdout.write(JSON.stringify({ files, errors: errors.length, warnings: hits.length - errors.length, accepted: accepted.length, hits, acceptedHits: accepted }, null, 2) + "\n");
+    process.stdout.write(JSON.stringify({ files, errors: errors.length, warnings: hits.length - errors.length, accepted: accepted.length, advisory: advisory.length, hits, acceptedHits: accepted, advisoryHits: advisory }, null, 2) + "\n");
   } else {
     for (const h of hits) log(`${h.level === "error" ? "✗" : "!"} ${h.file}:${h.line}:${h.col}  ${h.message}: “${h.match}”\n    → ${h.fix}  [${h.rule}]`);
-    log(`\nrecanica check: ${files} files · ${errors.length} must-fix · ${hits.length - errors.length} should (deviate with a recanica-ignore reason)${accepted.length ? ` · ${accepted.length} accepted (recanica.config.json "allow")` : ""}`);
+    if (advisory.length) {
+      const byFile = new Map();
+      for (const h of advisory) byFile.set(h.file, (byFile.get(h.file) ?? 0) + 1);
+      log(`\nOutside the UI scope (advice, not yours to change; raise the useful ones in docs/ui/PROPOSALS.md):`);
+      for (const [f, n] of [...byFile].sort((a, b) => b[1] - a[1]).slice(0, flags.all ? 999 : 10)) log(`  · ${f}  ${n} finding${n > 1 ? "s" : ""}`);
+    }
+    log(`\nrecanica check: ${files} files · ${errors.length} must-fix · ${hits.length - errors.length} should (deviate with a recanica-ignore reason)${accepted.length ? ` · ${accepted.length} accepted (recanica.config.json "allow")` : ""}${advisory.length ? ` · ${advisory.length} advisory (outside scope)` : ""}`);
     if (errors.length) log("Fix with tokens, or add `recanica-ignore` with a reason on the line. Rules: npx recanica rules");
   }
   return errors.length && !flags.warn ? 1 : 0;

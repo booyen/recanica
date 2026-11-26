@@ -2,7 +2,10 @@
 /**
  * recanica — add Recanica to any project.
  *
- *   npx recanica init [--stack <s>] [--yes] [--dry-run] [--skip-install] [--pm npm|pnpm|yarn|bun]
+ *   npx recanica init [--stack <s>] [--role owner|guest] [--owns "src/ui/**,…"] [--yes] [--dry-run] [--skip-install] [--pm npm|pnpm|yarn|bun]
+ *   npx recanica kickoff [--questions [--json]] [--answers a.json] [--yes]
+ *   npx recanica decisions [brief|lint|list|new] [--trap] [--title "…"]
+ *   npx recanica slop [paths…] | --text "…" | -
  *   npx recanica add <pattern-or-block>
  *   npx recanica tokens <format> [--out <file>]
  *   npx recanica check [paths…] [--all] [--json] [--warn]
@@ -19,6 +22,12 @@ import { createInterface } from "node:readline/promises";
 import { runCheck } from "./check.js";
 import { runAudit } from "./audit.js";
 import { runReview } from "./review.js";
+import { RULES as CHECK_RULES } from "./check.js";
+import { RULE_LEVELS } from "./audit-browser.js";
+import { loadConfig } from "./config.js";
+import { appendEntries, briefDecisions, lintDecisions, loadDecisions } from "./decisions.js";
+import { runKickoff } from "./kickoff.js";
+import { runSlop } from "./slop.js";
 
 const require = createRequire(import.meta.url);
 // The rules/tokens data ships with @recanica/mcp. Run from a clone of this repo (e.g. a git
@@ -74,7 +83,13 @@ function detectStack() {
     const tw = deps.tailwindcss ? parseInt(String(deps.tailwindcss).replace(/[^\d]/, "")) : 0;
     if (tw && tw < 4) return "tailwind-v3";
     if (deps.next) return "nextjs";
-    if (deps.vite || deps.react) return "vite-react";
+    // React on anything else (Vite, React Router, Remix, Gatsby, Expo web): the React components work on React 19 + Tailwind v4.
+    if (deps.react) return "vite-react";
+    // Non-React web frameworks: the framework-free rc-* parts are the contract (docs/STACKS.md).
+    if (deps.astro) return "astro";
+    if (deps.vue || deps.nuxt) return "vue";
+    if (deps.svelte || deps["@sveltejs/kit"]) return "svelte";
+    if (deps["@angular/core"]) return "angular";
     return "html";
   }
   return "html";
@@ -115,51 +130,61 @@ const USAGE = {
   "vite-react": 'Import components from "@recanica/ui/components/<name>". Style with Tailwind classes on Recanica tokens.',
   "tailwind-v3": "Use the Recanica Tailwind preset classes (bg-panel, text-muted-foreground, rounded-2xl, p-panel, text-title…). No hard-coded colors.",
   html: "Use the rc-* classes from @recanica/css (rc-btn, rc-card, rc-stats, rc-table, rc-input…). No inline colors.",
+  vue: "Use the rc-* classes from @recanica/css in your templates (rc-btn, rc-surface, rc-section…). Wrap a part in a .vue component only to add behaviour; never restyle it.",
+  svelte: "Use the rc-* classes from @recanica/css in your components (rc-btn, rc-surface, rc-section…). Wrap a part in a .svelte component only to add behaviour; never restyle it.",
+  astro: "Use the rc-* classes from @recanica/css in .astro components (rc-btn, rc-surface, rc-section…). React islands may use @recanica/ui.",
+  angular: "Use the rc-* classes from @recanica/css in templates (rc-btn, rc-surface, rc-section…). Wrap a part in a component only to add behaviour; never restyle it.",
   flutter: "Use recanicaTheme() plus RecanicaColors / RecanicaSpacing / RecanicaRadius / RecanicaText from lib/theme/recanica_tokens.dart.",
   swiftui: "Use Recanica.Colors / Spacing / Radius / Typography from RecanicaTokens.swift.",
   compose: "Use recanicaColorScheme() and RecanicaRadius / RecanicaSpacing / RecanicaTextSize from RecanicaTokens.kt.",
 };
-function agentsMd(stack) {
+const REACT_STACKS = new Set(["nextjs", "vite-react"]);
+const NATIVE_STACKS = new Set(["flutter", "swiftui", "compose"]);
+function partsLine(stack) {
+  // Name the parts the way this stack writes them: React components, or their rc-* twins everywhere else.
+  const want = ["Page", "PageHeader", "Section", "Heading", "Stack", "Surface", "SurfaceGrid", "ReferenceTable", "WebSection", "WebSectionTitle", "WebHeroTitle"];
+  const parts = (data.parts ?? []).filter((p) => want.includes(p.react));
+  if (REACT_STACKS.has(stack)) return parts.map((p) => `\`${p.react}\``).join(", ") + " from `@recanica/ui`";
+  return parts.map((p) => `\`${p.css}\``).join(", ") + " from `@recanica/css`";
+}
+function agentsMd(stack, role = "owner") {
   // Short on purpose: this file is read on every request. Full rules load on demand (npx recanica rules / MCP get_rules);
   // the build enforces the rest (npx recanica check), so nothing here relies on being remembered.
+  const react = REACT_STACKS.has(stack);
+  const guest = role === "guest" ? `
+**You are a guest in this codebase.** The UI work owns only the paths in \`recanica.config.json\` → \`scope.owns\`.
+- Don't change build config, routing, data fetching, state, APIs, dependencies, CI or other teams' tests. Ask first.
+- Follow the project's own conventions (naming, imports, formatting, test style) over Recanica's.
+- Saw a UI/UX problem outside your scope? Add it to \`docs/ui/PROPOSALS.md\` (where, what you saw, suggestion, evidence, effort). Don't fix it. At most three per task, raised at the end.
+` : "";
   return `<!-- recanica:start -->
 # UI: Recanica
 
 This project uses **Recanica** (UI framework by Aturanica Labs, stack: ${stack}). ${USAGE[stack]}
-
+${guest}
 **Build from the parts, never by hand:**
-- **Page structure** from \`@recanica/ui\`:
-  - apps: \`Page\`, \`PageHeader\`, \`Section\`, \`Heading\`, \`Stack\`
-  - surfaces and tables: \`Surface\`, \`SurfaceGrid\`, \`ReferenceTable\`
-  - sites: \`WebSection\`, \`WebSectionTitle\`, \`WebHeroTitle\`
-  - without React, use the \`rc-*\` twins: \`rc-flow\`, \`rc-surface\`, \`rc-section\`, etc.
-- **Controls:** \`Button\`, \`NavItem\`, \`ChoiceCard\`, \`Input\`, \`NativeSelect\`, \`Table\`. No raw \`<button>\`, \`<input>\` or \`<select>\`, and no hand-made cards.
-- **Missing part:** if none fits, extend or add the part first. Never patch a part on one page.
-- **Spacing and width:** owned by the container (\`Page\`/\`.flow\`, \`gap-*\`). Blocks carry no margins. Use rhythm tokens by role: group · flow · stack · section · inset.
+${NATIVE_STACKS.has(stack) ? "- Every colour, radius, spacing and text size comes from the generated Recanica tokens. No literal values in widgets." : `- **Page structure:** ${partsLine(stack)}.
+- **Controls:** ${react ? "`Button`, `NavItem`, `ChoiceCard`, `Input`, `NativeSelect`, `Table`" : "`rc-btn`, `rc-nav-item`, `rc-choice`, `rc-input`, `rc-table`"}. No hand-styled buttons, inputs, selects or cards.`}
+- **Missing part:** extend or add the part first (both React and rc-* forms). Never patch a part on one page.
+- **Spacing and width:** owned by the container. Blocks carry no margins. Rhythm tokens by role: group · flow · stack · section · inset.
 
-**Calm:**
-- neutral base, one brand colour (\`--brand\`), status colours only for status, no gradients
-- light/regular type, no bold
-- one primary action per view
-- no eyebrows unless they add information
-- no AI jargon
+**Calm:** neutral base, one brand colour (\`--brand\`), status colours only for status, no gradients, glass, glows or emoji icons · light/regular type, no bold · one primary action per view · no eyebrows unless they add information · no AI jargon.
 
 **Workflow:**
-- New project: run the recanica-kickoff skill.
-- Every page: pick its type in the page anatomy (MCP \`get_page_anatomy\`), fill the listed regions with the listed parts, and use the recanica-page skill (brief → build → look at 375/1280px).
+- New project: \`npx recanica kickoff\` (or the recanica-kickoff skill) asks the human the start-of-project questions. Don't build pages before it's done.
+- Before UI work: \`npx recanica decisions brief\`. Follow the decisions in force; change one only by adding an entry that supersedes it.
+- Every page: pick its type in the page anatomy (MCP \`get_page_anatomy\`) and use the recanica-page skill (brief → build → look at 375/1280px).
+- Made a UI/UX decision? \`npx recanica decisions new --title "…"\`. Caught a mistake? \`npx recanica decisions new --trap\`, with a guard so it can't come back.
 
-**Checks (they run in CI; run them before you finish):**
-- \`npx recanica check\`: code
-- \`npx recanica audit <url>\`: rendered pages
-- \`npx recanica review <url>\`: score
+**Checks (they run in CI; run them before you finish):** \`npx recanica check\` (code) · \`npx recanica slop\` (copy and design defaults; also \`--text "…"\` for your own words) · \`npx recanica audit <url>\` (rendered pages) · \`npx recanica review <url>\` (score).
 
-Full rules: \`npx recanica rules\`, or MCP \`get_rules\` (\`claude mcp add recanica -- npx -y @recanica/mcp\`).
+Full rules: \`npx recanica rules\`, or MCP \`get_rules\`.
 <!-- recanica:end -->
 `;
 }
-function writeAgents(stack) {
+function writeAgents(stack, role = "owner") {
   const p = join(cwd, "AGENTS.md");
-  const block = agentsMd(stack);
+  const block = agentsMd(stack, role);
   if (existsSync(p)) {
     const cur = readFileSync(p, "utf8");
     const next = /<!-- recanica:start -->[\s\S]*<!-- recanica:end -->\n?/.test(cur)
@@ -170,9 +195,11 @@ function writeAgents(stack) {
   } else write("AGENTS.md", block);
   write("CLAUDE.md", "@AGENTS.md\n", { onlyIfMissing: true });
   // Enforcement that costs no tokens: config (structure + hand-built as must), a CI check and a script.
+  const owns = typeof flags.owns === "string" ? flags.owns.split(",").map((x) => x.trim()).filter(Boolean) : null;
   write("recanica.config.json", JSON.stringify({
-    $comment: "How strict Recanica is in this project. must = fails the build; should = reported. Loosen a rule only with a reason; record accepted deviations in allow.",
+    $comment: "How strict Recanica is in this project. must = fails the build; should = reported. Loosen a rule only with a reason; record accepted deviations in allow. Run `recanica kickoff` to set role, flexibility, scope and stack.",
     rules: { "hand-built": "must", structure: "must" },
+    ...(role === "guest" ? { scope: { owns: owns ?? ["src/components/**", "src/styles/**"] } } : {}),
     thresholds: {},
     allow: [],
   }, null, 2) + "\n", { onlyIfMissing: true });
@@ -186,6 +213,8 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 22 }
       - run: npx -y recanica check
+      - run: npx -y recanica slop
+      - run: npx -y recanica decisions lint
 `, { onlyIfMissing: true });
   const pkgPath = join(cwd, "package.json");
   const pkg = readJson(pkgPath);
@@ -226,6 +255,11 @@ const STACKS = {
     }
     return ['Add to tailwind.config: presets: [require("@recanica/tokens/tailwind-preset")]'];
   },
+  // Non-React web frameworks: the rc-* classes are the contract; the framework only adds behaviour.
+  async vue(pm) { return webCss(pm, ["src/assets/main.css", "src/style.css", "assets/css/main.css", "src/styles.css"], "In main.ts: import \"./assets/main.css\" (Nuxt: add it to css in nuxt.config)."); },
+  async svelte(pm) { return webCss(pm, ["src/app.css", "src/styles.css"], "Import src/app.css in your root +layout.svelte."); },
+  async astro(pm) { return webCss(pm, ["src/styles/global.css", "src/styles.css"], "Import src/styles/global.css in your base layout."); },
+  async angular(pm) { return webCss(pm, ["src/styles.css", "src/styles.scss"], "src/styles.css is already global in angular.json."); },
   async html() {
     write("recanica/recanica.css", data.tokens["plain-css"] ?? "");
     return ['Link it: <link rel="stylesheet" href="/recanica/recanica.css" />', 'Add class="dark" to <html> and load your font and set --font-sans (default Geist from Google Fonts).'];
@@ -244,6 +278,17 @@ const STACKS = {
   },
 };
 
+async function webCss(pm, candidates, hint) {
+  install(pm, ["@recanica/css", "@recanica/tokens"]);
+  const css = findFirst(candidates);
+  const line = '@import "@recanica/css";';
+  if (css) {
+    const p = join(cwd, css), cur = readFileSync(p, "utf8");
+    if (!cur.includes(line)) { changes.push(`update ${css}`); if (!dry) writeFileSync(p, line + "\n" + cur); }
+  } else write(candidates[0], line + "\n");
+  return [hint, 'Add class="dark" to <html>, load your font and set --font-sans (default Geist).', "Interactive parts (dialog, menu, tabs) use native HTML first (<dialog>, <details>, popover); see docs/STACKS.md."];
+}
+
 /* ---------- commands ---------- */
 async function init() {
   const stack = detectStack();
@@ -261,14 +306,61 @@ async function init() {
     if (a === "n" || a === "no") { log("Cancelled."); return; }
   }
   log("");
+  const role = flags.role === "guest" ? "guest" : "owner";
   const next = await STACKS[stack](pm);
-  writeAgents(stack);
+  writeAgents(stack, role);
   log(c.bold("\nChanges"));
   for (const ch of changes) log(`  ${c.ok("•")} ${ch}`);
   log(c.bold("\nNext steps"));
   for (const n of next) log(`  → ${n}`);
   log(`  → AI tools: ${c.dim("claude mcp add recanica -- npx -y @recanica/mcp")}`);
-  log(`  → Guide: ${data.site}/docs/installation\n`);
+  log(`  → Guide: ${data.site}/docs/installation`);
+  log(`  → ${c.bold("Kickoff:")} npx recanica kickoff ${c.dim("(the start-of-project questionnaire: role, flexibility, scope, stack, done)")}\n`);
+  if (!flags.yes && !dry && process.stdin.isTTY) {
+    const rl = createInterface({ input: process.stdin, output: process.stdout });
+    const a = (await rl.question("Run the kickoff questionnaire now? (Y/n) ")).trim().toLowerCase();
+    rl.close();
+    if (a !== "n" && a !== "no") await runKickoff(cwd, { ...flags, yes: false }, log, { detectStack: () => stack });
+  }
+}
+
+function decisions() {
+  const cfg = loadConfig(cwd);
+  const sub = flags._[0] ?? "brief";
+  if (sub === "brief") { log(briefDecisions(cfg)); return 0; }
+  if (sub === "list") {
+    const { entries } = loadDecisions(cfg);
+    if (flags.json) { process.stdout.write(JSON.stringify(entries, null, 2) + "\n"); return 0; }
+    for (const e of entries) log(`${e.id.padEnd(6)} ${(e.fields.status ?? "").padEnd(20)} ${e.title}`);
+    return 0;
+  }
+  if (sub === "lint") {
+    const known = new Set([...CHECK_RULES.map((r) => r[0]), "repeated-classes", "kickoff", ...RULE_LEVELS.must, ...RULE_LEVELS.should]);
+    const problems = lintDecisions(cfg, known);
+    if (flags.json) process.stdout.write(JSON.stringify(problems, null, 2) + "\n");
+    else {
+      for (const p of problems) log(`${p.level === "error" ? "✗" : "!"} ${p.id}  ${p.message}`);
+      const n = loadDecisions(cfg).entries.length;
+      log(`\ndecisions lint: ${n} entries · ${problems.filter((p) => p.level === "error").length} must-fix · ${problems.filter((p) => p.level !== "error").length} should`);
+    }
+    return problems.some((p) => p.level === "error") ? 1 : 0;
+  }
+  if (sub === "new") {
+    const kind = flags.trap ? "trap" : "decision";
+    const title = typeof flags.title === "string" ? flags.title : kind === "trap" ? "Name the class of mistake" : "Name the decision";
+    const [id] = appendEntries(cfg, [{ kind, title, date: new Date().toISOString().slice(0, 10), status: kind === "trap" ? "active" : "proposed",
+      decision: typeof flags.decision === "string" ? flags.decision : "", why: typeof flags.why === "string" ? flags.why : "",
+      guard: typeof flags.guard === "string" ? flags.guard : kind === "trap" ? "rule:<id> or pattern:/…/ in <glob>" : "review" }], !dry);
+    log(`${dry ? "Would add" : "Added"} ${id} to ${cfg.decisions}. Fill in every field, then run \`npx recanica decisions lint\`.`);
+    return 0;
+  }
+  log(`recanica decisions [brief|list|lint|new]
+  brief                      the decisions and traps in force, for the start of a task
+  list [--json]              every entry with its status
+  lint                       fields, statuses, supersedes, guards, vague reasons, slop (CI)
+  new [--trap] --title "…"   append an entry with the next id ([--decision] [--why] [--guard])
+Format and guard syntax: packages/cli/src/decisions.js (top comment) or docs/GOVERNANCE.md.`);
+  return 0;
 }
 
 function add() {
@@ -296,7 +388,7 @@ function tokens() {
 const help = `recanica v${VERSION} · UI framework by Aturanica Labs
 
 Usage
-  npx recanica init [--stack <s>] [--yes] [--dry-run] [--skip-install] [--pm <pm>]
+  npx recanica init [--stack <s>] [--role guest --owns "src/ui/**"] [--yes] [--dry-run] [--skip-install] [--pm <pm>]
       stacks: ${Object.keys(STACKS).join(", ")} (auto-detected)
   npx recanica add <pattern-or-block>      copy a pattern/block into your app (shadcn registry)
   npx recanica tokens <format> [--out f]   ${Object.keys(data.tokens).join(" | ")}
@@ -305,6 +397,9 @@ Usage
                                            rework plan (recanica-review.md): fixes, patterns, keep/change/remove
   npx recanica audit <url> [--crawl]       audit a running site at 375/900/1280px: overflow, overlap, wrapped labels,
                                            table edges, tap targets, labels, dead links (needs playwright)
+  npx recanica kickoff                     the start-of-project questionnaire (--questions for agents, --answers a.json)
+  npx recanica decisions [brief|lint|new]  the UI/UX decision log: what's in force, is it sound, add an entry
+  npx recanica slop [paths] | --text "…"   AI-slop check for copy and design defaults, with a score
   npx recanica rules                       print the design rules (for any LLM)
   npx recanica mcp                         print MCP setup for AI tools
 `;
@@ -316,6 +411,9 @@ switch (cmd) {
   case "check": process.exitCode = runCheck(cwd, flags._, flags, log); break;
   case "audit": process.exitCode = await runAudit(flags._, flags, log); break;
   case "review": process.exitCode = await runReview(flags._, flags, log, data); break;
+  case "kickoff": process.exitCode = await runKickoff(cwd, flags, log, { detectStack }); break;
+  case "decisions": process.exitCode = decisions(); break;
+  case "slop": process.exitCode = runSlop(cwd, flags._, flags, log); break;
   case "rules": process.stdout.write(data.rules + "\n"); break;
   case "mcp": log('Claude Code:  claude mcp add recanica -- npx -y @recanica/mcp\nOthers:       { "mcpServers": { "recanica": { "command": "npx", "args": ["-y", "@recanica/mcp"] } } }'); break;
   case "-v": case "--version": log(VERSION); break;

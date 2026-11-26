@@ -1,5 +1,6 @@
 {
   "$comment": "Recanica's own exceptions. Email HTML needs inline hex (clients ignore CSS variables); the theming guide shows raw token overrides on purpose. Foundation pages that SHOW colours or type sizes deviate from the busyness defaults because that is their content.",
+  "project": { "name": "Recanica (the design system itself)", "role": "owner", "flexibility": "guided", "stack": "monorepo: nextjs docs + packages", "surfaces": ["docs", "app", "site", "email"], "kickoff": "n/a: this repo is the system; projects run `recanica kickoff`" },
   "ignore": ["templates/email/**", "apps/docs/app/(docs)/docs/theming/**"],
   "allow": [
     { "rule": "busy-surfaces", "path": "/docs/foundations/colors", "reason": "The colours page displays the palette; many backgrounds are the content" },

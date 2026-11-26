@@ -93,6 +93,42 @@ Shadows only on floating layers: popovers, menus, dialogs, toasts.
 - Errors say what went wrong and what to do next. Empty states say what will appear and give one action.
 - Locale is the project's: format money, dates and numbers with the project's locale (Intl.NumberFormat / DateTimeFormat), and use names and places your users recognise. Recanica's demos use Malaysian defaults (RM, DD/MM/YYYY, SST, FPX/DuitNow) as an example, not a rule.
 
+## No generated-UI defaults (design slop)
+Generated UI falls back to the same look everywhere. None of it is Recanica, and `recanica check` / `recanica slop` flag it:
+- glass cards (backdrop blur on a see-through background), glows, decorative blur blobs behind heroes
+- gradient or clipped text, emoji used as icons or bullets, the sparkle icon for anything "AI"
+- looping animation outside loading states (pulse, bounce, ping), heavy shadows on surfaces
+- three identical feature cards because the layout had three slots; filling every optional slot (eyebrows, badges, icons)
+
+Copy has its own list: AI jargon, hype, chat-assistant phrasing left in the UI, and link text that doesn't say where it goes. Check your own words before you
+write them: `npx recanica slop --text "…"` or MCP `check_copy`. The checker finds generic phrasing; whether copy is specific to
+the reader is still your job.
+
+## Project setup: kickoff, flexibility and scope
+- **Every new project starts with the kickoff questionnaire** (`npx recanica kickoff`, MCP `get_kickoff_questions`), asked of a
+  person, before any page. It records the role, the UI scope, the stack, how strict the system is and what "done" means.
+- **Flexibility:** `locked` (product UI at scale: every deviation is a recorded decision), `guided` (default: reuse and
+  structure enforced, style deviations allowed with a reason) or `open` (art-directed work: composition free). Tokens are
+  fixed in every mode. An `open` zone can loosen one area (a campaign folder) while the rest stays strict.
+- **Stack:** a decision, not a default. If it isn't chosen yet, build CSS-first with `rc-*` parts (docs/STACKS.md).
+
+## Working inside a bigger build (guest projects)
+Often the UI is one part of someone else's product. Then Recanica is a guest:
+- Change only the paths in `recanica.config.json` → `scope.owns`. Checks block the build there and only advise elsewhere.
+- Don't touch build config, routing, data, state, APIs, dependencies, CI or other teams' tests without asking.
+- Fit the project's conventions (naming, imports, formatting, tests) over Recanica's.
+- Suggest, don't impose: UI/UX problems you notice outside your scope go in `docs/ui/PROPOSALS.md` with where, what you saw,
+  the suggestion, evidence and effort. At most three per task, raised at the end of it.
+
+## Decisions and traps (the decision log)
+`docs/ui/DECISIONS.md` holds the UI/UX decisions in force (`D-`) and the mistakes already caught (`T-`).
+- Before UI work, read it: `npx recanica decisions brief`. Follow what's in force.
+- Decided something a later page could get wrong? Add a `D-` entry: decision, why (the reader, content, evidence or
+  constraint; "better UX" is not a reason), what you rejected, and a guard.
+- Caught a mistake? Fix it in the shared part, then add a `T-` entry for the class of mistake with a mechanical guard
+  (`rule:`, `pattern:/…/ in <glob>` or `test:`). Pattern guards run in `recanica check`, so it can't come back quietly.
+- Changing your mind? Add a new entry that supersedes the old one. Never just do something else.
+
 ## Workflow: mockup first
 For any new project, new page or major redesign, do not start in production code.
 1. **Ask** what the page is for, who uses it, and the one action that matters most. Ask about brand and must-have content.

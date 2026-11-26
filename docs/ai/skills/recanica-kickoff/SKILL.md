@@ -1,26 +1,52 @@
 ---
 name: recanica-kickoff
-description: Use at the start of any new project, design system, or major redesign that uses Recanica — before the first page is built. Asks the questions that decide how the UI stays consistent (which decisions the system owns, what content each part holds, definition of done, reference pages, strictness, how bugs become permanent fixes, scale), records the answers in docs/KICKOFF.md, and builds the shared structure parts before any page. Trigger on "new project", "start a project", "set up the design system", "kickoff", "redesign the whole app".
+description: Use at the start of any new project, design system, or major redesign that uses Recanica — before the first page is built. Runs the start-of-project questionnaire with the human (role in the wider build, UI scope, stack, flexibility, definition of done), records it with `npx recanica kickoff` (config, docs/ui/KICKOFF.md, the first entries of the decision log), then settles which shared parts exist before any page. Trigger on "new project", "start a project", "set up the design system", "kickoff", "redesign the whole app".
 ---
 
 # Recanica kickoff
 
 Projects drift into inconsistency when the look is defined but the *decisions* aren't: every page then re-decides spacing,
 headers, sections and emphasis, and every re-decision is a new chance for the same mistake. This skill makes those decisions
-once, at the start, and turns them into shared parts before any page exists.
+once, at the start, with the human, and turns them into config, a decision log and shared parts before any page exists.
 
-Ask these one group at a time, propose a default for each, and record the answers in `docs/KICKOFF.md`.
+## 1. Run the questionnaire with the human (required, before any page)
 
-## 0. Reuse is the point
+1. Get the questions: `npx recanica kickoff --questions` (or MCP `get_kickoff_questions`). Each has a default and a one-line why.
+2. Ask the human **one group at a time** (Project, Role, Stack, Flexibility, Done, Scale). Show the default and the why.
+   Use your multiple-choice question tool where you have one. Never answer for the human.
+3. If the human isn't available, use the defaults, list the ids you assumed under `"_assumed"` in the answers, and say so in
+   the first line of your reply. Assumed answers are marked in KICKOFF.md until someone confirms them.
+4. Save the answers as JSON keyed by question id (e.g. `kickoff-answers.json`, not committed) and run
+   `npx recanica kickoff --answers kickoff-answers.json`.
+
+That writes:
+- `recanica.config.json`: `project` (role, flexibility, stack, surfaces), `scope` for guests, `zones` for looser areas.
+- `docs/ui/KICKOFF.md`: the answers, readable.
+- `docs/ui/DECISIONS.md`: D-001… for role, flexibility and stack. Re-running with a changed answer supersedes the old entry.
+- `docs/ui/PROPOSALS.md` for guest projects.
+
+Things to get right while asking:
+- **Role.** If the UI work is one part of a bigger build (another team owns the app, the backend, the build), the answer is
+  *guest*. Ask which paths the UI work owns. Outside them, Recanica's checks only advise, and you propose instead of changing.
+- **Stack.** "Unknown" is a good answer. Don't default to Next.js because it has the most examples: unknown means CSS-first
+  (see docs/STACKS.md), which carries over to any stack.
+- **Flexibility.** Locked, guided or open. Tokens are fixed in every mode. Open zones let a campaign area be art-directed
+  while the app stays strict.
+
+## 2. Then settle the system's decisions
+
+The questionnaire sets the frame. These need a conversation; record each outcome with `npx recanica decisions new`.
+
+### Reuse is the point
 
 A design system is decisions made once and reused. Before any page exists, agree with the user:
 - Pages are built only from shared parts.
 - A missing part is added to the system, not improvised on a page.
 - `recanica check` enforces this in CI from day one (`hand-built` and `structure` set to must).
 
-## 1. Which decisions belong to the system, not to pages?
+### Which decisions belong to the system, not to pages?
 
-Default: all of these are system decisions, built as shared parts before the first page:
+Default: all of these are system decisions, built as shared parts before the first page (React names shown; other stacks use the `rc-*` twins from `packages/ui/parts.json`):
 - **Rhythm by role** (tokens): inset · group · flow · stack · section.
 - **Page structure**: page column (`Page`), header (`PageHeader`), sections (`Section`, `Heading`), stacks (`Stack`).
 - **Sites**: section shell (`WebSection`), section title (`WebSectionTitle`), hero headline (`WebHeroTitle`).
@@ -30,43 +56,28 @@ Default: all of these are system decisions, built as shared parts before the fir
 
 Ask: anything else this product repeats on many pages (filters bar, empty states, detail panels)? Those become parts too.
 
-## 2. What content will each part hold?
+### What content will each part hold?
 
 For every shared part, list its content extremes: shortest and longest text, single words, prose vs code/IDs, numbers
 (and the largest), empty, 1 vs 1,000 items, other languages. These decide the part's defaults and become its stress tests
 (component QA at 240px, 400px and full width).
 
-## 3. When is something done, and who checks it?
+### What does "right" look like?
 
-Default: a page is done when its brief exists (`recanica-page` skill), it renders correctly at 375px and 1280px,
-`recanica review` scores 85+ with nothing under 70, `recanica audit` shows 0 must-fix, and someone other than the author
-has looked at it. Ask who that second person is.
+The questionnaire asks for 3 pages that feel right and 3 that feel wrong, with one sentence on why for each. If the human
+said "later", come back to it before the first page. Add them to `docs/ui/KICKOFF.md`. Visual inspiration alone isn't enough; the "why" is what transfers.
 
-## 4. What does "right" look like?
-
-Ask for 3 pages (any product) that feel right and 3 that feel wrong, and one sentence on why for each. Save them in
-`docs/KICKOFF.md` as the reference. Visual inspiration alone isn't enough; the "why" is what transfers.
-
-## 5. How strict is each rule?
-
-Walk the must / should / choice levels (see the Design language page). Ask which should-rules this product wants stricter
-or looser, and which choices are fixed now: brand colour, font, locale, density, thresholds. Write them into tokens and
-`recanica.config.json`.
-
-## 6. What happens when a bug is found?
+### What happens when a bug is found?
 
 Default, agreed up front:
 1. Name the *class* of problem, not just the instance.
 2. Fix it in the shared part or token, never on one page.
 3. Add a permanent test (component QA content case or audit rule) that fails on the old behaviour.
-4. Record it in `docs/FAILURES.md`: screenshot, class, cause, fix, test.
+4. Record it as a trap: `npx recanica decisions new --trap --title "<class of mistake>"`, with Seen as, Cause, Decision and a
+   mechanical guard (`rule:`, `pattern:/…/ in <glob>` or `test:`). A pattern guard makes `recanica check` fail if it comes back.
 
-## 7. How big will this get?
+## 3. Then
 
-Number of pages, page types, apps and teams. 10 pages can lean on review; 1,000 pages need page templates per page type,
-so each type is reviewed once and every page conforms to it.
-
-## Then
-
-1. Build or adopt the shared parts from section 1 (Recanica ships most of them), with the content cases from section 2.
+1. Build or adopt the shared parts (Recanica ships most of them), with the content cases above.
 2. Only then start pages, each with the `recanica-page` skill.
+3. Re-run `npx recanica kickoff` whenever an answer changes (new stack, the UI work becomes a guest, flexibility changes).

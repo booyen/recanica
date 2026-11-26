@@ -16,6 +16,10 @@ data shapes rendered as columns, sections stacked because that's the default). T
 
 ## 1. Write the brief (before any code)
 
+First run `npx recanica decisions brief`: the decisions in force and the traps this project already fell into. The brief
+must not contradict them. If the page needs something different, say so in the brief and add a decision that supersedes the
+old one (`npx recanica decisions new`); don't quietly do something else.
+
 Copy `brief-template.md` to `docs/pages/<route>.md` (create the folder if needed) and fill it in. Keep it short; one screen.
 
 - **Purpose**: one sentence. What is this page for?
@@ -26,7 +30,7 @@ Copy `brief-template.md` to `docs/pages/<route>.md` (create the folder if needed
 - **Structure**: each section in order, with the question it answers and why it sits there.
 - **Left out on purpose**: what a reader might expect that isn't here, and where it lives instead.
 - **Alternatives rejected**: at least two other structures you considered, and why not (e.g. "grid of cards: uneven lengths leave holes", "one big table: lists in cells read badly, breaks on phones").
-- **Width and adapting**: per section — reading column, full width, side panel — and what happens at 375px and in a narrow container.
+- **Width and adapting**: per section (reading column, full width or side panel), and what happens at 375px and in a narrow container.
 - **Deviations**: any should-rule you are deliberately not following, with the reason (these go to `recanica.config.json` "allow").
 
 Decide from the reader's questions, never from the shape of your data or what is quickest to code.
@@ -102,11 +106,19 @@ If any box is unchecked, fix the structure (not just the styling) and look again
 npx recanica review <url> --paths <route>   # target 85+, no dimension under 70
 npx recanica audit <url> --paths <route>    # 0 must-fix
 npx recanica check <files>                  # 0 must-fix
+npx recanica slop <files>                   # 0 must-fix: no AI jargon, glass, glows, blur blobs, emoji icons
 ```
+
+Before you write copy (headlines, empty states, buttons) run it past `npx recanica slop --text "…"` (or MCP `check_copy`).
 
 Every should-finding is either fixed or recorded in `recanica.config.json` "allow" with its reason.
 
-## 6. Report
+## 6. Record and report
+
+Every UI/UX decision you made that a later page could get wrong goes in the log: `npx recanica decisions new --title "…"`
+(what, why, rejected, guard). A mistake you caught and fixed goes in as a trap (`--trap`) with a mechanical guard.
+In a guest project, anything you noticed outside your scope goes in `docs/ui/PROPOSALS.md`, at most three per task.
+
 
 Reply with: the brief's purpose, reader and section order (3–6 lines), the alternatives you rejected and why, the scores,
 and the two screenshots. If the user asks "why is it like this?", the answer is already in `docs/pages/<route>.md`.

@@ -1,0 +1,4 @@
+/* The whole design system for a stack without a framework: tokens + rc-* parts in one import. */
+@import "@recanica/css";
+
+:root { --font-geist-sans: "Geist", system-ui, sans-serif; --font-geist-mono: "Geist Mono", ui-monospace, monospace; }

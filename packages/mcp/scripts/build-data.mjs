@@ -15,6 +15,9 @@ const colorTable = Object.keys(tokensJson.color.light)
 const rules = read("docs/ai/rules.template.md").replace(/^<!--[\s\S]*?-->\n/, "").replace(/ <!-- copy-lint-ignore[^>]*-->/g, "").replace("{{COLOR_TABLE}}", colorTable);
 
 const catalog = JSON.parse(read("apps/docs/lib/catalog.json"));
+// Shared with the CLI: the kickoff questionnaire and the copy rules (so MCP clients without the CLI get both).
+const { QUESTIONS } = await import("../../cli/src/kickoff.js");
+const { COPY_RULES_SOURCE } = await import("../../cli/src/copy-rules.js");
 const uiFile = (slug) => maybe("packages/ui/src/components", `${slug}.tsx`);
 
 const data = {
@@ -48,6 +51,8 @@ const data = {
   webRecipes: catalog.webRecipes,
   anatomy: JSON.parse(read("docs/ai/anatomy.json")),
   parts: JSON.parse(read("packages/ui/parts.json")).parts,
+  kickoff: QUESTIONS.map(({ when, ...q }) => ({ ...q, ...(when ? { askIf: "role is guest" } : {}) })),
+  copyRules: COPY_RULES_SOURCE,
   // Skills shipped to projects (Claude Code skills; also served as MCP prompts for other AI tools).
   skills: Object.fromEntries(
     readdirSync(join(repo, "docs/ai/skills")).map((name) => [name, Object.fromEntries(readdirSync(join(repo, "docs/ai/skills", name)).map((f) => [f, read("docs/ai/skills", name, f)]))])

@@ -87,6 +87,11 @@ dashboards get **sidebar tokens**. Same system, two densities.
 - `/llms.txt`, `/llms-full.txt`, `/recanica.css`: static, machine-readable.
 - "Copy for LLM" on each component/pattern/block page: reference code + core rules.
 
+## Any stack
+
+Tokens and the `rc-*` parts in `@recanica/css` are the contract; React (`@recanica/ui`) is one adapter. A part exists in
+both forms (`pnpm lint:parts`), and an adapter never has a look the CSS lacks. Proposal and roadmap: [STACKS.md](STACKS.md).
+
 ## Clickable demo
 
 `apps/docs/app/demo/*`: a full seller app on dummy data. State is a reducer in

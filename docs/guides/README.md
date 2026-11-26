@@ -8,6 +8,8 @@ Recanica is the UI framework by Aturanica Labs. Pick your stack:
 | Vite / React + Tailwind v4 | [setup-vite-react.md](setup-vite-react.md) | Same as above |
 | Tailwind v3 (any framework) | [setup-tailwind-v3.md](setup-tailwind-v3.md) | Tokens via preset; build your own components |
 | Plain HTML / WordPress / Laravel / Django / Rails | [setup-html.md](setup-html.md) | `@recanica/css` with `rc-*` classes |
+| Vue / Nuxt, Svelte / SvelteKit, Astro, Angular | [../STACKS.md](../STACKS.md) | `@recanica/css` wired by `recanica init`; `rc-*` parts in your templates |
+| Stack not decided yet | [../STACKS.md](../STACKS.md) | Start CSS-first (`templates/vite-html`); nothing to rewrite later |
 | Flutter | [setup-flutter.md](setup-flutter.md) | `recanicaTheme()` + color/space/type constants |
 | SwiftUI (iOS) | [setup-swiftui.md](setup-swiftui.md) | `Recanica.Colors`, radius, spacing, type |
 | Jetpack Compose (Android) | [setup-compose.md](setup-compose.md) | `recanicaColorScheme()` + constants |
@@ -22,3 +24,4 @@ npx recanica init
 ```
 
 The CLI detects your stack, installs the right package, wires the CSS and writes an `AGENTS.md` so AI tools follow Recanica.
+Then run `npx recanica kickoff`: the start-of-project questionnaire.
