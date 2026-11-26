@@ -230,3 +230,103 @@ console.log("✓ check");
   assert.equal(loadConfig(dir).allow.length, 0, "levels: an allow entry without a real reason is ignored");
   console.log("✓ must / should levels and accepted deviations");
 }
+
+// Kickoff questionnaire: answers become config, a readable record and the first decisions; a changed answer supersedes.
+{
+  const proj = fixture({ "package.json": JSON.stringify({ dependencies: { next: "16.0.0", react: "19", tailwindcss: "^4.1.0" } }), "app/globals.css": '@import "tailwindcss";\n' });
+  run(proj, "init", "--yes", "--skip-install");
+  writeFileSync(join(proj, "app/page.tsx"), "<p>Orders</p>\n");
+  assert.match(run(proj, "check", "app"), /No kickoff recorded/, "kickoff: a project set up with init but never kicked off is flagged");
+  const answers = { name: "Kedai admin", role: "guest", owns: ["src/ui/**"], approver: "Aina", stack: "nextjs", flexibility: "guided", openZones: ["src/ui/campaign/**"] };
+  writeFileSync(join(proj, "answers.json"), JSON.stringify(answers));
+  run(proj, "kickoff", "--answers", "answers.json", "--date", "2026-11-26");
+  const cfg = JSON.parse(readFileSync(join(proj, "recanica.config.json"), "utf8"));
+  assert.equal(cfg.project.role, "guest", "kickoff: role recorded");
+  assert.deepEqual(cfg.scope.owns, ["src/ui/**"], "kickoff: guest scope recorded");
+  assert.equal(cfg.zones[0].flexibility, "open", "kickoff: open zone recorded");
+  assert.ok(existsSync(join(proj, "docs/ui/KICKOFF.md")) && existsSync(join(proj, "docs/ui/PROPOSALS.md")), "kickoff: record and proposals log written");
+  assert.equal((readFileSync(join(proj, "docs/ui/DECISIONS.md"), "utf8").match(/^## D-/gm) ?? []).length, 3, "kickoff: role, flexibility and stack seeded as decisions");
+  assert.doesNotMatch(run(proj, "check", "app"), /No kickoff recorded/, "kickoff: flag cleared");
+  writeFileSync(join(proj, "answers.json"), JSON.stringify({ ...answers, flexibility: "locked" }));
+  run(proj, "kickoff", "--answers", "answers.json", "--date", "2026-11-27");
+  const list = run(proj, "decisions", "list");
+  assert.match(list, /D-002\s+superseded by D-004/, "kickoff: a changed answer supersedes the old decision");
+  assert.equal((list.match(/^D-/gm) ?? []).length, 4, "kickoff: unchanged answers add nothing");
+  assert.match(run(proj, "decisions", "lint"), /0 must-fix/, "kickoff: the seeded log is valid");
+  assert.match(run(proj, "kickoff", "--questions"), /flexibility/, "kickoff: questions printable for agents");
+  console.log("✓ kickoff questionnaire → config, record, decisions; re-run supersedes");
+}
+
+// Guest scope, flexibility zones and decision-log guards in `recanica check`.
+{
+  const proj = fixture({
+    "recanica.config.json": JSON.stringify({ project: { role: "guest", flexibility: "guided" }, scope: { owns: ["src/ui/**"] }, zones: [{ files: "src/ui/campaign/**", flexibility: "open" }] }),
+    "src/ui/form.tsx": '<button className="px-4">Save</button>\n',
+    "src/ui/campaign/hero.tsx": '<button className="px-4">Shop the sale</button>\n',
+    "src/server/admin.tsx": '<button className="bg-blue-500">Go</button>\n',
+    "docs/ui/DECISIONS.md": "# UI\n\n## T-001 · Raw tables in reports\n- Date: 2026-11-26\n- Status: active\n- Seen as: hand-styled tables\n- Cause: copied from the old app\n- Decision: Reports use ReferenceTable\n- Guard: pattern:/<table/ in src/ui/**\n",
+    "src/ui/report.tsx": "<table>{rows}</table>\n",
+  });
+  let r; try { r = JSON.parse(run(proj, "check", "--json")); } catch (e) { r = JSON.parse(e.stdout); }
+  const at = (f, rule) => r.hits.filter((h) => h.file === f && h.rule === rule);
+  assert.equal(at("src/ui/form.tsx", "hand-built")[0]?.level, "error", "scope: owned paths block the build");
+  assert.equal(at("src/ui/campaign/hero.tsx", "hand-built")[0]?.level, "warn", "zones: an open zone reports reuse instead of failing");
+  assert.ok(!r.hits.some((h) => h.file.startsWith("src/server")) && r.advisory === 2, "scope: outside the UI scope findings are advisory only");
+  assert.equal(at("src/ui/report.tsx", "T-001")[0]?.level, "error", "decisions: a trap's pattern guard fails the build");
+  console.log("✓ guest scope, flexibility zones and trap guards");
+}
+
+// Decision-log lint: the log stays usable (reasons, alternatives, real guards).
+{
+  const proj = fixture({
+    "recanica.config.json": JSON.stringify({ project: { role: "owner" } }),
+    "docs/ui/DECISIONS.md": [
+      "# UI", "",
+      "## D-001 · Cards for settings", "- Date: 2026-11-26", "- Status: active", "- Decision: Settings use cards", "- Why: better UX", "- Guard: rule:not-a-rule", "",
+      "## T-001 · Margins on blocks", "- Date: 2026-11-26", "- Status: active", "- Seen as: uneven gaps", "- Cause: blocks spaced themselves", "- Decision: containers own spacing", "- Guard: review", "",
+      "## D-002 · Tables scroll", "- Date: 2026-11-26", "- Status: superseded by D-009", "- Decision: Unleash seamless tables", "- Why: Finance compares nine columns side by side on laptops", "- Rejected: cards", "- Guard: rule:busy-table", "",
+    ].join("\n"),
+  });
+  let out; try { out = run(proj, "decisions", "lint"); } catch (e) { out = e.stdout; }
+  for (const [re, what] of [[/D-001\s+"Why" is too vague/, "vague why"], [/rule:not-a-rule doesn't exist/, "unknown rule"], [/T-001\s+a trap needs a mechanical guard/, "trap without guard"],
+    [/superseded by D-009, which isn't in the log/, "dangling supersede"], [/D-001\s+no "Rejected"/, "missing alternatives"], [/D-002\s+decision: .*seamless/i, "slop in the log"]]) assert.match(out, re, `decisions lint: ${what}`);
+  assert.match(run(proj, "decisions", "brief"), /D-001 Cards for settings/, "decisions: brief lists entries in force");
+  assert.doesNotMatch(run(proj, "decisions", "brief"), /D-002/, "decisions: brief leaves out superseded entries");
+  console.log("✓ decision log lint and brief");
+}
+
+// Slop: text mode for agents' own words, and source mode with a score.
+{
+  const dir = fixture({ "a.tsx": '<p>Experience the future ✨</p>\n<div className="absolute -top-40 h-96 rounded-full bg-foreground/10 blur-3xl" />\n', "b.tsx": "<p>Most invoices are paid within 3 days.</p>\n" });
+  let failed = false, out = "";
+  try { out = run(dir, "slop", "--text", "Great question! Unleash the power of our next-gen, seamless platform."); } catch (e) { failed = true; out = e.stdout; }
+  assert.ok(failed && /assistant voice/.test(out) && /next-gen/.test(out), "slop: text mode catches assistant voice and hype");
+  assert.match(run(dir, "slop", "--text", "Most invoices are paid within 3 days."), /100\/100/, "slop: plain, specific copy scores 100");
+  let r; try { r = JSON.parse(run(dir, "slop", "--json")); } catch (e) { r = JSON.parse(e.stdout); }
+  const a = r.byFile.find((f) => f.file === "a.tsx");
+  assert.ok(a && a.hits.some((h) => /Emoji/.test(h.message)) && a.hits.some((h) => /blur blob/.test(h.message)), "slop: design defaults found (emoji, blur blob)");
+  assert.ok(!r.byFile.some((f) => f.file === "b.tsx"), "slop: clean file not listed");
+  console.log("✓ slop checker: copy and design");
+}
+
+// Any stack: non-React web frameworks get the rc-* parts; guests get the guest rules.
+{
+  for (const [deps, stack, css] of [[{ vue: "3.5", vite: "7" }, "vue", "src/assets/main.css"], [{ svelte: "5", "@sveltejs/kit": "2" }, "svelte", "src/app.css"], [{ astro: "5" }, "astro", "src/styles/global.css"], [{ "@angular/core": "20" }, "angular", "src/styles.css"]]) {
+    const d = fixture({ "package.json": JSON.stringify({ dependencies: deps }) });
+    assert.match(run(d, "init", "--yes", "--skip-install"), new RegExp(`stack\\s+.*${stack}`), `${stack}: detected`);
+    assert.match(readFileSync(join(d, css), "utf8"), /@import "@recanica\/css";/, `${stack}: css wired`);
+    const agents = readFileSync(join(d, "AGENTS.md"), "utf8");
+    assert.match(agents, /`rc-page-header`/, `${stack}: AGENTS.md names the rc-* parts`);
+    assert.doesNotMatch(agents, /`PageHeader`/, `${stack}: AGENTS.md doesn't name React parts`);
+    writeFileSync(join(d, "src/Form.vue"), '<template><button class="rc-btn rc-btn--brand">Save</button><button class="px-4">Raw</button></template>\n');
+    let r; try { r = JSON.parse(run(d, "check", "src", "--json")); } catch (e) { r = JSON.parse(e.stdout); }
+    assert.equal(r.hits.filter((h) => h.rule === "hand-built").length, 1, `${stack}: an rc-* element is the part; a raw one is hand-built`);
+  }
+  const g = fixture({ "package.json": JSON.stringify({ dependencies: { next: "16", react: "19", tailwindcss: "^4.1.0" } }), "app/globals.css": '@import "tailwindcss";\n' });
+  run(g, "init", "--yes", "--skip-install", "--role", "guest", "--owns", "src/ui/**");
+  const agents = readFileSync(join(g, "AGENTS.md"), "utf8");
+  assert.match(agents, /guest in this codebase/, "guest: AGENTS.md carries the guest rules");
+  assert.ok(agents.length < 4000, `guest: AGENTS.md stays short (${agents.length})`);
+  assert.deepEqual(JSON.parse(readFileSync(join(g, "recanica.config.json"), "utf8")).scope.owns, ["src/ui/**"], "guest: init records the scope");
+  console.log("✓ vue, svelte, astro, angular get rc-* parts; guest init");
+}

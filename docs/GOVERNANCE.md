@@ -15,7 +15,7 @@ Every pull request runs these in CI (`.github/workflows/ci.yml`). Each one catch
 |---|---|---|
 | Tokens in sync | `pnpm tokens:check` | Generated CSS/Flutter/Swift/Compose tokens out of date with the JSON source |
 | Design lint | `pnpm lint:design` | Hard-coded colours, Tailwind palette hues, bold weights, gradients, arbitrary radii (`recanica check`) |
-| Copy lint | `pnpm lint:copy` | AI jargon, clichés, placeholder text (see `docs/COPY_AUDIT.md`) |
+| Copy lint | `pnpm lint:copy` | AI jargon, clichés, assistant voice, placeholder text (see `docs/COPY_AUDIT.md`) |
 | Types and build | `pnpm typecheck && pnpm build` | Broken APIs, missing imports, pages that don't build |
 | Package tests | `pnpm test` | CLI `init` and `check` on fixture projects for every stack; MCP server smoke test |
 | Layout audit | `pnpm test:layout` | Every page at 375px, 900px and 1280px: page overflow, text overflow, clipped text, **wrapped button, tab, badge and table-header labels**, stretched rows, runtime errors |
@@ -39,7 +39,7 @@ Automated checks catch rule breaks. They don't judge taste. Each PR description 
 
 ## 2. In other projects: protecting the language
 
-A project picks up Recanica with `npx recanica init`. That sets up three layers of protection.
+A project picks up Recanica with `npx recanica init`, then runs the kickoff questionnaire. That sets up these layers of protection.
 
 **1. The rules travel with the code**
 
@@ -80,6 +80,47 @@ npx recanica check --json         # for tooling
 | `arbitrary-radius` | warn | `rounded-[7px]` |
 | `arbitrary-spacing` | warn | `p-[13px]` |
 | `uppercase-label` | warn | `uppercase tracking-wider` |
+| `design-slop` | warn | glass cards, glows, decorative blur blobs, gradient/clipped text, emoji icons, the sparkle icon, looping decorative motion, heavy shadows on surfaces |
+| `kickoff` | warn | a project with `recanica.config.json` but no kickoff recorded |
+| `D-###` / `T-###` | warn / error | a pattern guard from the project's decision log (decisions report, traps fail) |
+
+**4. `npx recanica slop`: the AI-slop checker**
+
+Copy tells (jargon, hype, assistant voice, placeholder data) and design defaults (glass, glow, blur blobs, emoji icons,
+sparkles, decorative motion) in one report with a score per file. `--text "…"` (or stdin, or MCP `check_copy`) checks a
+single piece of copy, so an agent can check its own words before writing them. It finds generic phrasing; it can't judge
+whether copy is specific to the reader.
+
+**5. The kickoff questionnaire and the project's settings**
+
+`npx recanica kickoff` asks a person the start-of-project questions (agents: `--questions`, then `--answers file.json`) and
+writes the answers into `recanica.config.json`:
+
+```json
+{
+  "project": { "role": "guest", "flexibility": "guided", "stack": "unknown", "surfaces": ["app", "email"] },
+  "scope": { "owns": ["src/components/**", "src/styles/**"] },
+  "zones": [{ "files": "src/campaigns/**", "flexibility": "open", "reason": "Art-directed per launch" }]
+}
+```
+
+| Setting | What it changes |
+|---|---|
+| `flexibility: locked` | Every style rule and `design-slop` become must. Deviations need a decision-log entry. |
+| `flexibility: guided` (default) | `hand-built` and `structure` are must; the rest are should, allowable with a reason. |
+| `flexibility: open` | Reuse and style rules are reported, not enforced. Composition is free. |
+| always fixed | `hard-coded-color`, `arbitrary-color`, `palette-hue`, `self-reference`: tokens hold in every mode. |
+| `zones` | The same presets for one area (a campaign folder looser than the app). |
+| `scope.owns` (guest) | Findings inside these paths block the build; outside them they're advisory and listed for `docs/ui/PROPOSALS.md`. |
+| `rules` | Per-rule level; beats everything above. |
+
+**6. The decision log: `docs/ui/DECISIONS.md`**
+
+`D-` entries are UI/UX decisions; `T-` entries are traps (mistakes already caught). Each has a guard: `rule:<id>`,
+`pattern:/regex/ in <glob>`, `test:<path>` or `review`. Pattern guards run inside `recanica check`, so a trap fails the build
+if it comes back. `recanica decisions lint` (CI) rejects entries without a reason or alternatives, vague reasons ("better
+UX"), unknown rules, missing tests, traps guarded only by review, broken supersede chains and slop in the entries themselves.
+`recanica decisions brief` prints what's in force for the start of a task; `recanica decisions new` appends an entry.
 
 **Exceptions are explicit and reviewable**
 

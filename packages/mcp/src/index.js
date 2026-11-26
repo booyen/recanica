@@ -131,6 +131,22 @@ server.registerTool("get_setup", {
   return text(data.guides[key] ?? `No guide for ${stack}.`);
 });
 
+server.registerTool("get_kickoff_questions", {
+  title: "Kickoff questionnaire",
+  description: "The questions to ask the human at the start of every new project (role, scope, stack, flexibility, definition of done), with defaults and the reason for each. Ask them one group at a time, then save the answers as JSON and run `npx recanica kickoff --answers <file>`.",
+  inputSchema: {},
+}, async () => text((data.kickoff ?? []).map((q) => `- ${q.id} [${q.group}] ${q.q}${q.options ? `\n  options: ${q.options.map((o) => (typeof o === "string" ? o : o.value)).join(" | ")}` : ""}\n  default: ${JSON.stringify(q.default)} · why: ${q.why}${q.askIf ? ` · ask only if ${q.askIf}` : ""}`).join("\n")));
+
+server.registerTool("check_copy", {
+  title: "Check copy for AI slop",
+  description: "Check a piece of UI copy (headline, button, empty state, PR text, decision entry) against Recanica's copy rules: AI jargon, hype, assistant voice, placeholder text. Run it on your own words before writing them.",
+  inputSchema: { text: z.string().describe("The copy to check") },
+}, async ({ text: t }) => {
+  const hits = [];
+  for (const [src, flags, msg, level] of data.copyRules ?? []) { const m = t.match(new RegExp(src, flags)); if (m) hits.push(`${level === "error" ? "must-fix" : "should"}: "${m[0]}" ${msg}`); }
+  return text(hits.length ? hits.join("\n") : "No slop found. (This finds generic phrasing; it can't judge whether the copy is specific to the reader.)");
+});
+
 server.registerPrompt("apply-recanica", {
   title: "Apply Recanica to this project",
   description: "Adopt Recanica in an existing project: review busy pages, agree a rework plan, rebuild pages from Recanica patterns (not a reskin).",

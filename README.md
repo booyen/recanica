@@ -16,16 +16,22 @@ Also:
 - a **clickable dashboard demo** (`/demo`), set up like a template you'd buy: 23 page types, a UI kit with every component live, a forms showcase and a patterns gallery
 - a customer portal
 - [starter templates](templates) and [guides](docs/guides)
-- [governance](docs/GOVERNANCE.md), which covers how the design language is checked and protected in other projects
+- [governance](docs/GOVERNANCE.md), which covers how the design language is checked and protected in other projects: kickoff, flexibility, guest scope, the decision log and the slop checker
 - the [copy audit](docs/COPY_AUDIT.md)
 
 ## Quick start
 
 ```bash
-npx recanica init                              # any project
+npx recanica init                              # any project, any stack (add --role guest --owns "src/ui/**" inside a bigger build)
+npx recanica kickoff                           # the start-of-project questionnaire: role, scope, stack, flexibility, done
 npx recanica check src                         # guard the design language (CI / pre-commit)
+npx recanica slop src                          # AI-slop check: copy tells and generated-UI defaults
+npx recanica decisions brief                   # the UI/UX decisions and traps in force
 claude mcp add recanica -- npx -y @recanica/mcp   # AI tools
 ```
+
+Recanica isn't tied to a framework: tokens and the `rc-*` parts are the contract, and React is one adapter.
+See [docs/STACKS.md](docs/STACKS.md).
 
 ## Develop
 

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Invoices · Recanica on Vite</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&family=Geist+Mono&display=swap" rel="stylesheet" />
+  <script type="module" src="/src/main.js"></script>
+</head>
+<body>
+  <main class="rc-container rc-flow" style="padding-block: var(--spacing-section-sm, 4rem)">
+    <header class="rc-page-header">
+      <div class="rc-page-header__main">
+        <div class="rc-page-header__text">
+          <h1 class="rc-page-header__title">Invoices</h1>
+          <p class="rc-page-header__desc">2 open, RM 20,088 outstanding.</p>
+        </div>
+        <div class="rc-page-header__actions"><button class="rc-btn rc-btn--brand" data-open="new-invoice">New invoice</button></div>
+      </div>
+    </header>
+
+    <section class="rc-stats">
+      <div class="rc-stat">
+        <div class="rc-stat__head"><span>Paid this month</span></div>
+        <div class="rc-stat__value"><span class="rc-metric">RM 4,820</span><span class="rc-caption">November</span></div>
+      </div>
+      <div class="rc-stat">
+        <div class="rc-stat__head"><span>Average time to pay</span></div>
+        <div class="rc-stat__value"><span class="rc-metric">3 days</span><span class="rc-caption">last 90 days</span></div>
+      </div>
+    </section>
+
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th class="rc-table__cell--secondary">Invoice</th><th>Customer</th><th>Status</th><th style="text-align:right">Amount</th></tr></thead>
+        <tbody>
+          <tr><td class="rc-mono rc-table__cell--secondary">INV-2026-0008</td><td>Syarikat Maju Jaya</td><td><span class="rc-badge rc-badge--warning">Partially paid</span></td><td class="rc-nums" style="text-align:right">RM 14,904.00</td></tr>
+          <tr><td class="rc-mono rc-table__cell--secondary">INV-2026-0007</td><td>Lumen Labs Sdn. Bhd.</td><td><span class="rc-badge rc-badge--success">Paid</span></td><td class="rc-nums" style="text-align:right">RM 5,184.00</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <dialog id="new-invoice" class="rc-dialog">
+    <form method="dialog" class="rc-stack">
+      <h2 class="rc-heading">New invoice</h2>
+      <label class="rc-field"><span class="rc-label">Customer</span><input class="rc-input" placeholder="Company name" /></label>
+      <label class="rc-field"><span class="rc-label">Amount (RM)</span><input class="rc-input" inputmode="decimal" placeholder="0.00" /><span class="rc-hint">SST 8% is added automatically.</span></label>
+      <div class="rc-row" style="justify-content:flex-end"><button class="rc-btn rc-btn--ghost">Cancel</button><button class="rc-btn">Create invoice</button></div>
+    </form>
+  </dialog>
+</body>
+</html>
