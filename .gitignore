@@ -12,3 +12,6 @@ playwright-report
 packages/ui/dist
 packages/css/dist
 packages/mcp/data
+.open-next
+.wrangler
+.dev.vars
